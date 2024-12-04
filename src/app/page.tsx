@@ -49,34 +49,43 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <section className="relative bg-primary">
-        <GradientBackground variant="subtle">
-          <Container size="xl" className="py-24 lg:py-32">
-            <div className="flex flex-col items-center text-center">
-              <Text
-                variant="h1"
-                align="center"
-                className="font-bold tracking-tight text-primary-foreground"
-              >
-                Welcome to Golf2Go
-              </Text>
-              <Text variant="xl" className="mx-auto mt-6 max-w-2xl text-primary-foreground/90">
-                New Zealand's first portable mini golf company, bringing fun to your events since
-                2008.
-              </Text>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <Link href="/book" className="btn-primary inline-flex items-center gap-2 px-8 py-3">
-                  <Text variant="lg">Request Quote</Text>
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-                <Link
-                  href="/courses"
-                  className="btn-outline inline-flex items-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
+        <GradientBackground variant="glow">
+          <div className="relative isolate overflow-hidden py-32 md:py-40">
+            <Image
+              src="/2-parties-and-events-golf2go-portable-miniature-golf.jpg"
+              alt="Golf 2 Go events"
+              fill
+              className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30"
+              sizes="100vw"
+            />
+            <Container size="xl">
+              <div className="mx-auto max-w-2xl text-center py-12">
+                <Text
+                  variant="h1"
+                  align="center"
+                  className="font-bold tracking-tight text-primary-foreground"
                 >
-                  <Text variant="lg">View Solutions</Text>
-                </Link>
+                  Welcome to Golf2Go
+                </Text>
+                <Text variant="xl" className="mx-auto mt-6 max-w-2xl text-primary-foreground/90">
+                  New Zealand's first portable mini golf company, bringing fun to your events since
+                  2008.
+                </Text>
+                <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
+                  <Link href="/book" className="btn-primary inline-flex items-center gap-2 px-8 py-3">
+                    <Text variant="lg">Request Quote</Text>
+                    <ArrowRight className="h-5 w-5" />
+                  </Link>
+                  <Link
+                    href="/courses"
+                    className="btn-outline inline-flex items-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
+                  >
+                    <Text variant="lg">View Solutions</Text>
+                  </Link>
+                </div>
               </div>
-            </div>
-          </Container>
+            </Container>
+          </div>
         </GradientBackground>
       </section>
 
@@ -213,7 +222,7 @@ export default function HomePage() {
             </div>
             <Card variant="elevated" className="relative aspect-[4/3] overflow-hidden p-0">
               <Image
-                src="/2-parties-and-events-golf2go-portable-miniature-golf.jpg"
+                src="/3-fun-portable-mini-golf.jpg"
                 alt="Professional event setup"
                 fill
                 className="object-cover"
