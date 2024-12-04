@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import { AlertTriangle, RefreshCw } from 'lucide-react';
-import { Container } from '~/components/ui/Container';
-import { Card, CardContent } from '~/components/ui/Card';
-import { Text } from '~/components/ui/Text';
+import { AlertTriangle, RefreshCw } from "lucide-react";
+
+import { Card, CardContent } from "~/components/ui/Card";
+import { Container } from "~/components/ui/Container";
+import { Text } from "~/components/ui/Text";
 
 export default function Error({
   error,
@@ -14,7 +15,10 @@ export default function Error({
 }) {
   return (
     <div className="min-h-[50vh] bg-background">
-      <Container size="lg" className="flex min-h-[50vh] flex-col items-center justify-center text-center">
+      <Container
+        size="lg"
+        className="flex min-h-[50vh] flex-col items-center justify-center text-center"
+      >
         <Card variant="elevated" className="max-w-md backdrop-blur">
           <CardContent className="flex flex-col items-center p-8">
             <div className="rounded-full bg-error/10 p-4">
@@ -24,7 +28,7 @@ export default function Error({
               Something went wrong
             </Text>
             <Text variant="base" className="mt-2 text-foreground-secondary">
-              {error.message || 'An unexpected error occurred'}
+              {error.message || "An unexpected error occurred"}
             </Text>
             <button
               onClick={reset}

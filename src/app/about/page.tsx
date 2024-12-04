@@ -1,33 +1,38 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Trophy, Heart, Target, ArrowRight } from 'lucide-react';
-import { Container } from '~/components/ui/Container';
-import { GradientBackground } from '~/components/ui/GradientBackground';
-import { Text } from '~/components/ui/Text';
-import { Card, CardHeader } from '~/components/ui/Card';
+import { ArrowRight, Heart, Target, Trophy } from "lucide-react";
+
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+import { Card, CardHeader } from "~/components/ui/Card";
+import { Container } from "~/components/ui/Container";
+import { GradientBackground } from "~/components/ui/GradientBackground";
+import { Text } from "~/components/ui/Text";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'About Golf 2 Go - Our Story & Mission',
-    description: 'Learn about Golf 2 Go, New Zealand\'s premier portable mini golf hire service. Discover our journey and commitment to bringing fun to your events.',
+    title: "About Golf 2 Go - Our Story & Mission",
+    description:
+      "Learn about Golf 2 Go, New Zealand's premier portable mini golf hire service. Discover our journey and commitment to bringing fun to your events.",
   };
 }
 
 const values = [
   {
-    name: 'Excellence',
-    description: 'We strive to deliver the highest quality mini golf experience at every event.',
+    name: "Excellence",
+    description: "We strive to deliver the highest quality mini golf experience at every event.",
     icon: Trophy,
   },
   {
-    name: 'Customer Focus',
-    description: 'Your satisfaction is our top priority. We go above and beyond to exceed expectations.',
+    name: "Customer Focus",
+    description:
+      "Your satisfaction is our top priority. We go above and beyond to exceed expectations.",
     icon: Heart,
   },
   {
-    name: 'Innovation',
-    description: 'Continuously improving our courses and services to provide the best possible experience.',
+    name: "Innovation",
+    description:
+      "Continuously improving our courses and services to provide the best possible experience.",
     icon: Target,
   },
 ];
@@ -51,12 +56,10 @@ export default function AboutPage() {
                 <Text variant="h1" align="center" className="text-primary-foreground">
                   Our Story
                 </Text>
-                <Text 
-                  variant="xl" 
-                  className="mt-6 text-primary-foreground/90"
-                >
-                  Founded with a passion for bringing joy and entertainment to events across New Zealand,
-                  Golf 2 Go has grown from a simple idea into the country's leading portable mini golf provider.
+                <Text variant="xl" className="mt-6 text-primary-foreground/90">
+                  Founded with a passion for bringing joy and entertainment to events across New
+                  Zealand, Golf 2 Go has grown from a simple idea into the country's leading
+                  portable mini golf provider.
                 </Text>
               </div>
             </Container>
@@ -81,19 +84,13 @@ export default function AboutPage() {
               <Text variant="h2" className="text-foreground">
                 Our Mission
               </Text>
-              <Text 
-                variant="lg"
-                className="mt-6 text-foreground-secondary"
-              >
+              <Text variant="lg" className="mt-6 text-foreground-secondary">
                 To create memorable experiences through innovative portable mini golf solutions,
-                bringing people together and making every event special. We believe in the power
-                of play to connect people and create lasting memories.
+                bringing people together and making every event special. We believe in the power of
+                play to connect people and create lasting memories.
               </Text>
               <div className="mt-8">
-                <Link
-                  href="/book"
-                  className="btn-primary inline-flex items-center gap-2"
-                >
+                <Link href="/book" className="btn-primary inline-flex items-center gap-2">
                   <Text variant="base">Get Started</Text>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
@@ -110,7 +107,7 @@ export default function AboutPage() {
             <Text variant="h2" align="center" className="text-foreground">
               Our Values
             </Text>
-            <Text 
+            <Text
               variant="lg"
               className="mx-auto mt-6 max-w-2xl text-center text-foreground-secondary"
             >
@@ -129,10 +126,7 @@ export default function AboutPage() {
                 <Text variant="h4" className="text-foreground mb-3">
                   {value.name}
                 </Text>
-                <Text 
-                  variant="base"
-                  className="text-foreground-secondary"
-                >
+                <Text variant="base" className="text-foreground-secondary">
                   {value.description}
                 </Text>
               </Card>
@@ -146,14 +140,19 @@ export default function AboutPage() {
         <GradientBackground variant="subtle">
           <Container size="xl" className="py-24">
             <div className="relative z-10">
-              <Text variant="h2" align="center" className="pb-4 font-bold tracking-tight text-primary-foreground">
+              <Text
+                variant="h2"
+                align="center"
+                className="pb-4 font-bold tracking-tight text-primary-foreground"
+              >
                 Ready to Create Memories?
               </Text>
-              <Text 
+              <Text
                 variant="lg"
                 className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground/90"
               >
-                Let us help make your next event unforgettable with our portable mini golf experience.
+                Let us help make your next event unforgettable with our portable mini golf
+                experience.
               </Text>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link

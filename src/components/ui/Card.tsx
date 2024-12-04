@@ -1,7 +1,9 @@
 "use client";
 
 import { HTMLMotionProps, Variants, motion } from "framer-motion";
+
 import { ReactNode, forwardRef } from "react";
+
 import { cn } from "~/utils/cn";
 
 const cardVariants: Variants = {
@@ -57,7 +59,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             "h-full": fullHeight,
             "min-h-[280px]": !fullHeight, // Ensure minimum height for uniformity
             "p-8": !noPadding,
-            "bg-background shadow-lg border border-border/50 hover:shadow-xl hover:border-border": variant === "elevated",
+            "bg-background shadow-lg border border-border/50 hover:shadow-xl hover:border-border":
+              variant === "elevated",
             "border-2 border-border hover:border-primary/50": variant === "outlined",
             "bg-background-secondary hover:bg-background-secondary/90": variant === "filled",
             "cursor-pointer transform": interactive,
@@ -96,9 +99,7 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
             {title}
           </h3>
           {subtitle && (
-            <p className="mt-3 text-base text-foreground-secondary leading-relaxed">
-              {subtitle}
-            </p>
+            <p className="mt-3 text-base text-foreground-secondary leading-relaxed">{subtitle}</p>
           )}
         </div>
         {action && <div className="flex-shrink-0 mt-4">{action}</div>}

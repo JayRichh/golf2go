@@ -1,24 +1,25 @@
-import Link from 'next/link';
-import { Container } from '~/components/ui/Container';
-import { Text } from '~/components/ui/Text';
+import Link from "next/link";
+
+import { Container } from "~/components/ui/Container";
+import { Text } from "~/components/ui/Text";
 
 const navigation = {
   company: [
-    { name: 'About Us', href: '/about' },
-    { name: 'Gallery', href: '/gallery' },
+    { name: "About Us", href: "/about" },
+    { name: "Gallery", href: "/gallery" },
   ],
   services: [
-    { name: 'Our Courses', href: '/courses' },
-    { name: 'Book Now', href: '/book' },
+    { name: "Our Courses", href: "/courses" },
+    { name: "Book Now", href: "/book" },
   ],
   contact: [
-    { name: 'Email', value: 'admin@golf2go.co.nz', href: 'mailto:admin@golf2go.co.nz', icon: '📧' },
-    { name: 'Phone', value: '021 849931', href: 'tel:021849931', icon: '📞' },
-    { name: 'Location', value: 'Wanganui, New Zealand', href: '#', icon: '📍' },
+    { name: "Email", value: "admin@golf2go.co.nz", href: "mailto:admin@golf2go.co.nz", icon: "📧" },
+    { name: "Phone", value: "021 849931", href: "tel:021849931", icon: "📞" },
+    { name: "Location", value: "Wanganui, New Zealand", href: "#", icon: "📍" },
   ],
   legal: [
-    { name: 'Privacy Policy', href: '/privacy' },
-    { name: 'Terms of Service', href: '/terms' },
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Terms of Service", href: "/terms" },
   ],
 };
 
@@ -34,10 +35,7 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               {navigation.company.map((item) => (
                 <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="transition-colors hover:text-foreground"
-                  >
+                  <Link href={item.href} className="transition-colors hover:text-foreground">
                     <Text variant="base" className="text-foreground-secondary">
                       {item.name}
                     </Text>
@@ -54,10 +52,7 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               {navigation.services.map((item) => (
                 <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="transition-colors hover:text-foreground"
-                  >
+                  <Link href={item.href} className="transition-colors hover:text-foreground">
                     <Text variant="base" className="text-foreground-secondary">
                       {item.name}
                     </Text>
@@ -97,10 +92,7 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               {navigation.legal.map((item) => (
                 <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="transition-colors hover:text-foreground"
-                  >
+                  <Link href={item.href} className="transition-colors hover:text-foreground">
                     <Text variant="base" className="text-foreground-secondary">
                       {item.name}
                     </Text>
@@ -113,10 +105,7 @@ export function Footer() {
 
         <div className="mt-12 border-t border-border/50 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <Link 
-              href="/" 
-              className="transition-colors hover:text-primary/90"
-            >
+            <Link href="/" className="transition-colors hover:text-primary/90">
               <Text variant="h4" className="font-bold text-primary">
                 Golf 2 Go
               </Text>
@@ -126,7 +115,15 @@ export function Footer() {
                 © {new Date().getFullYear()} Golf 2 Go. All rights reserved.
               </Text>
               <Text variant="sm" className="text-foreground-secondary">
-                Site by <a href="https://jayrich.dev" className="text-primary hover:text-primary/90" target="_blank" rel="noopener noreferrer">jay</a>
+                Site by{" "}
+                <a
+                  href="https://jayrich.dev"
+                  className="text-primary hover:text-primary/90"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  jay
+                </a>
               </Text>
             </div>
           </div>

@@ -16,7 +16,7 @@ export interface FormData {
   landlinePhone?: string;
   mobilePhone: string;
   email: string;
-  
+
   postalAddress: string;
   postalAddress2?: string;
   postalCity: string;
@@ -35,7 +35,7 @@ export interface FormData {
   eventCity: string;
   eventRegion: string;
   eventPostcode: string;
-  
+
   eventDate: string;
   eventType: string;
   numberOfDays: string;

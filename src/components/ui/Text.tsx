@@ -4,7 +4,21 @@ import { HTMLAttributes, forwardRef } from "react";
 
 import { cn } from "~/utils/cn";
 
-type TextVariant = "h1" | "h2" | "h3" | "h4" | "body-lg" | "body" | "body-sm" | "caption" | "xs" | "sm" | "md" | "lg" | "xl" | "base";
+type TextVariant =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "body-lg"
+  | "body"
+  | "body-sm"
+  | "caption"
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "base";
 type TextGradient = "none" | "blue" | "purple" | "orange" | "primary";
 
 interface TextProps extends HTMLAttributes<HTMLDivElement> {

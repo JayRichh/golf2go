@@ -5,12 +5,14 @@ Golf2Go is New Zealand's premier portable mini golf rental service, offering pro
 ## Features
 
 - **Professional Event Solutions**
+
   - Corporate team building packages
   - Multiple course configurations (3, 6, or 9 holes)
   - Hole in One Challenge options
   - Indoor and outdoor capabilities
 
 - **Advanced Booking System**
+
   - Multi-step form with validation
   - Real-time price calculator
   - Automated email notifications

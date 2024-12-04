@@ -1,44 +1,47 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Calendar, Users, MapPin, CheckCircle, ArrowRight } from 'lucide-react';
-import { Container } from '~/components/ui/Container';
-import { GradientBackground } from '~/components/ui/GradientBackground';
-import { Text } from '~/components/ui/Text';
-import { Card, CardHeader, CardContent } from '~/components/ui/Card';
+import { ArrowRight, Calendar, CheckCircle, MapPin, Users } from "lucide-react";
+
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+import { Card, CardContent, CardHeader } from "~/components/ui/Card";
+import { Container } from "~/components/ui/Container";
+import { GradientBackground } from "~/components/ui/GradientBackground";
+import { Text } from "~/components/ui/Text";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Golf 2 Go - Professional Portable Mini Golf Solutions',
-    description: 'New Zealand\'s premier portable mini golf hire service. Perfect for corporate events, team building, and professional functions.',
+    title: "Golf 2 Go - Professional Portable Mini Golf Solutions",
+    description:
+      "New Zealand's premier portable mini golf hire service. Perfect for corporate events, team building, and professional functions.",
   };
 }
 
 const features = [
   {
-    name: 'Efficient Setup',
-    description: 'Professional installation with minimal disruption to your event schedule.',
+    name: "Efficient Setup",
+    description: "Professional installation with minimal disruption to your event schedule.",
     icon: Calendar,
   },
   {
-    name: 'Corporate Events',
-    description: 'Tailored solutions for team building and corporate functions.',
+    name: "Corporate Events",
+    description: "Tailored solutions for team building and corporate functions.",
     icon: Users,
   },
   {
-    name: 'Nationwide Service',
-    description: 'Professional delivery and setup across New Zealand.',
+    name: "Nationwide Service",
+    description: "Professional delivery and setup across New Zealand.",
     icon: MapPin,
   },
 ];
 
 const benefits = [
-  'Professional event management',
-  'Corporate team building solutions',
-  'Customizable course layouts',
-  'Indoor and outdoor capabilities',
-  'Full setup and support service',
-  'Comprehensive event planning',
+  "Professional event management",
+  "Corporate team building solutions",
+  "Customizable course layouts",
+  "Indoor and outdoor capabilities",
+  "Full setup and support service",
+  "Comprehensive event planning",
 ];
 
 export default function HomePage() {
@@ -49,17 +52,19 @@ export default function HomePage() {
         <GradientBackground variant="subtle">
           <Container size="xl" className="py-24 lg:py-32">
             <div className="flex flex-col items-center text-center">
-              <Text variant="h1" align="center" className="font-bold tracking-tight text-primary-foreground">
+              <Text
+                variant="h1"
+                align="center"
+                className="font-bold tracking-tight text-primary-foreground"
+              >
                 Welcome to Golf2Go
               </Text>
               <Text variant="xl" className="mx-auto mt-6 max-w-2xl text-primary-foreground/90">
-                New Zealand's first portable mini golf company, bringing fun to your events since 2008.
+                New Zealand's first portable mini golf company, bringing fun to your events since
+                2008.
               </Text>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <Link
-                  href="/book"
-                  className="btn-primary inline-flex items-center gap-2 px-8 py-3"
-                >
+                <Link href="/book" className="btn-primary inline-flex items-center gap-2 px-8 py-3">
                   <Text variant="lg">Request Quote</Text>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
@@ -165,12 +170,7 @@ export default function HomePage() {
 
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
-              <Card
-                key={feature.name}
-                variant="elevated"
-                interactive
-                className="group"
-              >
+              <Card key={feature.name} variant="elevated" interactive className="group">
                 <CardHeader
                   title={feature.name}
                   subtitle={feature.description}
@@ -187,11 +187,12 @@ export default function HomePage() {
         <Container size="xl">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-8">
             <div className="flex flex-col justify-center">
-              <Text variant="h2"  className="font-bold tracking-tight text-foreground">
+              <Text variant="h2" className="font-bold tracking-tight text-foreground">
                 Comprehensive Event Solutions
               </Text>
               <Text variant="lg" className="mt-4 text-foreground-secondary">
-                Our professional event solutions are designed to deliver exceptional experiences for corporate functions and team building activities.
+                Our professional event solutions are designed to deliver exceptional experiences for
+                corporate functions and team building activities.
               </Text>
               <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {benefits.map((benefit) => (
@@ -204,10 +205,7 @@ export default function HomePage() {
                 ))}
               </div>
               <div className="mt-8">
-                <Link
-                  href="/book"
-                  className="btn-primary inline-flex items-center gap-2"
-                >
+                <Link href="/book" className="btn-primary inline-flex items-center gap-2">
                   <Text variant="base">Request Quote</Text>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
@@ -230,31 +228,39 @@ export default function HomePage() {
       <section className="relative bg-primary py-24">
         <GradientBackground variant="subtle">
           <Container size="xl" className="py-24">
-              <div className="relative z-10">
-                <Text variant="h2" align="center" className="pb-4 font-bold tracking-tight text-primary-foreground">
-                  Ready to Transform Your Event?
-                </Text>
-                <Text variant="lg" className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground/90">
-                  Contact our professional team to discuss your event requirements and receive a customized quote.
-                </Text>
-                <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                  <Link
-                    href="/book"
-                    className="btn-primary inline-flex min-w-[200px] items-center justify-center gap-2 px-8 py-3"
-                  >
-                    <Text variant="lg">Request Quote</Text>
-                    <ArrowRight className="h-5 w-5" />
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="btn-outline inline-flex min-w-[200px] items-center justify-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
-                  >
-                    <Text variant="lg">Contact Sales</Text>
-                  </Link>
-                </div>
+            <div className="relative z-10">
+              <Text
+                variant="h2"
+                align="center"
+                className="pb-4 font-bold tracking-tight text-primary-foreground"
+              >
+                Ready to Transform Your Event?
+              </Text>
+              <Text
+                variant="lg"
+                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground/90"
+              >
+                Contact our professional team to discuss your event requirements and receive a
+                customized quote.
+              </Text>
+              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <Link
+                  href="/book"
+                  className="btn-primary inline-flex min-w-[200px] items-center justify-center gap-2 px-8 py-3"
+                >
+                  <Text variant="lg">Request Quote</Text>
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="btn-outline inline-flex min-w-[200px] items-center justify-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
+                >
+                  <Text variant="lg">Contact Sales</Text>
+                </Link>
               </div>
-              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/20 to-transparent" />
-            </Container>
+            </div>
+            <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/20 to-transparent" />
+          </Container>
         </GradientBackground>
       </section>
     </div>

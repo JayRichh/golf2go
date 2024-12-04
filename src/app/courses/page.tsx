@@ -1,16 +1,19 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowRight, CheckCircle } from 'lucide-react';
-import { Container } from '~/components/ui/Container';
-import { GradientBackground } from '~/components/ui/GradientBackground';
-import { Text } from '~/components/ui/Text';
-import { Card, CardHeader, CardContent } from '~/components/ui/Card';
+import { ArrowRight, CheckCircle } from "lucide-react";
+
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+import { Card, CardContent, CardHeader } from "~/components/ui/Card";
+import { Container } from "~/components/ui/Container";
+import { GradientBackground } from "~/components/ui/GradientBackground";
+import { Text } from "~/components/ui/Text";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Our Courses - Golf 2 Go',
-    description: 'Explore our range of portable mini golf courses. Choose from Hole in One Challenge or 3, 6, and 9 hole courses.',
+    title: "Our Courses - Golf 2 Go",
+    description:
+      "Explore our range of portable mini golf courses. Choose from Hole in One Challenge or 3, 6, and 9 hole courses.",
   };
 }
 
@@ -29,59 +32,60 @@ interface CourseType {
 
 const courses: Course[] = [
   {
-    title: 'Hole in One Challenge',
-    description: 'A great option for office parties and school gala day competitions. Simply hire one hole for the ultimate challenge!',
+    title: "Hole in One Challenge",
+    description:
+      "A great option for office parties and school gala day competitions. Simply hire one hole for the ultimate challenge!",
     features: [
-      'Perfect for competitions',
-      'Easy to set up',
-      'Ideal for limited space',
-      'Great for team building',
+      "Perfect for competitions",
+      "Easy to set up",
+      "Ideal for limited space",
+      "Great for team building",
     ],
-    image: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
+    image: "/2-parties-and-events-golf2go-portable-miniature-golf.jpg",
   },
   {
-    title: '3, 6 or 9 Hole Courses',
-    description: 'This course is self-operated and is freighted directly to your desired location.',
+    title: "3, 6 or 9 Hole Courses",
+    description: "This course is self-operated and is freighted directly to your desired location.",
     features: [
-      'Multiple course options',
-      'Self-operated system',
-      'Direct freight delivery',
-      'Indoor or outdoor use',
+      "Multiple course options",
+      "Self-operated system",
+      "Direct freight delivery",
+      "Indoor or outdoor use",
     ],
-    image: '/3-fun-portable-mini-golf.jpg',
+    image: "/3-fun-portable-mini-golf.jpg",
   },
 ];
 
 const courseTypes: CourseType[] = [
   {
-    name: 'Twin Hedges',
-    description: 'A challenging course with strategic hedge placements',
-    image: '/1-Twin-Hedges-3-3m-x-75m.jpg',
+    name: "Twin Hedges",
+    description: "A challenging course with strategic hedge placements",
+    image: "/1-Twin-Hedges-3-3m-x-75m.jpg",
   },
   {
-    name: 'Triple Kidney',
-    description: 'Features multiple curved sections for added difficulty',
-    image: '/10-Triple-Kidney-3-4m-x-9m.jpg',
+    name: "Triple Kidney",
+    description: "Features multiple curved sections for added difficulty",
+    image: "/10-Triple-Kidney-3-4m-x-9m.jpg",
   },
   {
-    name: 'Slalom',
-    description: 'A winding course that tests precision and control',
-    image: '/12-Slalom-2-8m-x-9m.jpg',
+    name: "Slalom",
+    description: "A winding course that tests precision and control",
+    image: "/12-Slalom-2-8m-x-9m.jpg",
   },
   {
-    name: 'Bridge over the River',
-    description: 'Elevated bridge section adds an exciting challenge',
-    image: '/19-Bridge-over-the-River-3-3m-x-9m.jpg',
+    name: "Bridge over the River",
+    description: "Elevated bridge section adds an exciting challenge",
+    image: "/19-Bridge-over-the-River-3-3m-x-9m.jpg",
   },
   {
-    name: 'Multi Tunnels',
-    description: 'Multiple tunnel obstacles for varied gameplay',
-    image: '/15-Multi-tunnels-2-8m-x-9m.jpg',
+    name: "Multi Tunnels",
+    description: "Multiple tunnel obstacles for varied gameplay",
+    image: "/15-Multi-tunnels-2-8m-x-9m.jpg",
   },
   {
-    name: 'Holy Bridge',
-    description: 'Combines elevation changes with precise targeting',
-    image: '/16-Holy-Bridge-3-3m-x-75m.jpg',
+    name: "Holy Bridge",
+    description: "Combines elevation changes with precise targeting",
+    image: "/16-Holy-Bridge-3-3m-x-75m.jpg",
   },
 ];
 
@@ -97,7 +101,8 @@ export default function CoursesPage() {
                 Our Courses
               </Text>
               <Text variant="xl" className="mx-auto mt-6 max-w-2xl text-primary-foreground/90">
-                Choose from our selection of portable mini golf courses, perfect for any event or occasion.
+                Choose from our selection of portable mini golf courses, perfect for any event or
+                occasion.
               </Text>
             </div>
           </Container>
@@ -111,13 +116,21 @@ export default function CoursesPage() {
             <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
               Course Packages
             </Text>
-            <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-center text-foreground-secondary">
+            <Text
+              variant="lg"
+              className="mx-auto mt-4 max-w-2xl text-center text-foreground-secondary"
+            >
               Select the perfect package for your event
             </Text>
           </div>
           <div className="grid gap-8 lg:grid-cols-2">
             {courses.map((course) => (
-              <Card key={course.title} variant="elevated" interactive className="group overflow-hidden">
+              <Card
+                key={course.title}
+                variant="elevated"
+                interactive
+                className="group overflow-hidden"
+              >
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
                     src={course.image}
@@ -144,10 +157,7 @@ export default function CoursesPage() {
                     ))}
                   </div>
                   <div className="mt-8 flex justify-center">
-                    <Link
-                      href="/book"
-                      className="btn-primary inline-flex items-center gap-2"
-                    >
+                    <Link href="/book" className="btn-primary inline-flex items-center gap-2">
                       <Text variant="base">Book This Course</Text>
                       <ArrowRight className="h-5 w-5" />
                     </Link>
@@ -166,7 +176,10 @@ export default function CoursesPage() {
             <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
               Course Types Available
             </Text>
-            <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-center text-foreground-secondary">
+            <Text
+              variant="lg"
+              className="mx-auto mt-4 max-w-2xl text-center text-foreground-secondary"
+            >
               Explore our variety of unique course layouts and challenges
             </Text>
           </div>
@@ -210,10 +223,17 @@ export default function CoursesPage() {
         <GradientBackground variant="subtle">
           <Container size="xl" className="py-24">
             <div className="relative z-10">
-              <Text variant="h2" align="center" className="pb-4 font-bold tracking-tight text-primary-foreground">
+              <Text
+                variant="h2"
+                align="center"
+                className="pb-4 font-bold tracking-tight text-primary-foreground"
+              >
                 Ready to Book Your Course?
               </Text>
-              <Text variant="lg" className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground/90">
+              <Text
+                variant="lg"
+                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground/90"
+              >
                 Contact us today to discuss your event requirements and receive a customized quote.
               </Text>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

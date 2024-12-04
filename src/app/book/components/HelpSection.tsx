@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { Phone, HelpCircle } from 'lucide-react';
-import { Text } from '~/components/ui/Text';
+import { HelpCircle, Phone } from "lucide-react";
+
+import { Text } from "~/components/ui/Text";
 
 export function HelpSection() {
   return (
@@ -10,7 +11,9 @@ export function HelpSection() {
       <div className="border-b border-border/50 p-4">
         <div className="flex items-center gap-2">
           <HelpCircle className="h-5 w-5 text-primary" />
-          <Text variant="base" className="font-semibold">Need Help?</Text>
+          <Text variant="base" className="font-semibold">
+            Need Help?
+          </Text>
         </div>
         <Text variant="sm" className="mt-1.5 text-foreground-secondary">
           Have questions about our services or the booking process? We're here to help!
@@ -20,7 +23,7 @@ export function HelpSection() {
       {/* Content */}
       <div className="space-y-3 p-4">
         {/* Phone Contact */}
-        <a 
+        <a
           href="tel:021849931"
           className="flex items-center gap-3 rounded-md border border-border/50 bg-background/50 p-2.5 transition-all hover:border-primary/50 hover:bg-background hover:shadow-sm"
         >

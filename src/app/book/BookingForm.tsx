@@ -1,17 +1,20 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useCallback, useMemo } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Container } from '~/components/ui/Container';
-import { Text } from '~/components/ui/Text';
-import { FormStep } from '~/components/ui/FormStep';
-import { StepIndicator } from '~/components/ui/StepIndicator';
-import { FormCheckbox } from '~/components/ui/FormCheckbox';
-import { FormField } from '~/components/ui/FormField';
-import { sendEmail } from '~/lib/email';
-import type { FormData } from '~/types/form';
+
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
+
+import { Container } from "~/components/ui/Container";
+import { FormCheckbox } from "~/components/ui/FormCheckbox";
+import { FormField } from "~/components/ui/FormField";
+import { FormStep } from "~/components/ui/FormStep";
+import { StepIndicator } from "~/components/ui/StepIndicator";
+import { Text } from "~/components/ui/Text";
+
+import { sendEmail } from "~/lib/email";
+import type { FormData } from "~/types/form";
 
 const formSchema = z.object({
   companyName: z.string().optional(),
@@ -50,17 +53,22 @@ type Section = {
 };
 
 const sections: Section[] = [
-  { id: 'contact', title: 'Contact Details', icon: '👤', description: 'Your contact information' },
-  { id: 'postal', title: 'Postal Address', icon: '📮', description: 'Where to send documents' },
-  { id: 'delivery', title: 'Delivery Details', icon: '🚚', description: 'Where to deliver equipment' },
-  { id: 'event', title: 'Event Information', icon: '🎯', description: 'Details about your event' }
+  { id: "contact", title: "Contact Details", icon: "👤", description: "Your contact information" },
+  { id: "postal", title: "Postal Address", icon: "📮", description: "Where to send documents" },
+  {
+    id: "delivery",
+    title: "Delivery Details",
+    icon: "🚚",
+    description: "Where to deliver equipment",
+  },
+  { id: "event", title: "Event Information", icon: "🎯", description: "Details about your event" },
 ];
 
 const eventTypes = [
-  { value: 'corporate', label: 'Corporate Event' },
-  { value: 'birthday', label: 'Birthday Party' },
-  { value: 'school', label: 'School Event' },
-  { value: 'other', label: 'Other' }
+  { value: "corporate", label: "Corporate Event" },
+  { value: "birthday", label: "Birthday Party" },
+  { value: "school", label: "School Event" },
+  { value: "other", label: "Other" },
 ];
 
 export default function BookingForm() {
@@ -69,7 +77,7 @@ export default function BookingForm() {
   const [error, setError] = useState<string | null>(null);
   const [sameAsPostal, setSameAsPostal] = useState(false);
   const [sameAsDelivery, setSameAsDelivery] = useState(false);
-  const [activeSection, setActiveSection] = useState('contact');
+  const [activeSection, setActiveSection] = useState("contact");
   const [showPriceInfo, setShowPriceInfo] = useState(false);
   const [completedSections, setCompletedSections] = useState<string[]>([]);
 
@@ -82,40 +90,50 @@ export default function BookingForm() {
     trigger,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    mode: 'onBlur',
-    criteriaMode: 'firstError'
+    mode: "onBlur",
+    criteriaMode: "firstError",
   });
 
   const getFieldsForSection = (sectionId: string): Array<keyof FormData> => {
     switch (sectionId) {
-      case 'contact':
-        return ['contactPerson', 'mobilePhone', 'email'];
-      case 'postal':
-        return ['postalAddress', 'postalCity', 'postalRegion', 'postalPostcode'];
-      case 'delivery':
-        return ['deliveryAddress', 'deliveryCity', 'deliveryRegion', 'deliveryPostcode'];
-      case 'event':
-        return ['eventAddress', 'eventCity', 'eventRegion', 'eventPostcode', 'eventDate', 'eventType', 'numberOfDays', 'numberOfGreens'];
+      case "contact":
+        return ["contactPerson", "mobilePhone", "email"];
+      case "postal":
+        return ["postalAddress", "postalCity", "postalRegion", "postalPostcode"];
+      case "delivery":
+        return ["deliveryAddress", "deliveryCity", "deliveryRegion", "deliveryPostcode"];
+      case "event":
+        return [
+          "eventAddress",
+          "eventCity",
+          "eventRegion",
+          "eventPostcode",
+          "eventDate",
+          "eventType",
+          "numberOfDays",
+          "numberOfGreens",
+        ];
       default:
         return [];
     }
   };
 
   const formData = watch();
-  const currentSectionIndex = sections.findIndex(section => section.id === activeSection);
+  const currentSectionIndex = sections.findIndex((section) => section.id === activeSection);
 
-  const validateSection = useCallback(async (sectionId: string) => {
-    const fieldsToValidate = getFieldsForSection(sectionId);
-    const isValid = await trigger(fieldsToValidate);
-    
-    if (isValid) {
-      setCompletedSections(prev => 
-        prev.includes(sectionId) ? prev : [...prev, sectionId]
-      );
-    }
-    
-    return isValid;
-  }, [trigger]);
+  const validateSection = useCallback(
+    async (sectionId: string) => {
+      const fieldsToValidate = getFieldsForSection(sectionId);
+      const isValid = await trigger(fieldsToValidate);
+
+      if (isValid) {
+        setCompletedSections((prev) => (prev.includes(sectionId) ? prev : [...prev, sectionId]));
+      }
+
+      return isValid;
+    },
+    [trigger]
+  );
 
   const copyPostalToDelivery = useCallback(() => {
     if (!sameAsPostal) return;
@@ -156,13 +174,27 @@ export default function BookingForm() {
   useEffect(() => {
     const timer = setTimeout(copyPostalToDelivery, 300);
     return () => clearTimeout(timer);
-  }, [formData.postalAddress, formData.postalAddress2, formData.postalCity, formData.postalRegion, formData.postalPostcode, copyPostalToDelivery]);
+  }, [
+    formData.postalAddress,
+    formData.postalAddress2,
+    formData.postalCity,
+    formData.postalRegion,
+    formData.postalPostcode,
+    copyPostalToDelivery,
+  ]);
 
   useEffect(() => {
     const timer = setTimeout(copyDeliveryToEvent, 300);
     return () => clearTimeout(timer);
-  }, [formData.deliveryAddress, formData.deliveryAddress2, formData.deliveryCity, formData.deliveryRegion, formData.deliveryPostcode, copyDeliveryToEvent]);
-  
+  }, [
+    formData.deliveryAddress,
+    formData.deliveryAddress2,
+    formData.deliveryCity,
+    formData.deliveryRegion,
+    formData.deliveryPostcode,
+    copyDeliveryToEvent,
+  ]);
+
   const price = useMemo(() => {
     const days = parseInt(formData.numberOfDays) || 1;
     const greens = parseInt(formData.numberOfGreens) || 1;
@@ -174,7 +206,7 @@ export default function BookingForm() {
       dayMultiplier = days * 0.8;
     }
 
-    return (basePrice + (greenPrice * greens)) * dayMultiplier;
+    return (basePrice + greenPrice * greens) * dayMultiplier;
   }, [formData.numberOfDays, formData.numberOfGreens]);
 
   const onSubmit = async (data: FormData) => {
@@ -184,17 +216,17 @@ export default function BookingForm() {
     try {
       await sendEmail(data);
       setSuccess(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
-      setError('Failed to send booking request. Please try again or contact us directly.');
+      setError("Failed to send booking request. Please try again or contact us directly.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleStepClick = async (sectionId: string) => {
-    const targetIndex = sections.findIndex(section => section.id === sectionId);
-    const currentIndex = sections.findIndex(section => section.id === activeSection);
+    const targetIndex = sections.findIndex((section) => section.id === sectionId);
+    const currentIndex = sections.findIndex((section) => section.id === activeSection);
 
     if (targetIndex > currentIndex) {
       const isValid = await validateSection(activeSection);
@@ -257,17 +289,13 @@ export default function BookingForm() {
       )}
 
       {/* Progress Steps */}
-      <StepIndicator
-        steps={sections}
-        currentStep={activeSection}
-        onStepClick={handleStepClick}
-      />
+      <StepIndicator steps={sections} currentStep={activeSection} onStepClick={handleStepClick} />
 
       {/* Form Content */}
       <div className="relative w-full">
-      <div className="relative min-h-[400px]">
+        <div className="relative min-h-[400px]">
           {/* Contact Section */}
-          <FormStep isActive={activeSection === 'contact'} direction="right">
+          <FormStep isActive={activeSection === "contact"} direction="right">
             <div className="grid gap-6 md:grid-cols-2">
               <FormField
                 name="companyName"
@@ -309,7 +337,10 @@ export default function BookingForm() {
           </FormStep>
 
           {/* Postal Section */}
-          <FormStep isActive={activeSection === 'postal'} direction={currentSectionIndex > 1 ? 'left' : 'right'}>
+          <FormStep
+            isActive={activeSection === "postal"}
+            direction={currentSectionIndex > 1 ? "left" : "right"}
+          >
             <div className="grid gap-6 md:grid-cols-2">
               <FormField
                 name="postalAddress"
@@ -368,7 +399,10 @@ export default function BookingForm() {
           </FormStep>
 
           {/* Delivery Section */}
-          <FormStep isActive={activeSection === 'delivery'} direction={currentSectionIndex > 2 ? 'left' : 'right'}>
+          <FormStep
+            isActive={activeSection === "delivery"}
+            direction={currentSectionIndex > 2 ? "left" : "right"}
+          >
             <div className="grid gap-6 md:grid-cols-2">
               <FormField
                 name="deliveryAddress"
@@ -421,7 +455,7 @@ export default function BookingForm() {
           </FormStep>
 
           {/* Event Section */}
-          <FormStep isActive={activeSection === 'event'} direction="left">
+          <FormStep isActive={activeSection === "event"} direction="left">
             <div className="grid gap-6 md:grid-cols-2">
               <FormField
                 name="eventAddress"
@@ -528,9 +562,21 @@ export default function BookingForm() {
                       Price Breakdown:
                     </Text>
                     <ul className="list-inside list-disc space-y-1">
-                      <li><Text variant="sm" className="text-foreground-secondary">Base price: $500</Text></li>
-                      <li><Text variant="sm" className="text-foreground-secondary">Additional greens: $250 each</Text></li>
-                      <li><Text variant="sm" className="text-foreground-secondary">Multi-day discount: 20% off for bookings longer than 1 day</Text></li>
+                      <li>
+                        <Text variant="sm" className="text-foreground-secondary">
+                          Base price: $500
+                        </Text>
+                      </li>
+                      <li>
+                        <Text variant="sm" className="text-foreground-secondary">
+                          Additional greens: $250 each
+                        </Text>
+                      </li>
+                      <li>
+                        <Text variant="sm" className="text-foreground-secondary">
+                          Multi-day discount: 20% off for bookings longer than 1 day
+                        </Text>
+                      </li>
                     </ul>
                   </div>
                 )}
@@ -570,23 +616,23 @@ export default function BookingForm() {
           >
             {loading ? (
               <div className="flex items-center justify-center gap-2">
-                <svg 
-                  className="h-5 w-5 animate-spin" 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  fill="none" 
+                <svg
+                  className="h-5 w-5 animate-spin"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
                   viewBox="0 0 24 24"
                 >
-                  <circle 
-                    className="opacity-25" 
-                    cx="12" 
-                    cy="12" 
-                    r="10" 
-                    stroke="currentColor" 
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
                     strokeWidth="4"
                   />
-                  <path 
-                    className="opacity-75" 
-                    fill="currentColor" 
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   />
                 </svg>

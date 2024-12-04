@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { Text } from './Text';
-import { UseFormRegister } from 'react-hook-form';
+import { UseFormRegister } from "react-hook-form";
+
+import { Text } from "./Text";
 
 interface FormFieldProps {
   name: string;
@@ -16,14 +17,14 @@ interface FormFieldProps {
   }>;
 }
 
-export function FormField({ 
-  name, 
-  label, 
-  type = 'text', 
+export function FormField({
+  name,
+  label,
+  type = "text",
   required = false,
   register,
   error,
-  options
+  options,
 }: FormFieldProps) {
   return (
     <div className="col-span-2 md:col-span-1">
@@ -33,11 +34,11 @@ export function FormField({
           {required && <span className="ml-1 text-amber-500">*</span>}
         </Text>
       </label>
-      {type === 'select' ? (
+      {type === "select" ? (
         <select
           id={name}
           {...register(name)}
-          className={`input-base ${error ? 'border-red-500 focus:ring-red-500' : required ? 'border-amber-200 focus:ring-amber-500' : ''}`}
+          className={`input-base ${error ? "border-red-500 focus:ring-red-500" : required ? "border-amber-200 focus:ring-amber-500" : ""}`}
         >
           <option value="">Select {label.toLowerCase()}</option>
           {options?.map((option) => (
@@ -46,12 +47,12 @@ export function FormField({
             </option>
           ))}
         </select>
-      ) : type === 'textarea' ? (
+      ) : type === "textarea" ? (
         <textarea
           id={name}
           {...register(name)}
           rows={4}
-          className={`input-base ${error ? 'border-red-500 focus:ring-red-500' : required ? 'border-amber-200 focus:ring-amber-500' : ''}`}
+          className={`input-base ${error ? "border-red-500 focus:ring-red-500" : required ? "border-amber-200 focus:ring-amber-500" : ""}`}
           placeholder={`Enter ${label.toLowerCase()}`}
         />
       ) : (
@@ -59,8 +60,8 @@ export function FormField({
           type={type}
           id={name}
           {...register(name)}
-          min={type === 'number' ? 1 : undefined}
-          className={`input-base ${error ? 'border-red-500 focus:ring-red-500' : required ? 'border-amber-200 focus:ring-amber-500' : ''}`}
+          min={type === "number" ? 1 : undefined}
+          className={`input-base ${error ? "border-red-500 focus:ring-red-500" : required ? "border-amber-200 focus:ring-amber-500" : ""}`}
         />
       )}
       {error && (

@@ -1,13 +1,18 @@
-import Link from 'next/link';
-import { Search, Home } from 'lucide-react';
-import { Container } from '~/components/ui/Container';
-import { Card, CardContent } from '~/components/ui/Card';
-import { Text } from '~/components/ui/Text';
+import { Home, Search } from "lucide-react";
+
+import Link from "next/link";
+
+import { Card, CardContent } from "~/components/ui/Card";
+import { Container } from "~/components/ui/Container";
+import { Text } from "~/components/ui/Text";
 
 export default function NotFound() {
   return (
     <div className="min-h-[50vh] bg-background">
-      <Container size="lg" className="flex min-h-[50vh] flex-col items-center justify-center text-center">
+      <Container
+        size="lg"
+        className="flex min-h-[50vh] flex-col items-center justify-center text-center"
+      >
         <Card variant="elevated" className="max-w-md backdrop-blur">
           <CardContent className="flex flex-col items-center p-8">
             <div className="rounded-full bg-primary/10 p-4">

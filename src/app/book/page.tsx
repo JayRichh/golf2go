@@ -1,15 +1,18 @@
-import type { Metadata } from 'next';
-import { Container } from '~/components/ui/Container';
-import { GradientBackground } from '~/components/ui/GradientBackground';
-import { Text } from '~/components/ui/Text';
-import { HelpSection } from './components/HelpSection';
-import { QuickTips } from './components/QuickTips';
-import BookingForm from './BookingForm';
+import type { Metadata } from "next";
+
+import { Container } from "~/components/ui/Container";
+import { GradientBackground } from "~/components/ui/GradientBackground";
+import { Text } from "~/components/ui/Text";
+
+import BookingForm from "./BookingForm";
+import { HelpSection } from "./components/HelpSection";
+import { QuickTips } from "./components/QuickTips";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Book Now | Golf 2 Go',
-    description: 'Book your portable mini golf course for your next event. Available for corporate events, parties, and more.',
+    title: "Book Now | Golf 2 Go",
+    description:
+      "Book your portable mini golf course for your next event. Available for corporate events, parties, and more.",
   };
 }
 
@@ -24,8 +27,8 @@ export default function BookPage() {
               <Text variant="h1" align="center" className="text-primary-foreground">
                 Make a Booking
               </Text>
-              <Text 
-                variant="xl" 
+              <Text
+                variant="xl"
                 align="center"
                 className="mx-auto mt-6 max-w-2xl text-primary-foreground/90"
               >

@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
-import { Text } from '~/components/ui/Text';
-import { Modal } from '~/components/ui/Modal';
+import { useState } from "react";
+
+import Image from "next/image";
+
+import { Modal } from "~/components/ui/Modal";
+import { Text } from "~/components/ui/Text";
 
 interface ImagePreviewProps {
   src: string;
@@ -16,7 +18,7 @@ export function ImagePreview({ src, alt, title }: ImagePreviewProps) {
 
   return (
     <>
-      <div 
+      <div
         className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-lg"
         onClick={() => setIsOpen(true)}
       >
@@ -44,14 +46,7 @@ export function ImagePreview({ src, alt, title }: ImagePreviewProps) {
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[95vw] max-w-7xl p-0 overflow-hidden"
       >
         <div className="relative aspect-[4/3] w-full">
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            className="object-contain"
-            sizes="95vw"
-            priority
-          />
+          <Image src={src} alt={alt} fill className="object-contain" sizes="95vw" priority />
         </div>
         <div className="bg-background p-4 text-center">
           <Text variant="lg" className="font-medium">

@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { cn } from '~/utils/cn';
+import { motion } from "framer-motion";
+
+import { cn } from "~/utils/cn";
 
 export interface GradientBackgroundProps {
-  variant?: 'default' | 'subtle' | 'glow';
+  variant?: "default" | "subtle" | "glow";
   interactive?: boolean;
   className?: string;
   children?: React.ReactNode;
 }
 
 export const GradientBackground = ({
-  variant = 'default',
+  variant = "default",
   interactive = false,
   className,
   children,
@@ -32,24 +33,20 @@ export const GradientBackground = ({
   };
 
   const gradientStyles = {
-    default: 'bg-gradient-to-b from-primary/20 via-background to-background',
-    subtle: 'bg-gradient-to-b from-primary/10 via-background to-background',
-    glow: 'bg-[radial-gradient(circle_at_center,var(--gradient-start)_0%,var(--gradient-end)_100%)]',
+    default: "bg-gradient-to-b from-primary/20 via-background to-background",
+    subtle: "bg-gradient-to-b from-primary/10 via-background to-background",
+    glow: "bg-[radial-gradient(circle_at_center,var(--gradient-start)_0%,var(--gradient-end)_100%)]",
   };
 
   return (
-    <div 
-      className={cn(
-        'relative w-full h-full overflow-hidden',
-        gradientStyles[variant],
-        className
-      )}
+    <div
+      className={cn("relative w-full h-full overflow-hidden", gradientStyles[variant], className)}
       style={
-        variant === 'glow' 
-          ? {
-              '--gradient-start': 'hsl(var(--primary) / 0.15)',
-              '--gradient-end': 'transparent',
-            } as React.CSSProperties
+        variant === "glow"
+          ? ({
+              "--gradient-start": "hsl(var(--primary) / 0.15)",
+              "--gradient-end": "transparent",
+            } as React.CSSProperties)
           : undefined
       }
     >
@@ -59,15 +56,11 @@ export const GradientBackground = ({
         transition={{
           duration: 8,
           repeat: Infinity,
-          repeatType: 'reverse',
+          repeatType: "reverse",
         }}
         className="absolute inset-0"
       />
-      {children && (
-        <div className="relative z-10">
-          {children}
-        </div>
-      )}
+      {children && <div className="relative z-10">{children}</div>}
     </div>
   );
 };

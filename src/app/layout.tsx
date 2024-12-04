@@ -1,28 +1,26 @@
-import localFont from 'next/font/local';
-import './globals.css';
-import { Navbar } from '~/components/layout/navbar';
-import { Footer } from '~/components/layout/footer';
-import { PageTransition } from '~/components/ui/PageTransition';
+import localFont from "next/font/local";
+
+import { Footer } from "~/components/layout/footer";
+import { Navbar } from "~/components/layout/navbar";
+import { PageTransition } from "~/components/ui/PageTransition";
+
+import "./globals.css";
 
 // Load fonts locally for better performance
 const geist = localFont({
   src: [
     {
-      path: './fonts/GeistVF.woff',
-      weight: '300 700',
-      style: 'normal',
+      path: "./fonts/GeistVF.woff",
+      weight: "300 700",
+      style: "normal",
     },
   ],
-  variable: '--font-geist',
+  variable: "--font-geist",
   preload: true,
-  display: 'swap',
+  display: "swap",
 });
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geist.variable} antialiased`}>
       <body className="flex min-h-screen flex-col bg-background font-sans">
@@ -34,9 +32,7 @@ export default async function RootLayout({
         {/* Main content */}
         <Navbar />
         <main className="flex-1">
-          <PageTransition>
-            {children}
-          </PageTransition>
+          <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
 

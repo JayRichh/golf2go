@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { Lightbulb } from 'lucide-react';
-import { Text } from '~/components/ui/Text';
+import { Lightbulb } from "lucide-react";
+
+import { Text } from "~/components/ui/Text";
 
 export function QuickTips() {
   return (
@@ -15,8 +16,8 @@ export function QuickTips() {
             Quick Tips
           </Text>
           <Text variant="sm" className="mt-1.5 text-foreground-secondary">
-            The more details you provide, the better we can tailor our service to your event.
-            All fields marked with * are required.
+            The more details you provide, the better we can tailor our service to your event. All
+            fields marked with * are required.
           </Text>
         </div>
       </div>
