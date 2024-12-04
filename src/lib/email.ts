@@ -1,6 +1,9 @@
 import type { FormData } from "~/types/form";
 
-export async function sendEmail(formData: FormData) {
+// Create a type that excludes recaptchaToken
+type EmailFormData = Omit<FormData, "recaptchaToken">;
+
+export async function sendEmail(formData: EmailFormData) {
   const formatAddress = (prefix: "postal" | "delivery" | "event") => {
     const address = formData[`${prefix}Address`];
     const address2 = formData[`${prefix}Address2`];

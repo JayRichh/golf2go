@@ -41,7 +41,7 @@ export interface FormData {
   numberOfDays: string;
   numberOfGreens: string;
   message?: string;
-  recaptchaToken?: string;
+  recaptchaToken: string; // Changed from optional to required
 }
 
 export interface FormState {
