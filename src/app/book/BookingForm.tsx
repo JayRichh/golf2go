@@ -20,7 +20,7 @@ declare global {
   interface Window {
     grecaptcha: {
       ready: (callback: () => void) => void;
-      execute: (siteKey: string, options: { action: string }) => Promise<string>;
+      execute: (siteKey: string) => Promise<string>;
     };
   }
 }
@@ -89,6 +89,7 @@ export default function BookingForm() {
   const [activeSection, setActiveSection] = useState("contact");
   const [showPriceInfo, setShowPriceInfo] = useState(false);
   const [completedSections, setCompletedSections] = useState<string[]>([]);
+  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
   const {
     register,
@@ -223,22 +224,20 @@ export default function BookingForm() {
     setError(null);
 
     try {
+      if (!recaptchaLoaded) {
+        throw new Error("reCAPTCHA not loaded. Please refresh the page and try again.");
+      }
+
       // Get reCAPTCHA token
       const token = await new Promise<string>((resolve, reject) => {
-        if (!window.grecaptcha) {
-          reject(new Error("reCAPTCHA not loaded"));
-          return;
-        }
-
         window.grecaptcha.ready(async () => {
           try {
             const token = await window.grecaptcha.execute(
-              process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
-              { action: "submit" }
+              process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!
             );
             resolve(token);
           } catch (error) {
-            reject(error);
+            reject(new Error("Failed to verify reCAPTCHA. Please try again."));
           }
         });
       });
@@ -303,6 +302,8 @@ export default function BookingForm() {
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
         strategy="afterInteractive"
+        onLoad={() => setRecaptchaLoaded(true)}
+        onError={() => setError("Failed to load reCAPTCHA. Please refresh the page and try again.")}
       />
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8" noValidate>
@@ -662,7 +663,7 @@ export default function BookingForm() {
           ) : (
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || !recaptchaLoaded}
               className="btn-primary inline-flex min-w-[160px] items-center justify-center gap-2 px-8 py-3"
             >
               {loading ? (

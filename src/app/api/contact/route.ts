@@ -39,8 +39,6 @@ const formSchema = z.object({
 
 interface RecaptchaResponse {
   success: boolean;
-  score: number;
-  action: string;
   challenge_ts: string;
   hostname: string;
   error_codes?: string[];
@@ -48,46 +46,62 @@ interface RecaptchaResponse {
 
 export async function POST(request: Request) {
   try {
+    // Validate environment variables
+    if (!process.env.RECAPTCHA_SECRET_KEY) {
+      console.error("RECAPTCHA_SECRET_KEY is not set");
+      return NextResponse.json(
+        { error: "Server configuration error. Please contact support." },
+        { status: 500 }
+      );
+    }
+
+    if (!process.env.SMTP_KEY) {
+      console.error("SMTP_KEY is not set");
+      return NextResponse.json(
+        { error: "Server configuration error. Please contact support." },
+        { status: 500 }
+      );
+    }
+
+    // Parse and validate request body
     const body = await request.json();
     const validatedData = formSchema.parse(body);
 
     // Verify reCAPTCHA token
-    const recaptchaVerifyUrl = new URL("https://www.google.com/recaptcha/api/siteverify");
-    const recaptchaResponse = await fetch(recaptchaVerifyUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        secret: process.env.RECAPTCHA_SECRET_KEY!,
-        response: validatedData.recaptchaToken,
-      }),
-    });
+    try {
+      const recaptchaVerifyUrl = new URL("https://www.google.com/recaptcha/api/siteverify");
+      const recaptchaResponse = await fetch(recaptchaVerifyUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          secret: process.env.RECAPTCHA_SECRET_KEY,
+          response: validatedData.recaptchaToken,
+        }),
+      });
 
-    const recaptchaData = (await recaptchaResponse.json()) as RecaptchaResponse;
+      if (!recaptchaResponse.ok) {
+        console.error("reCAPTCHA API error:", await recaptchaResponse.text());
+        return NextResponse.json(
+          { error: "Failed to verify reCAPTCHA. Please try again." },
+          { status: 400 }
+        );
+      }
 
-    if (!recaptchaData.success) {
-      console.error("reCAPTCHA verification failed:", recaptchaData.error_codes);
+      const recaptchaData = (await recaptchaResponse.json()) as RecaptchaResponse;
+
+      if (!recaptchaData.success) {
+        console.error("reCAPTCHA verification failed:", recaptchaData.error_codes);
+        return NextResponse.json(
+          { error: "reCAPTCHA verification failed. Please try again." },
+          { status: 400 }
+        );
+      }
+    } catch (error) {
+      console.error("reCAPTCHA verification error:", error);
       return NextResponse.json(
-        { error: "reCAPTCHA verification failed. Please try again." },
-        { status: 400 }
-      );
-    }
-
-    // Check reCAPTCHA score (0.0 to 1.0, where 1.0 is very likely a good interaction)
-    if (recaptchaData.score < 0.5) {
-      console.error("reCAPTCHA score too low:", recaptchaData.score);
-      return NextResponse.json(
-        { error: "Request flagged as potential spam. Please try again or contact us directly." },
-        { status: 400 }
-      );
-    }
-
-    // Verify action matches
-    if (recaptchaData.action !== "submit") {
-      console.error("reCAPTCHA action mismatch:", recaptchaData.action);
-      return NextResponse.json(
-        { error: "Invalid reCAPTCHA action. Please try again." },
+        { error: "Failed to verify reCAPTCHA. Please try again." },
         { status: 400 }
       );
     }
@@ -95,17 +109,30 @@ export async function POST(request: Request) {
     // Remove recaptchaToken before sending email
     const { recaptchaToken, ...emailData } = validatedData;
 
-    // Send email with the cleaned data
-    await sendEmail(emailData);
+    // Send email
+    try {
+      await sendEmail(emailData);
+    } catch (error) {
+      console.error("Email service error:", error);
+      return NextResponse.json(
+        { error: "Failed to send booking request. Please try again later or contact us directly." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ message: "Form submitted successfully" }, { status: 200 });
   } catch (error) {
     console.error("Form submission error:", error);
+    
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors[0].message }, { status: 400 });
+      return NextResponse.json(
+        { error: error.errors[0].message },
+        { status: 400 }
+      );
     }
+
     return NextResponse.json(
-      { error: "Failed to submit form. Please try again or contact us directly." },
+      { error: "Failed to process form submission. Please try again or contact us directly." },
       { status: 500 }
     );
   }

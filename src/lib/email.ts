@@ -4,6 +4,10 @@ import type { FormData } from "~/types/form";
 type EmailFormData = Omit<FormData, "recaptchaToken">;
 
 export async function sendEmail(formData: EmailFormData) {
+  if (!process.env.SMTP_KEY) {
+    throw new Error("SMTP_KEY environment variable is not set");
+  }
+
   const formatAddress = (prefix: "postal" | "delivery" | "event") => {
     const address = formData[`${prefix}Address`];
     const address2 = formData[`${prefix}Address2`];
@@ -145,23 +149,31 @@ export async function sendEmail(formData: EmailFormData) {
   `,
   };
 
-  const apiUrl = "https://api.smtp2go.com/v3/email/send";
-  const response = await fetch(apiUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(emailPayload),
-  });
+  try {
+    const apiUrl = "https://api.smtp2go.com/v3/email/send";
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(emailPayload),
+    });
 
-  if (!response.ok) {
-    throw new Error("Failed to send email");
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("SMTP2GO API error:", errorData);
+      throw new Error(`Email service error: ${response.status} ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    if (!(result.data && result.data.succeeded > 0)) {
+      console.error("SMTP2GO API response:", result);
+      throw new Error("Email service failed to send email");
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Email service error:", error);
+    throw new Error("Failed to send email. Please check server logs for details.");
   }
-
-  const result = await response.json();
-  if (!(result.data && result.data.succeeded > 0)) {
-    throw new Error("Email not sent successfully");
-  }
-
-  return true;
 }
