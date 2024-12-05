@@ -28,6 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Golf 2 Go",
   },
   description: "Premium portable mini golf courses for your events",
+  manifest: "/manifest.json",
   icons: {
     icon: "/birdie.png",
     shortcut: "/birdie.png",
@@ -66,11 +67,23 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  alternates: {
+    canonical: "https://golf2go.co.nz",
+  },
+  verification: {
+    google: "google-site-verification",
+  },
+  category: "Entertainment",
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geist.variable} antialiased`}>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#008000" />
+        <link rel="apple-touch-icon" href="/birdie.png" />
+      </head>
       <body className="flex min-h-screen flex-col bg-background font-sans">
         {/* Background pattern */}
         <div className="fixed inset-0 -z-10">

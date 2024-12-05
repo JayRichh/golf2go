@@ -14,6 +14,15 @@ const nextConfig = {
     config.externals = [...(config.externals || []), { canvas: "canvas" }];
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/contact',
+        destination: '/book',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

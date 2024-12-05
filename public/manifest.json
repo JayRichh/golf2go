@@ -1,0 +1,16 @@
+{
+  "name": "Golf2Go - Portable Mini Golf",
+  "short_name": "Golf2Go",
+  "description": "Portable mini golf courses for events and parties across New Zealand",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#008000",
+  "icons": [
+    {
+      "src": "/birdie.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
