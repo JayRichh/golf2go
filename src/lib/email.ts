@@ -5,8 +5,8 @@ type EmailFormData = Omit<FormData, "recaptchaToken">;
 const SMTP2GO_API_URL = "https://api.smtp2go.com/v3/email/send";
 
 export async function sendEmail(formData: EmailFormData) {
-  if (!process.env.NEXT_SMTP_KEY) {
-    throw new Error("NEXT_SMTP_KEY environment variable is not set");
+  if (!process.env.SMTP_KEY) {
+    throw new Error("SMTP_KEY environment variable is not set");
   }
 
   const formatAddress = (prefix: "postal" | "delivery" | "event") => {
@@ -19,7 +19,6 @@ export async function sendEmail(formData: EmailFormData) {
     return `${address}${address2 ? `, ${address2}` : ""}, ${city}, ${region}, ${postcode}`;
   };
 
-  // Format the email body with HTML
   const htmlBody = `
     <h2>New Golf 2 Go Booking Request</h2>
     <p>Submitted on ${new Date().toLocaleString("en-NZ")}</p>
@@ -48,9 +47,9 @@ export async function sendEmail(formData: EmailFormData) {
     ` : ''}
   `;
 
-  // Structure the payload according to SMTP2GO's API requirements
+  // Match exactly the working payload structure
   const payload = {
-    api_key: process.env.NEXT_SMTP_KEY,
+    api_key: process.env.SMTP_KEY,
     to: ["steven@golf2go.co.nz"],
     sender: "noreply@golf2go.co.nz",
     subject: `New Booking Request from ${formData.companyName || formData.contactPerson}`,
@@ -63,8 +62,6 @@ export async function sendEmail(formData: EmailFormData) {
     ]
   };
 
-  console.log("Sending email via SMTP2GO...");
-  
   try {
     const response = await fetch(SMTP2GO_API_URL, {
       method: "POST",
@@ -75,14 +72,8 @@ export async function sendEmail(formData: EmailFormData) {
     });
 
     const responseData = await response.json();
-    console.log("SMTP2GO API response:", responseData);
 
     if (!response.ok) {
-      console.error("SMTP2GO API error response:", {
-        status: response.status,
-        statusText: response.statusText,
-        data: responseData
-      });
       throw new Error(`Email service error: ${response.status}`);
     }
 
@@ -90,7 +81,6 @@ export async function sendEmail(formData: EmailFormData) {
       throw new Error("Email not sent successfully");
     }
 
-    console.log("Email sent successfully");
     return true;
   } catch (error) {
     console.error("Email service error:", error);
