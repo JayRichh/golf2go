@@ -1,7 +1,28 @@
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { NextResponse } from "next/server";
 import { sendEmail } from "~/lib/email";
-import type { FormData } from "~/types/form";
+
+const SMTP2GO_API_URL = "https://api.smtp2go.com/v3/email/send";
+
+// Simple rate limiting
+const RATE_LIMIT = 5;
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const ipRequests = new Map<string, { count: number; timestamp: number }>();
+
+function rateLimitCheck(ip: string): boolean {
+  const now = Date.now();
+  const requestData = ipRequests.get(ip) || { count: 0, timestamp: now };
+
+  if (now - requestData.timestamp > RATE_LIMIT_WINDOW) {
+    requestData.count = 1;
+    requestData.timestamp = now;
+  } else {
+    requestData.count++;
+  }
+
+  ipRequests.set(ip, requestData);
+  return requestData.count <= RATE_LIMIT;
+}
 
 const formSchema = z.object({
   companyName: z.string().optional(),
@@ -33,9 +54,21 @@ const formSchema = z.object({
   recaptchaToken: z.string().min(1, "reCAPTCHA verification failed"),
 });
 
-export async function POST(request: Request) {
+export async function POST(req: NextRequest) {
+  console.log("Starting booking request process...");
+  const ip = req.headers.get("x-forwarded-for") || "unknown";
+
+  if (!rateLimitCheck(ip)) {
+    console.log("Rate limit exceeded for IP:", ip);
+    return NextResponse.json(
+      { error: "Rate limit exceeded. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   try {
-    if (!process.env.RECAPTCHA_SECRET_KEY || !process.env.NEXT_PUBLIC_SMTP_KEY) {
+    // Check environment variables
+    if (!process.env.RECAPTCHA_SECRET_KEY || !process.env.NEXT_SMTP_KEY) {
       console.error("Missing required environment variables");
       return NextResponse.json(
         { error: "Server configuration error" },
@@ -43,53 +76,76 @@ export async function POST(request: Request) {
       );
     }
 
-    const body = await request.json();
-    const validatedData = formSchema.parse(body);
+    // Parse and validate request body
+    const body = await req.json();
+    console.log("Received request data");
 
-    // Verify reCAPTCHA
-    const recaptchaResponse = await fetch(
-      "https://www.google.com/recaptcha/api/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          secret: process.env.RECAPTCHA_SECRET_KEY,
-          response: validatedData.recaptchaToken,
-        }),
+    try {
+      const validatedData = formSchema.parse(body);
+      console.log("Data validation passed");
+
+      // Verify reCAPTCHA
+      const recaptchaResponse = await fetch(
+        "https://www.google.com/recaptcha/api/siteverify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            secret: process.env.RECAPTCHA_SECRET_KEY,
+            response: validatedData.recaptchaToken,
+          }),
+        }
+      );
+
+      const recaptchaData = await recaptchaResponse.json();
+      console.log("reCAPTCHA verification response:", recaptchaData);
+
+      if (!recaptchaData.success) {
+        console.error("reCAPTCHA verification failed:", recaptchaData["error-codes"]);
+        return NextResponse.json(
+          { error: "reCAPTCHA verification failed" },
+          { status: 400 }
+        );
       }
-    );
 
-    const recaptchaData = await recaptchaResponse.json();
-    if (!recaptchaData.success) {
-      console.error("reCAPTCHA verification failed:", recaptchaData["error-codes"]);
-      return NextResponse.json(
-        { error: "reCAPTCHA verification failed" },
-        { status: 400 }
-      );
+      // Remove recaptchaToken before sending email
+      const { recaptchaToken, ...emailData } = validatedData;
+
+      // Send email
+      try {
+        await sendEmail(emailData);
+        console.log("Email sent successfully");
+        return NextResponse.json(
+          { message: "Booking request sent successfully" },
+          { status: 200 }
+        );
+      } catch (emailError) {
+        console.error("Email service error:", emailError);
+        return NextResponse.json(
+          { 
+            error: "Failed to send booking request",
+            details: emailError instanceof Error ? emailError.message : String(emailError)
+          },
+          { status: 500 }
+        );
+      }
+    } catch (validationError) {
+      console.error("Validation error:", validationError);
+      if (validationError instanceof z.ZodError) {
+        return NextResponse.json(
+          { error: validationError.errors[0].message },
+          { status: 400 }
+        );
+      }
+      throw validationError;
     }
-
-    // Remove recaptchaToken before sending email
-    const { recaptchaToken, ...emailData } = validatedData;
-
-    // Send email
-    await sendEmail(emailData);
-
-    return NextResponse.json(
-      { message: "Form submitted successfully" },
-      { status: 200 }
-    );
   } catch (error) {
-    console.error("Form submission error:", error);
-    
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: error.errors[0].message },
-        { status: 400 }
-      );
-    }
-
+    console.error("Unexpected error in booking request:", error);
     return NextResponse.json(
-      { error: "Failed to process form submission" },
+      {
+        error: "Internal server error",
+        details: error instanceof Error ? error.message : String(error)
+      },
       { status: 500 }
     );
   }
