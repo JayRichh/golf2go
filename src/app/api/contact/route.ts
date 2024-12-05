@@ -4,26 +4,6 @@ import { z } from "zod";
 const SMTP2GO_API_URL = "https://api.smtp2go.com/v3/email/send";
 const RECIPIENT_EMAIL = "steven@golf2go.co.nz";
 
-// Simple rate limiting
-const RATE_LIMIT = 5;
-const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const ipRequests = new Map<string, { count: number; timestamp: number }>();
-
-function rateLimitCheck(ip: string): boolean {
-  const now = Date.now();
-  const requestData = ipRequests.get(ip) || { count: 0, timestamp: now };
-
-  if (now - requestData.timestamp > RATE_LIMIT_WINDOW) {
-    requestData.count = 1;
-    requestData.timestamp = now;
-  } else {
-    requestData.count++;
-  }
-
-  ipRequests.set(ip, requestData);
-  return requestData.count <= RATE_LIMIT;
-}
-
 const formSchema = z.object({
   companyName: z.string().optional(),
   contactPerson: z.string().min(2, "Contact person name is required"),
@@ -54,17 +34,8 @@ const formSchema = z.object({
   recaptchaToken: z.string().min(1, "reCAPTCHA verification failed"),
 });
 
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   console.log("Starting booking request process...");
-  const ip = req.headers.get("x-forwarded-for") || "unknown";
-
-  if (!rateLimitCheck(ip)) {
-    console.log("Rate limit exceeded for IP:", ip);
-    return NextResponse.json(
-      { error: "Rate limit exceeded. Please try again later." },
-      { status: 429 }
-    );
-  }
 
   try {
     const apiKey = process.env.NEXT_SMTP_KEY;
@@ -76,140 +47,136 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const body = await req.json();
-    console.log("Received request data");
+    const body = await request.json();
+    console.log("Received request data:", body);
 
-    try {
-      const validatedData = formSchema.parse(body);
-      console.log("Data validation passed");
+    // Validate form data
+    const validatedData = formSchema.parse(body);
+    console.log("Data validation passed");
 
-      // Verify reCAPTCHA
-      const recaptchaResponse = await fetch(
-        "https://www.google.com/recaptcha/api/siteverify",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            secret: process.env.RECAPTCHA_SECRET_KEY,
-            response: validatedData.recaptchaToken,
-          }),
-        }
-      );
-
-      const recaptchaData = await recaptchaResponse.json();
-      console.log("reCAPTCHA verification response:", recaptchaData);
-
-      if (!recaptchaData.success) {
-        console.error("reCAPTCHA verification failed:", recaptchaData["error-codes"]);
-        return NextResponse.json(
-          { error: "reCAPTCHA verification failed" },
-          { status: 400 }
-        );
-      }
-
-      // Remove recaptchaToken before sending email
-      const { recaptchaToken, ...formData } = validatedData;
-
-      const formatAddress = (prefix: "postal" | "delivery" | "event") => {
-        const address = formData[`${prefix}Address`];
-        const address2 = formData[`${prefix}Address2`];
-        const city = formData[`${prefix}City`];
-        const region = formData[`${prefix}Region`];
-        const postcode = formData[`${prefix}Postcode`];
-    
-        return `${address}${address2 ? `, ${address2}` : ""}, ${city}, ${region}, ${postcode}`;
-      };
-
-      const htmlBody = `
-        <h2>New Golf 2 Go Booking Request</h2>
-        <p>Submitted on ${new Date().toLocaleString("en-NZ")}</p>
-
-        <h3>Contact Information</h3>
-        <p><strong>Company:</strong> ${formData.companyName || 'N/A'}</p>
-        <p><strong>Contact Person:</strong> ${formData.contactPerson}</p>
-        <p><strong>Email:</strong> ${formData.email}</p>
-        <p><strong>Mobile:</strong> ${formData.mobilePhone}</p>
-        ${formData.landlinePhone ? `<p><strong>Landline:</strong> ${formData.landlinePhone}</p>` : ''}
-
-        <h3>Addresses</h3>
-        <p><strong>Postal Address:</strong><br>${formatAddress("postal")}</p>
-        <p><strong>Delivery Address:</strong><br>${formatAddress("delivery")}</p>
-        <p><strong>Event Address:</strong><br>${formatAddress("event")}</p>
-
-        <h3>Event Details</h3>
-        <p><strong>Date:</strong> ${new Date(formData.eventDate).toLocaleDateString("en-NZ")}</p>
-        <p><strong>Type:</strong> ${formData.eventType}</p>
-        <p><strong>Duration:</strong> ${formData.numberOfDays} day(s)</p>
-        <p><strong>Number of Greens:</strong> ${formData.numberOfGreens}</p>
-
-        ${formData.message ? `
-        <h3>Additional Information</h3>
-        <p>${formData.message}</p>
-        ` : ''}
-      `;
-
-      // Structure the payload according to SMTP2GO's API requirements
-      const payload = {
-        api_key: apiKey,
-        to: [RECIPIENT_EMAIL],
-        sender: RECIPIENT_EMAIL,
-        subject: `New Booking Request from ${formData.companyName || formData.contactPerson}`,
-        html_body: htmlBody,
-        custom_headers: [
-          {
-            header: "Reply-To",
-            value: formData.email
-          }
-        ]
-      };
-
-      console.log("Sending email via SMTP2GO...");
-
-      const response = await fetch(SMTP2GO_API_URL, {
+    // Verify reCAPTCHA
+    const recaptchaResponse = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
-
-      const responseData = await response.json();
-      console.log("SMTP2GO API response:", responseData);
-
-      if (!response.ok) {
-        console.error("SMTP2GO API error response:", {
-          status: response.status,
-          statusText: response.statusText,
-          data: responseData
-        });
-        throw new Error(`Email service error: ${response.status}`);
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: process.env.RECAPTCHA_SECRET_KEY,
+          response: validatedData.recaptchaToken,
+        }),
       }
+    );
 
-      if (!(responseData.data?.succeeded > 0)) {
-        console.error("SMTP2GO API unsuccessful response:", responseData);
-        throw new Error("Email not sent successfully");
-      }
+    const recaptchaData = await recaptchaResponse.json();
+    console.log("reCAPTCHA verification response:", recaptchaData);
 
-      console.log("Email sent successfully");
+    if (!recaptchaData.success) {
+      console.error("reCAPTCHA verification failed:", recaptchaData["error-codes"]);
       return NextResponse.json(
-        { message: "Booking request sent successfully" },
-        { status: 200 }
+        { error: "reCAPTCHA verification failed" },
+        { status: 400 }
       );
-    } catch (validationError) {
-      console.error("Validation error:", validationError);
-      if (validationError instanceof z.ZodError) {
-        return NextResponse.json(
-          { error: validationError.errors[0].message },
-          { status: 400 }
-        );
-      }
-      throw validationError;
     }
+
+    // Remove recaptchaToken before sending email
+    const { recaptchaToken, ...formData } = validatedData;
+
+    const formatAddress = (prefix: "postal" | "delivery" | "event") => {
+      const address = formData[`${prefix}Address`];
+      const address2 = formData[`${prefix}Address2`];
+      const city = formData[`${prefix}City`];
+      const region = formData[`${prefix}Region`];
+      const postcode = formData[`${prefix}Postcode`];
+  
+      return `${address}${address2 ? `, ${address2}` : ""}, ${city}, ${region}, ${postcode}`;
+    };
+
+    const htmlBody = `
+      <h2>New Golf 2 Go Booking Request</h2>
+      <p>Submitted on ${new Date().toLocaleString("en-NZ")}</p>
+
+      <h3>Contact Information</h3>
+      <p><strong>Company:</strong> ${formData.companyName || 'N/A'}</p>
+      <p><strong>Contact Person:</strong> ${formData.contactPerson}</p>
+      <p><strong>Email:</strong> ${formData.email}</p>
+      <p><strong>Mobile:</strong> ${formData.mobilePhone}</p>
+      ${formData.landlinePhone ? `<p><strong>Landline:</strong> ${formData.landlinePhone}</p>` : ''}
+
+      <h3>Addresses</h3>
+      <p><strong>Postal Address:</strong><br>${formatAddress("postal")}</p>
+      <p><strong>Delivery Address:</strong><br>${formatAddress("delivery")}</p>
+      <p><strong>Event Address:</strong><br>${formatAddress("event")}</p>
+
+      <h3>Event Details</h3>
+      <p><strong>Date:</strong> ${new Date(formData.eventDate).toLocaleDateString("en-NZ")}</p>
+      <p><strong>Type:</strong> ${formData.eventType}</p>
+      <p><strong>Duration:</strong> ${formData.numberOfDays} day(s)</p>
+      <p><strong>Number of Greens:</strong> ${formData.numberOfGreens}</p>
+
+      ${formData.message ? `
+      <h3>Additional Information</h3>
+      <p>${formData.message}</p>
+      ` : ''}
+    `;
+
+    // Structure the payload according to SMTP2GO's API requirements
+    const payload = {
+      api_key: apiKey,
+      to: [RECIPIENT_EMAIL],
+      sender: RECIPIENT_EMAIL,
+      subject: `New Booking Request from ${formData.companyName || formData.contactPerson}`,
+      html_body: htmlBody,
+      custom_headers: [
+        {
+          header: "Reply-To",
+          value: formData.email
+        }
+      ]
+    };
+
+    console.log("Sending email via SMTP2GO...");
+
+    const response = await fetch(SMTP2GO_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const responseData = await response.json();
+    console.log("SMTP2GO API response:", responseData);
+
+    if (!response.ok) {
+      console.error("SMTP2GO API error response:", {
+        status: response.status,
+        statusText: response.statusText,
+        data: responseData
+      });
+      return NextResponse.json(
+        { error: "Failed to send email", details: responseData },
+        { status: 500 }
+      );
+    }
+
+    if (!(responseData.data?.succeeded > 0)) {
+      console.error("SMTP2GO API unsuccessful response:", responseData);
+      return NextResponse.json(
+        { error: "Email not sent successfully", details: responseData },
+        { status: 500 }
+      );
+    }
+
+    console.log("Email sent successfully");
+    return NextResponse.json(
+      { message: "Booking request sent successfully" },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Unexpected error in booking request:", error);
     return NextResponse.json(
       {
-        error: "Failed to send booking request",
+        error: "Internal server error",
         details: error instanceof Error ? error.message : String(error)
       },
       { status: 500 }

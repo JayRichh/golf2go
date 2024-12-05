@@ -222,6 +222,7 @@ export default function BookingForm() {
   const onSubmit = async (data: FormData) => {
     setLoading(true);
     setError(null);
+    console.log("Starting form submission...");
 
     try {
       if (!recaptchaLoaded) {
@@ -232,17 +233,20 @@ export default function BookingForm() {
       const token = await new Promise<string>((resolve, reject) => {
         window.grecaptcha.ready(async () => {
           try {
+            console.log("Executing reCAPTCHA...");
             const token = await window.grecaptcha.execute(
               process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!
             );
+            console.log("reCAPTCHA token received");
             resolve(token);
           } catch (error) {
+            console.error("reCAPTCHA error:", error);
             reject(new Error("Failed to verify reCAPTCHA. Please try again."));
           }
         });
       });
 
-      // Send data with reCAPTCHA token to our API
+      console.log("Sending request to API...");
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -254,14 +258,17 @@ export default function BookingForm() {
         }),
       });
 
+      const result = await response.json();
+      console.log("API response:", result);
+
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || "Failed to submit form");
+        throw new Error(result.error || "Failed to submit form");
       }
 
       setSuccess(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
+      console.error("Form submission error:", err);
       setError(err instanceof Error ? err.message : "Failed to send booking request. Please try again or contact us directly.");
     } finally {
       setLoading(false);
