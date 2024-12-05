@@ -3,8 +3,8 @@ import type { FormData } from "~/types/form";
 type EmailFormData = Omit<FormData, "recaptchaToken">;
 
 export async function sendEmail(formData: EmailFormData) {
-  if (!process.env.SMTP_KEY) {
-    throw new Error("SMTP_KEY environment variable is not set");
+  if (!process.env.NEXT_PUBLIC_SMTP_KEY) {
+    throw new Error("NEXT_PUBLIC_SMTP_KEY environment variable is not set");
   }
 
   const formatAddress = (prefix: "postal" | "delivery" | "event") => {
@@ -24,7 +24,7 @@ export async function sendEmail(formData: EmailFormData) {
 
   // Match the exact SMTP2GO API payload structure that works in the Vue app
   const emailPayload = {
-    api_key: process.env.SMTP_KEY,
+    api_key: process.env.NEXT_PUBLIC_SMTP_KEY,
     to: ["steven@golf2go.co.nz"],
     sender: "noreply@golf2go.co.nz",
     subject: `New Booking Request from ${formData.companyName || formData.contactPerson}`,

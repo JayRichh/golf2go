@@ -35,7 +35,7 @@ const formSchema = z.object({
 
 export async function POST(request: Request) {
   try {
-    if (!process.env.RECAPTCHA_SECRET_KEY || !process.env.SMTP_KEY) {
+    if (!process.env.RECAPTCHA_SECRET_KEY || !process.env.NEXT_PUBLIC_SMTP_KEY) {
       console.error("Missing required environment variables");
       return NextResponse.json(
         { error: "Server configuration error" },
