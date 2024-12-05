@@ -91,7 +91,7 @@ const courseTypes: CourseType[] = [
 
 export default function CoursesPage() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       {/* Header */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
@@ -129,15 +129,16 @@ export default function CoursesPage() {
                 key={course.title}
                 variant="elevated"
                 interactive
-                className="group overflow-hidden"
+                className="group w-full overflow-hidden"
               >
-                <div className="relative aspect-[16/9] overflow-hidden">
+                <div className="relative aspect-[16/9] w-full overflow-hidden">
                   <Image
                     src={course.image}
                     alt={course.title}
                     fill
-                    className="object-cover transition duration-500 will-change-transform group-hover:scale-105"
+                    className="h-full w-full object-cover transition duration-500 will-change-transform group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
+                    priority
                   />
                 </div>
                 <CardHeader
@@ -189,15 +190,16 @@ export default function CoursesPage() {
                 key={type.name}
                 variant="elevated"
                 interactive
-                className="group overflow-hidden"
+                className="group w-full overflow-hidden"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
                   <Image
                     src={type.image}
                     alt={type.name}
                     fill
-                    className="object-cover transition duration-500 will-change-transform group-hover:scale-105"
+                    className="h-full w-full object-cover transition duration-500 will-change-transform group-hover:scale-105"
                     sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="absolute inset-0 flex items-end p-6">

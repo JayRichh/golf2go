@@ -205,7 +205,7 @@ const galleryImages: GalleryImage[] = [
 
 export default function GalleryPage() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       {/* Header */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
@@ -232,9 +232,11 @@ export default function GalleryPage() {
       {/* Gallery Grid */}
       <section className="py-16 md:py-24">
         <Container size="xl">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {galleryImages.map((image) => (
-              <ImagePreview key={image.id} src={image.src} alt={image.alt} title={image.title} />
+              <div key={image.id} className="w-full">
+                <ImagePreview src={image.src} alt={image.alt} title={image.title} />
+              </div>
             ))}
           </div>
         </Container>

@@ -46,18 +46,21 @@ const benefits = [
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
           <div className="relative isolate overflow-hidden py-32 md:py-40">
-            <Image
-              src="/2-parties-and-events-golf2go-portable-miniature-golf.jpg"
-              alt="Golf 2 Go events"
-              fill
-              className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30"
-              sizes="100vw"
-            />
+            <div className="absolute inset-0 -z-10 w-full">
+              <Image
+                src="/2-parties-and-events-golf2go-portable-miniature-golf.jpg"
+                alt="Golf 2 Go events"
+                fill
+                className="h-full w-full object-cover opacity-30"
+                sizes="100vw"
+                priority
+              />
+            </div>
             <Container size="xl">
               <div className="mx-auto max-w-2xl text-center py-12">
                 <Text
@@ -220,15 +223,16 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <Card variant="elevated" className="relative aspect-[4/3] overflow-hidden p-0">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
               <Image
                 src="/3-fun-portable-mini-golf.jpg"
                 alt="Professional event setup"
                 fill
-                className="object-cover"
+                className="h-full w-full object-cover"
                 sizes="(min-width: 1024px) 50vw, 100vw"
+                priority
               />
-            </Card>
+            </div>
           </div>
         </Container>
       </section>

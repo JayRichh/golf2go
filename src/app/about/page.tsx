@@ -39,18 +39,21 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
           <div className="relative isolate overflow-hidden py-32 md:py-40">
-            <Image
-              src="/3-fun-portable-mini-golf.jpg"
-              alt="Golf 2 Go team"
-              fill
-              className="absolute inset-0 -z-10 h-full w-full object-cover opacity-30"
-              sizes="100vw"
-            />
+            <div className="absolute inset-0 -z-10 w-full">
+              <Image
+                src="/3-fun-portable-mini-golf.jpg"
+                alt="Golf 2 Go team"
+                fill
+                className="h-full w-full object-cover opacity-30"
+                sizes="100vw"
+                priority
+              />
+            </div>
             <Container size="xl">
               <div className="mx-auto max-w-2xl text-center py-12">
                 <Text variant="h1" align="center" className="text-primary-foreground">
@@ -71,15 +74,16 @@ export default function AboutPage() {
       <section className="py-12 md:py-16">
         <Container size="xl">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-8">
-            <Card variant="elevated" className="relative aspect-[4/3] overflow-hidden p-0">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
               <Image
                 src="/4-portable-miniature-golf.jpg"
                 alt="Professional mini golf setup"
                 fill
-                className="object-cover"
+                className="h-full w-full object-cover"
                 sizes="(min-width: 1024px) 50vw, 100vw"
+                priority
               />
-            </Card>
+            </div>
             <div className="flex flex-col justify-center">
               <Text variant="h2" className="text-foreground">
                 Our Mission
@@ -114,13 +118,13 @@ export default function AboutPage() {
               These core values guide everything we do at Golf 2 Go.
             </Text>
           </div>
-          <div className="mx-auto mt-16 grid gap-8 lg:grid-cols-3">
+          <div className="mx-auto mt-16 grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {values.map((value) => (
               <Card
                 key={value.name}
                 variant="elevated"
                 interactive
-                className="group flex flex-col items-center text-center p-8"
+                className="group flex w-full flex-col items-center text-center p-8"
               >
                 <value.icon className="h-12 w-12 text-primary mb-4" />
                 <Text variant="h4" className="text-foreground mb-3">
