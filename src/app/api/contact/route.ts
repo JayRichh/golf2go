@@ -29,7 +29,7 @@ const formSchema = z.object({
   eventDate: z.string().min(1, "Event date is required"),
   eventType: z.string().min(1, "Event type is required"),
   numberOfDays: z.string().min(1, "Number of days is required"),
-  numberOfGreens: z.string().min(1, "Number of greens is required"),
+  numberOfHoles: z.string().min(1, "Number of holes is required"),
   message: z.string().optional(),
   recaptchaToken: z.string().min(1, "reCAPTCHA verification failed"),
 });
@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
       <p><strong>Date:</strong> ${new Date(formData.eventDate).toLocaleDateString("en-NZ")}</p>
       <p><strong>Type:</strong> ${formData.eventType}</p>
       <p><strong>Duration:</strong> ${formData.numberOfDays} day(s)</p>
-      <p><strong>Number of Greens:</strong> ${formData.numberOfGreens}</p>
+      <p><strong>Number of Holes:</strong> ${formData.numberOfHoles}</p>
 
       ${formData.message ? `
       <h3>Additional Information</h3>

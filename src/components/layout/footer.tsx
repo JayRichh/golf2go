@@ -15,11 +15,10 @@ const navigation = {
   contact: [
     { name: "Email", value: "admin@golf2go.co.nz", href: "mailto:admin@golf2go.co.nz", icon: "📧" },
     { name: "Phone", value: "021 849931", href: "tel:021849931", icon: "📞" },
-    { name: "Location", value: "Wanganui, New Zealand", href: "#", icon: "📍" },
+    { name: "Location", value: "Palmerston North, New Zealand", href: "#", icon: "📍" },
   ],
   legal: [
-    { name: "Privacy Policy", href: "/privacy" },
-    { name: "Terms of Service", href: "/terms" },
+    { name: "Terms and Conditions", href: "/terms" },
   ],
 };
 

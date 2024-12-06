@@ -39,9 +39,9 @@ export interface FormData {
   eventDate: string;
   eventType: string;
   numberOfDays: string;
-  numberOfGreens: string;
+  numberOfHoles: string;
   message?: string;
-  recaptchaToken: string; // Changed from optional to required
+  recaptchaToken: string;
 }
 
 export interface FormState {

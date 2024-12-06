@@ -50,7 +50,7 @@ const formSchema = z.object({
   eventDate: z.string().min(1, "Event date is required"),
   eventType: z.string().min(1, "Event type is required"),
   numberOfDays: z.string().min(1, "Number of days is required"),
-  numberOfGreens: z.string().min(1, "Number of greens is required"),
+  numberOfHoles: z.string().min(1, "Number of holes is required"),
   message: z.string().optional(),
 });
 
@@ -80,6 +80,64 @@ const eventTypes = [
   { value: "other", label: "Other" },
 ];
 
+// Exact pricing table from the document for 1-7 days
+const pricingTable = {
+  1: {
+    1: 190.00, 2: 304.00, 3: 408.50, 4: 503.50, 5: 589.00, 6: 665.00, 7: 731.50
+  },
+  2: {
+    1: 260.00, 2: 416.00, 3: 559.00, 4: 689.00, 5: 806.00, 6: 910.00, 7: 1001.00
+  },
+  3: {
+    1: 338.00, 2: 540.80, 3: 726.70, 4: 895.70, 5: 1047.80, 6: 1183.00, 7: 1301.30
+  },
+  4: {
+    1: 395.00, 2: 632.00, 3: 849.25, 4: 1046.75, 5: 1224.50, 6: 1382.50, 7: 1520.75
+  },
+  5: {
+    1: 448.00, 2: 716.80, 3: 963.20, 4: 1187.20, 5: 1388.80, 6: 1568.00, 7: 1724.80
+  },
+  6: {
+    1: 495.00, 2: 792.00, 3: 1064.25, 4: 1331.75, 5: 1534.50, 6: 1732.50, 7: 1905.75
+  },
+  9: {
+    1: 575.00, 2: 920.00, 3: 1236.25, 4: 1523.75, 5: 1782.50, 6: 2012.50, 7: 2213.75
+  }
+} as const;
+
+// Base prices for extended durations
+const basePrices = {
+  1: 190.00,
+  2: 260.00,
+  3: 338.00,
+  4: 395.00,
+  5: 448.00,
+  6: 495.00,
+  9: 575.00
+} as const;
+
+// Calculate price for any duration
+const calculatePrice = (holes: number, days: number) => {
+  // For 1-7 days, use exact prices from the pricing table
+  if (days <= 7) {
+    return pricingTable[holes as keyof typeof pricingTable]?.[days as keyof typeof pricingTable[1]] || 0;
+  }
+
+  // For longer durations, use a weekly rate based on day 7's percentage (285%)
+  // and apply it for each complete week, then add remaining days at their normal rate
+  const basePrice = basePrices[holes as keyof typeof basePrices] || basePrices[1];
+  const weeks = Math.floor(days / 7);
+  const remainingDays = days % 7;
+
+  let price = weeks * pricingTable[holes as keyof typeof pricingTable][7];
+  
+  if (remainingDays > 0) {
+    price += pricingTable[holes as keyof typeof pricingTable][remainingDays as keyof typeof pricingTable[1]];
+  }
+
+  return price;
+};
+
 export default function BookingForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -87,14 +145,13 @@ export default function BookingForm() {
   const [sameAsPostal, setSameAsPostal] = useState(false);
   const [sameAsDelivery, setSameAsDelivery] = useState(false);
   const [activeSection, setActiveSection] = useState("contact");
-  const [showPriceInfo, setShowPriceInfo] = useState(false);
   const [completedSections, setCompletedSections] = useState<string[]>([]);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     watch,
     setValue,
     trigger,
@@ -121,7 +178,7 @@ export default function BookingForm() {
           "eventDate",
           "eventType",
           "numberOfDays",
-          "numberOfGreens",
+          "numberOfHoles",
         ];
       default:
         return [];
@@ -206,18 +263,10 @@ export default function BookingForm() {
   ]);
 
   const price = useMemo(() => {
-    const days = parseInt(formData.numberOfDays) || 1;
-    const greens = parseInt(formData.numberOfGreens) || 1;
-    const basePrice = 500;
-    const greenPrice = 250;
-    let dayMultiplier = 1;
-
-    if (days > 1) {
-      dayMultiplier = days * 0.8;
-    }
-
-    return (basePrice + greenPrice * greens) * dayMultiplier;
-  }, [formData.numberOfDays, formData.numberOfGreens]);
+    const days = Math.max(parseInt(formData.numberOfDays) || 1, 1);
+    const holes = parseInt(formData.numberOfHoles) || 1;
+    return calculatePrice(holes, days);
+  }, [formData.numberOfDays, formData.numberOfHoles]);
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
@@ -576,12 +625,21 @@ export default function BookingForm() {
                   error={errors.numberOfDays?.message}
                 />
                 <FormField
-                  name="numberOfGreens"
-                  label="Number of Greens"
-                  type="number"
+                  name="numberOfHoles"
+                  label="Number of Holes"
+                  type="select"
                   register={register}
                   required
-                  error={errors.numberOfGreens?.message}
+                  error={errors.numberOfHoles?.message}
+                  options={[
+                    { value: "1", label: "1 Hole" },
+                    { value: "2", label: "2 Holes" },
+                    { value: "3", label: "3 Holes" },
+                    { value: "4", label: "4 Holes" },
+                    { value: "5", label: "5 Holes" },
+                    { value: "6", label: "6 Holes" },
+                    { value: "9", label: "9 Holes" },
+                  ]}
                 />
                 <FormField
                   name="message"
@@ -597,13 +655,6 @@ export default function BookingForm() {
                   <div className="flex items-center gap-3">
                     <span className="text-xl">💰</span>
                     <Text variant="h4">Estimated Price</Text>
-                    <button
-                      type="button"
-                      onClick={() => setShowPriceInfo(!showPriceInfo)}
-                      className="ml-2 rounded-full bg-background-secondary p-2 text-foreground-secondary transition-colors hover:bg-background hover:text-foreground"
-                    >
-                      ℹ️
-                    </button>
                   </div>
                   <div className="flex items-baseline">
                     <Text variant="h3" className="text-primary">
@@ -614,33 +665,17 @@ export default function BookingForm() {
                     </Text>
                   </div>
                 </div>
-                <div className="p-6">
-                  {showPriceInfo && (
-                    <div className="mb-4 rounded-lg bg-background-secondary/50 p-4">
-                      <Text variant="sm" className="mb-2 font-medium">
-                        Price Breakdown:
-                      </Text>
-                      <ul className="list-inside list-disc space-y-1">
-                        <li>
-                          <Text variant="sm" className="text-foreground-secondary">
-                            Base price: $500
-                          </Text>
-                        </li>
-                        <li>
-                          <Text variant="sm" className="text-foreground-secondary">
-                            Additional greens: $250 each
-                          </Text>
-                        </li>
-                        <li>
-                          <Text variant="sm" className="text-foreground-secondary">
-                            Multi-day discount: 20% off for bookings longer than 1 day
-                          </Text>
-                        </li>
-                      </ul>
-                    </div>
-                  )}
+                <div className="p-6 space-y-2">
                   <Text variant="sm" className="text-foreground-secondary">
-                    Final price may vary based on location and specific requirements
+                    {formData.numberOfHoles && formData.numberOfDays ? 
+                      `${formData.numberOfHoles} hole${parseInt(formData.numberOfHoles) > 1 ? 's' : ''} for ${formData.numberOfDays} day${parseInt(formData.numberOfDays) > 1 ? 's' : ''}`
+                      : 'Select number of holes and days to see pricing'}
+                  </Text>
+                  <Text variant="sm" className="text-foreground-secondary">
+                    • Freight rates will be quoted separately based on location
+                  </Text>
+                  <Text variant="sm" className="text-foreground-secondary">
+                    • Maximum rental duration varies based on season and availability
                   </Text>
                 </div>
               </Container>
