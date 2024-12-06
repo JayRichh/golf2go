@@ -95,17 +95,29 @@ export default function CoursesPage() {
       {/* Header */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
-          <Container size="xl" className="py-32 md:py-40">
-            <div className="text-center">
-              <Text variant="h1" align="center" className="tracking-tight text-primary-foreground">
-                Our Courses
-              </Text>
-              <Text variant="xl" className="mx-auto mt-6 max-w-2xl text-primary-foreground/90">
-                Choose from our selection of portable mini golf courses, perfect for any event or
-                occasion.
-              </Text>
+          <div className="relative isolate overflow-hidden py-32 md:py-40">
+            <div className="absolute inset-0 -z-10 w-full">
+              <Image
+                src="/3-fun-portable-mini-golf.jpg"
+                alt="Golf 2 Go courses"
+                fill
+                className="h-full w-full object-cover opacity-30"
+                sizes="100vw"
+                priority
+              />
             </div>
-          </Container>
+            <Container size="xl">
+              <div className="mx-auto max-w-2xl text-center py-12">
+                <Text variant="h1" align="center" className="tracking-tight text-primary-foreground">
+                  Our Courses
+                </Text>
+                <Text variant="xl" className="mx-auto mt-6 max-w-2xl text-primary-foreground/90">
+                  Choose from our selection of portable mini golf courses, perfect for any event or
+                  occasion.
+                </Text>
+              </div>
+            </Container>
+          </div>
         </GradientBackground>
       </section>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
@@ -209,23 +210,35 @@ export default function GalleryPage() {
       {/* Header */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
-          <Container size="xl" className="py-32 md:py-40">
-            <div className="text-center">
-              <Text
-                variant="h1"
-                align="center"
-                className="font-bold tracking-tight text-primary-foreground"
-              >
-                Gallery
-              </Text>
-              <Text
-                variant="xl"
-                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground/90"
-              >
-                See our portable mini golf courses in action
-              </Text>
+          <div className="relative isolate overflow-hidden py-32 md:py-40">
+            <div className="absolute inset-0 -z-10 w-full">
+              <Image
+                src="/8-work-function-fun-portable-mini-golf.jpg"
+                alt="Golf 2 Go gallery"
+                fill
+                className="h-full w-full object-cover opacity-30"
+                sizes="100vw"
+                priority
+              />
             </div>
-          </Container>
+            <Container size="xl">
+              <div className="mx-auto max-w-2xl text-center py-12">
+                <Text
+                  variant="h1"
+                  align="center"
+                  className="font-bold tracking-tight text-primary-foreground"
+                >
+                  Gallery
+                </Text>
+                <Text
+                  variant="xl"
+                  className="mx-auto mt-6 max-w-2xl text-primary-foreground/90 text-center"
+                >
+                  See our portable mini golf courses in action
+                </Text>
+              </div>
+            </Container>
+          </div>
         </GradientBackground>
       </section>
 

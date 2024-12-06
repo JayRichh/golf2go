@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Download, ZoomIn, ZoomOut } from 'lucide-react';
+import { Download } from 'lucide-react';
+import Image from "next/image";
 
 import { Container } from '~/components/ui/Container';
 import { GradientBackground } from '~/components/ui/GradientBackground';
@@ -15,16 +16,28 @@ export default function Terms() {
       {/* Hero Section */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
-          <Container size="xl">
-            <div className="mx-auto max-w-3xl py-12 md:py-16 text-center">
-              <Text variant="h2" align="center" className="text-primary-foreground">
-                Terms and Conditions
-              </Text>
-              {/* <Text variant="xl" className="mt-6 text-primary-foreground/90">
-                Please review our terms and conditions for hiring our mini golf courses
-              </Text> */}
+          <div className="relative isolate overflow-hidden py-32 md:py-40">
+            <div className="absolute inset-0 -z-10 w-full">
+              <Image
+                src="/4-portable-miniature-golf.jpg"
+                alt="Golf 2 Go terms"
+                fill
+                className="h-full w-full object-cover opacity-30"
+                sizes="100vw"
+                priority
+              />
             </div>
-          </Container>
+            <Container size="xl">
+              <div className="mx-auto max-w-2xl text-center py-12">
+                <Text variant="h1" align="center" className="text-primary-foreground">
+                  Terms and Conditions
+                </Text>
+                <Text variant="xl" className="mt-6 text-primary-foreground/90">
+                  Please review our terms and conditions for hiring our mini golf courses
+                </Text>
+              </div>
+            </Container>
+          </div>
         </GradientBackground>
       </section>
 
@@ -34,24 +47,6 @@ export default function Terms() {
           <div className="bg-white rounded-xl shadow-xl overflow-hidden">
             {/* Controls */}
             <div className="flex items-center justify-between px-6 py-4 bg-[#1c2834] text-white">
-              {/* <div className="flex items-center space-x-4">
-                <button
-                  onClick={() => setScale(prev => Math.max(prev - 10, 50))}
-                  className="p-2 rounded-md hover:bg-gray-700 transition-colors"
-                  aria-label="Zoom out"
-                >
-                  <ZoomOut className="w-5 h-5" />
-                </button>
-                <span className="text-sm font-medium select-none">{scale}%</span>
-                <button
-                  onClick={() => setScale(prev => Math.min(prev + 10, 150))}
-                  className="p-2 rounded-md hover:bg-gray-700 transition-colors"
-                  aria-label="Zoom in"
-                >
-                  <ZoomIn className="w-5 h-5" />
-                </button>
-              </div> */}
-              
               <a
                 href="/TERMS AND CONDITIONS OF HIRE 2025-26.pdf"
                 download
