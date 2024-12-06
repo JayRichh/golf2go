@@ -28,7 +28,7 @@ export default function Terms() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center py-12">
+              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
                 <Text variant="h1" align="center" className="text-primary-foreground">
                   Terms and Conditions
                 </Text>

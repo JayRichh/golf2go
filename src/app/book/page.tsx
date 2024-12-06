@@ -35,14 +35,14 @@ export default function BookPage() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center py-12">
+              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
                 <Text variant="h1" align="center" className="text-primary-foreground">
                   Make a Booking
                 </Text>
                 <Text
                   variant="xl"
                   align="center"
-                  className="mx-auto mt-6 max-w-2xl text-primary-foreground/90"
+                  className="mt-6 text-primary-foreground/90"
                 >
                   Fill out the form below and we'll get back to you with a quote
                 </Text>

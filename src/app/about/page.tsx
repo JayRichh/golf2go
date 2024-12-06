@@ -55,11 +55,11 @@ export default function AboutPage() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center py-12">
+              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
                 <Text variant="h1" align="center" className="text-primary-foreground">
                   Our Story
                 </Text>
-                <Text variant="xl" className="mt-6 pb-8 text-primary-foreground/90">
+                <Text variant="xl" className="mt-6 text-primary-foreground/90">
                   Founded with a passion for bringing joy and entertainment to events across New
                   Zealand, Golf 2 Go has grown from a simple idea into the country's leading
                   portable mini golf provider.

@@ -62,7 +62,7 @@ export default function HomePage() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center py-12">
+              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
                 <Text
                   variant="h1"
                   align="center"
@@ -70,7 +70,7 @@ export default function HomePage() {
                 >
                   Welcome to Golf2Go
                 </Text>
-                <Text variant="xl" className="mx-auto mt-6 max-w-2xl text-primary-foreground/90">
+                <Text variant="xl" className="mx-auto mt-6 text-primary-foreground/90">
                   New Zealand's first portable mini golf company, bringing fun to your events since
                   2008.
                 </Text>

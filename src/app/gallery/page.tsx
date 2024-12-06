@@ -213,7 +213,7 @@ export default function GalleryPage() {
           <div className="relative isolate overflow-hidden py-32 md:py-40">
             <div className="absolute inset-0 -z-10 w-full">
               <Image
-                src="/8-work-function-fun-portable-mini-golf.jpg"
+                src="/3-fun-portable-mini-golf.jpg"
                 alt="Golf 2 Go gallery"
                 fill
                 className="h-full w-full object-cover opacity-30"
@@ -222,7 +222,7 @@ export default function GalleryPage() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center py-12">
+              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
                 <Text
                   variant="h1"
                   align="center"
@@ -232,7 +232,7 @@ export default function GalleryPage() {
                 </Text>
                 <Text
                   variant="xl"
-                  className="mx-auto mt-6 max-w-2xl text-primary-foreground/90 text-center"
+                  className="mt-6 text-primary-foreground/90 text-center"
                 >
                   See our portable mini golf courses in action
                 </Text>

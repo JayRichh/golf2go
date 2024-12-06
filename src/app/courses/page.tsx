@@ -107,11 +107,11 @@ export default function CoursesPage() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center py-12">
+              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
                 <Text variant="h1" align="center" className="tracking-tight text-primary-foreground">
                   Our Courses
                 </Text>
-                <Text variant="xl" className="mx-auto mt-6 max-w-2xl text-primary-foreground/90">
+                <Text variant="xl" className="mt-6 text-primary-foreground/90">
                   Choose from our selection of portable mini golf courses, perfect for any event or
                   occasion.
                 </Text>
