@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
   :root {
     --background: #ffffff;
@@ -104,7 +103,7 @@
     @apply text-gray-700;
   }
 
-  /* Layout containers */
+  /* Container utilities */
   .container-base {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
@@ -112,21 +111,47 @@
   .container-narrow {
     @apply mx-auto max-w-5xl px-4 sm:px-6 lg:px-8;
   }
+
+  /* Navigation styles */
+  .nav-link {
+    @apply inline-flex items-center px-3 py-2 text-[15px] font-medium transition-colors;
+  }
+
+  .nav-link-active {
+    @apply text-primary;
+  }
+
+  /* Form elements */
+  .form-group {
+    @apply space-y-1.5;
+  }
+
+  .form-error {
+    @apply mt-1 text-sm text-red-600;
+  }
+
+  .form-helper {
+    @apply mt-1 text-sm text-gray-500;
+  }
 }
 
 @layer utilities {
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-out;
+    animation: fadeIn 0.2s ease-out;
   }
 
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(4px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  .text-balance {
+    text-wrap: balance;
   }
 }

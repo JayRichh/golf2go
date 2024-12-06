@@ -59,7 +59,7 @@ export default function AboutPage() {
                 <Text variant="h1" align="center" className="text-primary-foreground">
                   Our Story
                 </Text>
-                <Text variant="xl" className="mt-6 text-primary-foreground/90">
+                <Text variant="xl" className="mt-6 pb-8 text-primary-foreground/90">
                   Founded with a passion for bringing joy and entertainment to events across New
                   Zealand, Golf 2 Go has grown from a simple idea into the country's leading
                   portable mini golf provider.
