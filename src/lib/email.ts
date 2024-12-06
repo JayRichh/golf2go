@@ -39,7 +39,7 @@ export async function sendEmail(formData: EmailFormData) {
     <p><strong>Date:</strong> ${new Date(formData.eventDate).toLocaleDateString("en-NZ")}</p>
     <p><strong>Type:</strong> ${formData.eventType}</p>
     <p><strong>Duration:</strong> ${formData.numberOfDays} day(s)</p>
-    <p><strong>Number of Greens:</strong> ${formData.numberOfGreens}</p>
+    <p><strong>Number of Holes:</strong> ${formData.numberOfHoles}</p>
 
     ${formData.message ? `
     <h3>Additional Information</h3>
