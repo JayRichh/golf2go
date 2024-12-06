@@ -1,6 +1,5 @@
 import { ArrowRight, CheckCircle } from "lucide-react";
 
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,14 +7,6 @@ import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
-
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "Our Courses - Golf 2 Go",
-    description:
-      "Explore our range of portable mini golf courses. Choose from Hole in One Challenge or 3, 6, and 9 hole courses.",
-  };
-}
 
 interface Course {
   title: string;

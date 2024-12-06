@@ -1,6 +1,5 @@
 import { ArrowRight, Heart, Target, Trophy } from "lucide-react";
 
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,14 +7,6 @@ import { Card, CardHeader } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
-
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "About Golf 2 Go - Our Story & Mission",
-    description:
-      "Learn about Golf 2 Go, New Zealand's premier portable mini golf hire service. Discover our journey and commitment to bringing fun to your events.",
-  };
-}
 
 const values = [
   {
