@@ -5,8 +5,8 @@ type EmailFormData = Omit<FormData, "recaptchaToken">;
 const SMTP2GO_API_URL = "https://api.smtp2go.com/v3/email/send";
 
 export async function sendEmail(formData: EmailFormData) {
-  if (!process.env.SMTP_KEY) {
-    throw new Error("SMTP_KEY environment variable is not set");
+  if (!process.env.NEXT_SMTP_KEY) {
+    throw new Error("NEXT_SMTP_KEY environment variable is not set");
   }
 
   const formatAddress = (prefix: "postal" | "delivery" | "event") => {
@@ -49,7 +49,7 @@ export async function sendEmail(formData: EmailFormData) {
 
   // Match exactly the working payload structure
   const payload = {
-    api_key: process.env.SMTP_KEY,
+    api_key: process.env.NEXT_SMTP_KEY,
     to: ["steven@golf2go.co.nz"],
     sender: "noreply@golf2go.co.nz",
     subject: `New Booking Request from ${formData.companyName || formData.contactPerson}`,
