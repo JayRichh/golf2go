@@ -11,6 +11,7 @@ export async function sendEmail(formData: EmailFormData) {
     throw new Error("NEXT_SMTP_KEY environment variable is not set");
   }
 
+  
   const formatAddress = (prefix: "postal" | "delivery" | "event") => {
     const address = formData[`${prefix}Address`];
     const address2 = formData[`${prefix}Address2`];
