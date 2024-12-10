@@ -50,16 +50,10 @@ export async function sendEmail(formData: EmailFormData) {
   // Match exactly the working payload structure
   const payload = {
     api_key: process.env.NEXT_SMTP_KEY,
-    to: ["steven@golf2go.co.nz"],
     sender: "noreply@golf2go.co.nz",
+    to: ["steven@golf2go.co.nz"],
     subject: `New Booking Request from ${formData.companyName || formData.contactPerson}`,
-    html_body: htmlBody,
-    custom_headers: [
-      {
-        header: "Reply-To",
-        value: formData.email
-      }
-    ]
+    html_body: htmlBody
   };
 
   try {
