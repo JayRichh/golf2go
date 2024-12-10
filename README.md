@@ -1,6 +1,6 @@
 # Golf2Go - Professional Portable Mini Golf Solutions
 
-[Golf2Go](https://Golf2Go.vercel.app).
+[Golf2Go](https://Golf2Go.co.nz).
 
 Golf2Go is New Zealand's premier portable mini golf rental service, offering professional solutions for corporate events, team building activities, and functions since 2008.
 
