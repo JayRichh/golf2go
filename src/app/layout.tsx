@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Footer } from "~/components/layout/footer";
 import { Navbar } from "~/components/layout/navbar";
 import { PageTransition } from "~/components/ui/PageTransition";
-
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
 
 // Load fonts locally for better performance
@@ -99,6 +99,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         {/* Overlay for mobile menu */}
         <div id="mobile-menu-overlay" />
+
+        <Analytics />
       </body>
     </html>
   );
