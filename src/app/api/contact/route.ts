@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const SMTP2GO_API_URL = "https://api.smtp2go.com/v3/email/send";
-const RECIPIENT_EMAIL = "steven@golf2go.co.nz";
+const RECIPIENT_EMAIL = "steven@encompasstours.nz";
 
 const formSchema = z.object({
   companyName: z.string().optional(),
@@ -122,8 +122,8 @@ export async function POST(request: NextRequest) {
     // Structure the payload according to SMTP2GO's API requirements
     const payload = {
       api_key: apiKey,
-      to: [RECIPIENT_EMAIL],
-      sender: RECIPIENT_EMAIL,
+      sender: "hello@golf2go.nz",
+      to: ["steven@golf2go.co.nz"],
       subject: `New Booking Request from ${formData.companyName || formData.contactPerson}`,
       html_body: htmlBody,
       custom_headers: [

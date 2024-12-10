@@ -51,7 +51,7 @@ export async function sendEmail(formData: EmailFormData) {
   const payload = {
     api_key: process.env.NEXT_SMTP_KEY,
     sender: "noreply@golf2go.co.nz",
-    to: ["steven@golf2go.co.nz"],
+    to: ["steven@encompasstours.nz"],
     subject: `New Booking Request from ${formData.companyName || formData.contactPerson}`,
     html_body: htmlBody
   };
