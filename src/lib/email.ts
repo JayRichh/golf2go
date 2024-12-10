@@ -3,6 +3,8 @@ import type { FormData } from "~/types/form";
 type EmailFormData = Omit<FormData, "recaptchaToken">;
 
 const SMTP2GO_API_URL = "https://api.smtp2go.com/v3/email/send";
+const SENDER_EMAIL = "hello@golf2go.nz";
+const RECIPIENT_EMAIL = "steven@golf2go.co.nz";
 
 export async function sendEmail(formData: EmailFormData) {
   if (!process.env.NEXT_SMTP_KEY) {
@@ -47,13 +49,18 @@ export async function sendEmail(formData: EmailFormData) {
     ` : ''}
   `;
 
-  // Match exactly the working payload structure
   const payload = {
     api_key: process.env.NEXT_SMTP_KEY,
-    sender: "noreply@golf2go.co.nz",
-    to: ["steven@encompasstours.nz"],
+    sender: SENDER_EMAIL,
+    to: [RECIPIENT_EMAIL],
     subject: `New Booking Request from ${formData.companyName || formData.contactPerson}`,
-    html_body: htmlBody
+    html_body: htmlBody,
+    custom_headers: [
+      {
+        header: "Reply-To",
+        value: formData.email
+      }
+    ]
   };
 
   try {
@@ -68,10 +75,16 @@ export async function sendEmail(formData: EmailFormData) {
     const responseData = await response.json();
 
     if (!response.ok) {
+      console.error("SMTP2GO API error response:", {
+        status: response.status,
+        statusText: response.statusText,
+        data: responseData
+      });
       throw new Error(`Email service error: ${response.status}`);
     }
 
     if (!(responseData.data?.succeeded > 0)) {
+      console.error("SMTP2GO API unsuccessful response:", responseData);
       throw new Error("Email not sent successfully");
     }
 
