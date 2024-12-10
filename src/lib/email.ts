@@ -3,15 +3,14 @@ import type { FormData } from "~/types/form";
 type EmailFormData = Omit<FormData, "recaptchaToken">;
 
 const SMTP2GO_API_URL = "https://api.smtp2go.com/v3/email/send";
-const SENDER_EMAIL = "hello@golf2go.nz";
-const RECIPIENT_EMAIL = "steven@golf2go.co.nz";
+const SENDER_EMAIL = "contact@golf2go.nz";
+const RECIPIENT_EMAIL = "golf2go2017@gmail.com";
 
 export async function sendEmail(formData: EmailFormData) {
   if (!process.env.NEXT_SMTP_KEY) {
     throw new Error("NEXT_SMTP_KEY environment variable is not set");
   }
 
-  
   const formatAddress = (prefix: "postal" | "delivery" | "event") => {
     const address = formData[`${prefix}Address`];
     const address2 = formData[`${prefix}Address2`];
