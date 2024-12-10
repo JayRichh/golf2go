@@ -22,31 +22,41 @@ export async function sendEmail(formData: EmailFormData) {
   };
 
   const htmlBody = `
-    <h2>New Golf 2 Go Booking Request</h2>
-    <p>Submitted on ${new Date().toLocaleString("en-NZ")}</p>
-
-    <h3>Contact Information</h3>
-    <p><strong>Company:</strong> ${formData.companyName || 'N/A'}</p>
-    <p><strong>Contact Person:</strong> ${formData.contactPerson}</p>
-    <p><strong>Email:</strong> ${formData.email}</p>
-    <p><strong>Mobile:</strong> ${formData.mobilePhone}</p>
-    ${formData.landlinePhone ? `<p><strong>Landline:</strong> ${formData.landlinePhone}</p>` : ''}
-
-    <h3>Addresses</h3>
-    <p><strong>Postal Address:</strong><br>${formatAddress("postal")}</p>
-    <p><strong>Delivery Address:</strong><br>${formatAddress("delivery")}</p>
-    <p><strong>Event Address:</strong><br>${formatAddress("event")}</p>
-
-    <h3>Event Details</h3>
-    <p><strong>Date:</strong> ${new Date(formData.eventDate).toLocaleDateString("en-NZ")}</p>
-    <p><strong>Type:</strong> ${formData.eventType}</p>
-    <p><strong>Duration:</strong> ${formData.numberOfDays} day(s)</p>
-    <p><strong>Number of Holes:</strong> ${formData.numberOfHoles}</p>
-
-    ${formData.message ? `
-    <h3>Additional Information</h3>
-    <p>${formData.message}</p>
-    ` : ''}
+    <div style="background:#f4f4f4;padding:20px;font-family:Arial,sans-serif;font-size:14px;color:#333;">
+      <div style="max-width:600px;margin:0 auto;background:#fff;border:1px solid #ddd;border-radius:6px;overflow:hidden;">
+        <div style="background:#004a2f;padding:20px;text-align:center;color:#fff;">
+          <h2 style="margin:0;font-size:20px;font-weight:normal;">New Golf 2 Go Booking Request</h2>
+        </div>
+        <div style="padding:20px;">
+          <p style="margin-top:0;margin-bottom:15px;">Submitted on ${new Date().toLocaleString("en-NZ")}</p>
+          <h3 style="margin-top:0;margin-bottom:10px;font-size:16px;color:#004a2f;">Contact Information</h3>
+          <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;">Company:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formData.companyName || 'N/A'}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;">Contact Person:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formData.contactPerson}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;">Email:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formData.email}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;">Mobile:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formData.mobilePhone}</td></tr>
+            ${formData.landlinePhone ? `<tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;">Landline:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formData.landlinePhone}</td></tr>` : ''}
+          </table>
+          <h3 style="margin-top:0;margin-bottom:10px;font-size:16px;color:#004a2f;">Addresses</h3>
+          <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;vertical-align:top;">Postal Address:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formatAddress("postal")}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;vertical-align:top;">Delivery Address:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formatAddress("delivery")}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;vertical-align:top;">Event Address:</td><td style="padding:8px;">${formatAddress("event")}</td></tr>
+          </table>
+          <h3 style="margin-top:0;margin-bottom:10px;font-size:16px;color:#004a2f;">Event Details</h3>
+          <table style="width:100%;border-collapse:collapse;margin-bottom:20px;">
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;">Date:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${new Date(formData.eventDate).toLocaleDateString("en-NZ")}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;">Type:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formData.eventType}</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;">Duration:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formData.numberOfDays} day(s)</td></tr>
+            <tr><td style="padding:8px;border-bottom:1px solid #ddd;font-weight:bold;">Number of Holes:</td><td style="padding:8px;border-bottom:1px solid #ddd;">${formData.numberOfHoles}</td></tr>
+          </table>
+          ${formData.message ? `
+            <h3 style="margin-top:0;margin-bottom:10px;font-size:16px;color:#004a2f;">Additional Information</h3>
+            <p style="margin-top:0;">${formData.message}</p>
+          ` : ''}
+        </div>
+      </div>
+    </div>
   `;
 
   const payload = {
