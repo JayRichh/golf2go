@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Book Your Mini Golf Event",
-    description: "Book your portable mini golf event with Golf 2 Go. Perfect for corporate events, parties, and special occasions.",
+    title: "Book Now | Golf 2 Go NZ Event Booking & Hire",
+    description: "Reserve your portable mini golf experience today. Easy online booking for corporate events, team building, parties, and special occasions throughout New Zealand.",
     openGraph: {
-      title: "Book Your Mini Golf Event - Golf 2 Go",
-      description: "Book your portable mini golf event with Golf 2 Go. Perfect for corporate events, parties, and special occasions.",
+      title: "Book Now | Golf 2 Go NZ Event Booking & Hire",
+      description: "Reserve your portable mini golf experience today. Easy online booking for corporate events, team building, parties, and special occasions throughout New Zealand.",
       images: [
         {
           url: "/8-work-function-fun-portable-mini-golf.jpg",

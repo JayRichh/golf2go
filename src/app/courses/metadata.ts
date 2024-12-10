@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Our Mini Golf Courses",
-    description: "Explore our range of premium portable mini golf courses. From classic designs to challenging layouts, perfect for any event.",
+    title: "Mini Golf Course Designs | Golf 2 Go NZ Course Catalog",
+    description: "Browse our extensive range of portable mini golf course layouts. From classic designs to challenging obstacles, featuring unique holes like Twin Hedges and Bridge over the River.",
     openGraph: {
-      title: "Mini Golf Courses - Golf 2 Go",
-      description: "Explore our range of premium portable mini golf courses. From classic designs to challenging layouts, perfect for any event.",
+      title: "Mini Golf Course Designs | Golf 2 Go NZ Course Catalog",
+      description: "Browse our extensive range of portable mini golf course layouts. From classic designs to challenging obstacles, featuring unique holes like Twin Hedges and Bridge over the River.",
       images: [
         {
           url: "/1-Twin-Hedges-3-3m-x-75m.jpg",

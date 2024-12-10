@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Golf 2 Go - Premium Portable Mini Golf",
-    description: "Experience the ultimate portable mini golf solution for your events. Professional setup and delivery across New Zealand.",
+    title: "Golf 2 Go NZ | Premium Portable Mini Golf Hire",
+    description: "New Zealand's leading portable mini golf rental service. Professional setup and delivery nationwide for corporate events, parties, and special occasions.",
     openGraph: {
+      title: "Golf 2 Go NZ | Premium Portable Mini Golf Hire",
+      description: "New Zealand's leading portable mini golf rental service. Professional setup and delivery nationwide for corporate events, parties, and special occasions.",
       images: [
         {
           url: "/2-parties-and-events-golf2go-portable-miniature-golf.jpg",
@@ -19,6 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
           alt: "Golf 2 Go - Course Close Up",
         },
       ],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
