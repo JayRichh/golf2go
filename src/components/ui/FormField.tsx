@@ -1,71 +1,59 @@
-"use client";
-
 import { UseFormRegister } from "react-hook-form";
-
 import { Text } from "./Text";
 
-interface FormFieldProps {
+export interface FormFieldProps {
   name: string;
   label: string;
   type?: string;
-  required?: boolean;
   register: UseFormRegister<any>;
+  required?: boolean;
   error?: string;
-  options?: Array<{
-    value: string;
-    label: string;
-  }>;
+  options?: { value: string; label: string }[];
+  itemProp?: string;
 }
 
 export function FormField({
   name,
   label,
   type = "text",
-  required = false,
   register,
+  required = false,
   error,
   options,
+  itemProp,
 }: FormFieldProps) {
+  const inputProps = {
+    ...register(name),
+    ...(itemProp ? { 'itemProp': itemProp } : {}),
+    className: `form-input w-full rounded-lg border bg-background px-4 py-2 text-foreground placeholder:text-foreground-secondary/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
+      error ? "border-error" : "border-border"
+    }`,
+  };
+
   return (
-    <div className="col-span-2 md:col-span-1">
-      <label htmlFor={name} className="mb-1.5 block">
-        <Text variant="sm" className="font-medium text-foreground">
-          {label}
-          {required && <span className="ml-1 text-amber-500">*</span>}
-        </Text>
-      </label>
-      {type === "select" ? (
-        <select
-          id={name}
-          {...register(name)}
-          className={`input-base ${error ? "border-red-500 focus:ring-red-500" : required ? "border-amber-200 focus:ring-amber-500" : ""}`}
-        >
-          <option value="">Select {label.toLowerCase()}</option>
+    <div className="space-y-1">
+      <Text variant="sm" className="font-medium">
+        {label}
+        {required && <span className="text-error"> *</span>}
+      </Text>
+
+      {type === "textarea" ? (
+        <textarea {...inputProps} rows={4} />
+      ) : type === "select" ? (
+        <select {...inputProps}>
+          <option value="">Select...</option>
           {options?.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
         </select>
-      ) : type === "textarea" ? (
-        <textarea
-          id={name}
-          {...register(name)}
-          rows={4}
-          className={`input-base ${error ? "border-red-500 focus:ring-red-500" : required ? "border-amber-200 focus:ring-amber-500" : ""}`}
-          placeholder={`Enter ${label.toLowerCase()}`}
-        />
       ) : (
-        <input
-          type={type}
-          id={name}
-          {...register(name)}
-          min={type === "number" ? 1 : undefined}
-          className={`input-base ${error ? "border-red-500 focus:ring-red-500" : required ? "border-amber-200 focus:ring-amber-500" : ""}`}
-        />
+        <input type={type} {...inputProps} />
       )}
+
       {error && (
-        <Text variant="sm" className="mt-1 text-red-500">
+        <Text variant="sm" className="text-error">
           {error}
         </Text>
       )}

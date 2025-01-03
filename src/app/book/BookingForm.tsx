@@ -1,7 +1,7 @@
-// pages/book.tsx
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { generateBookingSchema, generateFormSchema } from './schema';
 import * as z from "zod";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-const formSchema = z.object({
+const validationSchema = z.object({
   companyName: z.string().optional(),
   contactPerson: z.string().min(1, "Contact person is required"),
   landlinePhone: z.string().optional(),
@@ -113,7 +113,22 @@ const calculatePrice = (holes: number, days: number) => {
   return price;
 };
 
+const baseUrl = "https://golf2go.co.nz";
+const bookingSchemaData = generateBookingSchema(baseUrl);
+const formSchemaData = generateFormSchema();
+
 export default function BookingForm() {
+  // Add schema.org markup
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify([bookingSchemaData, formSchemaData]);
+    document.head.appendChild(script);
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -124,7 +139,7 @@ export default function BookingForm() {
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
   const { register, handleSubmit, formState: { errors, isValid }, watch, setValue, trigger } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(validationSchema),
     mode: "onChange",
     defaultValues: {
       recaptchaToken: ""
@@ -286,7 +301,15 @@ export default function BookingForm() {
         onError={() => setError("Failed to load reCAPTCHA. Please refresh the page and try again.")}
       />
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8" noValidate>
+      <form 
+        onSubmit={handleSubmit(onSubmit)} 
+        className="space-y-8" 
+        noValidate
+        itemScope 
+        itemType="https://schema.org/ReservationForm"
+      >
+        <meta itemProp="name" content="Corporate Entertainment Booking Form" />
+        <meta itemProp="description" content="Book premium corporate entertainment and event solutions" />
         {success && (
           <Container glass className="border-success/20 bg-success/10">
             <div className="flex items-center gap-3">
@@ -316,8 +339,8 @@ export default function BookingForm() {
         <div className="relative w-full">
           <div className="relative min-h-[400px]">
             <FormStep isActive={activeSection === "contact"} direction="right">
-              <div className="grid gap-6 md:grid-cols-2">
-                <FormField name="companyName" label="Company Name" register={register} error={errors.companyName?.message}/>
+              <div className="grid gap-6 md:grid-cols-2" itemScope itemType="https://schema.org/Organization">
+                <FormField name="companyName" label="Company Name" register={register} error={errors.companyName?.message} itemProp="name"/>
                 <FormField name="contactPerson" label="Contact Person" register={register} required error={errors.contactPerson?.message}/>
                 <FormField name="landlinePhone" label="Landline Phone" type="tel" register={register} error={errors.landlinePhone?.message}/>
                 <FormField name="mobilePhone" label="Mobile Phone" type="tel" register={register} required error={errors.mobilePhone?.message}/>
@@ -391,15 +414,19 @@ export default function BookingForm() {
                 />
                 <FormField name="message" label="Additional Information" type="textarea" register={register} error={errors.message?.message}/>
               </div>
-              <Container glass className="mt-8">
+              <Container glass className="mt-8" itemScope itemType="https://schema.org/Offer">
+                <meta itemProp="priceCurrency" content="NZD" />
                 <div className="flex items-center justify-between border-b border-border/50 bg-background-secondary/30 p-4">
                   <div className="flex items-center gap-3">
                     <span className="text-xl">💰</span>
                     <Text variant="h4">Estimated Price</Text>
                   </div>
                   <div className="flex items-baseline">
-                    <Text variant="h3" className="text-primary">${price.toFixed(2)}</Text>
+                    <Text variant="h3" className="text-primary" itemProp="price">${price.toFixed(2)}</Text>
                     <Text variant="sm" className="ml-2 text-foreground-secondary">NZD excl. GST</Text>
+                    <meta itemProp="availability" content="https://schema.org/InStock" />
+                    <meta itemProp="validFrom" content={new Date().toISOString()} />
+                    <meta itemProp="priceValidUntil" content={new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString()} />
                   </div>
                 </div>
                 <div className="p-6 space-y-2">
@@ -452,7 +479,9 @@ export default function BookingForm() {
         </div>
 
         <Container glass className="text-center">
-          <Text variant="sm" className="text-foreground-secondary">By submitting this form, you agree to our terms and conditions</Text>
+          <Text variant="sm" className="text-foreground-secondary">
+            By submitting this form, you agree to our <a href="/terms" className="text-primary hover:underline" itemProp="termsOfService">terms and conditions</a>
+          </Text>
         </Container>
       </form>
     </>

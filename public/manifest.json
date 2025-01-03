@@ -1,16 +1,84 @@
 {
-  "name": "Golf2Go - Portable Mini Golf",
-  "short_name": "Golf2Go",
-  "description": "Portable mini golf courses for events and parties across New Zealand",
+  "name": "Golf 2 Go NZ - Premium Corporate Entertainment Solutions",
+  "short_name": "Golf 2 Go NZ",
+  "description": "New Zealand's leading corporate entertainment and event solutions provider. Premium interactive experiences for business functions and professional events.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#008000",
+  "dir": "ltr",
+  "lang": "en-NZ",
+  "categories": [
+    "business",
+    "entertainment",
+    "events",
+    "professional services"
+  ],
+  "screenshots": [
+    {
+      "src": "/2-parties-and-events-golf2go-portable-miniature-golf.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "Premium Corporate Events"
+    },
+    {
+      "src": "/17-golf2go-portable-miniature-golf-close-up.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "platform": "wide",
+      "label": "Professional Event Solutions"
+    }
+  ],
   "icons": [
     {
       "src": "/birdie.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/birdie.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/birdie.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Book Now",
+      "url": "/book",
+      "description": "Book premium corporate entertainment"
+    },
+    {
+      "name": "View Solutions",
+      "url": "/courses",
+      "description": "Explore our professional event solutions"
+    },
+    {
+      "name": "Event Gallery",
+      "url": "/gallery",
+      "description": "View our premium corporate events"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "share_target": {
+    "action": "/book",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
 }
