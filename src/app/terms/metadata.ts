@@ -1,35 +1,47 @@
 import { generateMetadata as baseGenerateMetadata } from '../seo.config'
-import { generateStructuredData } from '~/utils/sitemap'
+import { generateStructuredData } from '~/utils/schema'
 
 export async function generateMetadata() {
   const pageKeywords = [
-    'corporate entertainment terms',
-    'professional event policies',
-    'business function terms',
-    'executive event conditions',
-    'corporate booking terms',
-    'professional service agreement',
-    'business event terms',
-    'corporate function policies',
-    'event booking conditions',
-    'professional hire terms',
-    'Palmerston North events',
-    'NZ corporate entertainment',
-    'business service terms',
-    'corporate event policies',
-    'professional booking terms'
+    'mini golf hire terms',
+    'portable golf conditions',
+    'mini golf rental terms',
+    'golf hire agreement',
+    'portable course booking',
+    'mini golf hire policy',
+    'golf rental conditions',
+    'event booking terms',
+    'mini golf cancellation',
+    'portable golf hire',
+    'golf setup terms',
+    'mini golf service',
+    'rental agreement nz',
+    'hire conditions',
+    'booking policy',
+    // Service Terms
+    'setup requirements',
+    'delivery conditions',
+    'payment terms',
+    'cancellation policy',
+    'hire duration',
+    // Location Terms
+    'palmerston north hire',
+    'nz rental terms',
+    'nationwide service',
+    'delivery areas',
+    'service locations'
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Terms and Conditions | Professional Corporate Entertainment',
-    description: 'Professional terms and conditions for corporate entertainment and business event services. Clear policies for premium event solutions, professional setups, and executive function bookings.',
+    title: 'Terms & Conditions | Portable Mini Golf Hire NZ',
+    description: 'Clear terms and conditions for portable mini golf hire in New Zealand. Professional service terms, booking conditions, and hire agreements for our mobile mini golf solutions.',
     keywords: pageKeywords,
     images: [
       {
         url: '/4-portable-miniature-golf.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Professional Corporate Terms',
+        alt: 'Professional Mini Golf Hire Terms NZ',
       }
     ]
   })
@@ -38,7 +50,35 @@ export async function generateMetadata() {
     ...metadata,
     other: {
       structured_data: generateStructuredData('terms'),
-      'pdf-version': '/TERMS AND CONDITIONS OF HIRE 2025-26.pdf'
+      'document-info': {
+        'version': '2025-26',
+        'last-updated': new Date().toISOString(),
+        'pdf-version': '/TERMS AND CONDITIONS OF HIRE 2025-26.pdf',
+        'jurisdiction': 'New Zealand'
+      },
+      'key-sections': [
+        'Hire Agreement',
+        'Booking Conditions',
+        'Payment Terms',
+        'Cancellation Policy',
+        'Setup Requirements',
+        'Delivery Terms',
+        'Insurance Coverage',
+        'Safety Guidelines'
+      ],
+      'service-terms': {
+        'minimum-hire': '2 hours',
+        'setup-time': '1 hour before event',
+        'payment-terms': 'Deposit required at booking',
+        'cancellation-notice': '48 hours',
+        'weather-policy': 'Wet weather options available'
+      },
+      'contact-info': {
+        'email': 'admin@golf2go.co.nz',
+        'phone': '021849931',
+        'business-hours': 'Monday to Sunday',
+        'response-time': '24-48 hours'
+      }
     }
   }
 }

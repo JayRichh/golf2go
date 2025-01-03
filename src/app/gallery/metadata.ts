@@ -1,53 +1,58 @@
 import { generateMetadata as baseGenerateMetadata } from '../seo.config'
-import { generateStructuredData } from '~/utils/sitemap'
+import { generateStructuredData } from '~/utils/schema'
 
 export async function generateMetadata() {
   const pageKeywords = [
-    'corporate event gallery',
-    'professional event photos',
-    'business function gallery',
-    'executive event showcase',
-    'corporate entertainment examples',
-    'professional setup gallery',
-    'business event portfolio',
-    'corporate function photos',
-    'executive entertainment gallery',
-    'premium event showcase',
-    'Palmerston North corporate events',
-    'NZ business functions',
-    'professional event solutions',
-    'corporate entertainment portfolio',
-    'executive function gallery'
+    'portable mini golf photos nz',
+    'mini golf course pictures',
+    'portable golf setup images',
+    'mini golf event gallery',
+    'portable mini golf examples',
+    'mini golf course photos',
+    'mobile golf setup gallery',
+    'mini golf hire photos',
+    'portable golf layouts',
+    'mini golf setup pictures',
+    'mini putt course images',
+    'putt putt setup photos',
+    'portable golf gallery',
+    'mini golf event photos',
+    'golf course setups nz',
+    'mini golf installations',
+    'portable golf events',
+    'mini golf configurations',
+    'mobile golf layouts',
+    'mini golf setup examples'
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Professional Corporate Event Gallery | Premium Entertainment Solutions',
-    description: 'Explore our portfolio of successful corporate events and professional functions. View premium entertainment setups, executive-grade configurations, and business event solutions delivered across New Zealand.',
+    title: 'Portable Mini Golf Gallery NZ | Course Setup Examples',
+    description: 'View our portable mini golf course setups and layouts. Professional mini golf installations for events across New Zealand. Based in Palmerston North, available nationwide.',
     keywords: pageKeywords,
     images: [
       {
         url: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Premium Corporate Event Solutions',
+        alt: 'Professional Portable Mini Golf Setup - Event Configuration',
       },
       {
         url: '/6-Forefront-400x400-Auckland-Forefront.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Professional Business Functions',
+        alt: 'Mini Golf Course Setup - Professional Installation',
       },
       {
         url: '/8-work-function-fun-portable-mini-golf.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Executive Corporate Entertainment',
+        alt: 'Portable Mini Golf Layout - Event Setup',
       },
       {
         url: '/30-Tiger-400x400-Golf-Tournaments.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Premium Business Events',
+        alt: 'Mini Golf Course Configuration - Professional Setup',
       }
     ]
   })
@@ -55,7 +60,26 @@ export async function generateMetadata() {
   return {
     ...metadata,
     other: {
-      structured_data: generateStructuredData('gallery')
+      structured_data: generateStructuredData('gallery'),
+      'gallery-categories': [
+        'Course Layouts',
+        'Setup Examples',
+        'Event Configurations',
+        'Installation Photos'
+      ],
+      'featured-setups': [
+        'Twin Hedges Layout',
+        'Multi Tunnels Setup',
+        'Bridge Challenge Course',
+        'Slalom Configuration'
+      ],
+      'image-types': [
+        'Course Photos',
+        'Setup Images',
+        'Event Pictures',
+        'Installation Gallery'
+      ],
+      'setup-locations': 'Indoor and Outdoor Venues Across NZ'
     }
   }
 }

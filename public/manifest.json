@@ -1,7 +1,7 @@
 {
-  "name": "Golf 2 Go NZ - Premium Corporate Entertainment Solutions",
+  "name": "Portable Mini Golf Professional NZ - Golf 2 Go",
   "short_name": "Golf 2 Go NZ",
-  "description": "New Zealand's leading corporate entertainment and event solutions provider. Premium interactive experiences for business functions and professional events.",
+  "description": "Professional portable mini golf hire service in New Zealand. Premium mobile mini golf setups for events and functions. Based in Palmerston North.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -11,10 +11,11 @@
   "dir": "ltr",
   "lang": "en-NZ",
   "categories": [
-    "business",
     "entertainment",
     "events",
-    "professional services"
+    "professional services",
+    "recreation",
+    "sports"
   ],
   "screenshots": [
     {
@@ -22,14 +23,14 @@
       "sizes": "1200x630",
       "type": "image/jpeg",
       "platform": "wide",
-      "label": "Premium Corporate Events"
+      "label": "Professional Portable Mini Golf Setup"
     },
     {
       "src": "/17-golf2go-portable-miniature-golf-close-up.jpg",
       "sizes": "1200x630",
       "type": "image/jpeg",
       "platform": "wide",
-      "label": "Professional Event Solutions"
+      "label": "Portable Mini Golf Course Details"
     }
   ],
   "icons": [
@@ -54,19 +55,19 @@
   ],
   "shortcuts": [
     {
+      "name": "View Courses",
+      "url": "/courses",
+      "description": "Explore portable mini golf course options"
+    },
+    {
       "name": "Book Now",
       "url": "/book",
-      "description": "Book premium corporate entertainment"
+      "description": "Book portable mini golf for your event"
     },
     {
-      "name": "View Solutions",
-      "url": "/courses",
-      "description": "Explore our professional event solutions"
-    },
-    {
-      "name": "Event Gallery",
+      "name": "Gallery",
       "url": "/gallery",
-      "description": "View our premium corporate events"
+      "description": "View our portable mini golf setups"
     }
   ],
   "related_applications": [],
