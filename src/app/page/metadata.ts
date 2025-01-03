@@ -3,40 +3,45 @@ import { generateStructuredData } from '~/utils/sitemap'
 
 export async function generateMetadata() {
   const pageKeywords = [
-    'portable mini golf hire NZ',
-    'mobile mini golf rental',
-    'corporate event entertainment',
-    'professional mini golf setup',
-    'event activity solutions',
-    'mini golf party hire',
-    'corporate function activities',
-    'team building mini golf',
-    'portable entertainment hire',
-    'event planning services'
+    'corporate entertainment solutions',
+    'professional event services',
+    'business function activities',
+    'executive team building',
+    'corporate mini golf events',
+    'premium event entertainment',
+    'professional event setup',
+    'corporate activity solutions',
+    'business event planning',
+    'executive entertainment options',
+    'Palmerston North corporate events',
+    'NZ business entertainment',
+    'professional function activities',
+    'corporate team building',
+    'premium entertainment solutions'
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Premium Portable Mini Golf Solutions',
-    description: 'New Zealand\'s leading portable mini golf rental service. Professional setup and delivery nationwide for corporate events, parties, and special occasions. Transform your event with our premium mini golf solutions.',
+    title: 'Professional Corporate Entertainment Solutions',
+    description: 'Premium corporate entertainment and event solutions provider in New Zealand. Professional setup and nationwide service for business functions, corporate events, and executive team building activities.',
     keywords: pageKeywords,
     images: [
       {
         url: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Professional Mini Golf Events',
+        alt: 'Golf 2 Go - Professional Corporate Events',
       },
       {
         url: '/17-golf2go-portable-miniature-golf-close-up.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Premium Course Details',
+        alt: 'Golf 2 Go - Premium Business Solutions',
       },
       {
         url: '/3-fun-portable-mini-golf.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Corporate Event Setup',
+        alt: 'Golf 2 Go - Executive Event Setup',
       }
     ]
   })
@@ -44,7 +49,6 @@ export async function generateMetadata() {
   return {
     ...metadata,
     other: {
-      'google-site-verification': 'your-verification-code',
       structured_data: generateStructuredData('home')
     }
   }

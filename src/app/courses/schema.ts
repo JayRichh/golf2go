@@ -8,7 +8,18 @@ export const generateCoursesSchema = (baseUrl: string) => ({
   "provider": {
     "@type": "Organization",
     "name": "Golf 2 Go NZ",
-    "url": baseUrl
+    "url": baseUrl,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Palmerston North",
+      "addressCountry": "New Zealand"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "021849931",
+      "email": "admin@golf2go.co.nz",
+      "contactType": "customer service"
+    }
   },
   "itemListElement": [
     {
@@ -117,7 +128,12 @@ export const generateServiceSchema = (baseUrl: string) => ({
   },
   "areaServed": {
     "@type": "Country",
-    "name": "New Zealand"
+    "name": "New Zealand",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Palmerston North",
+      "addressCountry": "New Zealand"
+    }
   },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",

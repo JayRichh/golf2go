@@ -7,7 +7,18 @@ export const generateGallerySchema = (baseUrl: string, images: any[]) => ({
   "publisher": {
     "@type": "Organization",
     "name": "Golf 2 Go NZ",
-    "url": baseUrl
+    "url": baseUrl,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Palmerston North",
+      "addressCountry": "New Zealand"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "021849931",
+      "email": "admin@golf2go.co.nz",
+      "contactType": "customer service"
+    }
   },
   "image": images.map(img => ({
     "@type": "ImageObject",
@@ -52,6 +63,21 @@ export const generateGallerySchema = (baseUrl: string, images: any[]) => ({
     "primaryImageOfPage": {
       "@type": "ImageObject",
       "url": `${baseUrl}/2-parties-and-events-golf2go-portable-miniature-golf.jpg`
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "Golf 2 Go NZ",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Palmerston North",
+        "addressCountry": "New Zealand"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "021849931",
+        "email": "admin@golf2go.co.nz",
+        "contactType": "customer service"
+      }
     }
   },
   "potentialAction": {

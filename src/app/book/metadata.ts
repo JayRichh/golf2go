@@ -3,45 +3,39 @@ import { generateStructuredData } from '~/utils/sitemap'
 
 export async function generateMetadata() {
   const pageKeywords = [
-    'mini golf booking NZ',
-    'event hire booking',
-    'corporate event reservation',
-    'mini golf event planning',
-    'party booking system',
-    'corporate function hire',
-    'team building reservation',
-    'event equipment booking',
-    'mini golf hire rates',
-    'corporate event packages',
-    'party activity booking',
-    'professional event hire',
-    'online event booking',
-    'instant quote system',
-    'event date availability'
+    'corporate event booking',
+    'professional entertainment hire',
+    'business function reservations',
+    'executive event booking',
+    'corporate entertainment quotes',
+    'professional event planning',
+    'business event bookings',
+    'corporate function reservations',
+    'premium event booking',
+    'professional service hire',
+    'Palmerston North corporate bookings',
+    'NZ business event hire',
+    'corporate entertainment booking',
+    'executive function reservations',
+    'professional event quotes'
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Book Now | Professional Mini Golf Event Hire',
-    description: 'Reserve your premium portable mini golf experience today. Simple online booking for corporate events, team building activities, parties, and special occasions throughout New Zealand. Instant quotes and availability checking.',
+    title: 'Book Professional Corporate Entertainment | Premium Event Solutions',
+    description: 'Request premium corporate entertainment solutions for your business event. Professional setup and service for executive functions, corporate events, and business entertainment across New Zealand.',
     keywords: pageKeywords,
     images: [
-      {
-        url: '/8-work-function-fun-portable-mini-golf.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Golf 2 Go - Professional Corporate Event Setup',
-      },
       {
         url: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Premium Event Configuration',
+        alt: 'Golf 2 Go - Professional Corporate Bookings',
       },
       {
-        url: '/3-fun-portable-mini-golf.jpg',
+        url: '/6-Forefront-400x400-Auckland-Forefront.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Custom Event Layout',
+        alt: 'Golf 2 Go - Premium Business Events',
       }
     ]
   })
@@ -49,10 +43,12 @@ export async function generateMetadata() {
   return {
     ...metadata,
     other: {
-      structured_data: generateStructuredData('booking'),
-      'booking-availability': 'realtime',
-      'pricing-display': 'dynamic',
-      'response-time': 'instant'
+      structured_data: generateStructuredData('book'),
+      'contact-email': 'admin@golf2go.co.nz',
+      'contact-phone': '021849931',
+      'business-hours': 'Monday to Sunday',
+      'service-area': 'Palmerston North and nationwide',
+      'response-time': '24-48 hours'
     }
   }
 }

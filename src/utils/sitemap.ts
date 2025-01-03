@@ -60,9 +60,9 @@ const serviceKeywords = [
 
 // Location & Market Keywords
 const marketKeywords = [
-  'Auckland corporate events',
-  'Wellington business functions',
-  'Christchurch corporate activities',
+  'Palmerston North corporate events',
+  'New Zealand business functions',
+  'NZ corporate activities',
   'New Zealand event solutions',
   'nationwide corporate services',
   'NZ business entertainment',
@@ -169,24 +169,18 @@ type StructuredData = {
   areaServed: {
     '@type': string;
     name: string;
-    hasMap: string;
   } | string;
-  priceRange: string;
-  openingHours: string;
   address: {
     '@type': string;
     addressCountry: string;
-    addressRegion: string;
+    addressLocality: string;
   };
-  aggregateRating?: {
+  contactPoint?: {
     '@type': string;
-    ratingValue: string;
-    reviewCount: string;
+    telephone: string;
+    email: string;
+    contactType: string;
   };
-  award?: string[];
-  knowsAbout?: string[];
-  hasCredential?: string[];
-  memberOf?: string[];
   provider?: {
     '@type': string;
     name: string;
@@ -211,7 +205,6 @@ type StructuredData = {
     target: string;
   };
   image?: string[];
-  foundingDate?: string;
 }
 
 type PageSpecificData = {
@@ -228,28 +221,22 @@ export const generateStructuredData = (pageName: string): StructuredData => {
     name: 'Golf 2 Go NZ',
     description: 'New Zealand\'s leading corporate entertainment and event solutions provider, specializing in premium interactive experiences and professional team building activities',
     url: 'https://golf2go.co.nz',
-    telephone: '+64 800 GOLF2GO',
+    telephone: '021849931',
     areaServed: {
       '@type': 'Country',
-      name: 'New Zealand',
-      hasMap: 'https://golf2go.co.nz/coverage'
+      name: 'New Zealand'
     },
-    priceRange: '$$$',
-    openingHours: 'Mo-Su',
     address: {
       '@type': 'PostalAddress',
-      addressCountry: 'NZ',
-      addressRegion: 'Auckland'
+      addressCountry: 'New Zealand',
+      addressLocality: 'Palmerston North'
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '150'
-    },
-    award: [
-      'Leading Corporate Entertainment Provider 2023',
-      'Excellence in Business Events 2022'
-    ]
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '021849931',
+      email: 'admin@golf2go.co.nz',
+      contactType: 'customer service'
+    }
   }
 
   const pageSpecificData: PageSpecificData = {
@@ -268,7 +255,7 @@ export const generateStructuredData = (pageName: string): StructuredData => {
         priceSpecification: {
           '@type': 'PriceSpecification',
           priceCurrency: 'NZD',
-          minPrice: '1000'
+          minPrice: '190'
         }
       },
       amenityFeature: [
@@ -310,21 +297,12 @@ export const generateStructuredData = (pageName: string): StructuredData => {
     about: {
       ...baseStructuredData,
       '@type': 'Organization',
-      foundingDate: '2008',
       knowsAbout: [
         'Corporate Entertainment',
         'Event Management',
         'Team Building',
         'Professional Development',
         'Business Events'
-      ],
-      hasCredential: [
-        'Professional Event Management Certification',
-        'Corporate Entertainment Excellence Award'
-      ],
-      memberOf: [
-        'New Zealand Event Association',
-        'Business Events Industry Association'
       ]
     }
   }

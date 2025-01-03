@@ -3,51 +3,51 @@ import { generateStructuredData } from '~/utils/sitemap'
 
 export async function generateMetadata() {
   const pageKeywords = [
-    'mini golf course designs',
-    'portable golf courses',
-    'Twin Hedges mini golf',
-    'Bridge over the River course',
-    'Multi Tunnels mini golf',
-    'portable course layouts',
-    'mini golf obstacles',
-    'custom mini golf design',
-    'professional golf setup',
-    'event course layouts',
-    'indoor mini golf courses',
-    'outdoor mini golf setup',
-    'challenging mini golf holes',
-    'unique golf course features',
-    'portable putting greens'
+    'corporate entertainment courses',
+    'professional event solutions',
+    'executive function layouts',
+    'business event setups',
+    'corporate activity designs',
+    'premium entertainment configurations',
+    'professional course layouts',
+    'corporate function setups',
+    'executive entertainment solutions',
+    'business event courses',
+    'corporate team building layouts',
+    'professional entertainment designs',
+    'premium event configurations',
+    'executive function setups',
+    'corporate entertainment solutions'
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Mini Golf Course Designs & Layouts | Professional Course Catalog',
-    description: 'Explore our premium range of portable mini golf course layouts. From classic designs to challenging obstacles, featuring unique holes like Twin Hedges, Multi Tunnels, and Bridge over the River. Perfect for corporate events and functions.',
+    title: 'Professional Corporate Entertainment Solutions | Premium Course Catalog',
+    description: 'Discover our premium range of professional entertainment solutions for corporate events. Featuring executive-grade course designs including Twin Hedges Premium, Multi Tunnels Professional, and Bridge over the River Executive layouts. Perfect for corporate functions and business events.',
     keywords: pageKeywords,
     images: [
       {
         url: '/1-Twin-Hedges-3-3m-x-75m.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Twin Hedges Premium Course',
+        alt: 'Golf 2 Go - Premium Corporate Entertainment Solutions',
       },
       {
         url: '/15-Multi-tunnels-2-8m-x-9m.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Multi Tunnels Challenge Course',
+        alt: 'Golf 2 Go - Professional Business Event Setups',
       },
       {
         url: '/19-Bridge-over-the-River-3-3m-x-9m.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Bridge over the River Signature Course',
+        alt: 'Golf 2 Go - Executive Function Configurations',
       },
       {
         url: '/12-Slalom-2-8m-x-9m.jpg',
         width: 1200,
         height: 630,
-        alt: 'Golf 2 Go - Slalom Professional Course',
+        alt: 'Golf 2 Go - Premium Corporate Solutions',
       }
     ]
   })

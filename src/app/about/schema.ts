@@ -21,17 +21,14 @@ export const generateAboutSchema = (baseUrl: string) => ({
     }
   },
   "areaServed": {
-    "@type": "Country",
-    "name": "New Zealand"
+    "@type": "City",
+    "name": "Palmerston North",
+    "addressCountry": "New Zealand"
   },
-  "award": [
-    "Leading Corporate Entertainment Provider 2023",
-    "Excellence in Business Events 2022"
-  ],
   "slogan": "Premium Corporate Entertainment Solutions",
   "brand": {
     "@type": "Brand",
-    "name": "Golf 2 Go NZ",
+    "name": "Golf 2 Go",
     "description": "Professional portable mini golf and corporate entertainment solutions",
     "logo": `${baseUrl}/5-cropped-golf2go-logo-1.jpg`
   },
@@ -77,15 +74,13 @@ export const generateAboutSchema = (baseUrl: string) => ({
       }
     ]
   },
-  "sameAs": [
-    "https://www.linkedin.com/company/golf2go-nz",
-    "https://www.facebook.com/golf2gonz",
-    "https://www.instagram.com/golf2gonz"
-  ],
-  "memberOf": [
-    "New Zealand Event Association",
-    "Business Events Industry Association"
-  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "021849931",
+    "email": "admin@golf2go.co.nz",
+    "contactType": "customer service",
+    "areaServed": "New Zealand"
+  },
   "knowsAbout": [
     "Corporate Entertainment",
     "Event Management",

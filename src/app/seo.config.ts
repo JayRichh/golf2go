@@ -71,10 +71,22 @@ export function generateMetadata({
       images: images.map(img => img.url),
     },
     verification: {
-      google: 'your-google-site-verification', // Add your Google verification code
+      other: {
+        'msvalidate.01': '',
+        'yandex-verification': ''
+      }
     },
     alternates: {
       canonical: 'https://golf2go.co.nz',
+      languages: {
+        'en-NZ': 'https://golf2go.co.nz'
+      }
+    },
+    other: {
+      'business-type': 'Corporate Entertainment',
+      'location': 'Palmerston North, New Zealand',
+      'contact-email': 'admin@golf2go.co.nz',
+      'contact-phone': '021 849931'
     },
     metadataBase: new URL('https://golf2go.co.nz'),
   }
