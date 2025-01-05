@@ -44,17 +44,6 @@ export function generateMetadata({
     authors: [{ name: 'Golf 2 Go NZ' }],
     creator: 'Golf 2 Go NZ',
     publisher: 'Golf 2 Go NZ',
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
     openGraph: {
       title: finalTitle,
       description: finalDescription,
@@ -77,9 +66,17 @@ export function generateMetadata({
       }
     },
     alternates: {
-      canonical: 'https://golf2go.co.nz',
+      canonical: `https://golf2go.co.nz${title ? ('/' + title.toLowerCase()
+        .split('|')[0]
+        .trim()
+        .split(' ')[0]
+        .toLowerCase()) : ''}`,
       languages: {
-        'en-NZ': 'https://golf2go.co.nz'
+        'en-NZ': `https://golf2go.co.nz${title ? ('/' + title.toLowerCase()
+          .split('|')[0]
+          .trim()
+          .split(' ')[0]
+          .toLowerCase()) : ''}`
       }
     },
     other: {
@@ -89,5 +86,18 @@ export function generateMetadata({
       'contact-phone': '021 849931'
     },
     metadataBase: new URL('https://golf2go.co.nz'),
+    robots: {
+      index: true,
+      follow: true,
+      nocache: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   }
 }
