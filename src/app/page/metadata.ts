@@ -12,13 +12,13 @@ export async function generateMetadata() {
     'mini golf manawatu',
     'mini putt welly',
     'mini golf akl',
-    // Professional/Service Terms
-    'portable mini golf professional nz',
+    // Service Terms
+    'mini golf hire nz',
     'portable mini golf hire nz',
-    'professional portable mini golf',
+    'mini golf setup nz',
     'portable mini golf new zealand',
     'portable mini golf palmerston north',
-    'portable mini golf setup nz',
+    'mini golf setup nz',
     // B2B/Corporate Terms
     'corporate event mini golf nz',
     'business function mini golf',
@@ -34,8 +34,8 @@ export async function generateMetadata() {
     'portable mini golf auckland',
     'mini golf hire christchurch',
     // Service Features
-    'professional mini golf setup',
-    'mobile mini golf installation',
+    'mini golf setup',
+    'mobile mini golf setup',
     'portable golf course rental',
     'event mini golf solutions',
     'mini golf event planning',
@@ -43,8 +43,8 @@ export async function generateMetadata() {
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Professional Mini Golf Hire NZ | Corporate Events & Functions',
-    description: 'Leading portable mini golf hire service in New Zealand. Premium mobile mini putt setups for corporate events, team building & functions. Based in Palmerston North, serving nationwide. Trusted by Kiwi businesses.',
+    title: 'Mini Golf Hire NZ | Corporate Events & Team Building',
+    description: 'Quality portable mini golf hire across New Zealand. Mobile mini putt setups for corporate events, team building & functions. Based in Palmerston North, serving nationwide. Trusted by Kiwi businesses.',
     keywords: pageKeywords,
     path: '',
     images: [
@@ -52,19 +52,19 @@ export async function generateMetadata() {
         url: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
         width: 1200,
         height: 630,
-        alt: 'Professional Portable Mini Golf NZ - Corporate Event Setup',
+        alt: 'Mini Golf Setup NZ - Corporate Event',
       },
       {
         url: '/17-golf2go-portable-miniature-golf-close-up.jpg',
         width: 1200,
         height: 630,
-        alt: 'Premium Mini Putt Hire NZ - Professional Course Details',
+        alt: 'Mini Putt Hire NZ - Course Setup',
       },
       {
         url: '/3-fun-portable-mini-golf.jpg',
         width: 1200,
         height: 630,
-        alt: 'Corporate Mini Golf Events NZ - Professional Service',
+        alt: 'Corporate Mini Golf Events NZ',
       }
     ]
   })
@@ -76,8 +76,8 @@ export async function generateMetadata() {
     other: {
       ...metadata.other,
       'schema:Organization': JSON.stringify(schemas[0]), // Organization schema
-      'business-type': 'Professional Event Entertainment Service',
-      'primary-service': 'Portable Mini Golf Solutions',
+      'business-type': 'Event Entertainment Service',
+      'primary-service': 'Mini Golf Hire',
       'location': {
         'base': 'Palmerston North, New Zealand',
         'coverage': 'Nationwide Service',
@@ -91,12 +91,12 @@ export async function generateMetadata() {
         ]
       },
       'service-highlights': [
-        'Corporate Event Specialists',
-        'Professional Setup Service',
+        'Corporate Events',
+        'Full Setup Service',
         'Nationwide Coverage',
-        'Team Building Solutions',
-        'Business Function Entertainment',
-        'Conference Activities Provider'
+        'Team Building',
+        'Business Functions',
+        'Conference Activities'
       ],
       'business-focus': {
         'primary': 'Corporate Entertainment',
@@ -104,8 +104,8 @@ export async function generateMetadata() {
           'Business Events',
           'Team Building',
           'Corporate Functions',
-          'Conference Activities',
-          'Trade Show Entertainment'
+          'Conferences',
+          'Trade Shows'
         ]
       },
       'contact-info': {
@@ -116,9 +116,9 @@ export async function generateMetadata() {
         'booking-notice': '48 hours minimum'
       },
       'certifications': [
-        'Public Liability Insurance',
-        'Professional Event Management',
-        'Health & Safety Compliant',
+        'Liability Insurance',
+        'Event Management',
+        'Health & Safety',
         'GST Registered'
       ]
     }

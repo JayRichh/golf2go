@@ -51,7 +51,7 @@ export default function Terms() {
                   className="text-primary-foreground"
                   itemProp="name"
                 >
-                  Professional Terms and Conditions
+                  Terms and Conditions
                 </Text>
                 <Text 
                   variant="xl" 
@@ -81,7 +81,7 @@ export default function Terms() {
                 itemProp="downloadUrl"
               >
                 <Download className="w-5 h-5" />
-                <span className="text-sm font-medium">Download Professional Terms Document</span>
+                <span className="text-sm font-medium">Download Terms Document</span>
               </a>
             </div>
 

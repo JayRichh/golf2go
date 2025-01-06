@@ -5,7 +5,7 @@ export async function generateMetadata() {
   const pageKeywords = [
     // NZ-Specific Terms
     'mini putt hire nz',
-    'mini golf terms nz',
+    'mini putt terms nz',
     'kiwi event hire',
     'aotearoa event entertainment',
     'nz corporate activities',
@@ -40,8 +40,8 @@ export async function generateMetadata() {
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Terms & Conditions | Portable Mini Golf Hire NZ',
-    description: 'Clear terms and conditions for portable mini golf hire in New Zealand. Professional service terms, booking conditions, and hire agreements for our mobile mini golf solutions. Trusted by Kiwi businesses nationwide.',
+    title: 'Terms & Conditions | Mini Golf Hire NZ',
+    description: 'Clear terms for mini golf hire in New Zealand. Simple booking conditions and hire agreements for mobile mini golf solutions. Trusted by businesses nationwide.',
     keywords: pageKeywords,
     path: 'terms',
     images: [
@@ -49,7 +49,7 @@ export async function generateMetadata() {
         url: '/4-portable-miniature-golf.jpg',
         width: 1200,
         height: 630,
-        alt: 'Professional Mini Golf Hire Terms NZ',
+        alt: 'Mini Golf Hire Terms NZ',
       }
     ]
   })
@@ -90,8 +90,8 @@ export async function generateMetadata() {
         'cancellation-notice': '48 hours',
         'weather-policy': 'Wet weather options available',
         'gst-handling': 'All prices include GST',
-        'insurance-coverage': 'Public liability insurance included',
-        'damage-policy': 'Comprehensive coverage details'
+        'insurance-coverage': 'Full liability insurance included',
+        'damage-policy': 'Coverage details'
       },
       'business-coverage': {
         'regions': [
@@ -104,7 +104,7 @@ export async function generateMetadata() {
           'Nationwide Service Available'
         ],
         'service-radius': 'All major NZ centers',
-        'delivery-options': 'Nationwide logistics available'
+        'delivery-options': 'Nationwide delivery available'
       },
       'contact-info': {
         'email': 'admin@golf2go.co.nz',
