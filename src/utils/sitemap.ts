@@ -2,6 +2,23 @@ import { MetadataRoute } from 'next'
 
 const baseUrl = 'https://golf2go.co.nz'
 
+// NZ-Specific Terms
+const nzTerms: string[] = [
+  'mini putt nz',
+  'mini putt hire',
+  'kiwi mini golf',
+  'aotearoa mini golf',
+  'mini golf manawatu',
+  'mini putt palmy',
+  'mini golf welly',
+  'mini golf akl',
+  'mini putt chch',
+  'mini golf tauranga',
+  'mini putt hamilton',
+  'mini golf napier',
+  'mini putt dunedin'
+]
+
 // Generic Mini Golf Terms
 const genericTerms: string[] = [
   'mini golf',
@@ -14,6 +31,22 @@ const genericTerms: string[] = [
   'golf activities',
   'golf entertainment',
   'mini golf games'
+]
+
+// B2B and Corporate Terms
+const corporateTerms: string[] = [
+  'corporate event entertainment',
+  'business function activities',
+  'team building games',
+  'conference entertainment',
+  'trade show activities',
+  'corporate fun day',
+  'staff event ideas',
+  'business entertainment',
+  'corporate recreation',
+  'workplace activities',
+  'company event games',
+  'corporate party ideas'
 ]
 
 // Portable/Mobile Terms
@@ -55,7 +88,10 @@ const locationTerms: string[] = [
   'mini golf wellington',
   'mini golf christchurch',
   'mini golf palmerston north',
-  'mini golf manawatu'
+  'mini golf manawatu',
+  'mini golf hawkes bay',
+  'mini golf bay of plenty',
+  'mini golf waikato'
 ]
 
 // Service Terms
@@ -142,8 +178,24 @@ const businessTerms: string[] = [
   'mini golf expert'
 ]
 
+// Industry-Specific Terms
+const industryTerms: string[] = [
+  'hospitality entertainment nz',
+  'event planning activities',
+  'conference entertainment ideas',
+  'corporate function games',
+  'business event activities',
+  'team building solutions',
+  'workplace entertainment',
+  'staff morale activities',
+  'company social ideas',
+  'business party games'
+]
+
 export const seoKeywords = [
+  ...nzTerms,
   ...genericTerms,
+  ...corporateTerms,
   ...portableTerms,
   ...eventTerms,
   ...locationTerms,
@@ -153,18 +205,45 @@ export const seoKeywords = [
   ...equipmentTerms,
   ...experienceTerms,
   ...businessTerms,
-  // Combined Terms
+  ...industryTerms,
+  // NZ Combined Terms
+  ...nzTerms.map((term: string) => `hire ${term}`),
+  ...nzTerms.map((term: string) => `book ${term}`),
+  ...nzTerms.map((term: string) => `rent ${term}`),
+  // Corporate Combined Terms
+  ...corporateTerms.map((term: string) => `${term} nz`),
+  ...corporateTerms.map((term: string) => `${term} new zealand`),
+  // Generic Combined Terms
   ...genericTerms.map((term: string) => `portable ${term}`),
   ...genericTerms.map((term: string) => `mobile ${term}`),
   ...genericTerms.map((term: string) => `${term} hire`),
   ...genericTerms.map((term: string) => `${term} rental`),
   ...genericTerms.map((term: string) => `${term} nz`),
-  ...portableTerms.map((term: string) => `${term} hire nz`),
-  ...portableTerms.map((term: string) => `${term} rental nz`),
-  ...eventTerms.map((term: string) => `portable ${term}`),
+  // Location Combined Terms
   ...locationTerms.map((term: string) => `portable mini golf ${term}`),
+  ...locationTerms.map((term: string) => `mini putt hire ${term}`),
+  // Service Combined Terms
   ...serviceTerms.map((term: string) => `professional ${term}`),
   // Long-tail Keywords
+  // NZ-Specific Long-tail
+  'mini putt hire for corporate events nz',
+  'portable mini golf auckland region',
+  'mobile mini putt wellington area',
+  'mini golf rental palmerston north',
+  'corporate mini golf hire nz',
+  'mini putt for business events nz',
+  'portable mini golf north island',
+  'mobile mini putt south island',
+  // B2B Long-tail
+  'corporate team building mini golf',
+  'business function entertainment nz',
+  'conference activity ideas auckland',
+  'workplace event games wellington',
+  'staff party mini golf hire',
+  'corporate entertainment packages nz',
+  'business event planning activities',
+  'company social mini golf rental',
+  // Event-Specific Long-tail
   'portable mini golf for parties nz',
   'mobile mini golf for events nz',
   'mini golf rental for weddings nz',

@@ -35,6 +35,7 @@ export async function generateMetadata() {
     title: 'Book Portable Mini Golf NZ | Professional Course Hire',
     description: 'Book our professional portable mini golf courses for your event. Easy online booking, flexible hire options, and nationwide delivery. Based in Palmerston North, serving all NZ.',
     keywords: pageKeywords,
+    path: 'book',
     images: [
       {
         url: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
@@ -51,34 +52,83 @@ export async function generateMetadata() {
     ]
   })
 
+  const schemas = generateStructuredData('book', '/book')
+
   return {
     ...metadata,
     other: {
-      structured_data: generateStructuredData('book'),
-      'contact-email': 'admin@golf2go.co.nz',
-      'contact-phone': '021849931',
-      'business-hours': 'Monday to Sunday',
-      'service-area': 'Palmerston North and nationwide',
-      'response-time': '24-48 hours',
+      ...metadata.other,
+      'schema:BreadcrumbList': JSON.stringify(schemas[0]), // Breadcrumbs
+      'schema:Service': JSON.stringify(schemas[1]), // Service schema
+      'booking-info': {
+        'minimum-notice': '48 hours',
+        'availability': '7 days a week',
+        'service-hours': '7am - 9pm',
+        'setup-time': '1-2 hours',
+        'minimum-hire': '3 hours',
+        'maximum-hire': 'No limit - multi-day available',
+        'deposit-required': '20% to secure booking'
+      },
+      'pricing-info': {
+        'base-rate': 'From $190 NZD',
+        'duration': 'Per event/day',
+        'delivery': 'Location-based rates',
+        'setup-fee': 'Included in hire',
+        'payment-terms': 'Balance due 7 days before event',
+        'cancellation-policy': '48 hours notice required'
+      },
       'booking-options': [
         'Single Hole Hire',
         'Multi-Course Setup',
         'Full Event Package',
-        'Custom Configurations'
+        'Custom Configurations',
+        'Extended Hire Periods',
+        'Regular Booking Discounts'
       ],
       'hire-includes': [
         'Professional Setup',
         'Equipment Provided',
         'Delivery Service',
-        'Event Support'
+        'Event Support',
+        'Safety Briefing',
+        'Insurance Coverage',
+        'Backup Equipment'
       ],
       'payment-methods': [
         'Bank Transfer',
         'Invoice Payment',
-        'Corporate Billing'
+        'Corporate Billing',
+        'Advance Deposit',
+        'Split Payment Options'
       ],
-      'hire-duration': 'Flexible rental periods available',
-      'delivery-info': 'Nationwide delivery and setup service'
+      'service-area': {
+        'primary': 'Palmerston North',
+        'coverage': 'Nationwide',
+        'delivery-zones': [
+          'Manawatu Region',
+          'Wellington Region',
+          'Auckland Area',
+          'All Major NZ Cities'
+        ],
+        'travel-fees': 'Location-based rates apply'
+      },
+      'event-types': [
+        'Corporate Functions',
+        'Team Building',
+        'Private Parties',
+        'School Events',
+        'Community Festivals',
+        'Trade Shows',
+        'Product Launches'
+      ],
+      'support-info': {
+        'email': 'admin@golf2go.co.nz',
+        'phone': '021849931',
+        'response-time': '24-48 hours',
+        'emergency-support': 'Available during events',
+        'setup-assistance': 'Professional team provided',
+        'technical-support': 'On-call during hire period'
+      }
     }
   }
 }

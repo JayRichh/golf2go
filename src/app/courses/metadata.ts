@@ -29,6 +29,7 @@ export async function generateMetadata() {
     title: 'Portable Mini Golf Courses NZ | Professional Course Layouts',
     description: 'Explore our professional portable mini golf courses available for hire in NZ. From single hole setups to full course configurations. Premium portable mini golf solutions based in Palmerston North.',
     keywords: pageKeywords,
+    path: 'courses',
     images: [
       {
         url: '/1-Twin-Hedges-3-3m-x-75m.jpg',
@@ -57,10 +58,14 @@ export async function generateMetadata() {
     ]
   })
 
+  const schemas = generateStructuredData('courses', '/courses')
+
   return {
     ...metadata,
     other: {
-      structured_data: generateStructuredData('courses'),
+      ...metadata.other,
+      'schema:BreadcrumbList': JSON.stringify(schemas[0]), // Breadcrumbs
+      'schema:SportsActivityLocation': JSON.stringify(schemas[1]), // Course schema
       'course-types': [
         'Single Hole Setup (3.3m x 7.5m)',
         'Double Course Layout (2.8m x 9m)',

@@ -29,6 +29,7 @@ export async function generateMetadata() {
     title: 'Portable Mini Golf Gallery NZ | Course Setup Examples',
     description: 'View our portable mini golf course setups and layouts. Professional mini golf installations for events across New Zealand. Based in Palmerston North, available nationwide.',
     keywords: pageKeywords,
+    path: 'gallery',
     images: [
       {
         url: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
@@ -57,10 +58,14 @@ export async function generateMetadata() {
     ]
   })
 
+  const schemas = generateStructuredData('gallery', '/gallery')
+
   return {
     ...metadata,
     other: {
-      structured_data: generateStructuredData('gallery'),
+      ...metadata.other,
+      'schema:BreadcrumbList': JSON.stringify(schemas[0]), // Breadcrumbs
+      'schema:ImageGallery': JSON.stringify(schemas[1]), // Gallery schema
       'gallery-categories': [
         'Course Layouts',
         'Setup Examples',
@@ -79,7 +84,15 @@ export async function generateMetadata() {
         'Event Pictures',
         'Installation Gallery'
       ],
-      'setup-locations': 'Indoor and Outdoor Venues Across NZ'
+      'setup-locations': 'Indoor and Outdoor Venues Across NZ',
+      'image-count': '30+',
+      'last-updated': new Date().toISOString().split('T')[0],
+      'gallery-features': [
+        'Professional Course Photos',
+        'Event Setup Documentation',
+        'Installation Process',
+        'Venue Examples'
+      ]
     }
   }
 }

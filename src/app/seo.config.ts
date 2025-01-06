@@ -5,6 +5,7 @@ export type MetadataProps = {
   title?: string
   description?: string
   keywords?: string[]
+  path?: string
   images?: {
     url: string
     width: number
@@ -28,14 +29,46 @@ const defaultImages = [
   },
 ]
 
+// Map of valid routes to their canonical paths
+const VALID_ROUTES = new Map([
+  ['home', ''],
+  ['about', 'about'],
+  ['courses', 'courses'],
+  ['gallery', 'gallery'],
+  ['book', 'book'],
+  ['terms', 'terms']
+]);
+
+// Helper function to generate clean canonical URLs
+function generateCanonicalUrl(path?: string): string {
+  const baseUrl = 'https://golf2go.co.nz';
+  if (!path) return baseUrl;
+
+  // Extract the route identifier from the path
+  const routeId = path.toLowerCase()
+    .split('|')[0]
+    .trim()
+    .split(' ')[0];
+
+  // Get the canonical path from our valid routes map
+  const canonicalPath = VALID_ROUTES.get(routeId);
+  
+  // If it's not a valid route, return base URL
+  if (!canonicalPath) return baseUrl;
+  
+  return `${baseUrl}/${canonicalPath}`;
+}
+
 export function generateMetadata({
   title,
   description,
   keywords = [],
+  path,
   images = defaultImages,
 }: MetadataProps): Metadata {
   const finalTitle = `${title ? `${title} | ` : ''}Golf 2 Go NZ - Premium Portable Mini Golf Hire`
   const finalDescription = description || 'New Zealand\'s leading portable mini golf rental service. Professional setup and delivery nationwide for corporate events, parties, and special occasions.'
+  const canonicalUrl = generateCanonicalUrl(path || title);
 
   return {
     title: finalTitle,
@@ -47,7 +80,7 @@ export function generateMetadata({
     openGraph: {
       title: finalTitle,
       description: finalDescription,
-      url: 'https://golf2go.co.nz',
+      url: canonicalUrl,
       siteName: 'Golf 2 Go NZ',
       images,
       locale: 'en_NZ',
@@ -66,17 +99,9 @@ export function generateMetadata({
       }
     },
     alternates: {
-      canonical: `https://golf2go.co.nz${title ? ('/' + title.toLowerCase()
-        .split('|')[0]
-        .trim()
-        .split(' ')[0]
-        .toLowerCase()) : ''}`,
+      canonical: canonicalUrl,
       languages: {
-        'en-NZ': `https://golf2go.co.nz${title ? ('/' + title.toLowerCase()
-          .split('|')[0]
-          .trim()
-          .split(' ')[0]
-          .toLowerCase()) : ''}`
+        'en-NZ': canonicalUrl
       }
     },
     other: {
