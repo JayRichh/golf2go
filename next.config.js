@@ -23,7 +23,7 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/:path*//+',
+        source: '/:path*/{/}+',
         destination: '/:path*',
         permanent: true,
       },
