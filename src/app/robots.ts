@@ -7,6 +7,21 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
+        disallow: [
+          // Block everything by default
+          '/',
+          
+          // System and API routes
+          '/api/*',
+          '/_next/*',
+          '/static/*',
+          
+          // Block spam patterns
+          '/product/*',
+          '/a2f6product/*',
+          '/category/*',
+          '/feed/*'
+        ],
         allow: [
           '/',
           '/about',
@@ -14,62 +29,6 @@ export default function robots(): MetadataRoute.Robots {
           '/gallery',
           '/book',
           '/terms'
-        ],
-        disallow: [
-          // System and API routes
-          '/api/*',
-          '/_next/*',
-          '/static/*',
-          
-          // Prevent indexing of non-canonical URLs
-          '/*.json$',
-          '/*?*',
-          '/*/index',
-          '/*/page/*',
-          
-          // Prevent infinite crawling
-          '*///*',
-          '*/?*',
-          '*/&*',
-          '*/#*',
-          
-          // Prevent duplicate content
-          '*/amp/',
-          '*/print/',
-          '*/pdf/',
-          
-          // Prevent crawling of utility pages
-          '/error',
-          '/404',
-          '/500',
-          '/loading',
-          
-          // Prevent crawling of development routes
-          '/test/*',
-          '/dev/*',
-          '/preview/*',
-
-          // Block spam patterns
-          '/product/*',
-          '/a2f6product/*',
-          '/*.html',
-          '/Cat-*',
-          '/Dog-*',
-          '/category/*',
-          '/feed/*',
-          '/sitemap-*',
-          '/portable-*',
-          '/work-function-*',
-          '/reviews',
-          // Block random short directory names
-          '/[a-z]{2,4}/*',
-          // Block numbered paths
-          '/[0-9]/*',
-          // Block specific patterns
-          '/*-golf/',
-          '/*-putt/',
-          '/*-mini-golf/',
-          '/*-miniature-golf/'
         ]
       },
       {
