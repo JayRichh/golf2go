@@ -15,25 +15,6 @@ const nextConfig = {
     config.externals = [...(config.externals || []), { canvas: "canvas" }];
     return config;
   },
-  async redirects() {
-    return [
-      {
-        source: '/contact',
-        destination: '/book',
-        permanent: true,
-      },
-      {
-        source: '/:path*/{/}+',
-        destination: '/:path*',
-        permanent: true,
-      },
-      {
-        source: '/:path*/index',
-        destination: '/:path*',
-        permanent: true,
-      }
-    ];
-  },
   async rewrites() {
     return {
       beforeFiles: [
@@ -59,8 +40,45 @@ const nextConfig = {
           {
             key: 'Content-Type',
             value: 'application/xml'
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
           }
         ]
+      }
+    ];
+  },
+  async redirects() {
+    return [
+      // Canonical domain redirect
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'golf2go.co.nz'
+          }
+        ],
+        destination: 'https://www.golf2go.co.nz/:path*',
+        permanent: true
+      },
+      // Clean URLs
+      {
+        source: '/:path*/{/}+',
+        destination: '/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*/index',
+        destination: '/:path*',
+        permanent: true,
+      },
+      // Legacy redirects
+      {
+        source: '/contact',
+        destination: '/book',
+        permanent: true,
       }
     ];
   }
