@@ -47,7 +47,29 @@ export default function robots(): MetadataRoute.Robots {
           // Prevent crawling of development routes
           '/test/*',
           '/dev/*',
-          '/preview/*'
+          '/preview/*',
+
+          // Block spam patterns
+          '/product/*',
+          '/a2f6product/*',
+          '/*.html',
+          '/Cat-*',
+          '/Dog-*',
+          '/category/*',
+          '/feed/*',
+          '/sitemap-*',
+          '/portable-*',
+          '/work-function-*',
+          '/reviews',
+          // Block random short directory names
+          '/[a-z]{2,4}/*',
+          // Block numbered paths
+          '/[0-9]/*',
+          // Block specific patterns
+          '/*-golf/',
+          '/*-putt/',
+          '/*-mini-golf/',
+          '/*-miniature-golf/'
         ]
       },
       {
