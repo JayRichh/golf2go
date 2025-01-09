@@ -18,9 +18,8 @@ const spamPatterns = [
   /\/category\/\d+/i,
   /\/listing$/i,
   
-  // Feed and sitemap patterns
+  // Feed patterns
   /\/feed\//i,
-  /\/sitemap-.*\.xml$/i,
   
   // Product name patterns
   /\/(Cat|Dog)-/i,
@@ -59,7 +58,6 @@ export function middleware(request: NextRequest) {
         !path.startsWith('/api') && 
         !path.startsWith('/static') &&
         !path.startsWith('/images') &&
-        !path.endsWith('.xml') &&
         !path.endsWith('.txt') &&
         !path.endsWith('.ico') &&
         !path.endsWith('.png') &&

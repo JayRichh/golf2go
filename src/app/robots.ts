@@ -7,20 +7,11 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: [
-          '/',
-          '/about',
-          '/courses',
-          '/gallery',
-          '/book',
-          '/terms'
-        ],
+        allow: ['/'],
         disallow: [
           '/api/*',
           '/_next/*',
-          '/static/*',
-          '/product/*',
-          '/feed/*'
+          '/static/*'
         ]
       }
     ],
