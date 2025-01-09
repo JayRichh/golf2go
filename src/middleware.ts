@@ -35,6 +35,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next|static|api|.*\\.[\\w]+$).*)'
+    '/((?!_next|static|api|robots.txt|sitemap.xml|.*\\.[\\w]+$).*)'
   ]
 }
