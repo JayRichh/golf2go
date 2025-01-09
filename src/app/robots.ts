@@ -7,21 +7,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        disallow: [
-          // Block everything by default
-          '/',
-          
-          // System and API routes
-          '/api/*',
-          '/_next/*',
-          '/static/*',
-          
-          // Block spam patterns
-          '/product/*',
-          '/a2f6product/*',
-          '/category/*',
-          '/feed/*'
-        ],
         allow: [
           '/',
           '/about',
@@ -29,15 +14,14 @@ export default function robots(): MetadataRoute.Robots {
           '/gallery',
           '/book',
           '/terms'
+        ],
+        disallow: [
+          '/api/*',
+          '/_next/*',
+          '/static/*',
+          '/product/*',
+          '/feed/*'
         ]
-      },
-      {
-        userAgent: 'GPTBot',
-        disallow: ['/']
-      },
-      {
-        userAgent: 'CCBot',
-        disallow: ['/']
       }
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
