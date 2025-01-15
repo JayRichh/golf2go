@@ -33,7 +33,7 @@ const BLOCKED_PATTERNS = [
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // 1. Allow Next.js system routes and assets
+  // 1. Allow Next.js system routes, assets and special paths
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
@@ -42,22 +42,30 @@ export function middleware(request: NextRequest) {
     pathname === '/favicon.ico' ||
     pathname === '/sitemap.xml' ||
     pathname === '/robots.txt' ||
-    pathname === '/manifest.json'
+    pathname === '/manifest.json' ||
+    pathname === '/404' || // Allow direct access to 404 page
+    pathname.endsWith('.jpg') ||
+    pathname.endsWith('.jpeg') ||
+    pathname.endsWith('.png') ||
+    pathname.endsWith('.gif') ||
+    pathname.endsWith('.svg') ||
+    pathname.endsWith('.ico') ||
+    pathname.endsWith('.webp')
   ) {
     return NextResponse.next()
   }
 
   // 2. Block known malicious patterns
   if (BLOCKED_PATTERNS.some(pattern => pattern.test(pathname))) {
-    return NextResponse.redirect(new URL('/404', request.url), { status: 301 })
+    return NextResponse.rewrite(new URL('/404', request.url))
   }
 
   // 3. Handle clean routes
   const cleanPath = pathname.slice(1) // Remove leading slash
 
-  // If not a valid route, return 404
+  // If not a valid route, rewrite to 404 (don't redirect)
   if (!VALID_ROUTES.has(cleanPath)) {
-    return NextResponse.redirect(new URL('/404', request.url), { status: 301 })
+    return NextResponse.rewrite(new URL('/404', request.url))
   }
 
   return NextResponse.next()

@@ -8,6 +8,15 @@ const nextConfig = {
       rules: {},
     },
   },
+  images: {
+    domains: ['golf2go.co.nz', 'www.golf2go.co.nz'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.golf2go.co.nz'
+      }
+    ]
+  },
   async headers() {
     return [
       {
@@ -40,6 +49,24 @@ const nextConfig = {
           {
             key: 'X-XSS-Protection',
             value: '1; mode=block'
+          }
+        ]
+      },
+      {
+        source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      },
+      {
+        source: '/_next/image/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
           }
         ]
       }
