@@ -16,18 +16,36 @@ const BLOCKED_PATTERNS = [
   /\.well-known|\.env|\.git|\.svn|\.htaccess|\.htpasswd/i,
   
   // Random numeric/alphanumeric patterns
-  /\/\d{3,}u\d{3,}/i, // Matches /123u456 patterns
-  /\/[a-z]{2,6}\/\d{3,}[a-z]\d{3,}/i, // Matches /ddvm/300u28131 patterns
+  /\/\d{1,}u\d{1,}/i, // Matches any /123u456 patterns
+  /\/[a-z]{2,8}\/\d{1,}u\d{1,}/i, // Matches /ddvm/300u28131 patterns
+  /\/[a-z]{2,8}\/[0-9]+/i, // Matches random char/number combinations
   
-  // Product spam patterns
+  // Category and listing patterns
+  /\/category\/.*?\/\d+$/i, // Matches /category/41_1499_1500/1
+  /\/category\/\d+\/\d+$/i, // Matches /category/877/8
+  /\/category\/.*?\/listing$/i, // Matches category listings
+  
+  // Product and review patterns
+  /\/a2f6product\/product_id\/m\d+\/reviews$/i, // Matches product review URLs
   /-\d{5,}\.html$/i, // Matches product IDs
   /NEW-[\w-]+-\d+\.html$/i, // Matches NEW-Product-Name-12345.html
+  /[\w-]+-\d{5,}\.html$/i, // Matches Product-Name-12345.html
+  
+  // Date patterns
+  /\/20\d{2}-\d{2}-\d{2}\/\d+$/i, // Matches /2020-09-28/55
   
   // Common spam directories
   /\/(temp|tmp|updates|includes|misc|profiles|scripts|upgrade|vendor)/i,
   
   // Random PHP files
   /[a-z]{2,8}\.php$/i, // Matches short PHP filenames
+  
+  // Additional spam patterns
+  /\/tag\//i, // Matches tag URLs
+  /\/Fix-\d+\//i, // Matches Fix-#### patterns
+  /\/[a-z]{2,8}\/[0-9]+u[0-9]+\.html$/i, // Matches random/number combinations
+  /\/product\//i, // Matches product URLs
+  /\/reviews\//i // Matches review URLs
 ]
 
 export function middleware(request: NextRequest) {

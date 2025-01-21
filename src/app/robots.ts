@@ -72,14 +72,34 @@ export default function robots(): MetadataRoute.Robots {
           '/upgrade/',
           '/vendor/',
           
-          // Numeric patterns (common in spam)
+          // Numeric and random character patterns (common in spam)
           '/*/[0-9]*u[0-9]*',
-          '/ddvm/*',
-          '/udiv/*',
+          '/[a-z]{2,6}/[0-9]+u[0-9]+',
+          '/[a-z]{3,8}/*',
           
-          // Product spam patterns
+          // Category and listing patterns
+          '/category/*',
+          '/*/listing',
+          
+          // Product and review patterns
+          '/a2f6product/*',
+          '/*-[0-9][0-9][0-9][0-9][0-9][0-9].html',
           '/*-[0-9][0-9][0-9][0-9][0-9].html',
+          '/product/*',
+          '/reviews/*',
+          
+          // Date patterns
+          '/20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]/*',
+          
+          // Random product name patterns
+          '/*.html',
+          '/tag/*',
+          '/Fix-*',
           '/NEW-*',
+          
+          // Additional spam patterns
+          '/*/reviews',
+          '/product_id/*',
         ],
         crawlDelay: 10
       }
