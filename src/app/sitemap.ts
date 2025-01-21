@@ -106,8 +106,9 @@ function formatSitemapDate(date: Date | string): string {
   return d.toISOString();
 }
 
-// Helper function to format priority to 1 decimal place
+// Helper function to format priority to 1 decimal place string then back to number
 function formatSitemapPriority(priority: number): number {
+  // Convert to string with 1 decimal place then back to number to preserve the .0
   return Number(Math.max(0, Math.min(1, priority)).toFixed(1));
 }
 
@@ -118,7 +119,8 @@ function processRoutes(routes: Route[]): MetadataRoute.Sitemap {
       url: `${baseUrl}${route.path}`,
       lastModified: formatSitemapDate(route.lastModified || new Date()),
       changeFrequency: route.changeFrequency || 'weekly',
-      priority: formatSitemapPriority(route.priority || 0.5)
+      priority: formatSitemapPriority(route.priority || 0.5),
+      images: []
     };
 
     // Add images if present - Next.js expects an array of image URLs
