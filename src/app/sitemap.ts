@@ -114,23 +114,19 @@ function formatSitemapPriority(priority: number): number {
 // Process routes with proper formatting
 function processRoutes(routes: Route[]): MetadataRoute.Sitemap {
   return routes.map(route => {
-    const entry: any = {
+    const sitemapEntry: MetadataRoute.Sitemap[number] = {
       url: `${baseUrl}${route.path}`,
       lastModified: formatSitemapDate(route.lastModified || new Date()),
       changeFrequency: route.changeFrequency || 'weekly',
       priority: formatSitemapPriority(route.priority || 0.5)
     };
 
-    // Add images if present
+    // Add images if present - Next.js expects an array of image URLs
     if (route.images && route.images.length > 0) {
-      entry.images = route.images.map(img => ({
-        url: img.url,
-        title: img.title,
-        caption: img.caption
-      }));
+      sitemapEntry.images = route.images.map(img => img.url.toString());
     }
 
-    return entry;
+    return sitemapEntry;
   });
 }
 
