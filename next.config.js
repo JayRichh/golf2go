@@ -69,6 +69,23 @@ const nextConfig = {
             value: 'public, max-age=31536000, immutable'
           }
         ]
+      },
+      {
+        source: '/:path*.pdf',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/pdf'
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'ALLOWALL'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000'
+          }
+        ]
       }
     ];
   }

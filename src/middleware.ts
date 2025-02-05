@@ -51,6 +51,11 @@ const BLOCKED_PATTERNS = [
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // Handle contact route redirect
+  if (pathname === '/contact') {
+    return NextResponse.redirect('https://www.golf2go.co.nz/book')
+  }
+
   // 1. Allow Next.js system routes, assets and special paths
   if (
     pathname.startsWith('/_next') ||
@@ -68,7 +73,8 @@ export function middleware(request: NextRequest) {
     pathname.endsWith('.gif') ||
     pathname.endsWith('.svg') ||
     pathname.endsWith('.ico') ||
-    pathname.endsWith('.webp')
+    pathname.endsWith('.webp') ||
+    pathname.endsWith('.pdf')
   ) {
     return NextResponse.next()
   }
