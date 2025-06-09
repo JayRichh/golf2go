@@ -16,29 +16,29 @@ const publicRoutes = new Set([
   "/sitemap.xml",
 ]);
 
-const bypass = ["/_next", "/api", "/static", "/images", "/assets"];
+const bypassPrefixes = ["/_next", "/api", "/static", "/images", "/assets"];
 
-const toRegex = (p: string) =>
-  new RegExp("^" + p.replace(/\*/g, ".*").replace(/\$/g, "") + "$", "i");
+const toRegex = (pattern: string) =>
+  new RegExp("^" + pattern.replace(/\*/g, ".*").replace(/\$/g, "") + "$", "i");
 
-const spam = SPAM_DISALLOWS.map(toRegex);
+const spamPatterns = SPAM_DISALLOWS.map(toRegex);
 
 export function middleware(req: NextRequest) {
-  const path = req.nextUrl.pathname;
+  const { pathname } = req.nextUrl;
 
-  if (path === "/contact") {
+  if (pathname === "/contact") {
     return NextResponse.redirect("https://www.golf2go.co.nz/book");
   }
 
-  if (bypass.some((p) => path.startsWith(p))) {
+  if (bypassPrefixes.some((prefix) => pathname.startsWith(prefix))) {
     return NextResponse.next();
   }
 
-  if (spam.some((rx) => rx.test(path))) {
+  if (spamPatterns.some((rx) => rx.test(pathname))) {
     return NextResponse.rewrite(new URL("/404", req.url));
   }
 
-  if (!publicRoutes.has(path)) {
+  if (!publicRoutes.has(pathname)) {
     return NextResponse.rewrite(new URL("/404", req.url));
   }
 
@@ -47,6 +47,6 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|images).*)",
   ],
 };
