@@ -117,13 +117,13 @@ export const generateBookingSchema = (baseUrl: string) => ({
   ]
 });
 
-export const generateFormSchema = () => ({
+export const generateFormSchema = (baseUrl: string) => ({
   "@context": "https://schema.org",
   "@type": "WebForm",
   "name": "Corporate Entertainment Booking Form",
-  "url": "https://golf2go.co.nz/book",
+  "url": `${baseUrl}/book`,
   "encodingType": "application/x-www-form-urlencoded",
-  "actionableFeedbackPolicy": "https://golf2go.co.nz/terms",
+  "actionableFeedbackPolicy": `${baseUrl}/terms`,
   "availableLanguage": {
     "@type": "Language",
     "name": "English",

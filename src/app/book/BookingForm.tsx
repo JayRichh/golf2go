@@ -103,7 +103,6 @@ const calculatePrice = (holes: number, days: number) => {
   if (days <= 7) {
     return pricingTable[holes as keyof typeof pricingTable]?.[days as keyof typeof pricingTable[1]] || 0;
   }
-  const basePrice = basePrices[holes as keyof typeof basePrices] || basePrices[1];
   const weeks = Math.floor(days / 7);
   const remainingDays = days % 7;
   let price = weeks * pricingTable[holes as keyof typeof pricingTable][7];
@@ -113,9 +112,9 @@ const calculatePrice = (holes: number, days: number) => {
   return price;
 };
 
-const baseUrl = "https://golf2go.co.nz";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://golf2go.co.nz";
 const bookingSchemaData = generateBookingSchema(baseUrl);
-const formSchemaData = generateFormSchema();
+const formSchemaData = generateFormSchema(baseUrl);
 
 export default function BookingForm() {
   // Add schema.org markup
@@ -135,7 +134,7 @@ export default function BookingForm() {
   const [sameAsPostal, setSameAsPostal] = useState(false);
   const [sameAsDelivery, setSameAsDelivery] = useState(false);
   const [activeSection, setActiveSection] = useState("contact");
-  const [completedSections, setCompletedSections] = useState<string[]>([]);
+  const [_completedSections, setCompletedSections] = useState<string[]>([]);
   const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
   const { register, handleSubmit, formState: { errors, isValid }, watch, setValue, trigger } = useForm<FormData>({
@@ -425,8 +424,8 @@ export default function BookingForm() {
                     <Text variant="h3" className="text-primary" itemProp="price">${price.toFixed(2)}</Text>
                     <Text variant="sm" className="ml-2 text-foreground-secondary">NZD excl. GST</Text>
                     <meta itemProp="availability" content="https://schema.org/InStock" />
-                    <meta itemProp="validFrom" content={new Date().toISOString()} />
-                    <meta itemProp="priceValidUntil" content={new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString()} />
+                    <meta itemProp="validFrom" content="2025-01-01T00:00:00.000Z" />
+                    <meta itemProp="priceValidUntil" content="2025-12-31T23:59:59.999Z" />
                   </div>
                 </div>
                 <div className="p-6 space-y-2">

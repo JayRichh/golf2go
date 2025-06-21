@@ -11,9 +11,11 @@ interface ImagePreviewProps {
   src: string;
   alt: string;
   title: string;
+  loading?: "lazy" | "eager";
+  priority?: boolean;
 }
 
-export function ImagePreview({ src, alt, title }: ImagePreviewProps) {
+export function ImagePreview({ src, alt, title, loading = "lazy", priority = false }: ImagePreviewProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -28,6 +30,8 @@ export function ImagePreview({ src, alt, title }: ImagePreviewProps) {
           fill
           className="object-cover object-center transition will-change-transform group-hover:scale-105"
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+          loading={loading}
+          priority={priority}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <div className="absolute inset-0 flex items-end p-6">

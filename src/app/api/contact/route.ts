@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { sendEmail } from "~/lib/email";
 
-const formSchema = z.object({
+// Schema for complex form (original)
+const complexFormSchema = z.object({
   companyName: z.string().optional(),
   contactPerson: z.string().min(2, "Contact person name is required"),
   landlinePhone: z.string().optional(),
@@ -32,6 +33,22 @@ const formSchema = z.object({
   recaptchaToken: z.string().min(1, "reCAPTCHA verification failed"),
 });
 
+// Schema for simplified form (new)
+const simpleFormSchema = z.object({
+  contactPerson: z.string().min(2, "Contact person name is required"),
+  mobilePhone: z.string().min(8, "Mobile phone is required"),
+  email: z.string().email("Invalid email address"),
+  companyName: z.string().optional(),
+  eventDate: z.string().min(1, "Event date is required"),
+  eventLocation: z.string().min(1, "Event location is required"),
+  numberOfParticipants: z.string().min(1, "Number of participants is required"),
+  numberOfHoles: z.string().min(1, "Number of holes is required"),
+  numberOfDays: z.string().min(1, "Number of days is required"),
+  additionalRequirements: z.string().optional(),
+  acceptTerms: z.boolean().refine(val => val === true, "You must accept the terms and conditions"),
+  recaptchaToken: z.string().min(1, "reCAPTCHA verification failed"),
+});
+
 export async function POST(request: NextRequest) {
   console.log("Starting booking request process...");
 
@@ -47,9 +64,25 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     console.log("Received request data:", body);
 
-    // Validate form data
-    const validatedData = formSchema.parse(body);
-    console.log("Data validation passed");
+    // Determine form type and validate accordingly
+    let validatedData;
+    const isSimpleForm = 'eventLocation' in body || 'numberOfParticipants' in body;
+    
+    try {
+      if (isSimpleForm) {
+        validatedData = simpleFormSchema.parse(body);
+        console.log("Simple form validation passed");
+      } else {
+        validatedData = complexFormSchema.parse(body);
+        console.log("Complex form validation passed");
+      }
+    } catch (error) {
+      console.error("Form validation failed:", error);
+      return NextResponse.json(
+        { error: "Invalid form data", details: error instanceof z.ZodError ? error.errors : String(error) },
+        { status: 400 }
+      );
+    }
 
     // Verify reCAPTCHA
     const recaptchaResponse = await fetch(
@@ -75,11 +108,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Remove recaptchaToken before sending email
-    const { recaptchaToken, ...formData } = validatedData;
+    // Remove recaptchaToken and acceptTerms before sending email
+    const { recaptchaToken, ...emailData } = validatedData;
+    
+    // Remove acceptTerms if it exists (simple form only)
+    const formData = 'acceptTerms' in emailData ?
+      (({ acceptTerms, ...rest }) => rest)(emailData as any) :
+      emailData;
 
     // Send email using the consolidated email service
-    await sendEmail(formData);
+    await sendEmail(formData as any);
 
     console.log("Email sent successfully");
     return NextResponse.json(

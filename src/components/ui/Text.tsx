@@ -78,7 +78,7 @@ const gradientClasses: Record<TextGradient, string> = {
   primary: "bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent",
 };
 
-export const Text = forwardRef<HTMLDivElement, TextProps>(
+export const Text = forwardRef<HTMLElement, TextProps>(
   (
     {
       variant = "body",
@@ -98,8 +98,31 @@ export const Text = forwardRef<HTMLDivElement, TextProps>(
     const defaultWeight = variant.startsWith("h") ? "bold" : "normal";
     const finalWeight = weight || defaultWeight;
 
+    // Use semantic HTML elements based on variant
+    const getElementType = () => {
+      switch (variant) {
+        case "h1": return "h1";
+        case "h2": return "h2";
+        case "h3": return "h3";
+        case "h4": return "h4";
+        case "body-lg":
+        case "body":
+        case "body-sm":
+        case "base":
+        case "lg":
+        case "xl":
+        case "md": return "p";
+        case "caption":
+        case "xs":
+        case "sm": return "span";
+        default: return "div";
+      }
+    };
+
+    const Element = getElementType() as any;
+
     return (
-      <div
+      <Element
         ref={ref}
         className={cn(
           variantClasses[variant],
@@ -119,7 +142,7 @@ export const Text = forwardRef<HTMLDivElement, TextProps>(
           <span className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-25 blur-sm" />
         )}
         <span className="relative">{children}</span>
-      </div>
+      </Element>
     );
   }
 );

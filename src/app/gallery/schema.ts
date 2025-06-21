@@ -107,5 +107,5 @@ export const generateImageSchema = (baseUrl: string, image: any) => ({
     "name": "Golf 2 Go NZ"
   },
   "copyrightYear": "2025",
-  "license": "https://golf2go.co.nz/terms"
+  "license": `${baseUrl}/terms`
 });

@@ -5,7 +5,7 @@ import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 
-import BookingForm from "./BookingForm";
+import SimpleBookingForm from "./SimpleBookingForm";
 import { HelpSection } from "./components/HelpSection";
 import { QuickTips } from "./components/QuickTips";
 
@@ -61,7 +61,7 @@ export default function BookPage() {
               <QuickTips />
 
               {/* Booking Form */}
-              <BookingForm />
+              <SimpleBookingForm />
             </div>
 
             {/* Help Section - Sidebar */}

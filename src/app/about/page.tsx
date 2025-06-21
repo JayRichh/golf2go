@@ -11,7 +11,7 @@ import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import { generateAboutSchema, generateValuesSchema } from './schema';
 
-const baseUrl = 'https://golf2go.co.nz';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
 
 const values = [
   {
@@ -98,7 +98,6 @@ export default function AboutPage() {
                 fill
                 className="h-full w-full object-cover"
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                priority
               />
             </div>
             <div className="flex flex-col justify-center">

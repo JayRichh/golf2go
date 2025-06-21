@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const VALID_ROUTES = new Set(['', 'about', 'courses', 'gallery', 'book', 'terms'])
+const VALID_ROUTES = new Set(['', 'about', 'courses', 'gallery', 'book', 'terms', 'contact'])
 
 const BLOCKED_PATTERNS = [
   /\.(php|html|asp|aspx|jsp|cgi|pl|exe|dll|jar|json|sql|zip|tar|gz|log|bak)$/i,
@@ -20,8 +20,6 @@ const notFound = () => new Response(null, { status: 404, headers: { 'X-Robots-Ta
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-
-  if (pathname === '/contact') return NextResponse.redirect('https://www.golf2go.co.nz/book')
 
   if (
     pathname.startsWith('/_next') || pathname.startsWith('/api') ||

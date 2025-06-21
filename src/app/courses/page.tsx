@@ -1,17 +1,18 @@
-'use client';
-
-import { useEffect } from 'react';
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from 'next';
 
 import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import { generateCoursesSchema, generateCourseTypesSchema, generateServiceSchema } from './schema';
+import { metadata } from './metadata';
 
-const baseUrl = 'https://golf2go.co.nz';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
+
+export { metadata };
 
 interface Course {
   title: string;
@@ -106,23 +107,21 @@ const courseTypes: CourseType[] = [
 ];
 
 export default function CoursesPage() {
-  // Add schema.org markup
-  useEffect(() => {
-    const coursesSchema = generateCoursesSchema(baseUrl);
-    const courseTypesSchema = generateCourseTypesSchema(baseUrl);
-    const serviceSchema = generateServiceSchema(baseUrl);
-    
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify([coursesSchema, courseTypesSchema, serviceSchema]);
-    document.head.appendChild(script);
-    
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  // Generate schema markup for server-side rendering
+  const coursesSchema = generateCoursesSchema(baseUrl);
+  const courseTypesSchema = generateCourseTypesSchema(baseUrl);
+  const serviceSchema = generateServiceSchema(baseUrl);
 
   return (
+    <>
+      {/* Schema markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([coursesSchema, courseTypesSchema, serviceSchema])
+        }}
+      />
+      
     <div className="overflow-x-hidden">
       {/* Header */}
       <section className="relative bg-primary">
@@ -146,14 +145,14 @@ export default function CoursesPage() {
                   className="tracking-tight text-primary-foreground"
                   itemProp="name"
                 >
-                  Professional Entertainment Solutions
+                  Portable Mini Golf Courses & Mini Putt Solutions
                 </Text>
-                <Text 
-                  variant="xl" 
+                <Text
+                  variant="xl"
                   className="mt-6 text-primary-foreground/90"
                   itemProp="description"
                 >
-                  Discover our premium range of corporate entertainment packages and professional event solutions
+                  Professional portable mini golf course hire and mini putt setups featuring indoor mini golf options for corporate events across New Zealand
                 </Text>
               </div>
             </Container>
@@ -166,13 +165,13 @@ export default function CoursesPage() {
         <Container size="xl">
           <div className="text-center mb-16">
             <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
-              Premium Entertainment Packages
+              Portable Mini Golf Course Packages
             </Text>
             <Text
               variant="lg"
               className="mx-auto mt-4 max-w-2xl text-center text-foreground-secondary"
-            >
-              Professional solutions tailored for corporate events and business functions
+              >
+              Professional portable mini golf hire and mini putt course solutions for indoor and outdoor corporate events
             </Text>
           </div>
           <div className="grid gap-8 lg:grid-cols-2">
@@ -192,7 +191,6 @@ export default function CoursesPage() {
                     fill
                     className="h-full w-full object-cover transition duration-500 will-change-transform group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
-                    priority
                     itemProp="image"
                   />
                 </div>
@@ -230,13 +228,13 @@ export default function CoursesPage() {
         <Container size="xl">
           <div className="text-center mb-16">
             <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
-              Premium Course Selection
+              Mini Putt Course Collection
             </Text>
             <Text
               variant="lg"
               className="mx-auto mt-4 max-w-2xl text-center text-foreground-secondary"
             >
-              Professional course designs for corporate events and business functions
+              Portable mini golf course designs perfect for indoor mini golf setups and outdoor mini putt events
             </Text>
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -257,7 +255,6 @@ export default function CoursesPage() {
                     fill
                     className="h-full w-full object-cover transition duration-500 will-change-transform group-hover:scale-105"
                     sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="absolute inset-0 flex items-end p-6">
@@ -338,7 +335,8 @@ export default function CoursesPage() {
             </Text>
           </div>
         </Container>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }

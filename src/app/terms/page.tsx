@@ -9,12 +9,12 @@ import { GradientBackground } from '~/components/ui/GradientBackground';
 import { Text } from '~/components/ui/Text';
 import { generateTermsSchema, generatePdfSchema } from './schema';
 
-const baseUrl = 'https://golf2go.co.nz';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
 const termsSchema = generateTermsSchema(baseUrl);
 const pdfSchema = generatePdfSchema(baseUrl);
 
 export default function Terms() {
-  const [scale, setScale] = useState(100);
+  const [scale, _setScale] = useState(100);
 
   // Add schema.org markup
   useEffect(() => {

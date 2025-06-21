@@ -1,6 +1,4 @@
-import { MetadataRoute } from 'next'
-
-const baseUrl = 'https://golf2go.co.nz'
+const _baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz'
 
 // NZ-Specific Terms
 const nzTerms: string[] = [

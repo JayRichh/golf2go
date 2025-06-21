@@ -12,7 +12,7 @@ export type MetadataProps = {
 
 /* ------------------------------------------------------------------ */
 
-const BASE_URL = 'https://golf2go.co.nz'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz'
 
 const defaultImages = [
   {
@@ -31,6 +31,23 @@ const defaultImages = [
 
 const VALID_PATHS = new Set(['', 'about', 'courses', 'gallery', 'book', 'terms'])
 
+// Priority SEO Keywords from Search Console (0-click opportunities)
+const priorityKeywords = [
+  'mini putt',
+  'indoor mini golf palmerston north',
+  'new plymouth mini golf',
+  'mini golf wellington',
+  'portable mini golf hire',
+  'mini putt hire',
+  'portable mini putt',
+  'indoor mini golf wellington',
+  'mini golf palmerston north',
+  'mini golf new plymouth',
+  'portable mini golf wellington',
+  'portable mini golf taranaki',
+  'mini golf taranaki'
+]
+
 const canonical = (p?: string) => {
   if (!p) return BASE_URL
   const clean = p.replace(/^\/+/, '').toLowerCase()
@@ -46,16 +63,16 @@ export function generateMetadata({
   path,
   images = defaultImages
 }: MetadataProps): Metadata {
-  const fullTitle = `${title ? `${title} | ` : ''}Golf 2 Go NZ - Premium Portable Mini Golf Hire`
+  const fullTitle = `${title ? `${title} | ` : ''}Golf 2 Go NZ - Mini Putt & Portable Mini Golf Hire`
   const fullDesc =
     description ??
-    "New Zealand's leading portable mini golf rental service. Professional setup and delivery nationwide for corporate events, parties, and special occasions."
+    "New Zealand's leading portable mini golf hire and mini putt service. Professional indoor mini golf Palmerston North, mini golf Wellington, New Plymouth mini golf. Nationwide portable mini golf hire."
   const url = canonical(path)
 
   return {
     title: fullTitle,
     description: fullDesc,
-    keywords: [...new Set([...keywords, ...seoKeywords])].join(', '),
+    keywords: [...new Set([...priorityKeywords, ...keywords, ...seoKeywords])].join(', '),
     authors: [{ name: 'Golf 2 Go NZ' }],
     creator: 'Golf 2 Go NZ',
     publisher: 'Golf 2 Go NZ',

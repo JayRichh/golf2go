@@ -1,15 +1,16 @@
-'use client';
-
-import { useEffect } from 'react';
 import Image from "next/image";
+import { Metadata } from 'next';
 
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { ImagePreview } from "~/components/ui/ImagePreview";
 import { Text } from "~/components/ui/Text";
 import { generateGallerySchema, generateImageSchema } from './schema';
+import { metadata } from './metadata';
 
-const baseUrl = 'https://golf2go.co.nz';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
+
+export { metadata };
 
 interface GalleryImage {
   id: string;
@@ -264,25 +265,23 @@ const galleryImages: GalleryImage[] = [
 ];
 
 export default function GalleryPage() {
-  // Add schema.org markup
-  useEffect(() => {
-    const gallerySchema = generateGallerySchema(baseUrl, galleryImages);
-    const imageSchemas = galleryImages.map(img => generateImageSchema(baseUrl, img));
-    
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify([gallerySchema, ...imageSchemas]);
-    document.head.appendChild(script);
-    
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  // Generate schema markup for server-side rendering
+  const gallerySchema = generateGallerySchema(baseUrl, galleryImages);
+  const imageSchemas = galleryImages.map(img => generateImageSchema(baseUrl, img));
 
   return (
-    <div className="overflow-x-hidden">
-      {/* Header */}
-      <section className="relative bg-primary">
+    <>
+      {/* Schema markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([gallerySchema, ...imageSchemas])
+        }}
+      />
+      
+        <div className="overflow-x-hidden">
+        {/* Header */}
+        <section className="relative bg-primary">
         <GradientBackground variant="glow">
           <div className="relative isolate overflow-hidden py-32 md:py-40">
             <div className="absolute inset-0 -z-10 w-full">
@@ -316,26 +315,28 @@ export default function GalleryPage() {
             </Container>
           </div>
         </GradientBackground>
-      </section>
+        </section>
 
-      {/* Gallery Grid */}
-      <section className="py-16 md:py-24" itemScope itemType="https://schema.org/ImageGallery">
+        {/* Gallery Grid */}
+        <section className="py-16 md:py-24" itemScope itemType="https://schema.org/ImageGallery">
         <Container size="xl">
           <div className="grid grid-cols-1 gap-4 sm:gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {galleryImages.map((image) => (
-              <div 
-                key={image.id} 
+            {galleryImages.map((image, index) => (
+              <div
+                key={image.id}
                 className="w-full"
-                itemScope 
+                itemScope
                 itemType="https://schema.org/ImageObject"
               >
                 <meta itemProp="name" content={image.title} />
                 <meta itemProp="description" content={image.alt} />
                 <meta itemProp="contentUrl" content={`${baseUrl}${image.src}`} />
-                <ImagePreview 
-                  src={image.src} 
-                  alt={image.alt} 
+                <ImagePreview
+                  src={image.src}
+                  alt={image.alt}
                   title={image.title}
+                  loading={index < 2 ? "eager" : "lazy"}
+                  priority={index < 1}
                 />
                 <div className="mt-2 text-center">
                   <Text variant="sm" className="text-foreground-secondary">
@@ -351,10 +352,10 @@ export default function GalleryPage() {
               </div>
             ))}
           </div>
-        </Container>
+          </Container>
 
-        {/* SEO Text Section */}
-        <Container size="xl" className="mt-16">
+          {/* SEO Text Section */}
+          <Container size="xl" className="mt-16">
           <div className="mx-auto max-w-3xl text-center space-y-4">
             <Text variant="lg" className="text-foreground-secondary">
               Discover our premium corporate entertainment solutions showcasing successful implementations across New Zealand's leading businesses and events.
@@ -366,8 +367,9 @@ export default function GalleryPage() {
               Each setup is tailored to deliver premium experiences for corporate events, professional functions, and business entertainment needs.
             </Text>
           </div>
-        </Container>
-      </section>
-    </div>
+          </Container>
+        </section>
+      </div>
+    </>
   );
 }

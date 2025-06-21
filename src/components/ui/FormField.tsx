@@ -10,6 +10,8 @@ export interface FormFieldProps {
   error?: string;
   options?: { value: string; label: string }[];
   itemProp?: string;
+  placeholder?: string;
+  rows?: number;
 }
 
 export function FormField({
@@ -21,10 +23,13 @@ export function FormField({
   error,
   options,
   itemProp,
+  placeholder,
+  rows = 4,
 }: FormFieldProps) {
   const inputProps = {
     ...register(name),
     ...(itemProp ? { 'itemProp': itemProp } : {}),
+    ...(placeholder ? { placeholder } : {}),
     className: `form-input w-full rounded-lg border bg-background px-4 py-2 text-foreground placeholder:text-foreground-secondary/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
       error ? "border-error" : "border-border"
     }`,
@@ -38,7 +43,7 @@ export function FormField({
       </Text>
 
       {type === "textarea" ? (
-        <textarea {...inputProps} rows={4} />
+        <textarea {...inputProps} rows={rows} />
       ) : type === "select" ? (
         <select {...inputProps}>
           <option value="">Select...</option>
