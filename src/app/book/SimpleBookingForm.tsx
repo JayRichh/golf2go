@@ -5,13 +5,12 @@ import { generateBookingSchema, generateFormSchema } from './schema';
 import * as z from "zod";
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { Container } from "~/components/ui/Container";
 import { FormCheckbox } from "~/components/ui/FormCheckbox";
 import { FormField } from "~/components/ui/FormField";
 import { Text } from "~/components/ui/Text";
 
-// Simplified validation schema with only essential fields
+// Simplified validation schema - NO reCAPTCHA
 const validationSchema = z.object({
   contactPerson: z.string().min(1, "Contact person is required"),
   mobilePhone: z.string().regex(/^[0-9+\s()-]{8,}$/, "Please enter a valid phone number"),
@@ -24,18 +23,11 @@ const validationSchema = z.object({
   numberOfDays: z.string().min(1, "Number of days is required"),
   additionalRequirements: z.string().optional(),
   acceptTerms: z.boolean().refine(val => val === true, "You must accept the terms and conditions"),
-  recaptchaToken: z.string().min(1, "reCAPTCHA is required"),
+  // Hidden honeypot field - bots will fill this
+  _honeypot: z.string().optional(),
 });
 
 type SimpleFormData = z.infer<typeof validationSchema>;
-
-const eventTypes = [
-  { value: "corporate", label: "Corporate Event" },
-  { value: "birthday", label: "Birthday Party" },
-  { value: "school", label: "School Event" },
-  { value: "wedding", label: "Wedding" },
-  { value: "other", label: "Other" },
-];
 
 const pricingTable = {
   1: {1:190.00,2:304.00,3:408.50,4:503.50,5:589.00,6:665.00,7:731.50},
@@ -64,10 +56,8 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://golf2go.co.nz";
 const bookingSchemaData = generateBookingSchema(baseUrl);
 const formSchemaData = generateFormSchema(baseUrl);
 
-// Create inner form component that uses the reCAPTCHA hook
-function SimpleBookingFormInner() {
-  const { executeRecaptcha } = useGoogleReCaptcha();
-  
+
+export default function SimpleBookingForm() {
   // Add schema.org markup
   useEffect(() => {
     const script = document.createElement('script');
@@ -87,29 +77,12 @@ function SimpleBookingFormInner() {
     resolver: zodResolver(validationSchema),
     mode: "onChange",
     defaultValues: {
-      recaptchaToken: "",
-      acceptTerms: false
+      acceptTerms: false,
+      _honeypot: ""
     }
   });
 
   const formData = watch();
-
-  // Generate reCAPTCHA token when component mounts and executeRecaptcha is available
-  useEffect(() => {
-    if (executeRecaptcha) {
-      const generateToken = async () => {
-        try {
-          const token = await executeRecaptcha("submit");
-          setValue("recaptchaToken", token, { shouldValidate: true });
-        } catch (error) {
-          console.error("reCAPTCHA error:", error);
-          setError("Failed to verify reCAPTCHA. Please refresh and try again.");
-        }
-      };
-      
-      generateToken();
-    }
-  }, [executeRecaptcha, setValue]);
 
   const price = useMemo(() => {
     const days = Math.max(parseInt(formData.numberOfDays) || 1, 1);
@@ -122,14 +95,18 @@ function SimpleBookingFormInner() {
     setError(null);
 
     try {
-      if (!data.recaptchaToken) {
-        throw new Error("reCAPTCHA verification failed. Please refresh and try again.");
+      // Simple bot detection - check honeypot
+      if (data._honeypot && data._honeypot.trim() !== '') {
+        throw new Error("Security check failed. Please try again.");
       }
+
+      // Remove honeypot from submission data
+      const { _honeypot, ...submitData } = data;
 
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(data),
+        body: JSON.stringify(submitData),
       });
 
       const result = await response.json();
@@ -147,240 +124,248 @@ function SimpleBookingFormInner() {
 
   return (
     <form
-        onSubmit={handleSubmit(onSubmit)} 
-        className="space-y-8" 
-        noValidate
-        itemScope 
-        itemType="https://schema.org/ReservationForm"
-      >
-        <meta itemProp="name" content="Corporate Entertainment Booking Form" />
-        <meta itemProp="description" content="Book premium corporate entertainment and event solutions" />
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-8"
+      noValidate
+      itemScope
+      itemType="https://schema.org/ReservationForm"
+    >
+      <meta itemProp="name" content="Corporate Entertainment Booking Form" />
+      <meta itemProp="description" content="Book premium corporate entertainment and event solutions" />
+      
+      {/* Honeypot field - hidden from users */}
+      <input
+        {...register("_honeypot")}
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          width: '1px',
+          height: '1px',
+          overflow: 'hidden',
+          opacity: 0
+        }}
+        aria-hidden="true"
+      />
+      
+      {success && (
+        <Container glass className="border-success/20 bg-success/10">
+          <div className="flex items-center gap-3">
+            <div>
+              <Text variant="base" className="font-medium text-success">Booking request sent successfully!</Text>
+              <Text variant="sm" className="text-success">We'll get back to you soon with confirmation details.</Text>
+            </div>
+          </div>
+        </Container>
+      )}
+
+      {error && (
+        <Container glass className="border-error/20 bg-error/10">
+          <div className="flex items-center gap-3">
+            <div>
+              <Text variant="base" className="font-medium text-error">Something went wrong</Text>
+              <Text variant="sm" className="text-error">{error}</Text>
+            </div>
+          </div>
+        </Container>
+      )}
+
+      {/* Contact Information Section */}
+      <Container glass className="p-6">
+        <div className="mb-6">
+          <Text variant="h3" className="text-foreground mb-2">Contact Information</Text>
+          <Text variant="sm" className="text-foreground-secondary">Your details for booking confirmation</Text>
+        </div>
         
-        {success && (
-          <Container glass className="border-success/20 bg-success/10">
+        <div className="grid gap-6 lg:grid-cols-2" itemScope itemType="https://schema.org/Organization">
+          <FormField 
+            name="contactPerson" 
+            label="Contact Person" 
+            register={register} 
+            required 
+            error={errors.contactPerson?.message}
+            placeholder="Full name"
+          />
+          <FormField 
+            name="mobilePhone" 
+            label="Mobile Phone" 
+            type="tel" 
+            register={register} 
+            required 
+            error={errors.mobilePhone?.message}
+            placeholder="021 123 4567"
+          />
+          <FormField 
+            name="email" 
+            label="Email Address" 
+            type="email" 
+            register={register} 
+            required 
+            error={errors.email?.message}
+            placeholder="your@email.com"
+          />
+          <FormField 
+            name="companyName" 
+            label="Company Name" 
+            register={register} 
+            error={errors.companyName?.message}
+            placeholder="Optional"
+            itemProp="name"
+          />
+        </div>
+      </Container>
+
+      {/* Event Details Section */}
+      <Container glass className="p-6">
+        <div className="mb-6">
+          <Text variant="h3" className="text-foreground mb-2">Event Details</Text>
+          <Text variant="sm" className="text-foreground-secondary">Tell us about your event requirements</Text>
+        </div>
+        
+        <div className="grid gap-6 lg:grid-cols-2">
+          <FormField 
+            name="eventDate" 
+            label="Event Date" 
+            type="date" 
+            register={register} 
+            required 
+            error={errors.eventDate?.message}
+          />
+          <FormField 
+            name="eventLocation" 
+            label="Event Location/Address" 
+            register={register} 
+            required 
+            error={errors.eventLocation?.message}
+            placeholder="Full address where event will be held"
+          />
+          <FormField 
+            name="numberOfParticipants" 
+            label="Number of Participants" 
+            type="number" 
+            register={register} 
+            required 
+            error={errors.numberOfParticipants?.message}
+            placeholder="Approx. number of people"
+          />
+          <FormField 
+            name="numberOfHoles" 
+            label="Number of Holes" 
+            type="select" 
+            register={register} 
+            required 
+            error={errors.numberOfHoles?.message}
+            options={[
+              { value: "", label: "Select number of holes" },
+              { value: "1", label: "1 Hole" },
+              { value: "2", label: "2 Holes" },
+              { value: "3", label: "3 Holes" },
+              { value: "4", label: "4 Holes" },
+              { value: "5", label: "5 Holes" },
+              { value: "6", label: "6 Holes" },
+              { value: "9", label: "9 Holes" },
+            ]}
+          />
+          <FormField 
+            name="numberOfDays" 
+            label="Number of Days" 
+            type="number" 
+            register={register} 
+            required 
+            error={errors.numberOfDays?.message}
+            placeholder="How many days needed"
+          />
+        </div>
+        
+        <div className="mt-6">
+          <FormField 
+            name="additionalRequirements" 
+            label="Additional Requirements" 
+            type="textarea" 
+            register={register} 
+            error={errors.additionalRequirements?.message}
+            placeholder="Any special requests, setup requirements, or additional information..."
+            rows={4}
+          />
+        </div>
+      </Container>
+
+      {/* Price Estimate */}
+      {formData.numberOfHoles && formData.numberOfDays && (
+        <Container glass className="p-6" itemScope itemType="https://schema.org/Offer">
+          <meta itemProp="priceCurrency" content="NZD" />
+          <meta itemProp="availability" content="https://schema.org/InStock" />
+          <meta itemProp="validFrom" content="2025-01-01T00:00:00.000Z" />
+          <meta itemProp="priceValidUntil" content="2025-12-31T23:59:59.999Z" />
+          
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/50 bg-background-secondary/30 p-4 rounded-t-lg">
             <div className="flex items-center gap-3">
-              <div>
-                <Text variant="base" className="font-medium text-success">Booking request sent successfully!</Text>
-                <Text variant="sm" className="text-success">We'll get back to you soon with confirmation details.</Text>
-              </div>
+              <Text variant="h4">Estimated Price</Text>
             </div>
-          </Container>
-        )}
-
-        {error && (
-          <Container glass className="border-error/20 bg-error/10">
-            <div className="flex items-center gap-3">
-              <div>
-                <Text variant="base" className="font-medium text-error">Something went wrong</Text>
-                <Text variant="sm" className="text-error">{error}</Text>
-              </div>
+            <div className="flex items-baseline">
+              <Text variant="h4" className="text-primary" itemProp="price">${price.toFixed(2)}</Text>
+              <Text variant="sm" className="ml-2 text-foreground-secondary">NZD excl. GST</Text>
             </div>
-          </Container>
-        )}
-
-        {/* Contact Information Section */}
-        <Container glass className="p-6">
-          <div className="mb-6">
-            <Text variant="h3" className="text-foreground mb-2">Contact Information</Text>
-            <Text variant="sm" className="text-foreground-secondary">Your details for booking confirmation</Text>
           </div>
-          
-          <div className="grid gap-6 lg:grid-cols-2" itemScope itemType="https://schema.org/Organization">
-            <FormField 
-              name="contactPerson" 
-              label="Contact Person" 
-              register={register} 
-              required 
-              error={errors.contactPerson?.message}
-              placeholder="Full name"
-            />
-            <FormField 
-              name="mobilePhone" 
-              label="Mobile Phone" 
-              type="tel" 
-              register={register} 
-              required 
-              error={errors.mobilePhone?.message}
-              placeholder="021 123 4567"
-            />
-            <FormField 
-              name="email" 
-              label="Email Address" 
-              type="email" 
-              register={register} 
-              required 
-              error={errors.email?.message}
-              placeholder="your@email.com"
-            />
-            <FormField 
-              name="companyName" 
-              label="Company Name" 
-              register={register} 
-              error={errors.companyName?.message}
-              placeholder="Optional"
-              itemProp="name"
-            />
+          <div className="p-4 space-y-2">
+            <Text variant="sm" className="text-foreground-secondary">
+              {formData.numberOfHoles} hole{parseInt(formData.numberOfHoles)>1?'s':''} for {formData.numberOfDays} day{parseInt(formData.numberOfDays)>1?'s':''}
+            </Text>
+            <Text variant="sm" className="text-foreground-secondary">• Delivery and setup costs quoted separately</Text>
+            <Text variant="sm" className="text-foreground-secondary">• Final pricing confirmed upon booking</Text>
           </div>
         </Container>
+      )}
 
-        {/* Event Details Section */}
-        <Container glass className="p-6">
-          <div className="mb-6">
-            <Text variant="h3" className="text-foreground mb-2">Event Details</Text>
-            <Text variant="sm" className="text-foreground-secondary">Tell us about your event requirements</Text>
+      {/* Terms & Submit */}
+      <Container glass className="p-6">
+        <div className="space-y-6">
+          <FormCheckbox
+            checked={formData.acceptTerms}
+            onChange={(checked) => setValue("acceptTerms", checked, { shouldValidate: true })}
+            label="I accept the terms and conditions"
+            description={
+              <span>
+                I agree to Golf 2 Go NZ's{" "}
+                <a href="/terms" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+                  terms and conditions
+                </a>
+              </span>
+            }
+            error={errors.acceptTerms?.message}
+            required
+          />
+          
+          <div className="text-center">
+            <button
+              type="submit"
+              disabled={loading || !isValid || !formData.acceptTerms}
+              className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
+            >
+              {loading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <svg className="h-5 w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                    <path className="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                  </svg>
+                  <Text variant="base">Processing...</Text>
+                </div>
+              ) : (
+                <Text variant="base">Submit Booking Request</Text>
+              )}
+            </button>
           </div>
           
-          <div className="grid gap-6 lg:grid-cols-2">
-            <FormField 
-              name="eventDate" 
-              label="Event Date" 
-              type="date" 
-              register={register} 
-              required 
-              error={errors.eventDate?.message}
-            />
-            <FormField 
-              name="eventLocation" 
-              label="Event Location/Address" 
-              register={register} 
-              required 
-              error={errors.eventLocation?.message}
-              placeholder="Full address where event will be held"
-            />
-            <FormField 
-              name="numberOfParticipants" 
-              label="Number of Participants" 
-              type="number" 
-              register={register} 
-              required 
-              error={errors.numberOfParticipants?.message}
-              placeholder="Approx. number of people"
-            />
-            <FormField 
-              name="numberOfHoles" 
-              label="Number of Holes" 
-              type="select" 
-              register={register} 
-              required 
-              error={errors.numberOfHoles?.message}
-              options={[
-                { value: "", label: "Select number of holes" },
-                { value: "1", label: "1 Hole" },
-                { value: "2", label: "2 Holes" },
-                { value: "3", label: "3 Holes" },
-                { value: "4", label: "4 Holes" },
-                { value: "5", label: "5 Holes" },
-                { value: "6", label: "6 Holes" },
-                { value: "9", label: "9 Holes" },
-              ]}
-            />
-            <FormField 
-              name="numberOfDays" 
-              label="Number of Days" 
-              type="number" 
-              register={register} 
-              required 
-              error={errors.numberOfDays?.message}
-              placeholder="How many days needed"
-            />
+          <div className="text-center">
+            <Text variant="sm" className="text-foreground-secondary">
+              By submitting this form, you'll receive a detailed quote within 24 hours.
+            </Text>
           </div>
-          
-          <div className="mt-6">
-            <FormField 
-              name="additionalRequirements" 
-              label="Additional Requirements" 
-              type="textarea" 
-              register={register} 
-              error={errors.additionalRequirements?.message}
-              placeholder="Any special requests, setup requirements, or additional information..."
-              rows={4}
-            />
-          </div>
-        </Container>
-
-        {/* Price Estimate */}
-        {formData.numberOfHoles && formData.numberOfDays && (
-          <Container glass className="p-6" itemScope itemType="https://schema.org/Offer">
-            <meta itemProp="priceCurrency" content="NZD" />
-            <meta itemProp="availability" content="https://schema.org/InStock" />
-            <meta itemProp="validFrom" content="2025-01-01T00:00:00.000Z" />
-            <meta itemProp="priceValidUntil" content="2025-12-31T23:59:59.999Z" />
-            
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/50 bg-background-secondary/30 p-4 rounded-t-lg">
-              <div className="flex items-center gap-3">
-                <Text variant="h4">Estimated Price</Text>
-              </div>
-              <div className="flex items-baseline">
-                <Text variant="h4" className="text-primary" itemProp="price">${price.toFixed(2)}</Text>
-                <Text variant="sm" className="ml-2 text-foreground-secondary">NZD excl. GST</Text>
-              </div>
-            </div>
-            <div className="p-4 space-y-2">
-              <Text variant="sm" className="text-foreground-secondary">
-                {formData.numberOfHoles} hole{parseInt(formData.numberOfHoles)>1?'s':''} for {formData.numberOfDays} day{parseInt(formData.numberOfDays)>1?'s':''}
-              </Text>
-              <Text variant="sm" className="text-foreground-secondary">• Delivery and setup costs quoted separately</Text>
-              <Text variant="sm" className="text-foreground-secondary">• Final pricing confirmed upon booking</Text>
-            </div>
-          </Container>
-        )}
-
-        {/* Terms & Submit */}
-        <Container glass className="p-6">
-          <div className="space-y-6">
-            <FormCheckbox
-              checked={formData.acceptTerms}
-              onChange={(checked) => setValue("acceptTerms", checked, { shouldValidate: true })}
-              label="I accept the terms and conditions"
-              description={
-                <span>
-                  I agree to Golf 2 Go NZ's{" "}
-                  <a href="/terms" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                    terms and conditions
-                  </a>
-                </span>
-              }
-              error={errors.acceptTerms?.message}
-              required
-            />
-            
-            <div className="text-center">
-              <button
-                type="submit"
-                disabled={loading || !isValid || !formData.recaptchaToken || !formData.acceptTerms}
-                className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
-              >
-                {loading ? (
-                  <div className="flex items-center justify-center gap-2">
-                    <svg className="h-5 w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                      <path className="opacity-75" fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
-                    </svg>
-                    <Text variant="base">Processing...</Text>
-                  </div>
-                ) : (
-                  <Text variant="base">Submit Booking Request</Text>
-                )}
-              </button>
-            </div>
-            
-            <div className="text-center">
-              <Text variant="sm" className="text-foreground-secondary">
-                By submitting this form, you'll receive a detailed quote within 24 hours.
-              </Text>
-            </div>
-          </div>
-        </Container>
-      </form>
-    );
-}
-
-// Main export component wrapped with reCAPTCHA provider
-export default function SimpleBookingForm() {
-  return (
-    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
-      <SimpleBookingFormInner />
-    </GoogleReCaptchaProvider>
+        </div>
+      </Container>
+    </form>
   );
 }
