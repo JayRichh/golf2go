@@ -99,7 +99,7 @@ export default function ContactPage() {
                 />
               </div>
               <Container size="xl">
-                <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
+                <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
                   <Text
                     variant="h1"
                     align="center"
@@ -134,7 +134,7 @@ export default function ContactPage() {
               </Text>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {contactInfo.map((item) => (
                 <Card
                   key={item.title}
@@ -188,7 +188,7 @@ export default function ContactPage() {
               </Text>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {serviceAreas.map((area) => (
                 <Card key={area.region} variant="elevated" className="p-6">
                   <div className="pb-4">

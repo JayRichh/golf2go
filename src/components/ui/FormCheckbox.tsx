@@ -14,7 +14,7 @@ interface FormCheckboxProps {
 export function FormCheckbox({ checked, onChange, label, description, error, required }: FormCheckboxProps) {
   return (
     <div className="space-y-2">
-      <label className={`group flex cursor-pointer items-start gap-3 rounded-lg border p-4 transition-colors hover:border-border hover:bg-background-secondary ${
+      <label className={`group flex cursor-pointer items-start gap-2 sm:gap-3 rounded-lg border p-2 sm:p-4 transition-colors hover:border-border hover:bg-background-secondary ${
         error ? "border-error" : "border-transparent"
       }`}>
         <div className="relative flex h-6 items-center">

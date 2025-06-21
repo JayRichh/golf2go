@@ -33,10 +33,10 @@ interface TextProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantClasses: Record<TextVariant, string> = {
-  h1: "text-4xl md:text-5xl xl:text-6xl font-bold leading-tight tracking-tight",
-  h2: "text-3xl md:text-4xl xl:text-5xl font-bold leading-tight tracking-tight",
-  h3: "text-2xl md:text-3xl xl:text-4xl font-semibold leading-snug",
-  h4: "text-xl md:text-2xl xl:text-3xl font-semibold leading-snug",
+  h1: "text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight tracking-tight",
+  h2: "text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight",
+  h3: "text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold leading-snug",
+  h4: "text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold leading-snug",
   "body-lg": "text-lg md:text-xl leading-relaxed",
   body: "text-base leading-relaxed",
   "body-sm": "text-sm leading-relaxed",

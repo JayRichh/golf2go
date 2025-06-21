@@ -138,7 +138,7 @@ export default function CoursesPage() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
+              <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
                 <Text 
                   variant="h1" 
                   align="center" 
@@ -237,7 +237,7 @@ export default function CoursesPage() {
               Portable mini golf course designs perfect for indoor mini golf setups and outdoor mini putt events
             </Text>
           </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {courseTypes.map((type, index) => (
               <Card
                 key={type.name}
@@ -299,14 +299,14 @@ export default function CoursesPage() {
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
                   href="/book"
-                  className="btn-primary inline-flex min-w-[200px] items-center justify-center gap-2 px-8 py-3"
+                  className="btn-primary inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 px-8 py-3"
                 >
                   <Text variant="lg">Request Quote</Text>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="btn-outline inline-flex min-w-[200px] items-center justify-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
+                  className="btn-outline inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
                 >
                   <Text variant="lg">Corporate Inquiries</Text>
                 </Link>

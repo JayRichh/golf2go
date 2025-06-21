@@ -295,7 +295,7 @@ export default function GalleryPage() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
+              <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
                 <Text
                   variant="h1"
                   align="center"
@@ -320,7 +320,7 @@ export default function GalleryPage() {
         {/* Gallery Grid */}
         <section className="py-16 md:py-24" itemScope itemType="https://schema.org/ImageGallery">
         <Container size="xl">
-          <div className="grid grid-cols-1 gap-4 sm:gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 lg:gap-8">
             {galleryImages.map((image, index) => (
               <div
                 key={image.id}

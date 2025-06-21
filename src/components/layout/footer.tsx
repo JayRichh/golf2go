@@ -25,7 +25,7 @@ const navigation = {
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-border/50 bg-background">
-      <Container size="xl" className="px-4 py-12 sm:px-6 lg:px-8">
+      <Container size="xl" className="px-3 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="grid grid-cols-2 gap-12 sm:grid-cols-3 lg:grid-cols-4">
           <div>
             <Text variant="sm" className="font-semibold uppercase tracking-wider text-foreground">

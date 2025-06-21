@@ -71,7 +71,7 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
     const glassStyles = cn(
       glass && "glass",
       glassDark && "dark:glass-dark",
-      !noPadding && "py-6 px-4 sm:py-8 sm:px-4",
+      !noPadding && "py-4 px-3 sm:py-6 sm:px-4 lg:py-8 lg:px-6",
       "rounded-lg border border-border/50 shadow-sm backdrop-blur-sm",
       "transition-all duration-200 ease-in-out",
       "hover:border-border/70 hover:shadow-md"

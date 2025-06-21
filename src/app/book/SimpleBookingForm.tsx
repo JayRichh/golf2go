@@ -170,7 +170,6 @@ export default function SimpleBookingForm() {
         {success && (
           <Container glass className="border-success/20 bg-success/10">
             <div className="flex items-center gap-3">
-              <span className="text-xl">✅</span>
               <div>
                 <Text variant="base" className="font-medium text-success">Booking request sent successfully!</Text>
                 <Text variant="sm" className="text-success">We'll get back to you soon with confirmation details.</Text>
@@ -182,7 +181,6 @@ export default function SimpleBookingForm() {
         {error && (
           <Container glass className="border-error/20 bg-error/10">
             <div className="flex items-center gap-3">
-              <span className="text-xl">⚠️</span>
               <div>
                 <Text variant="base" className="font-medium text-error">Something went wrong</Text>
                 <Text variant="sm" className="text-error">{error}</Text>
@@ -198,7 +196,7 @@ export default function SimpleBookingForm() {
             <Text variant="sm" className="text-foreground-secondary">Your details for booking confirmation</Text>
           </div>
           
-          <div className="grid gap-6 md:grid-cols-2" itemScope itemType="https://schema.org/Organization">
+          <div className="grid gap-6 lg:grid-cols-2" itemScope itemType="https://schema.org/Organization">
             <FormField 
               name="contactPerson" 
               label="Contact Person" 
@@ -243,7 +241,7 @@ export default function SimpleBookingForm() {
             <Text variant="sm" className="text-foreground-secondary">Tell us about your event requirements</Text>
           </div>
           
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 lg:grid-cols-2">
             <FormField 
               name="eventDate" 
               label="Event Date" 
@@ -319,13 +317,12 @@ export default function SimpleBookingForm() {
             <meta itemProp="validFrom" content="2025-01-01T00:00:00.000Z" />
             <meta itemProp="priceValidUntil" content="2025-12-31T23:59:59.999Z" />
             
-            <div className="flex items-center justify-between border-b border-border/50 bg-background-secondary/30 p-4 rounded-t-lg">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/50 bg-background-secondary/30 p-4 rounded-t-lg">
               <div className="flex items-center gap-3">
-                <span className="text-xl">💰</span>
                 <Text variant="h4">Estimated Price</Text>
               </div>
               <div className="flex items-baseline">
-                <Text variant="h3" className="text-primary" itemProp="price">${price.toFixed(2)}</Text>
+                <Text variant="h4" className="text-primary" itemProp="price">${price.toFixed(2)}</Text>
                 <Text variant="sm" className="ml-2 text-foreground-secondary">NZD excl. GST</Text>
               </div>
             </div>
@@ -362,7 +359,7 @@ export default function SimpleBookingForm() {
               <button
                 type="submit"
                 disabled={loading || !recaptchaLoaded || !isValid || !formData.recaptchaToken || !formData.acceptTerms}
-                className="btn-primary inline-flex min-w-[200px] items-center justify-center gap-2 px-8 py-4 text-lg"
+                className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
               >
                 {loading ? (
                   <div className="flex items-center justify-center gap-2">
@@ -374,10 +371,7 @@ export default function SimpleBookingForm() {
                     <Text variant="base">Processing...</Text>
                   </div>
                 ) : (
-                  <>
-                    <span>📝</span>
-                    <Text variant="base">Submit Booking Request</Text>
-                  </>
+                  <Text variant="base">Submit Booking Request</Text>
                 )}
               </button>
             </div>

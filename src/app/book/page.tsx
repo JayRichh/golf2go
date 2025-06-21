@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function BookPage() {
   return (
-    <div className="max-w-1400px overflow-x-hidden">
+    <div className="w-full overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
@@ -35,7 +35,7 @@ export default function BookPage() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
+              <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
                 <Text variant="h1" align="center" className="text-primary-foreground">
                   Make a Booking
                 </Text>
@@ -54,8 +54,8 @@ export default function BookPage() {
 
       {/* Main Content */}
       <section className="py-12 md:py-16">
-        <Container size="xl" className="px-4 md:px-6">
-          <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
+        <Container size="xl" className="">
+          <div className="grid gap-8 xl:grid-cols-[1fr_300px]">
             <div className="space-y-8">
               {/* Quick Tips */}
               <QuickTips />

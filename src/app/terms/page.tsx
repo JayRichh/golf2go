@@ -44,7 +44,7 @@ export default function Terms() {
               />
             </div>
             <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center h-[180px] flex flex-col justify-center">
+              <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
                 <Text 
                   variant="h1" 
                   align="center" 
