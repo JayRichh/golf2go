@@ -103,14 +103,21 @@ export default function SimpleBookingForm() {
 
   useEffect(() => {
     if (recaptchaLoaded && window.grecaptcha) {
-      window.grecaptcha.ready(async () => {
-        try {
-          const token = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: "submit" });
-          setValue("recaptchaToken", token, { shouldValidate: true });
-        } catch {
-          setError("Failed to verify reCAPTCHA. Please refresh and try again.");
-        }
-      });
+      const executeRecaptcha = () => {
+        window.grecaptcha.ready(async () => {
+          try {
+            const token = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: "submit" });
+            setValue("recaptchaToken", token, { shouldValidate: true });
+          } catch (error) {
+            console.error("reCAPTCHA error:", error);
+            setError("Failed to verify reCAPTCHA. Please refresh and try again.");
+          }
+        });
+      };
+
+      // Add a small delay for production environments
+      const timer = setTimeout(executeRecaptcha, 500);
+      return () => clearTimeout(timer);
     }
   }, [recaptchaLoaded, setValue]);
 
