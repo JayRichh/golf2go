@@ -84,26 +84,58 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify reCAPTCHA
-    const recaptchaResponse = await fetch(
-      "https://www.google.com/recaptcha/api/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          secret: process.env.RECAPTCHA_SECRET_KEY,
-          response: validatedData.recaptchaToken,
-        }),
+    // Verify reCAPTCHA using Google Assessment API for production security
+    const projectId = "golf2go-recaptcha"; // You may need to set this as env var
+    
+    try {
+      // For now, fallback to siteverify but with enhanced validation
+      const recaptchaResponse = await fetch(
+        "https://www.google.com/recaptcha/api/siteverify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            secret: process.env.RECAPTCHA_SECRET_KEY,
+            response: validatedData.recaptchaToken,
+            remoteip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
+          }),
+        }
+      );
+
+      const recaptchaData = await recaptchaResponse.json();
+      console.log("reCAPTCHA verification response:", recaptchaData);
+
+      // Enhanced validation - check score for v3
+      if (!recaptchaData.success) {
+        console.error("reCAPTCHA verification failed:", recaptchaData["error-codes"]);
+        return NextResponse.json(
+          { error: "reCAPTCHA verification failed. Please try again." },
+          { status: 400 }
+        );
       }
-    );
 
-    const recaptchaData = await recaptchaResponse.json();
-    console.log("reCAPTCHA verification response:", recaptchaData);
+      // For reCAPTCHA v3, check score (should be > 0.5 for legitimate users)
+      if (recaptchaData.score !== undefined && recaptchaData.score < 0.5) {
+        console.error("reCAPTCHA score too low:", recaptchaData.score);
+        return NextResponse.json(
+          { error: "Security verification failed. Please try again." },
+          { status: 400 }
+        );
+      }
 
-    if (!recaptchaData.success) {
-      console.error("reCAPTCHA verification failed:", recaptchaData["error-codes"]);
+      // Verify action matches expected action
+      if (recaptchaData.action && recaptchaData.action !== 'submit') {
+        console.error("reCAPTCHA action mismatch:", recaptchaData.action);
+        return NextResponse.json(
+          { error: "Security verification failed. Invalid action." },
+          { status: 400 }
+        );
+      }
+
+    } catch (recaptchaError) {
+      console.error("reCAPTCHA verification error:", recaptchaError);
       return NextResponse.json(
-        { error: "reCAPTCHA verification failed" },
+        { error: "reCAPTCHA verification failed. Please try again." },
         { status: 400 }
       );
     }

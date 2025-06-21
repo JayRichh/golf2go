@@ -12,7 +12,7 @@ type SimpleFormData = {
   numberOfHoles: string;
   numberOfDays: string;
   additionalRequirements?: string;
-  acceptTerms: boolean;
+  acceptTerms?: boolean; // Optional since it gets stripped out before email sending
 };
 
 type EmailFormData = ComplexFormData | SimpleFormData;
