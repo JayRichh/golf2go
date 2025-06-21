@@ -5,20 +5,11 @@ import { generateBookingSchema, generateFormSchema } from './schema';
 import * as z from "zod";
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import Script from "next/script";
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { Container } from "~/components/ui/Container";
 import { FormCheckbox } from "~/components/ui/FormCheckbox";
 import { FormField } from "~/components/ui/FormField";
 import { Text } from "~/components/ui/Text";
-
-declare global {
-  interface Window {
-    grecaptcha: {
-      ready: (callback: () => void) => void;
-      execute: (siteKey: string, options?: { action?: string }) => Promise<string>;
-    };
-  }
-}
 
 // Simplified validation schema with only essential fields
 const validationSchema = z.object({
@@ -73,7 +64,10 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://golf2go.co.nz";
 const bookingSchemaData = generateBookingSchema(baseUrl);
 const formSchemaData = generateFormSchema(baseUrl);
 
-export default function SimpleBookingForm() {
+// Create inner form component that uses the reCAPTCHA hook
+function SimpleBookingFormInner() {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+  
   // Add schema.org markup
   useEffect(() => {
     const script = document.createElement('script');
@@ -88,7 +82,6 @@ export default function SimpleBookingForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [recaptchaLoaded, setRecaptchaLoaded] = useState(false);
 
   const { register, handleSubmit, formState: { errors, isValid }, watch, setValue } = useForm<SimpleFormData>({
     resolver: zodResolver(validationSchema),
@@ -101,25 +94,22 @@ export default function SimpleBookingForm() {
 
   const formData = watch();
 
+  // Generate reCAPTCHA token when component mounts and executeRecaptcha is available
   useEffect(() => {
-    if (recaptchaLoaded && window.grecaptcha) {
-      const executeRecaptcha = () => {
-        window.grecaptcha.ready(async () => {
-          try {
-            const token = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: "submit" });
-            setValue("recaptchaToken", token, { shouldValidate: true });
-          } catch (error) {
-            console.error("reCAPTCHA error:", error);
-            setError("Failed to verify reCAPTCHA. Please refresh and try again.");
-          }
-        });
+    if (executeRecaptcha) {
+      const generateToken = async () => {
+        try {
+          const token = await executeRecaptcha("submit");
+          setValue("recaptchaToken", token, { shouldValidate: true });
+        } catch (error) {
+          console.error("reCAPTCHA error:", error);
+          setError("Failed to verify reCAPTCHA. Please refresh and try again.");
+        }
       };
-
-      // Add a small delay for production environments
-      const timer = setTimeout(executeRecaptcha, 500);
-      return () => clearTimeout(timer);
+      
+      generateToken();
     }
-  }, [recaptchaLoaded, setValue]);
+  }, [executeRecaptcha, setValue]);
 
   const price = useMemo(() => {
     const days = Math.max(parseInt(formData.numberOfDays) || 1, 1);
@@ -156,15 +146,7 @@ export default function SimpleBookingForm() {
   };
 
   return (
-    <>
-      <Script
-        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-        strategy="afterInteractive"
-        onLoad={() => setRecaptchaLoaded(true)}
-        onError={() => setError("Failed to load reCAPTCHA. Please refresh the page and try again.")}
-      />
-
-      <form 
+    <form
         onSubmit={handleSubmit(onSubmit)} 
         className="space-y-8" 
         noValidate
@@ -365,7 +347,7 @@ export default function SimpleBookingForm() {
             <div className="text-center">
               <button
                 type="submit"
-                disabled={loading || !recaptchaLoaded || !isValid || !formData.recaptchaToken || !formData.acceptTerms}
+                disabled={loading || !isValid || !formData.recaptchaToken || !formData.acceptTerms}
                 className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
               >
                 {loading ? (
@@ -391,6 +373,14 @@ export default function SimpleBookingForm() {
           </div>
         </Container>
       </form>
-    </>
+    );
+}
+
+// Main export component wrapped with reCAPTCHA provider
+export default function SimpleBookingForm() {
+  return (
+    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
+      <SimpleBookingFormInner />
+    </GoogleReCaptchaProvider>
   );
 }
