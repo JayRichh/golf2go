@@ -19,17 +19,13 @@ const gone = () => new Response('Gone', { status: 410, headers: { 'X-Robots-Tag'
 const notFound = () => new Response(null, { status: 404, headers: { 'X-Robots-Tag': 'noindex, nofollow' } })
 
 export function middleware(request: NextRequest) {
-  const { pathname, hostname } = request.nextUrl
+  const { pathname } = request.nextUrl
 
-  // Don't run middleware on external domains (like Google reCAPTCHA)
-  if (hostname !== 'localhost' && !hostname.includes('golf2go.co.nz') && !hostname.includes('vercel.app')) {
-    return NextResponse.next()
-  }
-
-  // Allow all Next.js internal routes, API routes, and static assets
+  // Allow all Next.js internal routes, API routes, static assets, and Vercel
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
+    pathname.startsWith('/_vercel') ||
     pathname.startsWith('/images') ||
     pathname.startsWith('/assets') ||
     pathname.startsWith('/static') ||
@@ -46,15 +42,4 @@ export function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - External domains (Google reCAPTCHA, etc.)
-     */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ]
-}
+export const config = { matcher: ['/((?!_next|_vercel).*)', '/api/:path*'] }
