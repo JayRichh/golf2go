@@ -181,8 +181,6 @@ export default function CoursesPage() {
                 variant="elevated"
                 interactive
                 className="group w-full overflow-hidden"
-                itemScope
-                itemType="https://schema.org/Product"
               >
                 <div className="relative aspect-[16/9] w-full overflow-hidden">
                   <Image
@@ -191,7 +189,6 @@ export default function CoursesPage() {
                     fill
                     className="h-full w-full object-cover transition duration-500 will-change-transform group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
-                    itemProp="image"
                   />
                 </div>
                 <CardHeader
