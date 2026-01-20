@@ -28,6 +28,7 @@ const nextConfig = {
         source: '/:path*.pdf',
         headers: [
           { key: 'Content-Type', value: 'application/pdf' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
           { key: 'Cache-Control', value: 'public, max-age=31536000' }
         ]
       }

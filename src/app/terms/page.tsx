@@ -75,7 +75,7 @@ export default function Terms() {
             {/* Controls */}
             <div className="flex items-center justify-between px-6 py-4 bg-[#1c2834] text-white">
               <a
-                href="TERMS AND CONDITIONS OF HIRE 2025-26.pdf"
+                href="/TERMS%20AND%20CONDITIONS%20OF%20HIRE%202025-26.pdf"
                 download
                 className="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
                 itemProp="downloadUrl"
@@ -88,7 +88,7 @@ export default function Terms() {
             {/* PDF Viewer */}
             <div className="bg-[#2a3541] w-full">
               <iframe
-                src="TERMS AND CONDITIONS OF HIRE 2025-26.pdf"
+                src="/TERMS%20AND%20CONDITIONS%20OF%20HIRE%202025-26.pdf"
                 className="w-full h-[calc(100vh-300px)] border-0"
                 style={{
                   transform: `scale(${scale / 100})`,
