@@ -1,7 +1,20 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const VALID_ROUTES = new Set(['', 'about', 'courses', 'gallery', 'book', 'terms', 'contact'])
+import { locations } from '~/lib/locations'
+
+const VALID_ROUTES = new Set([
+  '',
+  'about',
+  'courses',
+  'gallery',
+  'book',
+  'terms',
+  'contact',
+  // Location landing pages — derived from the single locations source so a new
+  // location automatically becomes a valid route here.
+  ...locations.map(l => l.path)
+])
 
 const BLOCKED_PATTERNS = [
   /\.(php|html|asp|aspx|jsp|cgi|pl|exe|dll|jar|json|sql|zip|tar|gz|log|bak)$/i,
