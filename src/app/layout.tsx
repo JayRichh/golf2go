@@ -32,33 +32,6 @@ export const metadata: Metadata = {
   description: "New Zealand's leading portable mini golf hire and mini putt service. Indoor mini golf Palmerston North, mini golf Wellington, New Plymouth mini golf. Professional portable mini golf hire nationwide.",
   manifest: "/manifest.json",
   applicationName: "Golf 2 Go NZ",
-  keywords: [
-    // Priority SEO Keywords (0-click opportunities)
-    "mini putt",
-    "indoor mini golf palmerston north",
-    "new plymouth mini golf",
-    "mini golf wellington",
-    "portable mini golf hire",
-    "mini putt hire",
-    "portable mini putt",
-    "indoor mini golf wellington",
-    "mini golf palmerston north",
-    "mini golf new plymouth",
-    "portable mini golf wellington",
-    "portable mini golf taranaki",
-    "mini golf taranaki",
-    // Corporate/Business keywords
-    "corporate entertainment solutions",
-    "business event planning",
-    "professional team building",
-    "executive entertainment",
-    "corporate function activities",
-    "premium event solutions",
-    "business entertainment services",
-    "corporate engagement activities",
-    "professional event management",
-    "executive recreation planning"
-  ],
   authors: [{ name: "Golf 2 Go NZ", url: baseUrl }],
   creator: "Golf 2 Go NZ",
   publisher: "Golf 2 Go NZ",
@@ -130,13 +103,6 @@ export const metadata: Metadata = {
       "en-NZ": baseUrl,
     },
   },
-  verification: {
-    google: "google-site-verification",
-    other: {
-      "msvalidate.01": "bing-verification",
-      "yandex-verification": "yandex-verification"
-    }
-  },
   other: {
     category: "Business Services",
     classification: "Corporate Entertainment",
@@ -159,6 +125,27 @@ const organizationSchema = {
     height: "512"
   },
   description: "New Zealand's leading portable mini golf hire and mini putt service provider",
+  image: `${baseUrl}/2-parties-and-events-golf2go-portable-miniature-golf.jpg`,
+  telephone: "+64-21-849931",
+  email: "admin@golf2go.co.nz",
+  priceRange: "$190-$2500",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Palmerston North",
+    addressRegion: "Manawatu-Whanganui",
+    addressCountry: "NZ"
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -40.3523,
+    longitude: 175.6082
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "08:00",
+    closes: "20:00"
+  },
   foundingDate: "2008",
   foundingLocation: {
     "@type": "Place",
@@ -237,14 +224,13 @@ const organizationSchema = {
   },
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "021849931",
+    telephone: "+64-21-849931",
     email: "admin@golf2go.co.nz",
     contactType: "customer service",
     areaServed: "NZ",
     availableLanguage: "English"
   },
   sameAs: [
-    "https://www.linkedin.com/company/golf2go-nz",
     "https://www.facebook.com/golf2gonz",
     "https://www.instagram.com/golf2gonz"
   ]
@@ -256,7 +242,7 @@ const websiteSchema = {
   "@id": `${baseUrl}/#website`,
   name: "Golf 2 Go NZ",
   url: baseUrl,
-  description: "New Zealand's leading corporate entertainment and event solutions provider. Premium interactive experiences for business functions, team building, and professional events.",
+  description: "New Zealand's leading portable mini golf and mini putt hire service. Delivered and set up for parties, events, fundraisers and corporate functions nationwide.",
   publisher: {
     "@id": `${baseUrl}/#organization`
   },
@@ -296,6 +282,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body className="flex min-h-screen flex-col bg-background font-sans">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+        >
+          Skip to main content
+        </a>
         {/* Background pattern */}
         <div className="fixed inset-0 -z-10">
           <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-[0.02]" />
@@ -303,7 +295,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         {/* Main content */}
         <Navbar />
-        <main className="flex-1">
+        <main id="main-content" tabIndex={-1} className="flex-1">
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />

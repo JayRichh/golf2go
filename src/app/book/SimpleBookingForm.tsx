@@ -1,9 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { generateBookingSchema, generateFormSchema } from './schema';
 import * as z from "zod";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Container } from "~/components/ui/Container";
 import { FormCheckbox } from "~/components/ui/FormCheckbox";
@@ -52,23 +51,7 @@ const calculatePrice = (holes: number, days: number) => {
   return price;
 };
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://golf2go.co.nz";
-const bookingSchemaData = generateBookingSchema(baseUrl);
-const formSchemaData = generateFormSchema(baseUrl);
-
-
 export default function SimpleBookingForm() {
-  // Add schema.org markup
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify([bookingSchemaData, formSchemaData]);
-    document.head.appendChild(script);
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
-
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -130,8 +113,8 @@ export default function SimpleBookingForm() {
       itemScope
       itemType="https://schema.org/ReservationForm"
     >
-      <meta itemProp="name" content="Corporate Entertainment Booking Form" />
-      <meta itemProp="description" content="Book premium corporate entertainment and event solutions" />
+      <meta itemProp="name" content="Mini Golf Hire Booking Form" />
+      <meta itemProp="description" content="Book portable mini golf and mini putt hire for your event" />
       
       {/* Honeypot field - hidden from users */}
       <input
@@ -151,7 +134,7 @@ export default function SimpleBookingForm() {
       />
       
       {success && (
-        <Container glass className="border-success/20 bg-success/10">
+        <Container glass className="border-success/20 bg-success/10" role="status" aria-live="polite">
           <div className="flex items-center gap-3">
             <div>
               <Text variant="base" className="font-medium text-success">Booking request sent successfully!</Text>
@@ -162,7 +145,7 @@ export default function SimpleBookingForm() {
       )}
 
       {error && (
-        <Container glass className="border-error/20 bg-error/10">
+        <Container glass className="border-error/20 bg-error/10" role="alert" aria-live="assertive">
           <div className="flex items-center gap-3">
             <div>
               <Text variant="base" className="font-medium text-error">Something went wrong</Text>

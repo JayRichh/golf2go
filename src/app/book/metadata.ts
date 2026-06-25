@@ -32,8 +32,8 @@ export async function generateMetadata() {
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Book Portable Mini Golf NZ | Professional Course Hire',
-    description: 'Book our professional portable mini golf courses for your event. Easy online booking, flexible hire options, and nationwide delivery. Based in Palmerston North, serving all NZ.',
+    title: 'Book Mini Golf Hire NZ | Get a Quote',
+    description: 'Book portable mini golf & mini putt hire for your event. Easy online booking, flexible hire options and nationwide delivery from $190. Based in Palmerston North, serving all NZ.',
     keywords: pageKeywords,
     path: 'book',
     images: [

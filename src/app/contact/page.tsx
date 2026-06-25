@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,9 +23,9 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    details: "info@golf2go.co.nz",
+    details: "admin@golf2go.co.nz",
     description: "We respond within 24 hours",
-    href: "mailto:info@golf2go.co.nz",
+    href: "mailto:admin@golf2go.co.nz",
     action: "Send Email"
   },
   {
@@ -109,7 +108,7 @@ export default function ContactPage() {
                   </Text>
                   <Text
                     variant="xl"
-                    className="mt-6 text-primary-foreground/90 text-center"
+                    className="mt-6 text-primary-foreground text-center"
                   >
                     New Zealand's leading provider of professional corporate entertainment solutions
                   </Text>
@@ -256,13 +255,13 @@ export default function ContactPage() {
                       </a>
                       
                       <a
-                        href="mailto:info@golf2go.co.nz"
+                        href="mailto:admin@golf2go.co.nz"
                         className="flex items-center gap-3 p-4 rounded-lg border hover:bg-background-secondary transition-colors"
                       >
                         <Mail className="h-5 w-5 text-primary" />
                         <div>
                           <Text variant="base" className="font-medium text-foreground">
-                            Email: info@golf2go.co.nz
+                            Email: admin@golf2go.co.nz
                           </Text>
                           <Text variant="sm" className="text-foreground-secondary">
                             Response within 24 hours
@@ -282,16 +281,16 @@ export default function ContactPage() {
                   />
                   <CardContent className="space-y-6">
                     <div className="space-y-3">
-                      <Text variant="sm" className="text-primary-foreground/80">
+                      <Text variant="sm" className="text-primary-foreground">
                         ✓ Instant quote calculation
                       </Text>
-                      <Text variant="sm" className="text-primary-foreground/80">
+                      <Text variant="sm" className="text-primary-foreground">
                         ✓ Professional event planning
                       </Text>
-                      <Text variant="sm" className="text-primary-foreground/80">
+                      <Text variant="sm" className="text-primary-foreground">
                         ✓ Nationwide delivery & setup
                       </Text>
-                      <Text variant="sm" className="text-primary-foreground/80">
+                      <Text variant="sm" className="text-primary-foreground">
                         ✓ Corporate excellence guarantee
                       </Text>
                     </div>
@@ -319,7 +318,7 @@ export default function ContactPage() {
               </Text>
               <Text variant="base" className="text-foreground-secondary">
                 Our nationwide service coverage includes Auckland, Wellington, Christchurch, Hamilton, Tauranga, and many other locations. 
-                Call 021 849931 or email info@golf2go.co.nz for immediate assistance with your corporate event planning needs.
+                Call 021 849931 or email admin@golf2go.co.nz for immediate assistance with your corporate event planning needs.
               </Text>
               <Text variant="base" className="text-foreground-secondary">
                 Available 8am to 8pm, seven days a week, our professional team provides expert consultation, 

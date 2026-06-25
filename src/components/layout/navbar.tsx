@@ -141,7 +141,7 @@ export function Navbar() {
           className={`transform overflow-hidden transition-all duration-300 ease-in-out sm:hidden ${
             isMobileMenuOpen ? "max-h-96" : "max-h-0"
           }`}
-          aria-hidden={!isMobileMenuOpen}
+          {...(!isMobileMenuOpen ? ({ inert: "" } as Record<string, unknown>) : {})}
         >
           <div className="space-y-1 pb-3 pt-2">
             {navigation.map((item) => {

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 
 import { Container } from "~/components/ui/Container";
@@ -8,18 +7,24 @@ import { Text } from "~/components/ui/Text";
 import SimpleBookingForm from "./SimpleBookingForm";
 import { HelpSection } from "./components/HelpSection";
 import { QuickTips } from "./components/QuickTips";
+import { generateBookingSchema, generateFormSchema } from "./schema";
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "Book Now | Golf 2 Go",
-    description:
-      "Book your portable mini golf course for your next event. Available for corporate events, parties, and more.",
-  };
-}
+export { generateMetadata } from "./metadata";
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://golf2go.co.nz";
 
 export default function BookPage() {
+  const bookingSchema = generateBookingSchema(baseUrl);
+  const formSchema = generateFormSchema(baseUrl);
+
   return (
     <div className="w-full overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([bookingSchema, formSchema]),
+        }}
+      />
       {/* Hero Section */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
@@ -27,7 +32,7 @@ export default function BookPage() {
             <div className="absolute inset-0 -z-10 w-full">
               <Image
                 src="/2-parties-and-events-golf2go-portable-miniature-golf.jpg"
-                alt="Golf 2 Go booking"
+                alt=""
                 fill
                 className="h-full w-full object-cover opacity-30"
                 sizes="100vw"
@@ -37,14 +42,14 @@ export default function BookPage() {
             <Container size="xl">
               <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
                 <Text variant="h1" align="center" className="text-primary-foreground">
-                  Make a Booking
+                  Book Mini Golf Hire
                 </Text>
                 <Text
                   variant="xl"
                   align="center"
-                  className="mt-6 text-primary-foreground/90"
+                  className="mt-6 text-primary-foreground"
                 >
-                  Fill out the form below and we'll get back to you with a quote
+                  Fill out the form below and we&apos;ll get back to you with a free quote
                 </Text>
               </div>
             </Container>

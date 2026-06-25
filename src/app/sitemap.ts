@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next'
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz'
-const BUILD = '2025-06-21T00:00:00Z'
+// Build-time timestamp — refreshes on every deploy rather than a frozen literal.
+const BUILD = new Date().toISOString()
 
 const routes = [
   {
@@ -38,6 +39,30 @@ const routes = [
     ]
   },
   {
+    path: '/mini-golf-wellington',
+    freq: 'weekly',
+    pri: 0.85,
+    imgs: [`${baseUrl}/2-parties-and-events-golf2go-portable-miniature-golf.jpg`]
+  },
+  {
+    path: '/mini-golf-palmerston-north',
+    freq: 'weekly',
+    pri: 0.85,
+    imgs: [`${baseUrl}/17-golf2go-portable-miniature-golf-close-up.jpg`]
+  },
+  {
+    path: '/mini-golf-new-plymouth',
+    freq: 'weekly',
+    pri: 0.85,
+    imgs: [`${baseUrl}/3-fun-portable-mini-golf.jpg`]
+  },
+  {
+    path: '/mini-golf-taranaki',
+    freq: 'weekly',
+    pri: 0.85,
+    imgs: [`${baseUrl}/4-portable-miniature-golf.jpg`]
+  },
+  {
     path: '/gallery',
     freq: 'weekly',
     pri: 0.8,
@@ -59,6 +84,11 @@ const routes = [
       `${baseUrl}/6-Forefront-400x400-Auckland-Forefront.jpg`,
       `${baseUrl}/5-cropped-golf2go-logo-1.jpg`
     ]
+  },
+  {
+    path: '/contact',
+    freq: 'monthly',
+    pri: 0.7
   },
   {
     path: '/terms',

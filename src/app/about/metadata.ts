@@ -33,8 +33,8 @@ export async function generateMetadata() {
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'About Golf 2 Go NZ | Professional Portable Mini Golf Provider',
-    description: 'Leading provider of professional portable mini golf solutions in New Zealand. Based in Palmerston North, delivering premium mobile mini golf experiences nationwide since 2008.',
+    title: 'About Us | Portable Mini Golf & Mini Putt Hire',
+    description: 'New Zealand\'s first portable mini golf company. Based in Palmerston North, hiring out mini golf & mini putt courses for events nationwide since 2008.',
     keywords: pageKeywords,
     path: 'about',
     images: [

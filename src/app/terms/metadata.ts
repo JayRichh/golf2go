@@ -40,8 +40,8 @@ export async function generateMetadata() {
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Terms & Conditions | Mini Golf Hire NZ',
-    description: 'Clear terms for mini golf hire in New Zealand. Simple booking conditions and hire agreements for mobile mini golf solutions. Trusted by businesses nationwide.',
+    title: 'Terms & Conditions',
+    description: 'Terms and conditions for portable mini golf and mini putt hire in New Zealand — simple booking conditions and hire agreements. Trusted nationwide.',
     keywords: pageKeywords,
     path: 'terms',
     images: [

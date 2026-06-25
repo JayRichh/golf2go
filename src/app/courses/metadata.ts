@@ -1,27 +1,29 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Portable Mini Golf Courses & Mini Putt Solutions | Golf 2 Go NZ',
-  description: 'Professional portable mini golf course hire and mini putt setups featuring indoor mini golf options for corporate events across New Zealand. Premium entertainment solutions.',
-  keywords: 'portable mini golf hire, mini putt course, indoor mini golf nz, mini golf wellington, portable mini golf, corporate entertainment, business events, team building activities',
+  title: { absolute: 'Mini Golf Courses & Mini Putt Hire | Golf 2 Go NZ' },
+  description:
+    'Browse our portable mini golf courses for hire — the Hole in One Challenge and 3, 6 & 9 hole courses for parties, events and corporate functions across NZ. From $190.',
   openGraph: {
-    title: 'Portable Mini Golf Courses & Mini Putt Solutions | Golf 2 Go NZ',
-    description: 'Professional portable mini golf course hire and premium mini putt setups for corporate events across New Zealand.',
+    title: 'Mini Golf Courses & Mini Putt Hire | Golf 2 Go NZ',
+    description:
+      'Portable mini golf courses for hire — Hole in One Challenge and 3, 6 & 9 hole courses for parties, events and corporate functions across New Zealand.',
     type: 'website',
     locale: 'en_NZ',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Portable Mini Golf Courses & Mini Putt Solutions | Golf 2 Go NZ',
-    description: 'Professional portable mini golf course hire and mini putt setups for corporate events across New Zealand.',
+    title: 'Mini Golf Courses & Mini Putt Hire | Golf 2 Go NZ',
+    description:
+      'Portable mini golf courses for hire across New Zealand — from the Hole in One Challenge to full 9 hole courses.',
   },
   alternates: {
     canonical: 'https://golf2go.co.nz/courses',
   },
   other: {
-    'geo.region': 'NZ',
-    'geo.placename': 'New Zealand',
-    'geo.position': '-41.2865;174.7762',
-    'ICBM': '-41.2865, 174.7762',
+    'geo.region': 'NZ-MWT',
+    'geo.placename': 'Palmerston North',
+    'geo.position': '-40.3523;175.6082',
+    ICBM: '-40.3523, 175.6082',
   },
 };

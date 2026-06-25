@@ -7,18 +7,23 @@ const navigation = {
   company: [
     { name: "About Us", href: "/about" },
     { name: "Gallery", href: "/gallery" },
+    { name: "Terms and Conditions", href: "/terms" },
   ],
   services: [
     { name: "Our Courses", href: "/courses" },
     { name: "Book Now", href: "/book" },
+    { name: "Contact", href: "/contact" },
+  ],
+  locations: [
+    { name: "Mini Golf Wellington", href: "/mini-golf-wellington" },
+    { name: "Mini Golf Palmerston North", href: "/mini-golf-palmerston-north" },
+    { name: "Mini Golf New Plymouth", href: "/mini-golf-new-plymouth" },
+    { name: "Mini Golf Taranaki", href: "/mini-golf-taranaki" },
   ],
   contact: [
     { name: "Email", value: "admin@golf2go.co.nz", href: "mailto:admin@golf2go.co.nz", icon: "📧" },
     { name: "Phone", value: "021 849931", href: "tel:021849931", icon: "📞" },
-    { name: "Location", value: "Palmerston North, New Zealand", href: "#", icon: "📍" },
-  ],
-  legal: [
-    { name: "Terms and Conditions", href: "/terms" },
+    { name: "Location", value: "Palmerston North, New Zealand", href: undefined, icon: "📍" },
   ],
 };
 
@@ -63,22 +68,16 @@ export function Footer() {
 
           <div>
             <Text variant="sm" className="font-semibold uppercase tracking-wider text-foreground">
-              Contact
+              Locations
             </Text>
             <ul className="mt-4 space-y-3">
-              {navigation.contact.map((item) => (
+              {navigation.locations.map((item) => (
                 <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
-                  >
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10">
-                      {item.icon}
-                    </span>
+                  <Link href={item.href} className="transition-colors hover:text-foreground">
                     <Text variant="base" className="text-foreground-secondary">
-                      {item.value}
+                      {item.name}
                     </Text>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -86,16 +85,39 @@ export function Footer() {
 
           <div>
             <Text variant="sm" className="font-semibold uppercase tracking-wider text-foreground">
-              Legal
+              Contact
             </Text>
             <ul className="mt-4 space-y-3">
-              {navigation.legal.map((item) => (
+              {navigation.contact.map((item) => (
                 <li key={item.name}>
-                  <Link href={item.href} className="transition-colors hover:text-foreground">
-                    <Text variant="base" className="text-foreground-secondary">
-                      {item.name}
-                    </Text>
-                  </Link>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
+                    >
+                      <span
+                        className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10"
+                        aria-hidden="true"
+                      >
+                        {item.icon}
+                      </span>
+                      <Text variant="base" className="text-foreground-secondary">
+                        {item.value}
+                      </Text>
+                    </a>
+                  ) : (
+                    <span className="inline-flex items-center gap-2">
+                      <span
+                        className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10"
+                        aria-hidden="true"
+                      >
+                        {item.icon}
+                      </span>
+                      <Text variant="base" className="text-foreground-secondary">
+                        {item.value}
+                      </Text>
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

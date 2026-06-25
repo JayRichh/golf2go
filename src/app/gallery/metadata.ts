@@ -1,27 +1,29 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Professional Event Gallery | Golf 2 Go NZ Corporate Entertainment',
-  description: 'Explore our premium corporate entertainment gallery showcasing successful implementations across New Zealand. Professional portable mini golf solutions for business events and functions.',
-  keywords: 'corporate entertainment gallery, business event photos, professional mini golf nz, corporate function setup, team building activities gallery, executive entertainment solutions',
+  title: { absolute: 'Mini Golf & Mini Putt Hire Gallery | Golf 2 Go NZ' },
+  description:
+    'See our portable mini golf and mini putt courses in action — parties, events, fundraisers and corporate functions across New Zealand. Browse the Golf 2 Go gallery.',
   openGraph: {
-    title: 'Professional Event Gallery | Golf 2 Go NZ',
-    description: 'Browse our portfolio of premium corporate entertainment solutions and successful event implementations across New Zealand.',
+    title: 'Mini Golf & Mini Putt Hire Gallery | Golf 2 Go NZ',
+    description:
+      'Browse photos of our portable mini golf hire at events across New Zealand — parties, fundraisers and corporate functions.',
     type: 'website',
     locale: 'en_NZ',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Professional Event Gallery | Golf 2 Go NZ',
-    description: 'Professional corporate entertainment gallery featuring premium portable mini golf solutions for business events.',
+    title: 'Mini Golf & Mini Putt Hire Gallery | Golf 2 Go NZ',
+    description:
+      'Photos of Golf 2 Go portable mini golf hire at events across New Zealand.',
   },
   alternates: {
     canonical: 'https://golf2go.co.nz/gallery',
   },
   other: {
-    'geo.region': 'NZ',
-    'geo.placename': 'New Zealand',
-    'geo.position': '-41.2865;174.7762',
-    'ICBM': '-41.2865, 174.7762',
+    'geo.region': 'NZ-MWT',
+    'geo.placename': 'Palmerston North',
+    'geo.position': '-40.3523;175.6082',
+    ICBM: '-40.3523, 175.6082',
   },
 };

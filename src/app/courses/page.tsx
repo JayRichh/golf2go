@@ -1,7 +1,6 @@
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Metadata } from 'next';
 
 import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
@@ -34,75 +33,75 @@ interface CourseType {
 
 const courses: Course[] = [
   {
-    title: "Premium Single Hole Challenge",
-    description: "Professional entertainment solution perfect for corporate competitions, office events, and executive functions. Features our signature premium setup and dedicated event support.",
+    title: "Hole in One Challenge",
+    description: "Our single-hole challenge — perfect for parties, birthdays, school galas, promotions and corporate events. Quick to set up and a hit with all ages.",
     features: [
-      "Professional event management",
-      "Corporate-grade equipment",
-      "Flexible setup options",
-      "Expert event support",
+      "Delivery, setup and pack-down",
+      "Great for prizes and promotions",
+      "Indoor or outdoor",
+      "Suitable for all ages",
     ],
     image: "/2-parties-and-events-golf2go-portable-miniature-golf.jpg",
     priceRange: "$190 - $500",
-    suitableFor: ["Corporate Events", "Executive Functions", "Professional Competitions"]
+    suitableFor: ["Parties & Birthdays", "Fundraisers", "Corporate Events"]
   },
   {
-    title: "Executive Course Package",
-    description: "Comprehensive corporate entertainment solution with multiple course configurations. Premium setup and professional management for high-end business events.",
+    title: "3, 6 & 9 Hole Courses",
+    description: "Multi-hole portable mini golf courses for bigger events and functions. Mix and match layouts and obstacles for the perfect mini putt experience.",
     features: [
-      "Multiple premium layouts",
-      "Professional operation",
-      "Corporate event support",
-      "Executive-level service",
+      "Multiple course configurations",
+      "Indoor and outdoor setups",
+      "Full delivery and setup",
+      "Ideal for larger groups",
     ],
     image: "/3-fun-portable-mini-golf.jpg",
     priceRange: "$575 - $2500",
-    suitableFor: ["Corporate Functions", "Executive Events", "Business Entertainment"]
+    suitableFor: ["Big Events", "School Galas", "Corporate Functions"]
   },
 ];
 
 const courseTypes: CourseType[] = [
   {
-    name: "Twin Hedges Executive Course",
-    description: "Premium course featuring strategic hedge placements for corporate challenges",
+    name: "Twin Hedges",
+    description: "Portable course with strategic hedge placements for a fun challenge",
     image: "/1-Twin-Hedges-3-3m-x-75m.jpg",
     dimensions: "3.3m x 7.5m",
-    features: ["Professional Design", "Strategic Layout", "Corporate-Grade Equipment"]
+    features: ["Classic Design", "Strategic Layout", "All Ages"]
   },
   {
-    name: "Bridge over the River Premium Course",
-    description: "Signature elevated bridge section for executive entertainment",
+    name: "Bridge over the River",
+    description: "Crowd-pleasing course with an elevated bridge section",
     image: "/19-Bridge-over-the-River-3-3m-x-9m.jpg",
     dimensions: "3.3m x 9m",
-    features: ["Elevated Design", "Professional Setup", "Executive Challenge"]
+    features: ["Elevated Bridge", "Eye-Catching", "Fun Challenge"]
   },
   {
-    name: "Multi Tunnels Professional Course",
-    description: "Advanced course with premium tunnel obstacles for corporate events",
+    name: "Multi Tunnels",
+    description: "Course with multiple tunnel obstacles for extra excitement",
     image: "/15-Multi-tunnels-2-8m-x-9m.jpg",
     dimensions: "2.8m x 9m",
-    features: ["Complex Layout", "Professional Challenge", "Team Building Focus"]
+    features: ["Tunnel Obstacles", "Great for Groups", "Family Friendly"]
   },
   {
-    name: "Holy Bridge Business Course",
-    description: "Premium combination of elevation and precision challenges",
+    name: "Holy Bridge",
+    description: "A fun combination of elevation and precision challenges",
     image: "/16-Holy-Bridge-3-3m-x-75m.jpg",
     dimensions: "3.3m x 7.5m",
-    features: ["Executive Design", "Professional Setup", "Corporate Entertainment"]
+    features: ["Elevated Design", "Precision Play", "All Ages"]
   },
   {
-    name: "Triple Kidney Corporate Course",
-    description: "Professional course with multiple curved sections",
+    name: "Triple Kidney",
+    description: "Flowing course with multiple curved sections",
     image: "/10-Triple-Kidney-3-4m-x-9m.jpg",
     dimensions: "3.4m x 9m",
-    features: ["Premium Layout", "Corporate Events", "Professional Challenge"]
+    features: ["Curved Layout", "Fun for Everyone", "Popular Choice"]
   },
   {
-    name: "Slalom Executive Course",
-    description: "Premium winding course for corporate entertainment",
+    name: "Slalom",
+    description: "Winding course that keeps every putt interesting",
     image: "/12-Slalom-2-8m-x-9m.jpg",
     dimensions: "2.8m x 9m",
-    features: ["Executive Design", "Professional Setup", "Business Events"]
+    features: ["Winding Design", "Challenging", "Family Friendly"]
   },
 ];
 
@@ -130,7 +129,7 @@ export default function CoursesPage() {
             <div className="absolute inset-0 -z-10 w-full">
               <Image
                 src="/3-fun-portable-mini-golf.jpg"
-                alt="Premium Corporate Entertainment Solutions"
+                alt=""
                 fill
                 className="h-full w-full object-cover opacity-30"
                 sizes="100vw"
@@ -171,7 +170,7 @@ export default function CoursesPage() {
               variant="lg"
               className="mx-auto mt-4 max-w-2xl text-center text-foreground-secondary"
               >
-              Professional portable mini golf hire and mini putt course solutions for indoor and outdoor corporate events
+              Portable mini golf hire and mini putt courses for parties, events and corporate functions — indoor or outdoor
             </Text>
           </div>
           <div className="grid gap-8 lg:grid-cols-2">
@@ -187,7 +186,7 @@ export default function CoursesPage() {
                     src={course.image}
                     alt={course.title}
                     fill
-                    className="h-full w-full object-cover transition duration-500 will-change-transform group-hover:scale-105"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                 </div>
@@ -209,7 +208,7 @@ export default function CoursesPage() {
                   </div>
                   <div className="mt-8 flex justify-center">
                     <Link href="/book" className="btn-primary inline-flex items-center gap-2">
-                      <Text variant="base">Request Corporate Booking</Text>
+                      <Text variant="base">Get a Hire Quote</Text>
                       <ArrowRight className="h-5 w-5" />
                     </Link>
                   </div>
@@ -250,7 +249,7 @@ export default function CoursesPage() {
                     src={type.image}
                     alt={type.name}
                     fill
-                    className="h-full w-full object-cover transition duration-500 will-change-transform group-hover:scale-105"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -285,27 +284,27 @@ export default function CoursesPage() {
                 align="center"
                 className="pb-4 font-bold tracking-tight text-primary-foreground"
               >
-                Elevate Your Corporate Events
+                Ready to Book Your Mini Golf Hire?
               </Text>
               <Text
                 variant="lg"
-                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground/90"
+                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground"
               >
-                Contact our professional team to discuss your corporate entertainment requirements
+                Tell us about your event and we&apos;ll send you a free, no-obligation quote
               </Text>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
                   href="/book"
                   className="btn-primary inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 px-8 py-3"
                 >
-                  <Text variant="lg">Request Quote</Text>
+                  <Text variant="lg">Get a Hire Quote</Text>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
                 <Link
                   href="/contact"
                   className="btn-outline inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
                 >
-                  <Text variant="lg">Corporate Inquiries</Text>
+                  <Text variant="lg">Contact Us</Text>
                 </Link>
               </div>
             </div>
@@ -319,16 +318,16 @@ export default function CoursesPage() {
         <Container size="xl">
           <div className="mx-auto max-w-3xl text-center space-y-4">
             <Text variant="lg" className="text-foreground-secondary">
-              Discover our premium range of professional entertainment solutions designed specifically for 
-              corporate events, business functions, and executive entertainment needs.
+              Our portable mini golf courses are designed for fun — perfect for parties, birthdays,
+              fundraisers, school galas, weddings and corporate events across New Zealand.
             </Text>
             <Text variant="base" className="text-foreground-secondary">
-              Each course is meticulously designed to deliver exceptional corporate entertainment experiences, 
-              featuring professional-grade equipment and expert event management services.
+              Choose the Hole in One Challenge or a 3, 6 or 9 hole course, indoors or outdoors. We
+              deliver, set up and pack down everything so you can relax and enjoy the day.
             </Text>
             <Text variant="base" className="text-foreground-secondary">
-              Our comprehensive packages include professional setup, dedicated support, and customizable 
-              configurations to suit various corporate venues and business event requirements.
+              Mix and match course designs to suit your venue and group size. Get in touch for a
+              free quote on portable mini golf and mini putt hire for your event.
             </Text>
           </div>
         </Container>

@@ -20,15 +20,17 @@ export function ImagePreview({ src, alt, title, loading = "lazy", priority = fal
 
   return (
     <>
-      <div
-        className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-lg"
+      <button
+        type="button"
+        aria-label={`Open image: ${title}`}
+        className="group relative block aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
         onClick={() => setIsOpen(true)}
       >
         <Image
           src={src}
           alt={alt}
           fill
-          className="object-cover object-center transition will-change-transform group-hover:scale-105"
+          className="object-cover object-center transition group-hover:scale-105"
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
           loading={loading}
           priority={priority}
@@ -42,11 +44,12 @@ export function ImagePreview({ src, alt, title, loading = "lazy", priority = fal
             </div>
           </div>
         </div>
-      </div>
+      </button>
 
       <Modal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
+        ariaLabel={`Image preview: ${title}`}
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[95vw] max-w-7xl p-0 overflow-hidden"
       >
         <div className="relative aspect-[4/3] w-full">

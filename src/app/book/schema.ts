@@ -2,10 +2,11 @@ export const generateBookingSchema = (baseUrl: string) => ({
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": `${baseUrl}/book#service`,
-  "name": "Golf 2 Go NZ Corporate Entertainment Solutions",
-  "serviceType": "Corporate Entertainment",
+  "name": "Portable Mini Golf & Mini Putt Hire",
+  "serviceType": "Portable Mini Golf Hire",
   "provider": {
     "@type": "Organization",
+    "@id": `${baseUrl}/#organization`,
     "name": "Golf 2 Go NZ",
     "url": baseUrl
   },
@@ -17,36 +18,37 @@ export const generateBookingSchema = (baseUrl: string) => ({
     "@type": "AggregateOffer",
     "priceCurrency": "NZD",
     "availability": "https://schema.org/InStock",
-    "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString(),
-    "offerCount": "7",
+    "lowPrice": "190",
+    "highPrice": "2500",
+    "offerCount": "4",
     "offers": [
       {
         "@type": "Offer",
-        "name": "Single Hole Package",
+        "name": "1 Hole Hire",
         "price": "190.00",
         "priceCurrency": "NZD",
-        "description": "1 Hole Premium Mini Golf Setup"
+        "description": "Single hole portable mini golf setup — ideal for the Hole in One Challenge"
       },
       {
         "@type": "Offer",
-        "name": "Double Hole Package",
-        "price": "260.00",
-        "priceCurrency": "NZD",
-        "description": "2 Holes Premium Mini Golf Setup"
-      },
-      {
-        "@type": "Offer",
-        "name": "Triple Hole Package",
+        "name": "3 Hole Hire",
         "price": "338.00",
         "priceCurrency": "NZD",
-        "description": "3 Holes Premium Mini Golf Setup"
+        "description": "3 hole portable mini golf course hire"
       },
       {
         "@type": "Offer",
-        "name": "Executive Package",
+        "name": "6 Hole Hire",
+        "price": "455.00",
+        "priceCurrency": "NZD",
+        "description": "6 hole portable mini golf course hire"
+      },
+      {
+        "@type": "Offer",
+        "name": "9 Hole Course Hire",
         "price": "575.00",
         "priceCurrency": "NZD",
-        "description": "9 Holes Premium Mini Golf Setup"
+        "description": "Full 9 hole portable mini golf course hire"
       }
     ]
   },
@@ -63,64 +65,42 @@ export const generateBookingSchema = (baseUrl: string) => ({
     },
     "result": {
       "@type": "Reservation",
-      "name": "Corporate Entertainment Booking"
+      "name": "Mini Golf Hire Booking"
     }
   },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Corporate Entertainment Solutions",
+    "name": "Mini Golf Hire Options",
     "itemListElement": [
       {
         "@type": "OfferCatalog",
-        "name": "Corporate Events",
-        "description": "Premium entertainment solutions for corporate functions"
+        "name": "Parties & Events",
+        "description": "Portable mini golf hire for birthdays, parties, fundraisers and community events"
       },
       {
         "@type": "OfferCatalog",
-        "name": "Team Building",
-        "description": "Professional team building activities and solutions"
+        "name": "Corporate & Team Building",
+        "description": "Mini putt hire for corporate functions, conferences and team building"
       },
       {
         "@type": "OfferCatalog",
-        "name": "Executive Functions",
-        "description": "High-end entertainment for executive events"
+        "name": "Schools & Fundraisers",
+        "description": "Mini golf hire for school galas, fairs and fundraising events"
       }
     ]
   },
   "serviceOutput": {
     "@type": "Thing",
-    "name": "Professional Event Experience",
-    "description": "Premium interactive entertainment setup with professional management"
+    "name": "Mini Golf Hire Experience",
+    "description": "Complete portable mini golf course delivered and set up at your venue"
   },
-  "termsOfService": `${baseUrl}/terms`,
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "150",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
-  "review": [
-    {
-      "@type": "Review",
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": "5",
-        "bestRating": "5"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "Corporate Client NZ"
-      },
-      "reviewBody": "Exceptional professional service and premium entertainment solution for our corporate event."
-    }
-  ]
+  "termsOfService": `${baseUrl}/terms`
 });
 
 export const generateFormSchema = (baseUrl: string) => ({
   "@context": "https://schema.org",
   "@type": "WebForm",
-  "name": "Corporate Entertainment Booking Form",
+  "name": "Mini Golf Hire Booking Form",
   "url": `${baseUrl}/book`,
   "encodingType": "application/x-www-form-urlencoded",
   "actionableFeedbackPolicy": `${baseUrl}/terms`,

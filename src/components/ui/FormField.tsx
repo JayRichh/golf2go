@@ -1,5 +1,4 @@
 import { UseFormRegister } from "react-hook-form";
-import { Text } from "./Text";
 
 export interface FormFieldProps {
   name: string;
@@ -26,10 +25,14 @@ export function FormField({
   placeholder,
   rows = 4,
 }: FormFieldProps) {
+  const errorId = `${name}-error`;
   const inputProps = {
+    id: name,
     ...register(name),
-    ...(itemProp ? { 'itemProp': itemProp } : {}),
+    ...(itemProp ? { itemProp } : {}),
     ...(placeholder ? { placeholder } : {}),
+    "aria-invalid": error ? true : undefined,
+    "aria-describedby": error ? errorId : undefined,
     className: `form-input w-full rounded-lg border bg-background px-4 py-2 text-foreground placeholder:text-foreground-secondary/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
       error ? "border-error" : "border-border"
     }`,
@@ -37,10 +40,15 @@ export function FormField({
 
   return (
     <div className="space-y-1">
-      <Text variant="sm" className="font-medium">
+      <label htmlFor={name} className="block text-sm font-medium text-foreground">
         {label}
-        {required && <span className="text-error"> *</span>}
-      </Text>
+        {required && (
+          <span className="text-error" aria-hidden="true">
+            {" "}
+            *
+          </span>
+        )}
+      </label>
 
       {type === "textarea" ? (
         <textarea {...inputProps} rows={rows} />
@@ -58,9 +66,9 @@ export function FormField({
       )}
 
       {error && (
-        <Text variant="sm" className="text-error">
+        <p id={errorId} className="text-sm text-error">
           {error}
-        </Text>
+        </p>
       )}
     </div>
   );

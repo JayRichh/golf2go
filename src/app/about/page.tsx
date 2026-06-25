@@ -1,54 +1,47 @@
-'use client';
-
-import { useEffect } from 'react';
 import { ArrowRight, Heart, Target, Trophy } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Card, CardHeader } from "~/components/ui/Card";
+import { Card } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import { generateAboutSchema, generateValuesSchema } from './schema';
 
+export { generateMetadata } from './metadata';
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
 
 const values = [
   {
-    name: "Professional Excellence",
-    description: "We deliver premium quality corporate entertainment experiences with unmatched professionalism.",
+    name: "Easy & Hassle-Free",
+    description: "We deliver, set up and pack down the course so you can focus on your event.",
     icon: Trophy,
   },
   {
-    name: "Executive Focus",
-    description: "Dedicated to exceeding expectations for corporate clients and business events.",
+    name: "Fun for All Ages",
+    description: "From kids' birthdays to corporate team building, mini golf brings everyone together.",
     icon: Heart,
   },
   {
-    name: "Business Innovation",
-    description: "Continuously enhancing our premium solutions for corporate entertainment needs.",
+    name: "Trusted Since 2008",
+    description: "New Zealand's first portable mini golf company, with thousands of events delivered.",
     icon: Target,
   },
 ];
 
 export default function AboutPage() {
-  // Add schema.org markup
-  useEffect(() => {
-    const aboutSchema = generateAboutSchema(baseUrl);
-    const valuesSchema = generateValuesSchema(values);
-    
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify([aboutSchema, valuesSchema]);
-    document.head.appendChild(script);
-    
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  const aboutSchema = generateAboutSchema(baseUrl);
+  const valuesSchema = generateValuesSchema(values);
 
   return (
     <div className="overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([aboutSchema, valuesSchema]),
+        }}
+      />
       {/* Hero Section */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
@@ -56,7 +49,7 @@ export default function AboutPage() {
             <div className="absolute inset-0 -z-10 w-full">
               <Image
                 src="/3-fun-portable-mini-golf.jpg"
-                alt="Premium Corporate Entertainment Solutions by Golf 2 Go NZ"
+                alt=""
                 fill
                 className="h-full w-full object-cover opacity-30"
                 sizes="100vw"
@@ -65,21 +58,21 @@ export default function AboutPage() {
             </div>
             <Container size="xl">
               <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                <Text 
-                  variant="h1" 
-                  align="center" 
+                <Text
+                  variant="h1"
+                  align="center"
                   className="text-primary-foreground"
                   itemProp="name"
                 >
-                  Professional Entertainment Solutions
+                  About Golf 2 Go — Portable Mini Golf &amp; Mini Putt Hire
                 </Text>
-                <Text 
-                  variant="xl" 
-                  className="mt-6 text-primary-foreground/90"
+                <Text
+                  variant="xl"
+                  className="mt-6 text-primary-foreground"
                   itemProp="description"
                 >
-                  New Zealand's leading provider of premium corporate entertainment and event solutions. 
-                  Established in 2008, we've grown to become the trusted partner for business events nationwide.
+                  New Zealand&apos;s first portable mini golf company. Since 2008 we&apos;ve brought
+                  mini putt fun to parties, events and corporate functions right across the country.
                 </Text>
               </div>
             </Container>
@@ -94,7 +87,7 @@ export default function AboutPage() {
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
               <Image
                 src="/4-portable-miniature-golf.jpg"
-                alt="Professional Corporate Event Solutions"
+                alt="A Golf 2 Go portable mini golf course set up for an event"
                 fill
                 className="h-full w-full object-cover"
                 sizes="(min-width: 1024px) 50vw, 100vw"
@@ -102,21 +95,22 @@ export default function AboutPage() {
             </div>
             <div className="flex flex-col justify-center">
               <Text variant="h2" className="text-foreground">
-                Corporate Excellence
+                Our Story
               </Text>
-              <Text 
-                variant="lg" 
+              <Text
+                variant="lg"
                 className="mt-6 text-foreground-secondary"
                 itemProp="description"
               >
-                Our mission is to deliver exceptional corporate entertainment experiences through innovative 
-                portable solutions. We specialize in premium event entertainment, professional team building 
-                activities, and executive function solutions. With a focus on business excellence, we create 
-                memorable experiences that enhance corporate culture and professional relationships.
+                Golf 2 Go started in 2008 as New Zealand&apos;s first portable mini golf company,
+                based in Palmerston North. Today we hire out portable mini golf and mini putt courses
+                for birthdays, school galas, fundraisers, weddings, corporate events and team
+                building — delivered and set up anywhere in New Zealand. Our goal is simple: easy,
+                memorable fun for every kind of event.
               </Text>
               <div className="mt-8">
                 <Link href="/book" className="btn-primary inline-flex items-center gap-2">
-                  <Text variant="base">Request Corporate Booking</Text>
+                  <Text variant="base">Get a Hire Quote</Text>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </div>
@@ -130,13 +124,13 @@ export default function AboutPage() {
         <Container size="xl">
           <div className="text-center">
             <Text variant="h2" align="center" className="text-foreground">
-              Professional Standards
+              Why People Choose Golf 2 Go
             </Text>
             <Text
               variant="lg"
               className="mx-auto mt-6 max-w-2xl text-center text-foreground-secondary"
             >
-              Our commitment to corporate excellence is guided by these core principles
+              What makes our portable mini golf hire so popular
             </Text>
           </div>
           <div className="mx-auto mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -173,27 +167,27 @@ export default function AboutPage() {
                 align="center"
                 className="pb-4 font-bold tracking-tight text-primary-foreground"
               >
-                Elevate Your Corporate Events
+                Ready to Book Your Mini Golf Hire?
               </Text>
               <Text
                 variant="lg"
-                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground/90"
+                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground"
               >
-                Partner with New Zealand's leading corporate entertainment provider for premium event solutions.
+                Tell us about your event and we&apos;ll send you a free, no-obligation quote.
               </Text>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Link
                   href="/book"
                   className="btn-primary inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 px-8 py-3"
                 >
-                  <Text variant="lg">Request Quote</Text>
+                  <Text variant="lg">Get a Hire Quote</Text>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
                 <Link
                   href="/contact"
                   className="btn-outline inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
                 >
-                  <Text variant="lg">Corporate Inquiries</Text>
+                  <Text variant="lg">Contact Us</Text>
                 </Link>
               </div>
             </div>
@@ -207,16 +201,16 @@ export default function AboutPage() {
         <Container size="xl">
           <div className="mx-auto max-w-3xl text-center space-y-4">
             <Text variant="lg" className="text-foreground-secondary">
-              Golf 2 Go NZ is New Zealand's premier provider of professional corporate entertainment solutions, 
-              specializing in premium portable mini golf experiences for business events and functions.
+              Golf 2 Go is New Zealand&apos;s original portable mini golf and mini putt hire company,
+              based in Palmerston North and serving events nationwide.
             </Text>
             <Text variant="base" className="text-foreground-secondary">
-              Our executive-level service includes comprehensive event planning, professional setup, and 
-              dedicated support for corporate functions, team building activities, and business entertainment needs.
+              We deliver and set up complete mini golf courses for birthdays, parties, school galas,
+              fundraisers, weddings, corporate functions and team building — indoors or outdoors.
             </Text>
             <Text variant="base" className="text-foreground-secondary">
-              With nationwide coverage and a focus on corporate excellence, we deliver premium entertainment 
-              solutions that enhance professional events and business relationships across New Zealand.
+              From Wellington and the Manawatu to New Plymouth and Taranaki, our portable mini golf
+              hire makes any event more fun. Get in touch for a free quote.
             </Text>
           </div>
         </Container>

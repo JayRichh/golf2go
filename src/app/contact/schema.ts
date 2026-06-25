@@ -1,47 +1,38 @@
 export const generateContactSchema = (baseUrl: string) => ({
   "@context": "https://schema.org",
   "@type": "ContactPage",
-  "name": "Contact Golf 2 Go NZ - Professional Corporate Entertainment",
+  "name": "Contact Golf 2 Go NZ — Mini Golf & Mini Putt Hire",
   "url": `${baseUrl}/contact`,
-  "description": "Contact New Zealand's leading corporate entertainment provider for premium portable mini golf solutions and business event planning.",
+  "description": "Contact Golf 2 Go for portable mini golf and mini putt hire across New Zealand.",
   "mainEntity": {
     "@type": "LocalBusiness",
+    "@id": `${baseUrl}/#organization`,
     "name": "Golf 2 Go NZ",
     "url": baseUrl,
     "telephone": "+64-21-849931",
-    "email": "info@golf2go.co.nz",
+    "email": "admin@golf2go.co.nz",
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "NZ",
-      "addressRegion": "New Zealand"
+      "addressLocality": "Palmerston North",
+      "addressRegion": "Manawatu-Whanganui",
+      "addressCountry": "NZ"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "-41.2865",
-      "longitude": "174.7762"
+      "latitude": "-40.3523",
+      "longitude": "175.6082"
     },
-    "areaServed": [
-      {
-        "@type": "Country",
-        "name": "New Zealand"
-      },
-      {
-        "@type": "State",
-        "name": "North Island"
-      },
-      {
-        "@type": "State", 
-        "name": "South Island"
-      }
-    ],
+    "areaServed": {
+      "@type": "Country",
+      "name": "New Zealand"
+    },
     "serviceType": [
-      "Corporate Entertainment",
-      "Business Event Planning",
-      "Team Building Activities",
-      "Executive Functions",
-      "Professional Mini Golf Hire"
+      "Portable Mini Golf Hire",
+      "Mini Putt Hire",
+      "Party & Event Hire",
+      "Corporate & Team Building"
     ],
-    "priceRange": "$$",
+    "priceRange": "$190-$2500",
     "openingHours": "Mo-Su 08:00-20:00",
     "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
     "currenciesAccepted": "NZD"
@@ -59,16 +50,16 @@ export const generateContactSchema = (baseUrl: string) => ({
 export const generateContactFormSchema = () => ({
   "@context": "https://schema.org",
   "@type": "ContactPoint",
-  "contactType": "Corporate Bookings",
+  "contactType": "customer service",
   "telephone": "+64-21-849931",
-  "email": "info@golf2go.co.nz",
+  "email": "admin@golf2go.co.nz",
   "availableLanguage": ["English"],
   "areaServed": "NZ",
   "hoursAvailable": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": [
       "Monday",
-      "Tuesday", 
+      "Tuesday",
       "Wednesday",
       "Thursday",
       "Friday",

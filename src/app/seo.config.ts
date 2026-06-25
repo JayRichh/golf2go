@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import { seoKeywords } from '~/utils/sitemap'
 
 export type MetadataProps = {
   title?: string
@@ -29,29 +28,13 @@ const defaultImages = [
   }
 ]
 
-const VALID_PATHS = new Set(['', 'about', 'courses', 'gallery', 'book', 'terms'])
-
-// Priority SEO Keywords from Search Console (0-click opportunities)
-const priorityKeywords = [
-  'mini putt',
-  'indoor mini golf palmerston north',
-  'new plymouth mini golf',
-  'mini golf wellington',
-  'portable mini golf hire',
-  'mini putt hire',
-  'portable mini putt',
-  'indoor mini golf wellington',
-  'mini golf palmerston north',
-  'mini golf new plymouth',
-  'portable mini golf wellington',
-  'portable mini golf taranaki',
-  'mini golf taranaki'
-]
-
 const canonical = (p?: string) => {
   if (!p) return BASE_URL
-  const clean = p.replace(/^\/+/, '').toLowerCase()
-  return VALID_PATHS.has(clean) && clean ? `${BASE_URL}/${clean}` : BASE_URL
+  const clean = p.replace(/^\/+/, '').replace(/\/+$/, '').toLowerCase()
+  // Resolve every page to its own URL. An unrecognised non-empty path still
+  // canonicalises to itself rather than silently collapsing to the homepage
+  // (which would de-index the page).
+  return clean ? `${BASE_URL}/${clean}` : BASE_URL
 }
 
 /* ------------------------------------------------------------------ */
@@ -59,20 +42,26 @@ const canonical = (p?: string) => {
 export function generateMetadata({
   title,
   description,
-  keywords = [],
   path,
   images = defaultImages
 }: MetadataProps): Metadata {
-  const fullTitle = `${title ? `${title} | ` : ''}Golf 2 Go NZ - Mini Putt & Portable Mini Golf Hire`
+  // Append a short, brand-only suffix and guard against double-branding so the
+  // rendered <title> stays under ~60 chars (Google SERP truncation point).
+  const fullTitle = title
+    ? /golf 2 go/i.test(title)
+      ? title
+      : `${title} | Golf 2 Go NZ`
+    : 'Golf 2 Go NZ | Mini Putt & Portable Mini Golf Hire NZ'
   const fullDesc =
     description ??
-    "New Zealand's leading portable mini golf hire and mini putt service. Professional indoor mini golf Palmerston North, mini golf Wellington, New Plymouth mini golf. Nationwide portable mini golf hire."
+    "Hire portable mini golf & mini putt anywhere in NZ — Wellington, Palmerston North, New Plymouth & Taranaki. Full delivery and setup, from $190. Get a free quote."
   const url = canonical(path)
 
   return {
-    title: fullTitle,
+    // `absolute` bypasses the root layout's title.template so the brand suffix
+    // is not appended a second time.
+    title: { absolute: fullTitle },
     description: fullDesc,
-    keywords: [...new Set([...priorityKeywords, ...keywords, ...seoKeywords])].join(', '),
     authors: [{ name: 'Golf 2 Go NZ' }],
     creator: 'Golf 2 Go NZ',
     publisher: 'Golf 2 Go NZ',
@@ -96,7 +85,6 @@ export function generateMetadata({
     robots: {
       index: true,
       follow: true,
-      nocache: true,
       googleBot: {
         index: true,
         follow: true,

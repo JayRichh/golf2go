@@ -52,7 +52,7 @@ export async function generateMetadata() {
   ]
 
   const metadata = baseGenerateMetadata({
-    title: 'Mini Putt & Portable Mini Golf Hire | Wellington, Palmerston North, New Plymouth',
+    title: 'Mini Putt & Portable Mini Golf Hire NZ',
     description: 'Professional mini putt and portable mini golf hire across New Zealand. Indoor mini golf Palmerston North, mini golf Wellington, New Plymouth mini golf services. Mobile mini putt setup for corporate events nationwide.',
     keywords: pageKeywords,
     path: '',

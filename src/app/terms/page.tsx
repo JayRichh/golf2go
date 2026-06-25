@@ -1,6 +1,3 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import { Download } from 'lucide-react';
 import Image from "next/image";
 
@@ -9,26 +6,22 @@ import { GradientBackground } from '~/components/ui/GradientBackground';
 import { Text } from '~/components/ui/Text';
 import { generateTermsSchema, generatePdfSchema } from './schema';
 
+export { generateMetadata } from './metadata';
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
-const termsSchema = generateTermsSchema(baseUrl);
-const pdfSchema = generatePdfSchema(baseUrl);
 
 export default function Terms() {
-  const [scale, _setScale] = useState(100);
-
-  // Add schema.org markup
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify([termsSchema, pdfSchema]);
-    document.head.appendChild(script);
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
+  const termsSchema = generateTermsSchema(baseUrl);
+  const pdfSchema = generatePdfSchema(baseUrl);
 
   return (
     <div className="overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([termsSchema, pdfSchema]),
+        }}
+      />
       {/* Hero Section */}
       <section className="relative bg-primary">
         <GradientBackground variant="glow">
@@ -36,7 +29,7 @@ export default function Terms() {
             <div className="absolute inset-0 -z-10 w-full">
               <Image
                 src="/4-portable-miniature-golf.jpg"
-                alt="Golf 2 Go Professional Terms and Conditions"
+                alt=""
                 fill
                 className="h-full w-full object-cover opacity-30"
                 sizes="100vw"
@@ -45,20 +38,20 @@ export default function Terms() {
             </div>
             <Container size="xl">
               <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                <Text 
-                  variant="h1" 
-                  align="center" 
+                <Text
+                  variant="h1"
+                  align="center"
                   className="text-primary-foreground"
                   itemProp="name"
                 >
                   Terms and Conditions
                 </Text>
-                <Text 
-                  variant="xl" 
-                  className="mt-6 text-primary-foreground/90"
+                <Text
+                  variant="xl"
+                  className="mt-6 text-primary-foreground"
                   itemProp="description"
                 >
-                  Comprehensive terms for premium corporate entertainment and event solutions
+                  Terms for portable mini golf and mini putt hire
                 </Text>
               </div>
             </Container>
@@ -90,11 +83,7 @@ export default function Terms() {
               <iframe
                 src="/TERMS%20AND%20CONDITIONS%20OF%20HIRE%202025-26.pdf"
                 className="w-full h-[calc(100vh-300px)] border-0"
-                style={{
-                  transform: `scale(${scale / 100})`,
-                  transformOrigin: 'top center'
-                }}
-                title="Professional Terms and Conditions Document"
+                title="Golf 2 Go Terms and Conditions of Hire"
                 itemProp="url"
               />
             </div>
@@ -106,10 +95,15 @@ export default function Terms() {
               Last Updated: January 2025 • Version: 2025-26
             </Text>
             <Text variant="sm" className="text-foreground-secondary">
-              These terms cover our premium corporate entertainment services, event solutions, and professional equipment hire.
+              These terms cover our portable mini golf and mini putt hire, delivery, setup and
+              equipment.
             </Text>
             <Text variant="sm" className="text-foreground-secondary">
-              For inquiries about our terms or corporate bookings, please <a href="https://www.golf2go.co.nz/book" className="text-primary hover:underline">contact our professional team</a>.
+              For questions about our terms or to make a booking, please{" "}
+              <a href="/book" className="text-primary hover:underline">
+                get a hire quote
+              </a>
+              .
             </Text>
           </div>
         </Container>

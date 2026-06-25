@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Metadata } from 'next';
 
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
@@ -287,7 +286,7 @@ export default function GalleryPage() {
             <div className="absolute inset-0 -z-10 w-full">
               <Image
                 src="/3-fun-portable-mini-golf.jpg"
-                alt="Premium Corporate Entertainment Solutions Gallery"
+                alt=""
                 fill
                 className="h-full w-full object-cover opacity-30"
                 sizes="100vw"
@@ -302,14 +301,14 @@ export default function GalleryPage() {
                   className="font-bold tracking-tight text-primary-foreground"
                   itemProp="name"
                 >
-                  Professional Event Gallery
+                  Mini Golf &amp; Mini Putt Hire Gallery
                 </Text>
                 <Text
                   variant="xl"
-                  className="mt-6 text-primary-foreground/90 text-center"
+                  className="mt-6 text-primary-foreground text-center"
                   itemProp="description"
                 >
-                  Explore our premium corporate entertainment solutions and successful event implementations
+                  See our portable mini golf courses in action at parties, events and functions across New Zealand
                 </Text>
               </div>
             </Container>
@@ -358,13 +357,13 @@ export default function GalleryPage() {
           <Container size="xl" className="mt-16">
           <div className="mx-auto max-w-3xl text-center space-y-4">
             <Text variant="lg" className="text-foreground-secondary">
-              Discover our premium corporate entertainment solutions showcasing successful implementations across New Zealand's leading businesses and events.
+              Browse our portable mini golf and mini putt courses set up at events across New Zealand — parties, birthdays, fundraisers, weddings and corporate functions.
             </Text>
             <Text variant="base" className="text-foreground-secondary">
-              Our professional event gallery features custom course setups, corporate functions, team building activities, and executive entertainment solutions.
+              From the Hole in One Challenge to full 9 hole courses, every setup is delivered, installed and packed down by our team.
             </Text>
             <Text variant="base" className="text-foreground-secondary">
-              Each setup is tailored to deliver premium experiences for corporate events, professional functions, and business entertainment needs.
+              Like what you see? Get in touch for a free quote on mini golf hire for your next event.
             </Text>
           </div>
           </Container>
