@@ -13,16 +13,6 @@
     --radius: 0.375rem;
   }
 
-  .dark {
-    --background: #000000;
-    --background-secondary: #1a1a1a;
-    --foreground: #ffffff;
-    --foreground-secondary: #cccccc;
-    --primary: #00ff00; /* Bright green for dark mode */
-    --primary-foreground: #000000;
-    --border: #333333;
-  }
-
   body {
     @apply min-h-screen bg-background text-foreground antialiased;
     overflow-x: hidden;

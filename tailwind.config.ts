@@ -64,7 +64,7 @@ const config: Config = {
         full: "9999px",
       },
       fontFamily: {
-        sans: ["Arial", "sans-serif"],
+        sans: ["var(--font-geist)", "Arial", "sans-serif"],
         mono: ["Courier New", "monospace"],
       },
       boxShadow: {

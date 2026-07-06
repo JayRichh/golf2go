@@ -280,9 +280,7 @@ export default function SimpleBookingForm() {
         <Container glass className="p-6" itemScope itemType="https://schema.org/Offer">
           <meta itemProp="priceCurrency" content="NZD" />
           <meta itemProp="availability" content="https://schema.org/InStock" />
-          <meta itemProp="validFrom" content="2025-01-01T00:00:00.000Z" />
-          <meta itemProp="priceValidUntil" content="2025-12-31T23:59:59.999Z" />
-          
+
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/50 bg-background-secondary/30 p-4 rounded-t-lg">
             <div className="flex items-center gap-3">
               <Text variant="h4">Estimated Price</Text>

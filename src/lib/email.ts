@@ -18,8 +18,8 @@ type SimpleFormData = {
 type EmailFormData = ComplexFormData | SimpleFormData;
 
 const SMTP2GO_API_URL = "https://api.smtp2go.com/v3/email/send";
-const SENDER_EMAIL = "contact@golf2go.nz";
-const RECIPIENT_EMAIL = "golf2go2017@gmail.com";
+const SENDER_EMAIL = process.env.SMTP_SENDER_EMAIL || "contact@golf2go.nz";
+const RECIPIENT_EMAIL = process.env.CONTACT_RECIPIENT_EMAIL || "golf2go2017@gmail.com";
 
 // Type guard to check if form data is simple form
 function isSimpleFormData(data: EmailFormData): data is SimpleFormData {

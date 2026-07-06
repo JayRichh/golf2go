@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import { canonical } from '../seo.config';
+
 export const metadata: Metadata = {
   title: { absolute: 'Contact Golf 2 Go NZ | Mini Golf & Mini Putt Hire' },
   description:
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
       'Contact Golf 2 Go for portable mini golf and mini putt hire across New Zealand.',
   },
   alternates: {
-    canonical: 'https://golf2go.co.nz/contact',
+    canonical: canonical('contact'),
   },
   other: {
     'geo.region': 'NZ-MWT',

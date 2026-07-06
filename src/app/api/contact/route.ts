@@ -52,8 +52,6 @@ const simpleFormSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
-  console.log("Starting booking request process...");
-
   try {
     if (!process.env.NEXT_SMTP_KEY) {
       console.error("Missing SMTP key environment variable");
@@ -64,20 +62,18 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    console.log("Received request data");
 
     // Determine form type and validate accordingly
     let validatedData;
     const isSimpleForm = 'eventLocation' in body || 'numberOfParticipants' in body;
-    
+
     try {
       if (isSimpleForm) {
         validatedData = simpleFormSchema.parse(body);
-        console.log("Simple form validation passed");
-        
+
         // Simple honeypot check - if filled, it's a bot
         if (validatedData._honeypot && validatedData._honeypot.trim() !== '') {
-          console.log("Bot detected via honeypot");
+          console.warn("Bot detected via honeypot");
           return NextResponse.json(
             { error: "Security check failed" },
             { status: 400 }
@@ -85,12 +81,14 @@ export async function POST(request: NextRequest) {
         }
       } else {
         validatedData = complexFormSchema.parse(body);
-        console.log("Complex form validation passed");
       }
     } catch (error) {
-      console.error("Form validation failed:", error);
+      console.error(
+        "Form validation failed:",
+        error instanceof z.ZodError ? error.errors : error
+      );
       return NextResponse.json(
-        { error: "Invalid form data", details: error instanceof z.ZodError ? error.errors : String(error) },
+        { error: "Invalid form data" },
         { status: 400 }
       );
     }
@@ -108,7 +106,6 @@ export async function POST(request: NextRequest) {
     // Send email using the consolidated email service
     await sendEmail(emailData);
 
-    console.log("Email sent successfully");
     return NextResponse.json(
       { message: "Booking request sent successfully" },
       { status: 200 }
@@ -116,10 +113,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Unexpected error in booking request:", error);
     return NextResponse.json(
-      {
-        error: "Internal server error",
-        details: error instanceof Error ? error.message : String(error)
-      },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

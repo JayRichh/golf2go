@@ -87,7 +87,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    nocache: true,
     googleBot: {
       index: true,
       follow: true,
@@ -129,6 +128,14 @@ const organizationSchema = {
   telephone: "+64-21-849931",
   email: "admin@golf2go.co.nz",
   priceRange: "$190-$2500",
+  serviceType: [
+    "Portable Mini Golf Hire",
+    "Mini Putt Hire",
+    "Party & Event Hire",
+    "Corporate & Team Building"
+  ],
+  paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"],
+  currenciesAccepted: "NZD",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Palmerston North",

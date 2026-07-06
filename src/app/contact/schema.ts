@@ -1,3 +1,5 @@
+// The full LocalBusiness node with @id `${baseUrl}/#organization` is declared
+// once in the root layout. Reference it by @id here instead of redeclaring it.
 export const generateContactSchema = (baseUrl: string) => ({
   "@context": "https://schema.org",
   "@type": "ContactPage",
@@ -5,37 +7,7 @@ export const generateContactSchema = (baseUrl: string) => ({
   "url": `${baseUrl}/contact`,
   "description": "Contact Golf 2 Go for portable mini golf and mini putt hire across New Zealand.",
   "mainEntity": {
-    "@type": "LocalBusiness",
-    "@id": `${baseUrl}/#organization`,
-    "name": "Golf 2 Go NZ",
-    "url": baseUrl,
-    "telephone": "+64-21-849931",
-    "email": "admin@golf2go.co.nz",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Palmerston North",
-      "addressRegion": "Manawatu-Whanganui",
-      "addressCountry": "NZ"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "-40.3523",
-      "longitude": "175.6082"
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "New Zealand"
-    },
-    "serviceType": [
-      "Portable Mini Golf Hire",
-      "Mini Putt Hire",
-      "Party & Event Hire",
-      "Corporate & Team Building"
-    ],
-    "priceRange": "$190-$2500",
-    "openingHours": "Mo-Su 08:00-20:00",
-    "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
-    "currenciesAccepted": "NZD"
+    "@id": `${baseUrl}/#organization`
   },
   "potentialAction": {
     "@type": "CommunicateAction",

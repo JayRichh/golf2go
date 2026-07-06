@@ -28,7 +28,7 @@ const defaultImages = [
   }
 ]
 
-const canonical = (p?: string) => {
+export const canonical = (p?: string) => {
   if (!p) return BASE_URL
   const clean = p.replace(/^\/+/, '').replace(/\/+$/, '').toLowerCase()
   // Resolve every page to its own URL. An unrecognised non-empty path still

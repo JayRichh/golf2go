@@ -4,7 +4,6 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 31536000,
-    domains: ['golf2go.co.nz', 'www.golf2go.co.nz'],
     remotePatterns: [{ protocol: 'https', hostname: '**.golf2go.co.nz' }]
   },
   async headers() {
