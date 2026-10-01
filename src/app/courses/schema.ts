@@ -69,6 +69,7 @@ export const generateCourseTypesSchema = (baseUrl: string) => ({
       "item": {
         "@type": "Service",
         "name": "Twin Hedges",
+        "provider": { "@id": ORG_ID },
         "description": "Portable mini golf course, 3.3m x 7.5m, with strategic hedge placements",
         "image": `${baseUrl}/1-Twin-Hedges-3-3m-x-75m.jpg`,
         "brand": {
@@ -95,6 +96,7 @@ export const generateCourseTypesSchema = (baseUrl: string) => ({
       "item": {
         "@type": "Service",
         "name": "Bridge over the River",
+        "provider": { "@id": ORG_ID },
         "description": "Portable mini golf course, 3.3m x 9m, with an elevated bridge section",
         "image": `${baseUrl}/19-Bridge-over-the-River-3-3m-x-9m.jpg`,
         "brand": {
@@ -121,6 +123,7 @@ export const generateCourseTypesSchema = (baseUrl: string) => ({
       "item": {
         "@type": "Service",
         "name": "Multi Tunnels",
+        "provider": { "@id": ORG_ID },
         "description": "Portable mini golf course, 2.8m x 9m, with multiple tunnel obstacles",
         "image": `${baseUrl}/15-Multi-tunnels-2-8m-x-9m.jpg`,
         "brand": {
@@ -167,6 +170,7 @@ export const generateServiceSchema = (baseUrl: string) => ({
         "itemOffered": {
           "@type": "Service",
           "name": "Parties & Events Hire",
+          "provider": { "@id": ORG_ID },
           "description": "Portable mini golf hire for birthdays, parties, fundraisers and community events"
         }
       },
@@ -175,6 +179,7 @@ export const generateServiceSchema = (baseUrl: string) => ({
         "itemOffered": {
           "@type": "Service",
           "name": "Corporate & Team Building Hire",
+          "provider": { "@id": ORG_ID },
           "description": "Mini putt hire for corporate functions, conferences and team building"
         }
       }

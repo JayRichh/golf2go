@@ -9,7 +9,8 @@ const APP_DIR = join('.next', 'server', 'app')
 const errors = []
 // Measure visible length: React HTML-escapes &, ' and " inside <title>/<meta>,
 // which would otherwise inflate the raw count ("&" becomes "&amp;", +4 chars).
-const decode = s => s.replace(/&amp;/g, '&').replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+// &amp; is decoded last so an escaped entity such as "&amp;quot;" stays literal.
+const decode = s => s.replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
 
 function walk(dir, out = []) {
   for (const name of readdirSync(dir)) {
@@ -42,6 +43,10 @@ for (const file of pages) {
     try { json = JSON.parse(block[1]) } catch (e) { errors.push(`${rel}: invalid JSON-LD: ${e.message}`); continue }
     const text = JSON.stringify(json)
     for (const t of FORBID_TYPES) if (text.includes(`"@type":"${t}"`)) errors.push(`${rel}: forbidden @type ${t}`)
+  }
+  // Microdata is structured data too: itemtype="https://schema.org/<Type>".
+  for (const t of FORBID_TYPES) {
+    if (new RegExp(`itemtype=["']https?://schema\.org/${t}["']`, 'i').test(html)) errors.push(`${rel}: forbidden microdata itemtype ${t}`)
   }
 }
 

@@ -143,14 +143,12 @@ export default function CoursesPage() {
                   variant="h1" 
                   align="center" 
                   className="tracking-tight text-primary-foreground"
-                  itemProp="name"
                 >
                   Portable Mini Golf Courses & Mini Putt Solutions
                 </Text>
                 <Text
                   variant="xl"
                   className="mt-6 text-primary-foreground/90"
-                  itemProp="description"
                 >
                   Professional portable mini golf course hire and mini putt setups featuring indoor mini golf options for corporate events across New Zealand
                 </Text>
@@ -161,7 +159,7 @@ export default function CoursesPage() {
       </section>
 
       {/* Main Course Options */}
-      <section className="py-24" itemScope itemType="https://schema.org/OfferCatalog">
+      <section className="py-24">
         <Container size="xl">
           <div className="text-center mb-16">
             <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
