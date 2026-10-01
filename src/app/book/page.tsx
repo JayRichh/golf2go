@@ -1,11 +1,8 @@
-import Image from "next/image";
-
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
 
 import SimpleBookingForm from "./SimpleBookingForm";
 import { HelpSection } from "./components/HelpSection";
-import { QuickTips } from "./components/QuickTips";
 import { generateBookingSchema, generateFormSchema } from "./schema";
 import { SITE_URL } from '~/lib/site';
 
@@ -25,55 +22,30 @@ export default function BookPage() {
           __html: JSON.stringify([bookingSchema, formSchema]),
         }}
       />
-      {/* Hero Section */}
-      <section className="relative bg-primary text-primary-foreground">
-          <div className="relative isolate overflow-hidden py-32 md:py-40">
-            <div className="absolute inset-0 -z-10 w-full">
-              <Image
-                src="/2-parties-and-events-golf2go-portable-miniature-golf.jpg"
-                alt=""
-                fill
-                className="h-full w-full object-cover opacity-30"
-                sizes="100vw"
-                priority
-              />
-            </div>
-            <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                <Text variant="h1" align="center" className="text-primary-foreground">
-                  Book Mini Golf Hire
-                </Text>
-                <Text
-                  variant="xl"
-                  align="center"
-                  className="mt-6 text-primary-foreground"
-                >
-                  Fill out the form below and we&apos;ll get back to you with a free quote
-                </Text>
-              </div>
-            </Container>
-          </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="py-12 md:py-16">
-        <Container size="xl" className="">
-          <div className="grid gap-8 xl:grid-cols-[1fr_300px]">
-            <div className="space-y-8">
-              {/* Quick Tips */}
-              <QuickTips />
-
-              {/* Booking Form */}
+      <Container size="xl" className="pb-16 pt-8 md:pb-24 md:pt-10">
+        <div className="grid gap-12 xl:grid-cols-[1fr_300px]">
+          <div className="min-w-0">
+            <header className="max-w-3xl">
+              <Text variant="h1">Book Mini Golf Hire</Text>
+              <Text variant="lg" className="mt-3 text-foreground-secondary">
+                Fill out the form below and we&apos;ll get back to you with a free quote
+              </Text>
+              <Text variant="sm" className="mt-2 block text-foreground-secondary">
+                <strong className="font-semibold text-foreground">Quick Tips:</strong> The more
+                details you provide, the better we can tailor our service to your event. All fields
+                marked with * are required.
+              </Text>
+            </header>
+            <div className="mt-8">
               <SimpleBookingForm />
             </div>
-
-            {/* Help Section - Sidebar */}
-            <aside className="lg:sticky lg:top-8 lg:self-start">
-              <HelpSection />
-            </aside>
           </div>
-        </Container>
-      </section>
+
+          <aside className="xl:sticky xl:top-24 xl:self-start">
+            <HelpSection />
+          </aside>
+        </div>
+      </Container>
     </div>
   );
 }

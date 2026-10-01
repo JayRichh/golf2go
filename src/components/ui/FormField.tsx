@@ -33,7 +33,7 @@ export function FormField({
     ...(placeholder ? { placeholder } : {}),
     "aria-invalid": error ? true : undefined,
     "aria-describedby": error ? errorId : undefined,
-    className: `form-input w-full rounded-lg border bg-background px-4 py-2 text-foreground placeholder:text-foreground-secondary/50 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
+    className: `form-input w-full rounded-lg border bg-background px-4 py-2 text-foreground placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary ${
       error ? "border-error" : "border-border"
     }`,
   };

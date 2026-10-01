@@ -18,7 +18,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-white shadow-sm backdrop-blur-md">
+    <nav className="sticky top-0 z-50 border-b border-border bg-white shadow-sm">
       <Container size="xl" className="px-3 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           <div className="flex items-center gap-8">
@@ -63,15 +63,15 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 md:gap-6">
-            {/* Always visible phone number - mobile first approach */}
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-6">
+            {/* Always visible call link: icon-only 44px target on phones, number from sm up */}
             <a
               href="tel:021849931"
-              className="flex items-center gap-1.5 md:gap-2 text-[14px] md:text-[15px] font-medium text-gray-700 transition-colors hover:text-primary"
+              className="inline-flex h-11 min-w-11 items-center justify-center gap-1.5 text-[14px] font-medium text-gray-700 transition-colors hover:text-primary md:gap-2 md:text-[15px]"
               aria-label="Call us at 021 849931"
             >
               <svg
-                className="h-4 w-4 flex-shrink-0"
+                className="h-5 w-5 flex-shrink-0 sm:h-4 sm:w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="2"
@@ -84,11 +84,11 @@ export function Navbar() {
                   d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
                 />
               </svg>
-              <span className="whitespace-nowrap">021 849931</span>
+              <span className="hidden whitespace-nowrap sm:inline">021 849931</span>
             </a>
             <Link 
               href="/book" 
-              className="btn-primary hidden sm:inline-flex"
+              className="btn-primary inline-flex min-h-11 whitespace-nowrap"
               aria-label="Book Now"
             >
               Book Now
@@ -96,7 +96,7 @@ export function Navbar() {
 
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 transition-colors hover:bg-gray-100 hover:text-primary sm:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md text-gray-700 transition-colors hover:bg-gray-100 hover:text-primary sm:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
@@ -162,17 +162,6 @@ export function Navbar() {
                 </Link>
               );
             })}
-            {/* Phone number removed from mobile menu since it's now always visible in main navbar */}
-            <div className="px-3 py-2">
-              <Link
-                href="/book"
-                className="btn-primary w-full justify-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-                aria-label="Book Now"
-              >
-                Book Now
-              </Link>
-            </div>
           </div>
         </div>
       </Container>

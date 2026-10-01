@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormCheckbox } from "~/components/ui/FormCheckbox";
 import { FormField } from "~/components/ui/FormField";
@@ -55,7 +55,7 @@ export default function SimpleBookingForm() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { register, handleSubmit, formState: { errors, isValid }, watch, setValue } = useForm<SimpleFormData>({
+  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm<SimpleFormData>({
     resolver: zodResolver(validationSchema),
     mode: "onChange",
     defaultValues: {
@@ -63,6 +63,16 @@ export default function SimpleBookingForm() {
       _honeypot: ""
     }
   });
+
+  const statusRef = useRef<HTMLDivElement>(null);
+
+  // On success the form is replaced by the status panel: bring it into view and focus it.
+  useEffect(() => {
+    if (success) {
+      statusRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      statusRef.current?.focus({ preventScroll: true });
+    }
+  }, [success]);
 
   const formData = watch();
 
@@ -96,7 +106,6 @@ export default function SimpleBookingForm() {
         throw new Error(result.error || "Failed to submit form");
       }
       setSuccess(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to send booking request. Please try again or contact us directly.");
     } finally {
@@ -104,140 +113,122 @@ export default function SimpleBookingForm() {
     }
   };
 
+  if (success) {
+    return (
+      <div
+        ref={statusRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+        className="rounded-md bg-success/10 p-6 text-success focus:outline-none"
+      >
+        <Text variant="lg" className="font-semibold">Booking request sent successfully!</Text>
+        <Text variant="base" className="mt-1">We'll get back to you soon with confirmation details.</Text>
+      </div>
+    );
+  }
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-8"
+      className="space-y-12"
       noValidate
       itemScope
       itemType="https://schema.org/ReservationForm"
     >
       <meta itemProp="name" content="Mini Golf Hire Booking Form" />
       <meta itemProp="description" content="Book portable mini golf and mini putt hire for your event" />
-      
+
       {/* Honeypot field - hidden from users */}
       <input
         {...register("_honeypot")}
         type="text"
         tabIndex={-1}
         autoComplete="off"
-        style={{
-          position: 'absolute',
-          left: '-9999px',
-          width: '1px',
-          height: '1px',
-          overflow: 'hidden',
-          opacity: 0
-        }}
+        className="absolute -left-[9999px] h-px w-px overflow-hidden"
         aria-hidden="true"
       />
-      
-      {success && (
-        <div className="border-success/20 bg-success/10" role="status" aria-live="polite">
-          <div className="flex items-center gap-3">
-            <div>
-              <Text variant="base" className="font-medium text-success">Booking request sent successfully!</Text>
-              <Text variant="sm" className="text-success">We'll get back to you soon with confirmation details.</Text>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {error && (
-        <div className="border-error/20 bg-error/10" role="alert" aria-live="assertive">
-          <div className="flex items-center gap-3">
-            <div>
-              <Text variant="base" className="font-medium text-error">Something went wrong</Text>
-              <Text variant="sm" className="text-error">{error}</Text>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Contact Information Section */}
-      <div className="p-6">
-        <div className="mb-6">
-          <Text variant="h3" className="text-foreground mb-2">Contact Information</Text>
-          <Text variant="sm" className="text-foreground-secondary">Your details for booking confirmation</Text>
-        </div>
-        
+      <fieldset className="min-w-0 space-y-6">
+        <legend className="text-2xl font-semibold">Contact Information</legend>
+        <Text variant="sm" className="block text-foreground-secondary">Your details for booking confirmation</Text>
+
         <div className="grid gap-6 lg:grid-cols-2" itemScope itemType="https://schema.org/Organization">
-          <FormField 
-            name="contactPerson" 
-            label="Contact Person" 
-            register={register} 
-            required 
+          <FormField
+            name="contactPerson"
+            label="Contact Person"
+            register={register}
+            required
             error={errors.contactPerson?.message}
             placeholder="Full name"
           />
-          <FormField 
-            name="mobilePhone" 
-            label="Mobile Phone" 
-            type="tel" 
-            register={register} 
-            required 
+          <FormField
+            name="mobilePhone"
+            label="Mobile Phone"
+            type="tel"
+            register={register}
+            required
             error={errors.mobilePhone?.message}
             placeholder="021 123 4567"
           />
-          <FormField 
-            name="email" 
-            label="Email Address" 
-            type="email" 
-            register={register} 
-            required 
+          <FormField
+            name="email"
+            label="Email Address"
+            type="email"
+            register={register}
+            required
             error={errors.email?.message}
             placeholder="your@email.com"
           />
-          <FormField 
-            name="companyName" 
-            label="Company Name" 
-            register={register} 
+          <FormField
+            name="companyName"
+            label="Company Name"
+            register={register}
             error={errors.companyName?.message}
             placeholder="Optional"
             itemProp="name"
           />
         </div>
-      </div>
+      </fieldset>
 
       {/* Event Details Section */}
-      <div className="p-6">
-        <div className="mb-6">
-          <Text variant="h3" className="text-foreground mb-2">Event Details</Text>
-          <Text variant="sm" className="text-foreground-secondary">Tell us about your event requirements</Text>
-        </div>
-        
+      <fieldset className="min-w-0 space-y-6">
+        <legend className="text-2xl font-semibold">Event Details</legend>
+        <Text variant="sm" className="block text-foreground-secondary">Tell us about your event requirements</Text>
+
         <div className="grid gap-6 lg:grid-cols-2">
-          <FormField 
-            name="eventDate" 
-            label="Event Date" 
-            type="date" 
-            register={register} 
-            required 
+          <FormField
+            name="eventDate"
+            label="Event Date"
+            type="date"
+            register={register}
+            required
             error={errors.eventDate?.message}
           />
-          <FormField 
-            name="eventLocation" 
-            label="Event Location/Address" 
-            register={register} 
-            required 
+          <FormField
+            name="eventLocation"
+            label="Event Location/Address"
+            register={register}
+            required
             error={errors.eventLocation?.message}
             placeholder="Full address where event will be held"
           />
-          <FormField 
-            name="numberOfParticipants" 
-            label="Number of Participants" 
-            type="number" 
-            register={register} 
-            required 
+          <FormField
+            name="numberOfParticipants"
+            label="Number of Participants"
+            type="number"
+            register={register}
+            required
             error={errors.numberOfParticipants?.message}
             placeholder="Approx. number of people"
           />
-          <FormField 
-            name="numberOfHoles" 
-            label="Number of Holes" 
-            type="select" 
-            register={register} 
-            required 
+          <FormField
+            name="numberOfHoles"
+            label="Number of Holes"
+            type="select"
+            register={register}
+            required
             error={errors.numberOfHoles?.message}
             options={[
               { value: "", label: "Select number of holes" },
@@ -250,100 +241,95 @@ export default function SimpleBookingForm() {
               { value: "9", label: "9 Holes" },
             ]}
           />
-          <FormField 
-            name="numberOfDays" 
-            label="Number of Days" 
-            type="number" 
-            register={register} 
-            required 
+          <FormField
+            name="numberOfDays"
+            label="Number of Days"
+            type="number"
+            register={register}
+            required
             error={errors.numberOfDays?.message}
             placeholder="How many days needed"
           />
         </div>
-        
-        <div className="mt-6">
-          <FormField 
-            name="additionalRequirements" 
-            label="Additional Requirements" 
-            type="textarea" 
-            register={register} 
-            error={errors.additionalRequirements?.message}
-            placeholder="Any special requests, setup requirements, or additional information..."
-            rows={4}
-          />
-        </div>
-      </div>
 
-      {/* Price Estimate */}
-      {formData.numberOfHoles && formData.numberOfDays && (
-        <div className="p-6" itemScope itemType="https://schema.org/Offer">
-          <meta itemProp="priceCurrency" content="NZD" />
-          <meta itemProp="availability" content="https://schema.org/InStock" />
+        {/* Price Estimate */}
+        {formData.numberOfHoles && formData.numberOfDays && (
+          <div itemScope itemType="https://schema.org/Offer" aria-live="polite">
+            <meta itemProp="priceCurrency" content="NZD" />
+            <meta itemProp="availability" content="https://schema.org/InStock" />
+            <p className="flex flex-wrap items-baseline gap-x-2">
+              <span className="font-semibold">Estimated Price</span>
+              <span className="text-xl font-bold text-primary" itemProp="price">${price.toFixed(2)}</span>
+              <span className="text-sm text-foreground-secondary">NZD excl. GST</span>
+              <span className="text-sm text-foreground-secondary">
+                ({formData.numberOfHoles} hole{parseInt(formData.numberOfHoles)>1?'s':''} for {formData.numberOfDays} day{parseInt(formData.numberOfDays)>1?'s':''})
+              </span>
+            </p>
+            <ul className="mt-1 text-sm text-foreground-secondary">
+              <li>Delivery and setup costs quoted separately</li>
+              <li>Final pricing confirmed upon booking</li>
+            </ul>
+          </div>
+        )}
 
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border/50 bg-background-secondary/30 p-4 rounded-t-lg">
-            <div className="flex items-center gap-3">
-              <Text variant="h4">Estimated Price</Text>
-            </div>
-            <div className="flex items-baseline">
-              <Text variant="h4" className="text-primary" itemProp="price">${price.toFixed(2)}</Text>
-              <Text variant="sm" className="ml-2 text-foreground-secondary">NZD excl. GST</Text>
-            </div>
-          </div>
-          <div className="p-4 space-y-2">
-            <Text variant="sm" className="text-foreground-secondary">
-              {formData.numberOfHoles} hole{parseInt(formData.numberOfHoles)>1?'s':''} for {formData.numberOfDays} day{parseInt(formData.numberOfDays)>1?'s':''}
-            </Text>
-            <Text variant="sm" className="text-foreground-secondary">• Delivery and setup costs quoted separately</Text>
-            <Text variant="sm" className="text-foreground-secondary">• Final pricing confirmed upon booking</Text>
-          </div>
-        </div>
-      )}
+        <FormField
+          name="additionalRequirements"
+          label="Additional Requirements"
+          type="textarea"
+          register={register}
+          error={errors.additionalRequirements?.message}
+          placeholder="Any special requests, setup requirements, or additional information..."
+          rows={4}
+        />
+      </fieldset>
 
       {/* Terms & Submit */}
-      <div className="p-6">
-        <div className="space-y-6">
-          <FormCheckbox
-            checked={formData.acceptTerms}
-            onChange={(checked) => setValue("acceptTerms", checked, { shouldValidate: true })}
-            label="I accept the terms and conditions"
-            description={
-              <span>
-                I agree to Golf 2 Go NZ's{" "}
-                <a href="/terms" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                  terms and conditions
-                </a>
+      <div className="space-y-6">
+        <FormCheckbox
+          checked={formData.acceptTerms}
+          onChange={(checked) => setValue("acceptTerms", checked, { shouldValidate: true })}
+          label="I accept the terms and conditions"
+          description={
+            <span>
+              I agree to Golf 2 Go NZ's{" "}
+              <a href="/terms" className="text-primary underline hover:no-underline" target="_blank" rel="noopener noreferrer">
+                terms and conditions
+              </a>
+            </span>
+          }
+          error={errors.acceptTerms?.message}
+          required
+        />
+
+        {error && (
+          <div role="alert" aria-live="assertive" className="rounded-md bg-error/10 p-4 text-error">
+            <Text variant="base" className="font-semibold">Something went wrong</Text>
+            <Text variant="sm" className="block">{error}</Text>
+          </div>
+        )}
+
+        <div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="btn-primary inline-flex w-full items-center justify-center gap-2 px-6 py-3 text-base disabled:opacity-60 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
+          >
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="h-5 w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                  <path className="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                </svg>
+                <span>Processing...</span>
               </span>
-            }
-            error={errors.acceptTerms?.message}
-            required
-          />
-          
-          <div className="text-center">
-            <button
-              type="submit"
-              disabled={loading || !isValid || !formData.acceptTerms}
-              className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg"
-            >
-              {loading ? (
-                <div className="flex items-center justify-center gap-2">
-                  <svg className="h-5 w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                    <path className="opacity-75" fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
-                  </svg>
-                  <Text variant="base">Processing...</Text>
-                </div>
-              ) : (
-                <Text variant="base">Submit Booking Request</Text>
-              )}
-            </button>
-          </div>
-          
-          <div className="text-center">
-            <Text variant="sm" className="text-foreground-secondary">
-              By submitting this form, you'll receive a detailed quote within 24 hours.
-            </Text>
-          </div>
+            ) : (
+              "Submit Booking Request"
+            )}
+          </button>
+          <Text variant="sm" className="mt-3 block text-foreground-secondary">
+            By submitting this form, you'll receive a detailed quote within 24 hours.
+          </Text>
         </div>
       </div>
     </form>

@@ -47,6 +47,8 @@ const config: Config = {
           900: "#111827",
         },
         border: "var(--border)",
+        error: "#b91c1c",
+        success: "#15803d",
       },
       fontSize: {
         xs: ["0.75rem", { lineHeight: "1rem" }],

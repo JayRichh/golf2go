@@ -2,7 +2,7 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Card, CardContent, CardHeader } from "~/components/ui/Card";
+import { PhotoHero } from "~/components/PhotoHero";
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
 import { generateCoursesSchema, generateCourseTypesSchema, generateServiceSchema } from './schema';
@@ -122,184 +122,126 @@ export default function CoursesPage() {
       />
       
     <div className="overflow-x-hidden">
-      {/* Header */}
-      <section className="relative bg-primary text-primary-foreground">
-          <div className="relative isolate overflow-hidden py-32 md:py-40">
-            <div className="absolute inset-0 -z-10 w-full">
-              <Image
-                src="/3-fun-portable-mini-golf.jpg"
-                alt=""
-                fill
-                className="h-full w-full object-cover opacity-30"
-                sizes="100vw"
-                priority
-              />
-            </div>
-            <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                <Text 
-                  variant="h1" 
-                  align="center" 
-                  className="tracking-tight text-primary-foreground"
-                >
-                  Portable Mini Golf Courses & Mini Putt Solutions
-                </Text>
-                <Text
-                  variant="xl"
-                  className="mt-6 text-primary-foreground/90"
-                >
-                  Professional portable mini golf course hire and mini putt setups featuring indoor mini golf options for corporate events across New Zealand
-                </Text>
-              </div>
-            </Container>
-          </div>
-      </section>
+      <PhotoHero image="/3-fun-portable-mini-golf.jpg">
+        <Text variant="h1" className="tracking-tight">
+          Portable Mini Golf Courses & Mini Putt Solutions
+        </Text>
+        <Text variant="xl" className="mx-auto mt-6 max-w-2xl">
+          Professional portable mini golf course hire and mini putt setups featuring indoor mini golf options for corporate events across New Zealand
+        </Text>
+      </PhotoHero>
 
       {/* Main Course Options */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <Container size="xl">
-          <div className="text-center mb-16">
-            <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
+          <div className="mb-12 text-center">
+            <Text variant="h2" className="font-bold tracking-tight">
               Portable Mini Golf Course Packages
             </Text>
-            <Text
-              variant="lg"
-              className="mx-auto mt-4 max-w-2xl text-center text-foreground-secondary"
-              >
+            <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-foreground-secondary">
               Portable mini golf hire and mini putt courses for parties, events and corporate functions — indoor or outdoor
             </Text>
           </div>
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid gap-12 lg:grid-cols-2">
             {courses.map((course) => (
-              <Card
-                key={course.title}
-                className="group w-full overflow-hidden"
-              >
-                <div className="relative aspect-[16/9] w-full overflow-hidden">
+              <div key={course.title}>
+                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
                   <Image
                     src={course.image}
                     alt={course.title}
                     fill
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    className="object-cover"
                     sizes="(min-width: 1024px) 50vw, 100vw"
                   />
                 </div>
-                <CardHeader
-                  title={course.title}
-                  subtitle={course.description}
-                  className="text-center"
-                />
-                <CardContent>
-                  <div className="space-y-4">
-                    {course.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 flex-shrink-0 text-primary" />
-                        <Text variant="base" className="text-foreground-secondary">
-                          {feature}
-                        </Text>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-8 flex justify-center">
-                    <Link href="/book" className="btn-primary inline-flex items-center gap-2">
-                      <Text variant="base">Get a Hire Quote</Text>
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
+                <h3 className="mt-6 text-2xl font-semibold leading-tight tracking-tight">
+                  {course.title}
+                </h3>
+                <p className="mt-3 text-foreground-secondary">{course.description}</p>
+                <ul className="mt-6 space-y-3">
+                  {course.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-3 text-foreground-secondary">
+                      <CheckCircle className="h-5 w-5 flex-shrink-0 text-primary" aria-hidden="true" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/book" className="btn-primary mt-8 inline-flex items-center gap-2">
+                  <Text variant="base">Get a Hire Quote</Text>
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </div>
             ))}
           </div>
         </Container>
       </section>
 
       {/* Course Types Grid */}
-      <section className="py-24 bg-background-secondary" itemScope itemType="https://schema.org/ItemList">
+      <section className="bg-background-secondary py-16 md:py-24" itemScope itemType="https://schema.org/ItemList">
         <Container size="xl">
-          <div className="text-center mb-16">
-            <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
+          <div className="mb-12 text-center">
+            <Text variant="h2" className="font-bold tracking-tight">
               Mini Putt Course Collection
             </Text>
-            <Text
-              variant="lg"
-              className="mx-auto mt-4 max-w-2xl text-center text-foreground-secondary"
-            >
+            <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-foreground-secondary">
               Portable mini golf course designs perfect for indoor mini golf setups and outdoor mini putt events
             </Text>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {courseTypes.map((type, index) => (
-              <Card
-                key={type.name}
-                className="group w-full overflow-hidden"
-                itemScope
-                itemType="https://schema.org/ListItem"
-              >
+              <li key={type.name} itemScope itemType="https://schema.org/ListItem">
                 <meta itemProp="position" content={String(index + 1)} />
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
                   <Image
                     src={type.image}
                     alt={type.name}
                     fill
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    className="object-cover"
                     sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="absolute inset-0 flex items-end p-6">
-                      <div className="translate-y-4 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                        <Text variant="lg" className="font-medium text-white" itemProp="name">
-                          {type.name}
-                        </Text>
-                        <Text variant="base" className="mt-2 text-white/90" itemProp="description">
-                          {type.description}
-                        </Text>
-                        <Text variant="sm" className="mt-2 text-white/80">
-                          Dimensions: {type.dimensions}
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </Card>
+                <div className="mt-3">
+                  <Text variant="lg" className="font-semibold" itemProp="name">
+                    {type.name}
+                  </Text>
+                  <Text variant="sm" className="block font-medium text-primary">
+                    Dimensions: {type.dimensions}
+                  </Text>
+                  <Text variant="base" className="mt-1 text-foreground-secondary" itemProp="description">
+                    {type.description}
+                  </Text>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-primary py-24 text-primary-foreground">
-          <Container size="xl" className="py-24">
-            <div className="relative z-10">
-              <Text
-                variant="h2"
-                align="center"
-                className="pb-4 font-bold tracking-tight text-primary-foreground"
-              >
-                Ready to Book Your Mini Golf Hire?
-              </Text>
-              <Text
-                variant="lg"
-                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground"
-              >
-                Tell us about your event and we&apos;ll send you a free, no-obligation quote
-              </Text>
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link
-                  href="/book"
-                  className="btn-primary inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 px-8 py-3"
-                >
-                  <Text variant="lg">Get a Hire Quote</Text>
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="btn-outline inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
-                >
-                  <Text variant="lg">Contact Us</Text>
-                </Link>
-              </div>
-            </div>
-          </Container>
+      <section className="bg-primary py-20 text-primary-foreground md:py-24">
+        <Container size="xl" className="text-center">
+          <Text variant="h2" className="font-bold tracking-tight">
+            Ready to Book Your Mini Golf Hire?
+          </Text>
+          <Text variant="lg" className="mx-auto mt-4 max-w-2xl">
+            Tell us about your event and we&apos;ll send you a free, no-obligation quote
+          </Text>
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              href="/book"
+              className="btn-inverse inline-flex w-full items-center justify-center gap-2 px-8 py-3 sm:w-auto sm:min-w-[200px]"
+            >
+              <Text variant="lg">Get a Hire Quote</Text>
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+            <Link
+              href="/contact"
+              className="btn-outline-inverse inline-flex w-full items-center justify-center gap-2 px-8 py-3 sm:w-auto sm:min-w-[200px]"
+            >
+              <Text variant="lg">Contact Us</Text>
+            </Link>
+          </div>
+        </Container>
       </section>
 
       {/* SEO Content Section */}
