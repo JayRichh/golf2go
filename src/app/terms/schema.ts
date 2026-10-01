@@ -1,3 +1,5 @@
+import { ORG_ID } from '~/lib/site';
+
 export const generateTermsSchema = (baseUrl: string) => ({
   "@context": "https://schema.org",
   "@type": "LegalDocument",
@@ -7,9 +9,7 @@ export const generateTermsSchema = (baseUrl: string) => ({
   "version": "2025-26",
   "datePublished": "2025-01-01",
   "publisher": {
-    "@type": "Organization",
-    "name": "Golf 2 Go NZ",
-    "url": baseUrl
+    "@id": ORG_ID
   },
   "inLanguage": "en-NZ",
   "isPartOf": {
@@ -61,9 +61,7 @@ export const generatePdfSchema = (baseUrl: string) => ({
   "url": `${baseUrl}/TERMS AND CONDITIONS OF HIRE 2025-26.pdf`,
   "dateModified": "2025-01-01",
   "publisher": {
-    "@type": "Organization",
-    "name": "Golf 2 Go NZ",
-    "url": baseUrl
+    "@id": ORG_ID
   },
   "inLanguage": "en-NZ",
   "accessibilityFeature": [

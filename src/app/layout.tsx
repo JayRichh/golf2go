@@ -5,6 +5,7 @@ import { Footer } from "~/components/layout/footer";
 import { Navbar } from "~/components/layout/navbar";
 import { PageTransition } from "~/components/ui/PageTransition";
 import { Analytics } from "@vercel/analytics/react"
+import { ORG_ID, SITE_URL } from "~/lib/site";
 import "./globals.css";
 
 // Load fonts locally for better performance
@@ -21,10 +22,8 @@ const geist = localFont({
   display: "swap",
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
-
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Golf 2 Go NZ | Mini Putt & Portable Mini Golf Hire | Wellington, Palmerston North, New Plymouth",
     template: "%s | Golf 2 Go NZ - Mini Putt & Portable Mini Golf Hire",
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
   description: "New Zealand's leading portable mini golf hire and mini putt service. Indoor mini golf Palmerston North, mini golf Wellington, New Plymouth mini golf. Professional portable mini golf hire nationwide.",
   manifest: "/manifest.json",
   applicationName: "Golf 2 Go NZ",
-  authors: [{ name: "Golf 2 Go NZ", url: baseUrl }],
+  authors: [{ name: "Golf 2 Go NZ", url: SITE_URL }],
   creator: "Golf 2 Go NZ",
   publisher: "Golf 2 Go NZ",
   formatDetection: {
@@ -54,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_NZ",
-    url: baseUrl,
+    url: SITE_URL,
     siteName: "Golf 2 Go NZ",
     title: "Golf 2 Go NZ - Mini Putt & Portable Mini Golf Hire | Wellington, Palmerston North, New Plymouth",
     description: "New Zealand's leading portable mini golf hire and mini putt service. Indoor mini golf Palmerston North, mini golf Wellington, New Plymouth mini golf. Professional portable mini golf hire nationwide.",
@@ -96,35 +95,22 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: baseUrl,
-    languages: {
-      "en-NZ": baseUrl,
-    },
-  },
-  other: {
-    category: "Business Services",
-    classification: "Corporate Entertainment",
-    rating: "Professional",
-    industry: "Corporate Entertainment & Event Solutions",
-    businessType: "Professional Services"
-  },
 };
 
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": `${baseUrl}/#organization`,
+  "@id": ORG_ID,
   name: "Golf 2 Go NZ",
-  url: baseUrl,
+  url: SITE_URL,
   logo: {
     "@type": "ImageObject",
-    url: `${baseUrl}/birdie.png`,
+    url: `${SITE_URL}/birdie.png`,
     width: "512",
     height: "512"
   },
   description: "New Zealand's leading portable mini golf hire and mini putt service provider",
-  image: `${baseUrl}/2-parties-and-events-golf2go-portable-miniature-golf.jpg`,
+  image: `${SITE_URL}/2-parties-and-events-golf2go-portable-miniature-golf.jpg`,
   telephone: "+64-21-849931",
   email: "admin@golf2go.co.nz",
   priceRange: "$190-$2500",
@@ -152,15 +138,6 @@ const organizationSchema = {
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     opens: "08:00",
     closes: "20:00"
-  },
-  foundingDate: "2008",
-  foundingLocation: {
-    "@type": "Place",
-    address: {
-      "@type": "PostalAddress",
-      addressRegion: "Palmerston North",
-      addressCountry: "NZ"
-    }
   },
   areaServed: [
     {
@@ -246,28 +223,20 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": `${baseUrl}/#website`,
+  "@id": `${SITE_URL}/#website`,
   name: "Golf 2 Go NZ",
-  url: baseUrl,
+  url: SITE_URL,
   description: "New Zealand's leading portable mini golf and mini putt hire service. Delivered and set up for parties, events, fundraisers and corporate functions nationwide.",
   publisher: {
-    "@id": `${baseUrl}/#organization`
-  },
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${baseUrl}/?s={search_term_string}`
-    },
-    "query-input": "required name=search_term_string"
+    "@id": ORG_ID
   },
   mainEntity: {
-    "@id": `${baseUrl}/#organization`
+    "@id": ORG_ID
   },
   inLanguage: "en-NZ",
   copyrightYear: "2025",
   copyrightHolder: {
-    "@id": `${baseUrl}/#organization`
+    "@id": ORG_ID
   }
 };
 

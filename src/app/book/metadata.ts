@@ -3,7 +3,7 @@ import { generateMetadata as baseGenerateMetadata } from '../seo.config'
 export async function generateMetadata() {
   return baseGenerateMetadata({
     title: 'Book Mini Golf Hire NZ | Get a Quote',
-    description: 'Book portable mini golf & mini putt hire for your event. Easy online booking, flexible hire options and nationwide delivery from $190. Based in Palmerston North, serving all NZ.',
+    description: 'Book portable mini golf & mini putt hire for your event. Flexible hire options and nationwide delivery from $190. Based in Palmerston North, serving all NZ.',
     path: 'book',
     images: [
       {

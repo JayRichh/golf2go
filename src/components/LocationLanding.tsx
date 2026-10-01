@@ -6,11 +6,10 @@ import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import type { Location } from "~/lib/locations";
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://golf2go.co.nz";
+import { ORG_ID, SITE_URL, absUrl } from "~/lib/site";
 
 function buildSchema(location: Location) {
-  const url = `${baseUrl}/${location.path}`;
+  const url = absUrl(location.path);
 
   const service = {
     "@context": "https://schema.org",
@@ -21,10 +20,7 @@ function buildSchema(location: Location) {
     description: location.metaDescription,
     url,
     provider: {
-      "@type": "Organization",
-      "@id": `${baseUrl}/#organization`,
-      name: "Golf 2 Go NZ",
-      url: baseUrl,
+      "@id": ORG_ID,
     },
     areaServed: {
       "@type": "AdministrativeArea",
@@ -36,7 +32,7 @@ function buildSchema(location: Location) {
       lowPrice: "190",
       highPrice: "2500",
       availability: "https://schema.org/InStock",
-      url: `${baseUrl}/book`,
+      url: absUrl("book"),
     },
   };
 
@@ -44,7 +40,7 @@ function buildSchema(location: Location) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: baseUrl },
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
       {
         "@type": "ListItem",
         position: 2,

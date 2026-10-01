@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 
+import { SITE_URL, absUrl } from '~/lib/site'
+
 export type MetadataProps = {
   title?: string
   description?: string
@@ -10,8 +12,6 @@ export type MetadataProps = {
 }
 
 /* ------------------------------------------------------------------ */
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz'
 
 const defaultImages = [
   {
@@ -28,14 +28,11 @@ const defaultImages = [
   }
 ]
 
-export const canonical = (p?: string) => {
-  if (!p) return BASE_URL
-  const clean = p.replace(/^\/+/, '').replace(/\/+$/, '').toLowerCase()
+export const canonical = (p?: string) =>
   // Resolve every page to its own URL. An unrecognised non-empty path still
   // canonicalises to itself rather than silently collapsing to the homepage
   // (which would de-index the page).
-  return clean ? `${BASE_URL}/${clean}` : BASE_URL
-}
+  absUrl((p ?? '').toLowerCase())
 
 /* ------------------------------------------------------------------ */
 
@@ -54,7 +51,7 @@ export function generateMetadata({
     : 'Golf 2 Go NZ | Mini Putt & Portable Mini Golf Hire NZ'
   const fullDesc =
     description ??
-    "Hire portable mini golf & mini putt anywhere in NZ — Wellington, Palmerston North, New Plymouth & Taranaki. Full delivery and setup, from $190. Get a free quote."
+    "Hire portable mini golf & mini putt anywhere in NZ — Wellington, Palmerston North, New Plymouth & Taranaki. Full delivery & setup, from $190. Get a free quote."
   const url = canonical(path)
 
   return {
@@ -81,7 +78,7 @@ export function generateMetadata({
       images: images.map(i => i.url)
     },
     alternates: { canonical: url },
-    metadataBase: new URL(BASE_URL),
+    metadataBase: new URL(SITE_URL),
     robots: {
       index: true,
       follow: true,
@@ -102,11 +99,3 @@ export function generateMetadata({
     }
   }
 }
-
-
-
-
-
-
-
-

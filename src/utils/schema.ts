@@ -1,3 +1,5 @@
+import { ORG_ID, SITE_URL } from '~/lib/site';
+
 type SchemaContext = {
   baseUrl: string;
   siteName: string;
@@ -5,88 +7,12 @@ type SchemaContext = {
 }
 
 const defaultContext: SchemaContext = {
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz',
+  baseUrl: SITE_URL,
   siteName: 'Golf 2 Go NZ',
   siteImage: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg'
 }
 
-type StructuredData = {
-  '@context': string;
-  '@type': string;
-  name: string;
-  description: string;
-  url: string;
-  telephone: string;
-  areaServed: {
-    '@type': string;
-    name: string;
-  } | string;
-  address: {
-    '@type': string;
-    addressCountry: string;
-    addressLocality: string;
-  };
-  contactPoint?: {
-    '@type': string;
-    telephone: string;
-    email: string;
-    contactType: string;
-  };
-  provider?: {
-    '@type': string;
-    name: string;
-    description: string;
-  };
-  offers?: {
-    '@type': string;
-    availability: string;
-    priceSpecification: {
-      '@type': string;
-      priceCurrency: string;
-      minPrice: string;
-    };
-  } | {
-    '@type': 'AggregateOffer';
-    availability: string;
-    priceSpecification: {
-      '@type': string;
-      priceCurrency: string;
-      minPrice: string;
-    };
-  };
-  about?: {
-    '@type': string;
-    name: string;
-    description: string;
-  };
-  potentialAction?: {
-    '@type': string;
-    target: string;
-  };
-  image?: string[];
-  // Additional properties for specific schemas
-  serviceType?: string;
-  hasOfferCatalog?: {
-    '@type': string;
-    name: string;
-    itemListElement: Array<{
-      '@type': string;
-      itemOffered: {
-        '@type': string;
-        name: string;
-        description: string;
-      };
-    }>;
-  };
-  knowsAbout?: string[];
-  mainEntity?: {
-    '@type': string;
-    name: string;
-    description: string;
-    areaServed: string;
-    foundingDate: string;
-  };
-}
+type StructuredData = Record<string, unknown>;
 
 // Generate FAQ schema for home page
 function generateFAQSchema(): any {
@@ -183,44 +109,20 @@ function generateBreadcrumbSchema(path: string) {
   };
 }
 
-// Generate base business schema
-function generateBusinessSchema(): StructuredData {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'Golf 2 Go NZ',
-    description: 'Professional portable mini golf hire and rental service in New Zealand. Premium portable mini golf solutions for events and functions across NZ.',
-    url: defaultContext.baseUrl,
-    telephone: '021849931',
-    areaServed: {
-      '@type': 'Country',
-      name: 'New Zealand'
-    },
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'New Zealand',
-      addressLocality: 'Palmerston North'
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '021849931',
-      email: 'admin@golf2go.co.nz',
-      contactType: 'customer service'
-    }
-  };
+// Reference to the single LocalBusiness node declared in the root layout.
+// Never re-declare name/telephone/address here — reference it by @id.
+function generateBusinessSchema(): { '@id': string } {
+  return { '@id': ORG_ID };
 }
 
-// Generate course schema with proper product offerings
+// Courses: a Service provided by the organization
 function generateCourseSchema(): StructuredData {
   return {
-    ...generateBusinessSchema(),
-    '@type': 'SportsActivityLocation',
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Portable Mini Golf',
     serviceType: 'Portable Mini Golf',
-    provider: {
-      '@type': 'LocalBusiness',
-      name: 'Golf 2 Go NZ',
-      description: 'Professional portable mini golf hire service in NZ'
-    },
+    provider: generateBusinessSchema(),
     offers: {
       '@type': 'AggregateOffer',
       availability: 'https://schema.org/InStock',
@@ -237,7 +139,7 @@ function generateCourseSchema(): StructuredData {
         {
           '@type': 'Offer',
           itemOffered: {
-            '@type': 'Product',
+            '@type': 'Service',
             name: 'Single Hole Setup',
             description: 'Professional 3.3m x 7.5m course setup'
           }
@@ -245,7 +147,7 @@ function generateCourseSchema(): StructuredData {
         {
           '@type': 'Offer',
           itemOffered: {
-            '@type': 'Product',
+            '@type': 'Service',
             name: 'Full Course Package',
             description: 'Complete mini golf course configuration'
           }
@@ -255,15 +157,16 @@ function generateCourseSchema(): StructuredData {
   };
 }
 
-// Generate gallery schema with proper image organization
+// Gallery: an ImageGallery about the service
 function generateGallerySchema(): StructuredData {
   return {
-    ...generateBusinessSchema(),
+    '@context': 'https://schema.org',
     '@type': 'ImageGallery',
     about: {
       '@type': 'Service',
       name: 'Portable Mini Golf NZ',
-      description: 'Professional portable mini golf setups and events'
+      description: 'Professional portable mini golf setups and events',
+      provider: generateBusinessSchema()
     },
     image: [
       `${defaultContext.baseUrl}/2-parties-and-events-golf2go-portable-miniature-golf.jpg`,
@@ -273,25 +176,12 @@ function generateGallerySchema(): StructuredData {
   };
 }
 
-// Generate about page schema with comprehensive business info
+// About: an AboutPage whose main entity is the organization
 function generateAboutSchema(): StructuredData {
   return {
-    ...generateBusinessSchema(),
+    '@context': 'https://schema.org',
     '@type': 'AboutPage',
-    knowsAbout: [
-      'Portable Mini Golf',
-      'Mini Golf Hire',
-      'Event Services',
-      'Mobile Golf Solutions',
-      'Portable Entertainment'
-    ],
-    mainEntity: {
-      '@type': 'Organization',
-      name: 'Golf 2 Go NZ',
-      description: 'Leading provider of portable mini golf solutions in New Zealand',
-      areaServed: 'New Zealand',
-      foundingDate: '2020'
-    }
+    mainEntity: generateBusinessSchema()
   };
 }
 
@@ -306,7 +196,7 @@ export function generateStructuredData(pageName: string, path?: string): any[] {
   // Add page-specific schema
   switch (pageName) {
     case 'home':
-      schemas.push(generateBusinessSchema());
+      // The organization node is already declared in the root layout.
       schemas.push(generateFAQSchema());
       break;
     case 'courses':
@@ -319,7 +209,7 @@ export function generateStructuredData(pageName: string, path?: string): any[] {
       schemas.push(generateAboutSchema());
       break;
     default:
-      schemas.push(generateBusinessSchema());
+      break;
   }
 
   return schemas;

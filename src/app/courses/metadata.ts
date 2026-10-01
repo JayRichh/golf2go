@@ -5,7 +5,7 @@ import { canonical } from '../seo.config';
 export const metadata: Metadata = {
   title: { absolute: 'Mini Golf Courses & Mini Putt Hire | Golf 2 Go NZ' },
   description:
-    'Browse our portable mini golf courses for hire — the Hole in One Challenge and 3, 6 & 9 hole courses for parties, events and corporate functions across NZ. From $190.',
+    'Browse our portable mini golf courses for hire — the Hole in One Challenge and 3, 6 & 9 hole courses for parties, events and corporate functions. From $190.',
   openGraph: {
     title: 'Mini Golf Courses & Mini Putt Hire | Golf 2 Go NZ',
     description:

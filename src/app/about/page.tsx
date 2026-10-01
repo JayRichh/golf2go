@@ -7,10 +7,11 @@ import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import { generateAboutSchema, generateValuesSchema } from './schema';
+import { SITE_URL } from '~/lib/site';
 
 export { generateMetadata } from './metadata';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
+const baseUrl = SITE_URL;
 
 const values = [
   {

@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz'
+import { absUrl } from '~/lib/site'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -11,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/_next/']
       }
     ],
-    sitemap: `${baseUrl}/sitemap.xml`
+    sitemap: absUrl('sitemap.xml')
   }
 }

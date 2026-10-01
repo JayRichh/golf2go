@@ -5,9 +5,10 @@ import { GradientBackground } from "~/components/ui/GradientBackground";
 import { ImagePreview } from "~/components/ui/ImagePreview";
 import { Text } from "~/components/ui/Text";
 import { generateGallerySchema, generateImageSchema } from './schema';
+import { SITE_URL } from '~/lib/site';
 import { metadata } from './metadata';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
+const baseUrl = SITE_URL;
 
 export { metadata };
 

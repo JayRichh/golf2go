@@ -7,9 +7,10 @@ import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import { generateCoursesSchema, generateCourseTypesSchema, generateServiceSchema } from './schema';
+import { SITE_URL } from '~/lib/site';
 import { metadata } from './metadata';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://golf2go.co.nz';
+const baseUrl = SITE_URL;
 
 export { metadata };
 
@@ -160,7 +161,7 @@ export default function CoursesPage() {
       </section>
 
       {/* Main Course Options */}
-      <section className="py-24" itemScope itemType="https://schema.org/ProductCollection">
+      <section className="py-24" itemScope itemType="https://schema.org/OfferCatalog">
         <Container size="xl">
           <div className="text-center mb-16">
             <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">

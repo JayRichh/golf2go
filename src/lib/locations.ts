@@ -129,7 +129,7 @@ export const locations: Location[] = [
     geo: { latitude: -39.0556, longitude: 174.0752 },
     metaTitle: 'Mini Golf Hire New Plymouth | Portable Mini Putt',
     metaDescription:
-      'Portable mini golf & mini putt hire in New Plymouth and across Taranaki — Stratford, Hawera & Inglewood. Delivery and setup included, from $190. Get a free quote.',
+      'Portable mini golf & mini putt hire in New Plymouth & across Taranaki — Stratford, Hawera & Inglewood. Delivery & setup included, from $190. Get a free quote.',
     h1: 'Portable Mini Golf & Mini Putt Hire in New Plymouth',
     intro:
       'Planning an event in New Plymouth? Our portable mini golf hire brings a complete mini putt course to your venue anywhere in Taranaki. Great for birthdays, parties, fundraisers, school events and corporate functions across New Plymouth, Stratford, Hawera and Inglewood — we handle delivery, setup and pack-down.',

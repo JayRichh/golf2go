@@ -1,5 +1,7 @@
-// The full LocalBusiness node with @id `${baseUrl}/#organization` is declared
-// once in the root layout. Reference it by @id here instead of redeclaring it.
+import { ORG_ID } from '~/lib/site';
+
+// The full LocalBusiness node (@id ORG_ID) is declared once in the root
+// layout. Reference it by @id here instead of redeclaring it.
 export const generateAboutSchema = (baseUrl: string) => ({
   "@context": "https://schema.org",
   "@type": "AboutPage",
@@ -7,7 +9,7 @@ export const generateAboutSchema = (baseUrl: string) => ({
   "url": `${baseUrl}/about`,
   "description": "New Zealand's first portable mini golf company — portable mini golf and mini putt hire for parties, events, fundraisers and corporate functions nationwide",
   "mainEntity": {
-    "@id": `${baseUrl}/#organization`
+    "@id": ORG_ID
   }
 });
 

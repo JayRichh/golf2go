@@ -1,3 +1,5 @@
+import { ORG_ID } from '~/lib/site';
+
 export const generateGallerySchema = (baseUrl: string, images: any[]) => ({
   "@context": "https://schema.org",
   "@type": "ImageGallery",
@@ -5,20 +7,7 @@ export const generateGallerySchema = (baseUrl: string, images: any[]) => ({
   "name": "Golf 2 Go NZ Professional Event Gallery",
   "description": "Premium corporate entertainment and event solutions gallery showcasing professional setups and successful events",
   "publisher": {
-    "@type": "Organization",
-    "name": "Golf 2 Go NZ",
-    "url": baseUrl,
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Palmerston North",
-      "addressCountry": "New Zealand"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "021849931",
-      "email": "admin@golf2go.co.nz",
-      "contactType": "customer service"
-    }
+    "@id": ORG_ID
   },
   "image": images.map(img => ({
     "@type": "ImageObject",
@@ -65,19 +54,7 @@ export const generateGallerySchema = (baseUrl: string, images: any[]) => ({
       "url": `${baseUrl}/2-parties-and-events-golf2go-portable-miniature-golf.jpg`
     },
     "provider": {
-      "@type": "Organization",
-      "name": "Golf 2 Go NZ",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Palmerston North",
-        "addressCountry": "New Zealand"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "021849931",
-        "email": "admin@golf2go.co.nz",
-        "contactType": "customer service"
-      }
+      "@id": ORG_ID
     }
   },
   "potentialAction": {
@@ -99,12 +76,10 @@ export const generateImageSchema = (baseUrl: string, image: any) => ({
   "height": "800",
   "encodingFormat": "image/jpeg",
   "author": {
-    "@type": "Organization",
-    "name": "Golf 2 Go NZ"
+    "@id": ORG_ID
   },
   "copyrightHolder": {
-    "@type": "Organization",
-    "name": "Golf 2 Go NZ"
+    "@id": ORG_ID
   },
   "copyrightYear": "2025",
   "license": `${baseUrl}/terms`

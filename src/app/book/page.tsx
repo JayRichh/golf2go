@@ -8,10 +8,11 @@ import SimpleBookingForm from "./SimpleBookingForm";
 import { HelpSection } from "./components/HelpSection";
 import { QuickTips } from "./components/QuickTips";
 import { generateBookingSchema, generateFormSchema } from "./schema";
+import { SITE_URL } from '~/lib/site';
 
 export { generateMetadata } from "./metadata";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://golf2go.co.nz";
+const baseUrl = SITE_URL;
 
 export default function BookPage() {
   const bookingSchema = generateBookingSchema(baseUrl);

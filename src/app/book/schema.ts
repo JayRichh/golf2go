@@ -1,3 +1,5 @@
+import { ORG_ID } from '~/lib/site';
+
 export const generateBookingSchema = (baseUrl: string) => ({
   "@context": "https://schema.org",
   "@type": "Service",
@@ -5,10 +7,7 @@ export const generateBookingSchema = (baseUrl: string) => ({
   "name": "Portable Mini Golf & Mini Putt Hire",
   "serviceType": "Portable Mini Golf Hire",
   "provider": {
-    "@type": "Organization",
-    "@id": `${baseUrl}/#organization`,
-    "name": "Golf 2 Go NZ",
-    "url": baseUrl
+    "@id": ORG_ID
   },
   "areaServed": {
     "@type": "Country",
