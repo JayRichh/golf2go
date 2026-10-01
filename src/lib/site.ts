@@ -21,6 +21,7 @@ const IMAGE_SIZES: Record<string, { width: number; height: number }> = {
   '/2-parties-and-events-golf2go-portable-miniature-golf.jpg': { width: 1060, height: 596 },
   '/3-fun-portable-mini-golf.jpg': { width: 1060, height: 596 },
   '/4-portable-miniature-golf.jpg': { width: 992, height: 558 },
+  '/6-Forefront-400x400-Auckland-Forefront.jpg': { width: 400, height: 400 },
   '/7-portable-miniature-golf.jpg': { width: 992, height: 558 },
   '/8-work-function-fun-portable-mini-golf.jpg': { width: 1060, height: 455 },
   '/9-portable-mini-putt.jpg': { width: 787, height: 576 },

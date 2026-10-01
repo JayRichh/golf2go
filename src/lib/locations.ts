@@ -333,6 +333,7 @@ export const locations: Location[] = [
         paragraphs: [
           'Floor space in Auckland venues varies a lot, from a tight breakout corner beside a lift lobby to an open school field in Papakura. Twin Hedges measures 3.3m × 7.5m, while Slalom and Multi-tunnels are longer and narrower at 2.8m × 9m. Knowing those footprints lets us plan which holes fit well before the day.',
           'A rough sketch or a photo of the room is plenty. Mention doorways, pillars and where people will gather, and we can map out a route that flows instead of blocking the bar or the buffet.',
+          'Holy Bridge shares the 3.3m × 7.5m footprint of Twin Hedges, so a pair of them can sit side by side in a function suite or a school hall where length is limited. In a long, narrow corridor or marquee, the 2.8m-wide Slalom and Multi-tunnels holes use the length without crowding the walls. Triple Kidney, at 3.4m × 9m, is the widest of the set and belongs on an open lawn or a larger conference floor.',
         ],
       },
       {
@@ -340,6 +341,7 @@ export const locations: Location[] = [
         paragraphs: [
           'Your total is made up of the course itself, how long you keep it, and the drive north from our Manawatu base. That last part shrinks or grows with the address, so Howick and Henderson may not cost the same to reach.',
           'The minimum lead-in is 48 hours, which is the same rule we apply everywhere. With an Auckland booking, though, getting your enquiry in early leaves room to sort out venue access, loading zones and parking with your venue manager.',
+          'Put the full venue address in your enquiry, whether that is Auckland Central or out in Papakura, so the delivery line in your quote reflects the actual trip.',
         ],
       },
       {
@@ -415,6 +417,7 @@ export const locations: Location[] = [
         heading: 'Indoor or outdoor in the Waikato',
         paragraphs: [
           'The courses work indoors as well as outdoors; tell us whether your venue is inside or out when you book. Venues, halls and offices all suit the holes, as do lawns and fields. A smaller indoor space may suit a smaller combination of holes.',
+          'Inside a school hall or on a club rooms floor, the shorter holes are the easier fit: Twin Hedges and Holy Bridge each take 3.3m × 7.5m. A sports field or a big back lawn has the length for the 9m holes as well, such as Slalom, Multi-tunnels and Bridge over the River, so an outdoor Waikato event can run a longer, more varied round.',
         ],
       },
     ],
@@ -469,7 +472,7 @@ export const locations: Location[] = [
         heading: 'Courtyard, lawn or hall',
         paragraphs: [
           'Plenty of Bay events are planned for outside, and plenty happen in halls and function rooms. Every hole works indoors as well as outdoors, so a courtyard, a lawn or a hall can all host the course.',
-          'Give us the measurements of your space. Bridge over the River (3.3m × 9m) and Triple Kidney (3.4m × 9m) need more length than Twin Hedges (3.3m × 7.5m), so a shorter room might call for a slightly different mix.',
+          'Give us the measurements of your space. Bridge over the River (3.3m × 9m) and Triple Kidney (3.4m × 9m) need more length than Twin Hedges (3.3m × 7.5m), so a shorter room might call for a slightly different mix. Slalom and Multi-tunnels are the narrowest at 2.8m wide, which helps on a courtyard or deck at the Mount where width is tight but nine metres of length is available.',
         ],
       },
       {
@@ -552,7 +555,7 @@ export const locations: Location[] = [
         heading: 'Placing the course on the day',
         paragraphs: [
           'Lawns, terraces and halls all work, but think about flow. A course near the entrance becomes an icebreaker as people arrive; one beside the dance floor or the bar keeps a crowd busy later in the evening. Tell us which you prefer and we will set the holes out to suit.',
-          'Vineyard and garden venues around Havelock North can take the course on the lawn, while Napier and Hastings function rooms suit an indoor layout.',
+          'Vineyard and garden venues around Havelock North can take the course on the lawn, while Napier and Hastings function rooms suit an indoor layout. On a vineyard lawn, the 9m-long holes such as Triple Kidney (3.4m × 9m) and Bridge over the River (3.3m × 9m) have room to stretch out. A function room that cannot spare nine metres of length can still take Holy Bridge or Twin Hedges.',
           'For a long afternoon function, consider splitting the course into two smaller clusters so that groups at different ends of the venue each have their own holes to play. For a short promotion, one well-placed Hole in One Challenge near the main walkway is easier for passers-by to spot than several holes tucked away in a corner.',
         ],
       },
@@ -609,6 +612,7 @@ export const locations: Location[] = [
         paragraphs: [
           'School galas and club fundraisers need activities that keep people coming back to the stall. A Hole in One Challenge is simple to grasp and easy to run as a competition, while a multi-hole course gives families something to do together. Players take their shot and move on, which keeps the line moving on a busy gala day.',
           'For private parties, a 3 or 6-hole course fits into a backyard or hall and keeps guests entertained. There is nothing for the host to build, because assembly and removal are part of the service.',
+          'In a Whanganui school hall, a 3-hole set built from Twin Hedges and Holy Bridge (3.3m × 7.5m each) leaves space around the edges for spectators and a stall table. Out on a school field or a Marton sports ground there is room for the 9m holes too, such as Slalom or Triple Kidney, and the whole course can move indoors if the gala is held under cover.',
         ],
       },
       {

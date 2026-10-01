@@ -19,9 +19,9 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-white shadow-sm">
-      <Container size="xl" className="px-3 sm:px-6 lg:px-8">
+      <Container size="xl" className="px-3 sm:px-3 md:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-2 sm:gap-4">
-          <div className="flex items-center gap-4 sm:gap-8">
+          <div className="flex items-center gap-4 md:gap-8">
             <Link 
               href="/" 
               className="flex items-center transition-transform hover:scale-[0.98]"
@@ -45,7 +45,7 @@ export function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`group relative inline-flex items-center px-3 py-2 text-[15px] font-medium transition-colors ${
+                    className={`group relative inline-flex items-center px-2 py-2 text-[15px] md:px-3 font-medium transition-colors ${
                       isActive 
                         ? "text-primary" 
                         : "text-gray-700 hover:text-primary"
@@ -63,15 +63,15 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center gap-1 sm:gap-3 md:gap-6">
-            {/* Always visible call link: icon-only 44px target on phones, number from sm up */}
+          <div className="flex items-center gap-1 sm:gap-3 md:gap-4">
+            {/* Always visible call link: icon-only 44px target below lg, number from lg up */}
             <a
               href="tel:021849931"
               className="inline-flex h-11 min-w-11 items-center justify-center gap-1.5 text-[14px] font-medium text-gray-700 transition-colors hover:text-primary md:gap-2 md:text-[15px]"
               aria-label="Call us at 021 849931"
             >
               <svg
-                className="h-5 w-5 flex-shrink-0 sm:h-4 sm:w-4"
+                className="h-5 w-5 flex-shrink-0 lg:h-4 lg:w-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="2"
@@ -84,7 +84,7 @@ export function Navbar() {
                   d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
                 />
               </svg>
-              <span className="hidden whitespace-nowrap sm:inline">021 849931</span>
+              <span className="hidden whitespace-nowrap lg:inline">021 849931</span>
             </a>
             <Link 
               href="/book" 

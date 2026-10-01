@@ -35,13 +35,13 @@ export const eventTypes: EventType[] = [
       'Mini golf hire for corporate events, conferences, team building, promotions and trade shows. Indoor or outdoor, delivered and set up. From $190. Free quote.',
     h1: 'Corporate Mini Golf Hire for Work Events & Team Building',
     intro:
-      'Give your next work function something people will actually talk about. Golf 2 Go supplies portable mini golf and mini putt for conferences, staff parties, team building days, client functions, promotions and trade shows. We bring the course to your office, venue or exhibition space, install it before doors open and remove it at the close, so your organisers can concentrate on guests rather than logistics.',
+      'Give your next work function something people will actually talk about. Golf 2 Go supplies portable mini golf and mini putt for conferences, staff parties, team building days, client functions, promotions and trade shows. We deliver the course to your office, venue or exhibition space, set it up and pack it down again. Tell us the access times for your venue when you book, and your organisers can concentrate on guests rather than logistics.',
     heroImage: '/8-work-function-fun-portable-mini-golf.jpg',
     highlights: [
       'Indoor setups for offices, conference venues and exhibition halls',
       'Hole in One Challenge for stands, promotions and prize draws',
       '3, 6 and 9-hole courses for team building and staff parties',
-      'Installed before your guests arrive and removed afterwards',
+      'Delivered, set up and packed down at your venue',
       'Several layouts, each with different obstacles',
       'Free, no-obligation quote for your function',
     ],
@@ -64,7 +64,7 @@ export const eventTypes: EventType[] = [
         heading: 'Planning a corporate booking',
         paragraphs: [
           'Our company is based in Palmerston North and serves workplaces nationwide. Pricing for a corporate job reflects the number of holes, how many hours of play you need and where the venue sits, and your free quote includes all three.',
-          'Give us two full days of notice at the very least. It helps if your event manager sends the venue floor plan, bump-in and bump-out times and any venue rules on access, so we can line up the installation with everyone else on site.',
+          'Give us two full days of notice at the very least. It helps if your event manager sends the venue floor plan, bump-in and bump-out times and any venue rules on access. Tell us the access times for your venue when you book so the setup and pack-down can be planned around them.',
         ],
       },
       {

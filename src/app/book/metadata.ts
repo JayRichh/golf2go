@@ -1,4 +1,5 @@
 import { generateMetadata as baseGenerateMetadata } from '../seo.config'
+import { imageSize } from '~/lib/site'
 
 export async function generateMetadata() {
   return baseGenerateMetadata({
@@ -8,14 +9,12 @@ export async function generateMetadata() {
     images: [
       {
         url: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
-        width: 1200,
-        height: 630,
+        ...imageSize('/2-parties-and-events-golf2go-portable-miniature-golf.jpg'),
         alt: 'Hire Professional Portable Mini Golf - Event Setup',
       },
       {
         url: '/6-Forefront-400x400-Auckland-Forefront.jpg',
-        width: 1200,
-        height: 630,
+        ...imageSize('/6-Forefront-400x400-Auckland-Forefront.jpg'),
         alt: 'Mini Golf Course Rental - Professional Installation',
       }
     ]

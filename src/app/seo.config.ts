@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { SITE_URL, absUrl } from '~/lib/site'
+import { SITE_URL, absUrl, imageSize } from '~/lib/site'
 
 export type MetadataProps = {
   title?: string
@@ -16,14 +16,12 @@ export type MetadataProps = {
 const defaultImages = [
   {
     url: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
-    width: 1200,
-    height: 630,
+    ...imageSize('/2-parties-and-events-golf2go-portable-miniature-golf.jpg'),
     alt: 'Golf 2 Go - Professional Mini Golf Events'
   },
   {
     url: '/17-golf2go-portable-miniature-golf-close-up.jpg',
-    width: 1200,
-    height: 630,
+    ...imageSize('/17-golf2go-portable-miniature-golf-close-up.jpg'),
     alt: 'Golf 2 Go - Course Details'
   }
 ]

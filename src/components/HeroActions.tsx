@@ -3,10 +3,14 @@ import Link from "next/link";
 
 import { Text } from "~/components/ui/Text";
 
-/** Split an intro into its first sentence (hero lede) and the rest (opening body paragraph). */
+/**
+ * Split an intro into its first sentence (hero lede) and the rest (opening body paragraph).
+ * A lede that is only a question would leave the hero unanswered, so it takes the next sentence too.
+ */
 export function splitLede(intro: string): [string, string] {
-  const [lede, ...rest] = intro.split(/(?<=[.?!])\s+/);
-  return [lede, rest.join(" ")];
+  const sentences = intro.split(/(?<=[.?!])\s+/);
+  const take = sentences[0].endsWith("?") && sentences.length > 1 ? 2 : 1;
+  return [sentences.slice(0, take).join(" "), sentences.slice(take).join(" ")];
 }
 
 /** The hero's quote button and courses link, styled for the dark photo scrim. */

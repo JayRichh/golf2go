@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { Footer } from "~/components/layout/footer";
 import { Navbar } from "~/components/layout/navbar";
 import { Analytics } from "@vercel/analytics/react"
-import { ORG_ID, SITE_URL } from "~/lib/site";
+import { ORG_ID, SITE_URL, imageSize } from "~/lib/site";
 import "./globals.css";
 
 // Load fonts locally for better performance
@@ -59,14 +59,12 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/2-parties-and-events-golf2go-portable-miniature-golf.jpg",
-        width: 1200,
-        height: 630,
+        ...imageSize("/2-parties-and-events-golf2go-portable-miniature-golf.jpg"),
         alt: "Golf 2 Go NZ - Premium Corporate Events",
       },
       {
         url: "/17-golf2go-portable-miniature-golf-close-up.jpg",
-        width: 1200,
-        height: 630,
+        ...imageSize("/17-golf2go-portable-miniature-golf-close-up.jpg"),
         alt: "Golf 2 Go NZ - Professional Event Solutions",
       },
     ],

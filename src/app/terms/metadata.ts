@@ -1,4 +1,5 @@
 import { generateMetadata as baseGenerateMetadata } from '../seo.config'
+import { imageSize } from '~/lib/site'
 
 export async function generateMetadata() {
   return baseGenerateMetadata({
@@ -8,8 +9,7 @@ export async function generateMetadata() {
     images: [
       {
         url: '/4-portable-miniature-golf.jpg',
-        width: 1200,
-        height: 630,
+        ...imageSize('/4-portable-miniature-golf.jpg'),
         alt: 'Mini Golf Hire Terms NZ',
       }
     ]
