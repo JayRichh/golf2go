@@ -83,7 +83,7 @@ export const locations: Location[] = [
     region: 'Manawatu-Whanganui',
     heroImage: '/17-golf2go-portable-miniature-golf-close-up.jpg',
     geo: { latitude: -40.3523, longitude: 175.6082 },
-    metaTitle: 'Mini Golf Hire Palmerston North | Indoor Mini Putt',
+    metaTitle: 'Mini Golf Hire Palmerston North | Mini Putt',
     metaDescription:
       'Mini golf hire from our Palmerston North home base. Indoor or outdoor, delivered, set up & packed down in Feilding, Levin & Whanganui. From $190. Free quote.',
     h1: 'Portable Mini Golf & Mini Putt Hire in Palmerston North',
@@ -101,7 +101,7 @@ export const locations: Location[] = [
       {
         question: 'Are you based in Palmerston North?',
         answer:
-          'Yes — Palmerston North is our home base. That means fast, reliable delivery and setup for mini golf hire across the Manawatu-Whanganui region.',
+          'Yes — Palmerston North is our home base. That means delivery and setup from our Palmerston North base for mini golf hire across the Manawatu-Whanganui region.',
       },
       {
         question: 'Do you offer indoor mini golf in Palmerston North?',
@@ -226,7 +226,7 @@ export const locations: Location[] = [
       'Portable mini golf & mini putt hire for Auckland events, North Shore to Manukau. We deliver, set up and pack down, indoors or out. From $190. Free quote.',
     h1: 'Mini Golf & Mini Putt Hire in Auckland',
     intro:
-      'Auckland has no shortage of venues, and a portable mini golf course can turn almost any of them into a games room for the day. Golf 2 Go makes the trip north from Palmerston North with a complete mini putt setup, installs it where you want it and takes it away again once play wraps up. A city-centre office could use one to break up a long conference programme; a family on the North Shore might set one up for a birthday on the lawn. The range runs from a lone Hole in One Challenge, handy for a promotion or prize draw, through to 3, 6 or 9 holes for a bigger crowd. Since it is a long drive, delivery is priced by distance from Palmerston North, and that cost is spelled out for you before you commit to anything.',
+      'Auckland has no shortage of venues, and a portable mini golf course can turn almost any of them into a games room for the day. Golf 2 Go makes the trip north from Palmerston North with a complete mini putt setup, installs it where you want it and takes it away again once play wraps up. A city-centre office could use one to break up a long conference programme; a family on the North Shore might set one up for a birthday on the lawn. The range runs from a lone Hole in One Challenge, handy for a promotion or prize draw, through to 3, 6 or 9 holes for a bigger crowd. Since it is a long drive, delivery is priced by distance from Palmerston North and your free quote includes it.',
     places: [
       'Auckland Central',
       'North Shore',
@@ -271,7 +271,7 @@ export const locations: Location[] = [
       {
         question: 'Why does an Auckland quote include a travel component?',
         answer:
-          'Delivery is priced by distance from Palmerston North, so an Auckland job carries more travel than a Manawatu one. Hire itself starts from $190 and also depends on hole count and hours. Your free quote breaks the figure down.',
+          'Delivery is priced by distance from Palmerston North, so an Auckland job carries more travel than a Manawatu one. Hire itself starts from $190 and also depends on hole count and hours, and your free quote includes all of it.',
       },
     ],
     keywords: [
@@ -294,7 +294,7 @@ export const locations: Location[] = [
       'Mini golf & mini putt hire in Hamilton and the Waikato, including Cambridge & Te Awamutu. Delivered, set up and packed down. From $190. Get a free quote.',
     h1: 'Portable Mini Golf Hire in Hamilton & the Waikato',
     intro:
-      'Searching for mini putt hire in Hamilton, New Zealand? Golf 2 Go can bring a portable course to your event anywhere around the Waikato, whether that is a Hamilton school, a sports club in Cambridge, a woolshed party near Te Awamutu or an office in Huntly. We drive up from Palmerston North, put the holes down in your chosen spot, and lift them again when the day is over. Your guests just turn up and play. For a stall or a promotion, the one-hole Hole in One Challenge does the job; a 3, 6 or 9-hole layout suits a party or work function where people want to wander through a whole round. Rain plans are easy because the courses run inside or out. Delivery is priced by distance from Palmerston North, and it sits on your free quote as its own line.',
+      'Searching for mini putt hire in Hamilton, New Zealand? Golf 2 Go can bring a portable course to your event anywhere around the Waikato, whether that is a Hamilton school, a sports club in Cambridge, a woolshed party near Te Awamutu or an office in Huntly. We drive up from Palmerston North, put the holes down in your chosen spot, and lift them again when the day is over. Your guests just turn up and play. For a stall or a promotion, the one-hole Hole in One Challenge does the job; a 3, 6 or 9-hole layout suits a party or work function where people want to wander through a whole round. Rain plans are easy because the courses run inside or out. Delivery is priced by distance from Palmerston North and your free quote includes it.',
     places: [
       'Hamilton',
       'Cambridge',
@@ -308,20 +308,20 @@ export const locations: Location[] = [
         heading: 'Mini golf for Waikato events of every size',
         paragraphs: [
           'A course gives people something to do between the speeches, the food and the catch-ups. Around the Waikato that might be a club prizegiving, a workplace function, a birthday on a back lawn or a stall at a community fundraiser.',
-          'Small crowds are often happy with just the Hole in One Challenge. Larger groups do better with more holes, since several players can be out on the course at once and the queue stays short. A 9-hole round with mixed layouts gives keen players a proper test.',
+          'For a smaller crowd, the single-hole Hole in One Challenge is priced from $190 up to $500. Larger groups do better with more holes, since several players can be out on the course at once and the queue stays short. A 9-hole round with mixed layouts gives keen players a proper test.',
         ],
       },
       {
         heading: 'What to send us for a Hamilton quote',
         paragraphs: [
           'Give us four details and we can price the job: the date, the town or suburb, inside or outside, and roughly how many hours you want the course on site. The town matters because the travel cost depends on it.',
-          'Book at least 48 hours ahead. After you confirm, we bring the holes, lay them down, and return later to clear everything away.',
+          'Book at least 48 hours ahead. After you confirm, we deliver, set up and pack down the course.',
         ],
       },
       {
         heading: 'Wet weather in the Waikato',
         paragraphs: [
-          'Outdoor plans can change fast when the forecast turns. If you have a hall, a covered deck or a garage as a backup, tell us when you book and we can plan both options. The same holes work on either site, so swapping inside on the day only means choosing a smaller combination if the backup space is tight.',
+          'Outdoor plans can change with the weather. The courses work indoors and outdoors, so tell us about any backup space, such as a hall, a covered deck or a garage, when you book. A smaller indoor space may suit a smaller combination of holes.',
         ],
       },
     ],
@@ -332,9 +332,9 @@ export const locations: Location[] = [
           'Hamilton and the surrounding towns, including Cambridge, Te Awamutu, Huntly, Ngaruawahia and Morrinsville. Wherever the venue is, the drop-off, setup and pack-down are handled by us.',
       },
       {
-        question: 'If it rains, can the course be moved inside?',
+        question: 'What if rain is forecast?',
         answer:
-          'Yes, provided there is room. The holes suit halls, offices, function rooms and marquees as well as lawns, so let us know about any backup space when you book and we will plan a layout for it.',
+          'The courses work indoors and outdoors, so tell us about any backup space when you book. Halls, offices, function rooms and marquees all suit the holes as well as lawns.',
       },
       {
         question: 'What makes up a Hamilton hire quote?',
@@ -362,7 +362,7 @@ export const locations: Location[] = [
       'Portable mini golf hire in Tauranga, Mount Maunganui & the Bay of Plenty. Indoor or outdoor mini putt, delivered and set up. From $190. Request a free quote.',
     h1: 'Mini Golf Hire in Tauranga & the Bay of Plenty',
     intro:
-      'From a summer barbecue at the Mount to a staff day in Te Puke, a mini putt course gives Bay of Plenty guests an easy way to mingle. Golf 2 Go hires out portable mini golf for events across Tauranga, Mount Maunganui, Papamoa, Katikati and Omokoroa. We bring the course from our Palmerston North base, lay it out at your venue, and pack it up afterwards. There are two ways to play. The Hole in One Challenge is a single, eye-catching hole for competitions and brand activations. The 3, 6 and 9-hole options form a proper circuit for parties and functions. Indoors or outdoors both work. Delivery is priced by distance from Palmerston North, and your quote, which costs nothing, lists it separately.',
+      'From a summer barbecue at the Mount to a staff day in Te Puke, a mini putt course gives Bay of Plenty guests an easy way to mingle. Golf 2 Go hires out portable mini golf for events across Tauranga, Mount Maunganui, Papamoa, Katikati and Omokoroa. We bring the course from our Palmerston North base, lay it out at your venue, and pack it up afterwards. There are two ways to play. The Hole in One Challenge is a single, eye-catching hole for competitions and brand activations. The 3, 6 and 9-hole options form a proper circuit for parties and functions. Indoors or outdoors both work. Delivery is priced by distance from Palmerston North and your free quote includes it.',
     places: [
       'Tauranga',
       'Mount Maunganui',
@@ -373,10 +373,10 @@ export const locations: Location[] = [
     ],
     body: [
       {
-        heading: 'A courtyard plan with a hall as backup',
+        heading: 'Courtyard, lawn or hall',
         paragraphs: [
-          'Plenty of Bay events are planned for outside, but plans change. Since every hole works indoors as well as outdoors, you can book for the courtyard and keep the hall as plan B.',
-          'Give us measurements for both spaces. Bridge over the River (3.3m × 9m) and Triple Kidney (3.4m × 9m) need more length than Twin Hedges (3.3m × 7.5m), so the backup room might call for a slightly different mix.',
+          'Plenty of Bay events are planned for outside, and plenty happen in halls and function rooms. Every hole works indoors as well as outdoors, so a courtyard, a lawn or a hall can all host the course.',
+          'Give us the measurements of your space. Bridge over the River (3.3m × 9m) and Triple Kidney (3.4m × 9m) need more length than Twin Hedges (3.3m × 7.5m), so a shorter room might call for a slightly different mix.',
         ],
       },
       {
@@ -408,7 +408,7 @@ export const locations: Location[] = [
       {
         question: 'How is mini golf hire priced for the Bay of Plenty?',
         answer:
-          'Prices begin at $190. Hole count and hire length set the base, then delivery is added by distance from Palmerston North. Ask us and we will send a free quote with the total.',
+          'Prices begin at $190. Hole count and hire length set the base, then delivery is added by distance from Palmerston North. Ask us and we will send a free quote.',
       },
     ],
     keywords: [
@@ -431,7 +431,7 @@ export const locations: Location[] = [
       "Mini golf & mini putt hire in Hawke's Bay: Napier, Hastings & Havelock North. Delivered, set up and packed down, indoors or out. From $190. Free quote.",
     h1: "Portable Mini Golf Hire in Napier, Hastings & Hawke's Bay",
     intro:
-      "Hosting something in Napier, Hastings or Havelock North? A portable mini putt course is an easy add-on that suits all sorts of crowds. Golf 2 Go travels from Palmerston North to bring the full kit to Hawke's Bay, then handles the installation at your venue and the clean-up at the end. You pick the scale: one Hole in One Challenge for a giveaway or competition, or a 3, 6 or 9-hole course where groups can play a full round. A school hall in Taradale, a vineyard lawn, an office in Hastings or a backyard in Clive are all fair game, since the holes are made for inside and outside use. Delivery is priced by distance from Palmerston North, and your free quote sets it out alongside the hole count and hire time.",
+      "Hosting something in Napier, Hastings or Havelock North? A portable mini putt course is an easy add-on that suits all sorts of crowds. Golf 2 Go travels from Palmerston North to bring the full kit to Hawke's Bay, then handles the installation at your venue and the clean-up at the end. You pick the scale: one Hole in One Challenge for a giveaway or competition, or a 3, 6 or 9-hole course where groups can play a full round. A school hall in Taradale, a vineyard lawn, an office in Hastings or a backyard in Clive are all fair game, since the holes are made for inside and outside use. Delivery is priced by distance from Palmerston North and your free quote includes it.",
     places: [
       'Napier',
       'Hastings',
@@ -477,7 +477,7 @@ export const locations: Location[] = [
       {
         question: "What does mini golf hire in Hawke's Bay cost?",
         answer:
-          'The starting point is $190. More holes or longer hire raises it, and travel is added based on distance from Palmerston North. You will get a free quote with everything listed.',
+          'The starting point is $190. More holes or longer hire raises it, and travel is added based on distance from Palmerston North. Ask us for a free quote.',
       },
     ],
     keywords: [
@@ -500,7 +500,7 @@ export const locations: Location[] = [
       'Mini golf & mini putt hire in Whanganui, Marton & Bulls from our Palmerston North base. Delivery, setup & pack-down included. From $190. Get a free quote.',
     h1: 'Mini Golf & Mini Putt Hire in Whanganui',
     intro:
-      'Whanganui is a short drive from our Palmerston North base. Golf 2 Go hires out portable mini golf and mini putt for events across the river city and nearby towns such as Castlecliff, Marton, Bulls, Hunterville and Taihape. On the day, we arrive with the holes, lay them out at your venue and come back for them once the last group has putted out. A one-hole Hole in One Challenge suits a gala stall, a raffle or a shop promotion. A 3, 6 or 9-hole course suits a birthday, a club night, a fundraiser, a wedding or a staff function. Halls, school fields and backyards all work because the courses run indoors and outdoors. Delivery is priced by distance from Palmerston North, and every quote is free.',
+      'Whanganui is a short drive from our Palmerston North base. Golf 2 Go hires out portable mini golf and mini putt for events across the river city and nearby towns such as Castlecliff, Marton, Bulls, Hunterville and Taihape. We deliver the holes, set them up at your venue and pack them down when your event finishes. A one-hole Hole in One Challenge suits a gala stall, a raffle or a shop promotion. A 3, 6 or 9-hole course suits a birthday, a club night, a fundraiser, a wedding or a staff function. Halls, school fields and backyards all work because the courses run indoors and outdoors. Delivery is priced by distance from Palmerston North, and every quote is free.',
     places: [
       'Whanganui',
       'Castlecliff',
@@ -541,7 +541,7 @@ export const locations: Location[] = [
       {
         question: 'Will it fit in a Whanganui community or school hall?',
         answer:
-          'Usually, yes. Every layout we hire can be used under a roof or in the open air, so community halls, school halls, offices and function rooms are all candidates. Pass on the room measurements and we will pick a combination to suit.',
+          'Yes, if there is enough floor space. Every layout we hire can be used under a roof or in the open air, so community halls, school halls, offices and function rooms are all candidates. Pass on the room measurements and we will pick a combination to suit.',
       },
       {
         question: 'How much does mini golf hire in Whanganui cost?',

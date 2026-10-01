@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
-import { eventTypes } from "~/lib/event-types";
+import { PRICES_PATH, eventTypes } from "~/lib/event-types";
 import { locations } from "~/lib/locations";
 
 /**
@@ -22,9 +22,9 @@ export function RelatedLinks({ currentPath }: { currentPath: string }) {
               Plan Your Event
             </Text>
             <ul className="mt-4 space-y-2">
-              {currentPath !== "mini-golf-hire-prices" && (
+              {currentPath !== PRICES_PATH && (
                 <li>
-                  <Link href="/mini-golf-hire-prices" className="text-primary underline hover:no-underline">
+                  <Link href={`/${PRICES_PATH}`} className="text-primary underline hover:no-underline">
                     Mini golf hire prices
                   </Link>
                 </li>

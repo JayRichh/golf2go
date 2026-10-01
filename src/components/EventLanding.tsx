@@ -30,8 +30,8 @@ function buildSchema(event: EventType) {
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: "NZD",
-      lowPrice: "190",
-      highPrice: "2500",
+      lowPrice: 190,
+      highPrice: 2500,
       availability: "https://schema.org/InStock",
       url: absUrl("book"),
     },

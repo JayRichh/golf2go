@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-import { eventTypes } from '~/lib/event-types'
+import { PRICES_PATH, eventTypes } from '~/lib/event-types'
 import { locations } from '~/lib/locations'
 
 const VALID_ROUTES = new Set([
@@ -17,7 +17,7 @@ const VALID_ROUTES = new Set([
   ...locations.map(l => l.path),
   // Event-type landing pages and the pricing page.
   ...eventTypes.map(e => e.path),
-  'mini-golf-hire-prices'
+  PRICES_PATH
 ])
 
 const BLOCKED_PATTERNS = [

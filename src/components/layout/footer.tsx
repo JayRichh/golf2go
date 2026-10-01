@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
-import { eventTypes } from "~/lib/event-types";
+import { PRICES_PATH, eventTypes } from "~/lib/event-types";
 import { locations } from "~/lib/locations";
 
 const navigation = {
@@ -20,7 +20,7 @@ const navigation = {
   locations: locations.map((l) => ({ name: `Mini Golf ${l.name}`, href: `/${l.path}` })),
   events: [
     ...eventTypes.map((e) => ({ name: e.name, href: `/${e.path}` })),
-    { name: "Hire Prices", href: "/mini-golf-hire-prices" },
+    { name: "Hire Prices", href: `/${PRICES_PATH}` },
   ],
   contact: [
     { name: "Email", value: "admin@golf2go.co.nz", href: "mailto:admin@golf2go.co.nz", icon: "📧" },

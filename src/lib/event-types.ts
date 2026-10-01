@@ -1,6 +1,9 @@
 // Event-type landing pages. Pure data: this module is imported by the edge
 // middleware, so it must not import components, icons or anything server-only.
 
+/** Route path of the pricing page (no leading slash). */
+export const PRICES_PATH = 'mini-golf-hire-prices';
+
 export interface EventType {
   slug: string;
   /** Page path, e.g. "mini-golf-corporate-events" */
@@ -60,7 +63,7 @@ export const eventTypes: EventType[] = [
       {
         heading: 'Planning a corporate booking',
         paragraphs: [
-          'Our company is based in Palmerston North and serves workplaces nationwide. Pricing for a corporate job reflects the number of holes, how many hours of play you need and where the venue sits, and it all appears in a written quote before you sign off.',
+          'Our company is based in Palmerston North and serves workplaces nationwide. Pricing for a corporate job reflects the number of holes, how many hours of play you need and where the venue sits, and your free quote includes all three.',
           'Give us two full days of notice at the very least. It helps if your event manager sends the venue floor plan, bump-in and bump-out times and any venue rules on access, so we can line up the installation with everyone else on site.',
         ],
       },
@@ -158,7 +161,7 @@ export const eventTypes: EventType[] = [
       {
         question: 'How much is mini golf hire for a birthday party?',
         answer:
-          'Most small parties start with the one-hole challenge, priced from $190 up to $500. Bigger birthdays with a 3, 6 or 9-hole course fall between $575 and $2500, depending on holes, hours and the party location.',
+          'For a smaller party, the one-hole challenge is priced from $190 up to $500. Bigger birthdays with a 3, 6 or 9-hole course fall between $575 and $2500, depending on holes, hours and the party location.',
       },
       {
         question: 'How much notice do you need for a party booking?',
@@ -203,7 +206,7 @@ export const eventTypes: EventType[] = [
       {
         heading: 'Indoors or outdoors on the day',
         paragraphs: [
-          'Galas and fairs are often planned for outdoors, with a hall as a backup. Our courses can be set up indoors as well as outdoors, so you have options if the forecast changes.',
+          'Galas and fairs run on fields, courts and in halls. Our courses can be set up indoors as well as outdoors, so pick whichever space suits your grounds.',
           'Holes come in a range of sizes, for example Twin Hedges at 3.3m × 7.5m and Multi-tunnels at 2.8m × 9m. Tell us how much room the stall has and we will choose holes that fit.',
         ],
       },
@@ -295,7 +298,7 @@ export const eventTypes: EventType[] = [
       {
         heading: 'Booking wedding mini golf',
         paragraphs: [
-          'Weddings anywhere in New Zealand can book from our Palmerston North base. Your price comes from three things: the holes you choose, how long they stay at the venue, and how far the venue is from us. Your quote spells it out.',
+          'Weddings anywhere in New Zealand can book from our Palmerston North base. Your price comes from three things: the holes you choose, how long they stay at the venue, and how far the venue is from us.',
           'The minimum lead time is 48 hours, but it is worth locking it in alongside the rest of your suppliers. Once the venue and date are fixed, send them through and we will look after the drop-off, setup and removal.',
         ],
       },

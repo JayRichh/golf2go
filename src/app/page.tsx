@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
+import { PRICES_PATH } from "~/lib/event-types";
 import { locations } from "~/lib/locations";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -83,9 +84,14 @@ const serviceAreas = [
   },
 ];
 
-// Location pages not already represented by a region card above.
+// Location pages not already represented by a region card above: skip pages a
+// card links to, and pages in the same region as one (e.g. Taranaki vs New Plymouth).
+const cardPaths = new Set(serviceAreas.map((a) => a.href));
+const cardRegions = new Set(
+  locations.filter((l) => cardPaths.has(`/${l.path}`)).map((l) => l.region),
+);
 const extraAreas = locations.filter(
-  (l) => !serviceAreas.some((a) => a.href === `/${l.path}`) && l.slug !== "taranaki",
+  (l) => !cardPaths.has(`/${l.path}`) && !cardRegions.has(l.region),
 );
 
 export default function HomePage() {
@@ -280,7 +286,7 @@ export default function HomePage() {
           </div>
           <Text variant="lg" className="mx-auto mt-10 max-w-2xl text-center text-foreground-secondary">
             Hire starts from $190. See our{" "}
-            <Link href="/mini-golf-hire-prices" className="text-primary underline hover:no-underline">
+            <Link href={`/${PRICES_PATH}`} className="text-primary underline hover:no-underline">
               mini golf hire prices
             </Link>{" "}
             for the full price ranges and what affects them.

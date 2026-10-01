@@ -46,7 +46,7 @@ for (const file of pages) {
   }
   // Microdata is structured data too: itemtype="https://schema.org/<Type>".
   for (const t of FORBID_TYPES) {
-    if (new RegExp(`itemtype=["']https?://schema\.org/${t}["']`, 'i').test(html)) errors.push(`${rel}: forbidden microdata itemtype ${t}`)
+    if (new RegExp(`itemtype=["']https?://schema\\.org/${t}["']`, 'i').test(html)) errors.push(`${rel}: forbidden microdata itemtype ${t}`)
   }
 }
 

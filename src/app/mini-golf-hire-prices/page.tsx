@@ -7,10 +7,11 @@ import { RelatedLinks } from "~/components/RelatedLinks";
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
+import { PRICES_PATH } from "~/lib/event-types";
 import { ORG_ID, SITE_URL, absUrl } from "~/lib/site";
 import { generateMetadata as buildMetadata } from "../seo.config";
 
-const PATH = "mini-golf-hire-prices";
+const PATH = PRICES_PATH;
 const H1 = "Mini Golf Hire Prices NZ";
 const DESCRIPTION =
   "Mini golf hire prices in NZ: Hole in One Challenge $190–$500, 3, 6 or 9-hole courses $575–$2500. Delivery, setup and pack-down included. Get a free quote.";

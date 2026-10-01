@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 
-import { eventTypes } from '~/lib/event-types'
+import { PRICES_PATH, eventTypes } from '~/lib/event-types'
 import { locations } from '~/lib/locations'
 import { absUrl } from '~/lib/site'
 
@@ -59,7 +59,7 @@ const routes: Route[] = [
     imgs: [absUrl(e.heroImage)]
   })),
   {
-    path: '/mini-golf-hire-prices',
+    path: `/${PRICES_PATH}`,
     freq: 'monthly',
     pri: 0.8,
     imgs: [absUrl('/3-fun-portable-mini-golf.jpg')]
