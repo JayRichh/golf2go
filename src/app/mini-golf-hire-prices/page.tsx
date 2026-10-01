@@ -1,8 +1,10 @@
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
+import { CtaBand } from "~/components/CtaBand";
+import { HeroActions } from "~/components/HeroActions";
+import { PhotoHero } from "~/components/PhotoHero";
 import { RelatedLinks } from "~/components/RelatedLinks";
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
@@ -139,49 +141,17 @@ export default function MiniGolfHirePricesPage() {
       />
 
       <div className="overflow-x-hidden">
-        {/* Hero */}
-        <section className="relative bg-primary text-primary-foreground">
-            <div className="relative isolate overflow-hidden py-32 md:py-40">
-              <div className="absolute inset-0 -z-10 w-full">
-                <Image
-                  src="/3-fun-portable-mini-golf.jpg"
-                  alt=""
-                  fill
-                  className="h-full w-full object-cover opacity-30"
-                  sizes="100vw"
-                  priority
-                />
-              </div>
-              <Container size="xl">
-                <div className="mx-auto max-w-3xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                  <Text
-                    variant="h1"
-                    align="center"
-                    className="font-bold tracking-tight text-primary-foreground"
-                  >
-                    {H1}
-                  </Text>
-                  <Text variant="xl" className="mx-auto mt-6 text-primary-foreground">
-                    Portable mini golf and mini putt hire from Golf 2 Go starts from $190. Here is
-                    how our pricing works, what changes the total, and what every hire includes, so
-                    you can budget before you ask for a quote.
-                  </Text>
-                  <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-                    <Link href="/book" className="btn-primary inline-flex items-center gap-2 px-8 py-3">
-                      <Text variant="lg">Get a Free Quote</Text>
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
-                    <Link
-                      href="/courses"
-                      className="btn-outline inline-flex items-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
-                    >
-                      <Text variant="lg">View Our Courses</Text>
-                    </Link>
-                  </div>
-                </div>
-              </Container>
-            </div>
-        </section>
+        <PhotoHero image="/3-fun-portable-mini-golf.jpg">
+          <Text variant="h1" className="font-bold tracking-tight">
+            {H1}
+          </Text>
+          <Text variant="xl" className="mx-auto mt-6 max-w-2xl">
+            Portable mini golf and mini putt hire from Golf 2 Go starts from $190. Here is
+            how our pricing works, what changes the total, and what every hire includes, so
+            you can budget before you ask for a quote.
+          </Text>
+          <HeroActions quoteLabel="Get a Free Quote" />
+        </PhotoHero>
 
         {/* Price ranges */}
         <section className="py-20">
@@ -194,9 +164,9 @@ export default function MiniGolfHirePricesPage() {
                 We publish two price ranges. Where your event lands within a range depends on the
                 factors below, and your quote confirms the exact figure.
               </Text>
-              <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              <div className="mt-10 grid gap-10 sm:grid-cols-2">
                 {priceBands.map((band) => (
-                  <div key={band.name} className="rounded-xl border border-border bg-background p-6">
+                  <div key={band.name}>
                     <Text variant="lg" className="font-semibold text-foreground">
                       {band.name}
                     </Text>
@@ -316,36 +286,10 @@ export default function MiniGolfHirePricesPage() {
 
         <RelatedLinks currentPath={PATH} />
 
-        {/* CTA */}
-        <section className="relative bg-primary py-24 text-primary-foreground">
-            <Container size="xl" className="py-12">
-              <div className="relative z-10 text-center">
-                <Text
-                  variant="h2"
-                  align="center"
-                  className="pb-4 font-bold tracking-tight text-primary-foreground"
-                >
-                  Get an Exact Price for Your Event
-                </Text>
-                <Text
-                  variant="lg"
-                  className="mx-auto mt-4 max-w-2xl text-center text-primary-foreground"
-                >
-                  Tell us your date, location and the course you want, and we&apos;ll send a free,
-                  no-obligation quote.
-                </Text>
-                <div className="mt-10 flex justify-center">
-                  <Link
-                    href="/book"
-                    className="btn-primary inline-flex items-center justify-center gap-2 px-8 py-3"
-                  >
-                    <Text variant="lg">Get a Hire Quote</Text>
-                    <ArrowRight className="h-5 w-5" />
-                  </Link>
-                </div>
-              </div>
-            </Container>
-        </section>
+        <CtaBand title="Get an Exact Price for Your Event">
+          Tell us your date, location and the course you want, and we&apos;ll send a free,
+          no-obligation quote.
+        </CtaBand>
       </div>
     </>
   );

@@ -1,7 +1,9 @@
-import { ArrowRight, CheckCircle, MapPin } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
+import { CtaBand } from "~/components/CtaBand";
+import { HeroActions, splitLede } from "~/components/HeroActions";
+import { PhotoHero } from "~/components/PhotoHero";
 import { RelatedLinks } from "~/components/RelatedLinks";
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
@@ -65,6 +67,7 @@ function buildSchema(location: Location) {
 
 export function LocationLanding({ location }: { location: Location }) {
   const schema = buildSchema(location);
+  const [lede, restOfIntro] = splitLede(location.intro);
 
   return (
     <>
@@ -74,74 +77,36 @@ export function LocationLanding({ location }: { location: Location }) {
       />
 
       <div className="overflow-x-hidden">
-        {/* Hero */}
-        <section className="relative bg-primary text-primary-foreground">
-            <div className="relative isolate overflow-hidden py-32 md:py-40">
-              <div className="absolute inset-0 -z-10 w-full">
-                <Image
-                  src={location.heroImage}
-                  alt=""
-                  fill
-                  className="h-full w-full object-cover opacity-30"
-                  sizes="100vw"
-                  priority
-                />
-              </div>
-              <Container size="xl">
-                <div className="mx-auto max-w-3xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                  <Text
-                    variant="h1"
-                    align="center"
-                    className="font-bold tracking-tight text-primary-foreground"
-                  >
-                    {location.h1}
-                  </Text>
-                  <Text variant="xl" className="mx-auto mt-6 text-primary-foreground">
-                    {location.intro}
-                  </Text>
-                  <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-                    <Link
-                      href="/book"
-                      className="btn-primary inline-flex items-center gap-2 px-8 py-3"
-                    >
-                      <Text variant="lg">Get a Hire Quote</Text>
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
-                    <Link
-                      href="/courses"
-                      className="btn-outline inline-flex items-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
-                    >
-                      <Text variant="lg">View Our Courses</Text>
-                    </Link>
-                  </div>
-                </div>
-              </Container>
-            </div>
-        </section>
+        <PhotoHero image={location.heroImage}>
+          <Text variant="h1" className="font-bold tracking-tight">
+            {location.h1}
+          </Text>
+          <Text variant="xl" className="mx-auto mt-6 max-w-2xl">
+            {lede}
+          </Text>
+          <HeroActions />
+        </PhotoHero>
 
         {/* Areas covered */}
-        <section className="py-20">
+        <section className="py-16 md:py-20">
           <Container size="xl">
-            <div className="text-center">
-              <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
+            <div className="mx-auto max-w-3xl">
+              {restOfIntro && (
+                <Text variant="lg" className="mb-12 text-foreground-secondary">
+                  {restOfIntro}
+                </Text>
+              )}
+              <Text variant="h2" className="font-bold tracking-tight">
                 Areas We Cover in {location.name}
               </Text>
-              <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-foreground-secondary">
+              <Text variant="lg" className="mt-4 text-foreground-secondary">
                 Portable mini golf and mini putt hire delivered across {location.region}
               </Text>
-            </div>
-            <div className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-3">
-              {location.places.map((place) => (
-                <div
-                  key={place}
-                  className="flex items-center gap-2 rounded-lg border border-border bg-background px-4 py-3"
-                >
-                  <MapPin className="h-4 w-4 flex-shrink-0 text-primary" />
-                  <Text variant="base" className="text-foreground-secondary">
-                    {place}
-                  </Text>
-                </div>
-              ))}
+              <ul className="mt-6 grid grid-cols-2 gap-x-8 gap-y-2 text-lg sm:grid-cols-3">
+                {location.places.map((place) => (
+                  <li key={place}>{place}</li>
+                ))}
+              </ul>
             </div>
           </Container>
         </section>
@@ -233,35 +198,9 @@ export function LocationLanding({ location }: { location: Location }) {
 
         <RelatedLinks currentPath={location.path} />
 
-        {/* CTA */}
-        <section className="relative bg-primary py-24 text-primary-foreground">
-            <Container size="xl" className="py-12">
-              <div className="relative z-10 text-center">
-                <Text
-                  variant="h2"
-                  align="center"
-                  className="pb-4 font-bold tracking-tight text-primary-foreground"
-                >
-                  Book Mini Golf Hire in {location.name}
-                </Text>
-                <Text
-                  variant="lg"
-                  className="mx-auto mt-4 max-w-2xl text-center text-primary-foreground"
-                >
-                  Tell us about your event and we&apos;ll send a free, no-obligation quote.
-                </Text>
-                <div className="mt-10 flex justify-center">
-                  <Link
-                    href="/book"
-                    className="btn-primary inline-flex items-center justify-center gap-2 px-8 py-3"
-                  >
-                    <Text variant="lg">Get a Hire Quote</Text>
-                    <ArrowRight className="h-5 w-5" />
-                  </Link>
-                </div>
-              </div>
-            </Container>
-        </section>
+        <CtaBand title={<>Book Mini Golf Hire in {location.name}</>}>
+          Tell us about your event and we&apos;ll send a free, no-obligation quote.
+        </CtaBand>
       </div>
     </>
   );

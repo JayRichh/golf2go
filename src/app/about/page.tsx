@@ -2,7 +2,8 @@ import { ArrowRight, Heart, Target, Trophy } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Card } from "~/components/ui/Card";
+import { CtaBand } from "~/components/CtaBand";
+import { PhotoHero } from "~/components/PhotoHero";
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
 import { generateAboutSchema, generateValuesSchema } from './schema';
@@ -42,41 +43,15 @@ export default function AboutPage() {
           __html: JSON.stringify([aboutSchema, valuesSchema]),
         }}
       />
-      {/* Hero Section */}
-      <section className="relative bg-primary text-primary-foreground">
-          <div className="relative isolate overflow-hidden py-32 md:py-40">
-            <div className="absolute inset-0 -z-10 w-full">
-              <Image
-                src="/3-fun-portable-mini-golf.jpg"
-                alt=""
-                fill
-                className="h-full w-full object-cover opacity-30"
-                sizes="100vw"
-                priority
-              />
-            </div>
-            <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                <Text
-                  variant="h1"
-                  align="center"
-                  className="text-primary-foreground"
-                  itemProp="name"
-                >
-                  About Golf 2 Go — Portable Mini Golf &amp; Mini Putt Hire
-                </Text>
-                <Text
-                  variant="xl"
-                  className="mt-6 text-primary-foreground"
-                  itemProp="description"
-                >
-                  New Zealand&apos;s first portable mini golf company. Since 2008 we&apos;ve brought
-                  mini putt fun to parties, events and corporate functions right across the country.
-                </Text>
-              </div>
-            </Container>
-          </div>
-      </section>
+      <PhotoHero image="/3-fun-portable-mini-golf.jpg">
+        <Text variant="h1" itemProp="name">
+          About Golf 2 Go — Portable Mini Golf &amp; Mini Putt Hire
+        </Text>
+        <Text variant="xl" className="mx-auto mt-6 max-w-2xl" itemProp="description">
+          New Zealand&apos;s first portable mini golf company. Since 2008 we&apos;ve brought
+          mini putt fun to parties, events and corporate functions right across the country.
+        </Text>
+      </PhotoHero>
 
       {/* Mission Section */}
       <section className="py-12 md:py-16" itemScope itemType="https://schema.org/Organization">
@@ -118,76 +93,35 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="bg-background-secondary py-12 md:py-16" itemScope itemType="https://schema.org/ItemList">
+      <section className="bg-background-secondary py-16 md:py-24" itemScope itemType="https://schema.org/ItemList">
         <Container size="xl">
           <div className="text-center">
-            <Text variant="h2" align="center" className="text-foreground">
+            <Text variant="h2">
               Why People Choose Golf 2 Go
             </Text>
-            <Text
-              variant="lg"
-              className="mx-auto mt-6 max-w-2xl text-center text-foreground-secondary"
-            >
+            <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-foreground-secondary">
               What makes our portable mini golf hire so popular
             </Text>
           </div>
-          <div className="mx-auto mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mx-auto mt-12 grid max-w-5xl gap-8 lg:grid-cols-3">
             {values.map((value, index) => (
-              <Card
-                key={value.name}
-                className="group flex w-full flex-col items-center text-center p-8"
-                itemScope
-                itemType="https://schema.org/ListItem"
-              >
+              <li key={value.name} itemScope itemType="https://schema.org/ListItem">
                 <meta itemProp="position" content={String(index + 1)} />
-                <value.icon className="h-12 w-12 text-primary mb-4" />
-                <Text variant="h4" className="text-foreground mb-3" itemProp="name">
+                <h3 className="text-xl font-semibold" itemProp="name">
                   {value.name}
-                </Text>
-                <Text variant="base" className="text-foreground-secondary" itemProp="description">
+                </h3>
+                <p className="mt-2 text-foreground-secondary" itemProp="description">
                   {value.description}
-                </Text>
-              </Card>
+                </p>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative bg-primary py-24 text-primary-foreground">
-          <Container size="xl" className="py-24">
-            <div className="relative z-10">
-              <Text
-                variant="h2"
-                align="center"
-                className="pb-4 font-bold tracking-tight text-primary-foreground"
-              >
-                Ready to Book Your Mini Golf Hire?
-              </Text>
-              <Text
-                variant="lg"
-                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground"
-              >
-                Tell us about your event and we&apos;ll send you a free, no-obligation quote.
-              </Text>
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link
-                  href="/book"
-                  className="btn-primary inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 px-8 py-3"
-                >
-                  <Text variant="lg">Get a Hire Quote</Text>
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="btn-outline inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
-                >
-                  <Text variant="lg">Contact Us</Text>
-                </Link>
-              </div>
-            </div>
-          </Container>
-      </section>
+      <CtaBand title="Ready to Book Your Mini Golf Hire?" withContact>
+        Tell us about your event and we&apos;ll send you a free, no-obligation quote.
+      </CtaBand>
 
       {/* SEO Content Section */}
       <section className="py-12 bg-background">

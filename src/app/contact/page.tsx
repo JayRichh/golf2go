@@ -1,8 +1,7 @@
-import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, CheckCircle, Clock, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 
-import { Card, CardHeader, CardContent } from "~/components/ui/Card";
+import { PhotoHero } from "~/components/PhotoHero";
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
 import { generateContactSchema, generateContactFormSchema } from './schema';
@@ -83,138 +82,84 @@ export default function ContactPage() {
       />
       
       <div className="overflow-x-hidden">
-        {/* Header */}
-        <section className="relative bg-primary text-primary-foreground">
-            <div className="relative isolate overflow-hidden py-32 md:py-40">
-              <div className="absolute inset-0 -z-10 w-full">
-                <Image
-                  src="/2-parties-and-events-golf2go-portable-miniature-golf.jpg"
-                  alt="Contact Golf 2 Go NZ for Professional Corporate Entertainment"
-                  fill
-                  className="h-full w-full object-cover opacity-30"
-                  sizes="100vw"
-                  priority
-                />
-              </div>
-              <Container size="xl">
-                <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                  <Text
-                    variant="h1"
-                    align="center"
-                    className="font-bold tracking-tight text-primary-foreground"
-                  >
-                    Contact Golf 2 Go NZ
-                  </Text>
-                  <Text
-                    variant="xl"
-                    className="mt-6 text-primary-foreground text-center"
-                  >
-                    New Zealand's leading provider of professional corporate entertainment solutions
-                  </Text>
-                </div>
-              </Container>
-            </div>
-        </section>
+        <PhotoHero
+          image="/2-parties-and-events-golf2go-portable-miniature-golf.jpg"
+          alt="Contact Golf 2 Go NZ for Professional Corporate Entertainment"
+        >
+          <Text variant="h1" className="font-bold tracking-tight">
+            Contact Golf 2 Go NZ
+          </Text>
+          <Text variant="xl" className="mx-auto mt-6 max-w-2xl">
+            New Zealand's leading provider of professional corporate entertainment solutions
+          </Text>
+        </PhotoHero>
 
         {/* Contact Information */}
         <section className="py-16 md:py-24" itemScope itemType="https://schema.org/ContactPage">
           <Container size="xl">
-            <div className="text-center mb-16">
-              <Text variant="h2" align="center" className="text-foreground">
+            <div className="mb-12 text-center">
+              <Text variant="h2">
                 Get In Touch
               </Text>
-              <Text
-                variant="lg"
-                className="mx-auto mt-6 max-w-2xl text-center text-foreground-secondary"
-              >
+              <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-foreground-secondary">
                 Ready to elevate your corporate event? Contact our professional team for premium entertainment solutions.
               </Text>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <ul className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
               {contactInfo.map((item) => (
-                <Card
-                  key={item.title}
-                  className="group text-center p-6 hover:shadow-lg transition-shadow"
-                  itemScope
-                  itemType="https://schema.org/ContactPoint"
-                >
-                  <CardContent className="flex flex-col items-center space-y-4">
-                    <div className="rounded-full bg-primary/10 p-3">
-                      <item.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <div className="space-y-2">
-                      <Text variant="h4" className="text-foreground" itemProp="name">
-                        {item.title}
-                      </Text>
-                      <Text variant="lg" className="font-semibold text-foreground" itemProp="value">
-                        {item.details}
-                      </Text>
-                      <Text variant="sm" className="text-foreground-secondary">
-                        {item.description}
-                      </Text>
-                    </div>
-                    <a
-                      href={item.href}
-                      className="btn-outline btn-sm inline-flex items-center gap-2 group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-                    >
-                      {item.action}
-                      <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </CardContent>
-                </Card>
+                <li key={item.title} itemScope itemType="https://schema.org/ContactPoint">
+                  <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground-secondary" itemProp="name">
+                    <item.icon className="h-4 w-4 text-primary" aria-hidden="true" />
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 break-words text-xl font-bold" itemProp="value">
+                    {item.details}
+                  </p>
+                  <p className="mt-1 text-sm text-foreground-secondary">{item.description}</p>
+                  <a
+                    href={item.href}
+                    className="mt-3 inline-flex min-h-11 items-center gap-2 font-medium text-primary underline hover:no-underline"
+                  >
+                    {item.action}
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </Container>
         </section>
 
         {/* Service Areas */}
         <section id="service-areas" className="bg-background-secondary py-16 md:py-24">
           <Container size="xl">
-            <div className="text-center mb-16">
-              <Text variant="h2" align="center" className="text-foreground">
+            <div className="mb-12 text-center">
+              <Text variant="h2">
                 Nationwide Service Coverage
               </Text>
-              <Text
-                variant="lg"
-                className="mx-auto mt-6 max-w-2xl text-center text-foreground-secondary"
-              >
+              <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-foreground-secondary">
                 We provide professional corporate entertainment solutions across New Zealand
               </Text>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="mx-auto grid max-w-5xl gap-x-12 gap-y-8 md:grid-cols-2">
               {serviceAreas.map((area) => (
-                <Card key={area.region} className="p-6">
-                  <div className="pb-4">
-                    <Text variant="h4" className="text-foreground font-semibold">
-                      {area.region}
-                    </Text>
-                  </div>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {area.areas.map((location) => (
-                        <li key={location}>
-                          <Text variant="sm" className="text-foreground-secondary">
-                            • {location}
-                          </Text>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                <div key={area.region}>
+                  <dt className="text-xl font-semibold">{area.region}</dt>
+                  <dd className="mt-2 text-foreground-secondary">{area.areas.join(", ")}</dd>
+                </div>
               ))}
-            </div>
+            </dl>
 
             <div className="mt-12 text-center">
-              <Text variant="base" className="text-foreground-secondary mb-6">
+              <Text variant="base" className="mb-6 text-foreground-secondary">
                 Don't see your area listed? We also service many other locations across New Zealand.
               </Text>
               <a
                 href="tel:021849931"
                 className="btn-primary inline-flex items-center gap-2"
               >
-                <Phone className="h-5 w-5" />
+                <Phone className="h-5 w-5" aria-hidden="true" />
                 Call to Confirm Coverage
               </a>
             </div>
@@ -224,81 +169,54 @@ export default function ContactPage() {
         {/* Quick Contact & Booking CTA */}
         <section id="contact-form" className="py-16 md:py-24">
           <Container size="xl">
-            <div className="mx-auto max-w-4xl">
-              <div className="grid gap-8 lg:grid-cols-2">
-                {/* Quick Contact */}
-                <Card className="p-8">
-                  <CardHeader
-                    title="Quick Contact"
-                    subtitle="Get instant assistance for your corporate event needs"
-                    className="pb-6"
-                  />
-                  <CardContent className="space-y-6">
-                    <div className="space-y-4">
-                      <a
-                        href="tel:021849931"
-                        className="flex items-center gap-3 p-4 rounded-lg border hover:bg-background-secondary transition-colors"
-                      >
-                        <Phone className="h-5 w-5 text-primary" />
-                        <div>
-                          <Text variant="base" className="font-medium text-foreground">
-                            Call Now: 021 849931
-                          </Text>
-                          <Text variant="sm" className="text-foreground-secondary">
-                            Available 8am - 8pm, 7 days
-                          </Text>
-                        </div>
-                      </a>
-                      
-                      <a
-                        href="mailto:admin@golf2go.co.nz"
-                        className="flex items-center gap-3 p-4 rounded-lg border hover:bg-background-secondary transition-colors"
-                      >
-                        <Mail className="h-5 w-5 text-primary" />
-                        <div>
-                          <Text variant="base" className="font-medium text-foreground">
-                            Email: admin@golf2go.co.nz
-                          </Text>
-                          <Text variant="sm" className="text-foreground-secondary">
-                            Response within 24 hours
-                          </Text>
-                        </div>
-                      </a>
-                    </div>
-                  </CardContent>
-                </Card>
+            <div className="mx-auto grid max-w-4xl gap-12 lg:grid-cols-2">
+              {/* Quick Contact */}
+              <div>
+                <h3 className="text-2xl font-semibold tracking-tight">Quick Contact</h3>
+                <p className="mt-3 text-foreground-secondary">
+                  Get instant assistance for your corporate event needs
+                </p>
+                <ul className="mt-6 space-y-6">
+                  <li>
+                    <a href="tel:021849931" className="inline-flex items-center gap-3 text-lg font-semibold text-primary underline hover:no-underline">
+                      <Phone className="h-5 w-5" aria-hidden="true" />
+                      Call Now: 021 849931
+                    </a>
+                    <p className="mt-1 pl-8 text-sm text-foreground-secondary">Available 8am - 8pm, 7 days</p>
+                  </li>
+                  <li>
+                    <a href="mailto:admin@golf2go.co.nz" className="inline-flex items-center gap-3 break-all text-lg font-semibold text-primary underline hover:no-underline">
+                      <Mail className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
+                      Email: admin@golf2go.co.nz
+                    </a>
+                    <p className="mt-1 pl-8 text-sm text-foreground-secondary">Response within 24 hours</p>
+                  </li>
+                </ul>
+              </div>
 
-                {/* Booking CTA */}
-                <Card className="p-8 bg-primary text-primary-foreground">
-                  <CardHeader
-                    title={<Text variant="sm" className="text-2xl md:text-3xl xl:text-4xl font-semibold leading-snug text-primary-foreground">Ready to Book?</Text>}
-                    subtitle={<Text variant="sm" className="text-primary-foreground">Complete our detailed booking form for a comprehensive quote</Text>}
-                    className="pb-6"
-                  />
-                  <CardContent className="space-y-6">
-                    <div className="space-y-3">
-                      <Text variant="sm" className="text-primary-foreground">
-                        ✓ Instant quote calculation
-                      </Text>
-                      <Text variant="sm" className="text-primary-foreground">
-                        ✓ Professional event planning
-                      </Text>
-                      <Text variant="sm" className="text-primary-foreground">
-                        ✓ Nationwide delivery & setup
-                      </Text>
-                      <Text variant="sm" className="text-primary-foreground">
-                        ✓ Corporate excellence guarantee
-                      </Text>
-                    </div>
-                    <Link
-                      href="/book"
-                      className="btn-outline btn-lg w-full justify-center border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 inline-flex items-center gap-2"
-                    >
-                      Complete Booking Form
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
-                  </CardContent>
-                </Card>
+              {/* Booking CTA */}
+              <div>
+                <h3 className="text-2xl font-semibold tracking-tight">Ready to Book?</h3>
+                <p className="mt-3 text-foreground-secondary">
+                  Complete our detailed booking form for a comprehensive quote
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {[
+                    "Instant quote calculation",
+                    "Professional event planning",
+                    "Nationwide delivery & setup",
+                    "Corporate excellence guarantee",
+                  ].map((point) => (
+                    <li key={point} className="flex items-center gap-3">
+                      <CheckCircle className="h-5 w-5 flex-shrink-0 text-primary" aria-hidden="true" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/book" className="btn-primary btn-lg mt-8 inline-flex items-center gap-2">
+                  Complete Booking Form
+                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                </Link>
               </div>
             </div>
           </Container>

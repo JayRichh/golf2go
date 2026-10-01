@@ -2,6 +2,7 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { CtaBand } from "~/components/CtaBand";
 import { PhotoHero } from "~/components/PhotoHero";
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
@@ -217,32 +218,9 @@ export default function CoursesPage() {
         </Container>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-primary py-20 text-primary-foreground md:py-24">
-        <Container size="xl" className="text-center">
-          <Text variant="h2" className="font-bold tracking-tight">
-            Ready to Book Your Mini Golf Hire?
-          </Text>
-          <Text variant="lg" className="mx-auto mt-4 max-w-2xl">
-            Tell us about your event and we&apos;ll send you a free, no-obligation quote
-          </Text>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/book"
-              className="btn-inverse inline-flex w-full items-center justify-center gap-2 px-8 py-3 sm:w-auto sm:min-w-[200px]"
-            >
-              <Text variant="lg">Get a Hire Quote</Text>
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <Link
-              href="/contact"
-              className="btn-outline-inverse inline-flex w-full items-center justify-center gap-2 px-8 py-3 sm:w-auto sm:min-w-[200px]"
-            >
-              <Text variant="lg">Contact Us</Text>
-            </Link>
-          </div>
-        </Container>
-      </section>
+      <CtaBand title="Ready to Book Your Mini Golf Hire?" withContact>
+        Tell us about your event and we&apos;ll send you a free, no-obligation quote
+      </CtaBand>
 
       {/* SEO Content Section */}
       <section className="py-12 bg-background">

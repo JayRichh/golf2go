@@ -1,10 +1,12 @@
-import { ArrowRight, Calendar, CheckCircle, MapPin, Users } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Card, CardContent, CardHeader } from "~/components/ui/Card";
+import { CtaBand } from "~/components/CtaBand";
+import { HeroActions } from "~/components/HeroActions";
+import { PhotoHero } from "~/components/PhotoHero";
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
 import { PRICES_PATH } from "~/lib/event-types";
@@ -29,17 +31,33 @@ const features = [
   {
     name: "Full Delivery & Setup",
     description: "We deliver, set up and pack down the course — you just play. Minimal disruption to your event.",
-    icon: Calendar,
   },
   {
     name: "Parties, Events & Corporate",
     description: "Birthdays, galas, fundraisers, weddings, conferences and team building — mini golf suits them all.",
-    icon: Users,
   },
   {
     name: "Nationwide Hire",
     description: "Portable mini golf and mini putt hire delivered across New Zealand.",
-    icon: MapPin,
+  },
+];
+
+const offers = [
+  {
+    title: "Hole in One Challenge",
+    description:
+      "Our single-hole challenge — perfect for parties, promotions, school galas and corporate events. Includes delivery and setup.",
+    points: ["Quick to set up, big on fun", "Great for prizes and promotions", "Full equipment and support"],
+    image: "/9-portable-mini-putt.jpg",
+    alt: "Professional portable mini putt course",
+  },
+  {
+    title: "3, 6 & 9 Hole Courses",
+    description:
+      "Multi-hole portable mini golf courses for bigger events and functions. Multiple layouts and obstacles available.",
+    points: ["Multiple course configurations", "Indoor and outdoor setups", "Delivery, setup and pack-down"],
+    image: "/1-Twin-Hedges-3-3m-x-75m.jpg",
+    alt: "Twin Hedges",
   },
 ];
 
@@ -164,55 +182,23 @@ export default function HomePage() {
           })
         }}
       />
-      {/* Hero Section */}
-      <section className="relative bg-primary text-primary-foreground">
-          <div className="relative isolate overflow-hidden py-32 md:py-40">
-            <div className="absolute inset-0 -z-10 w-full">
-              <Image
-                src="/2-parties-and-events-golf2go-portable-miniature-golf.jpg"
-                alt=""
-                fill
-                className="h-full w-full object-cover opacity-30"
-                sizes="100vw"
-                priority
-              />
-            </div>
-            <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                <Text
-                  variant="h1"
-                  align="center"
-                  className="font-bold tracking-tight text-primary-foreground"
-                >
-                  Portable Mini Golf &amp; Mini Putt Hire in New Zealand
-                </Text>
-                <Text variant="xl" className="mx-auto mt-6 text-primary-foreground">
-                  New Zealand&apos;s first portable mini golf company — bringing the fun to your
-                  events since 2008, serving Wellington, Palmerston North, New Plymouth &amp;
-                  Taranaki.
-                </Text>
-                <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-                  <Link href="/book" className="btn-primary inline-flex items-center gap-2 px-8 py-3">
-                    <Text variant="lg">Get a Hire Quote</Text>
-                    <ArrowRight className="h-5 w-5" />
-                  </Link>
-                  <Link
-                    href="/courses"
-                    className="btn-outline inline-flex items-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
-                  >
-                    <Text variant="lg">View Our Mini Golf Courses</Text>
-                  </Link>
-                </div>
-              </div>
-            </Container>
-          </div>
-      </section>
+      <PhotoHero image="/2-parties-and-events-golf2go-portable-miniature-golf.jpg">
+        <Text variant="h1" className="font-bold tracking-tight">
+          Portable Mini Golf &amp; Mini Putt Hire in New Zealand
+        </Text>
+        <Text variant="xl" className="mx-auto mt-6 max-w-2xl">
+          New Zealand&apos;s first portable mini golf company — bringing the fun to your
+          events since 2008, serving Wellington, Palmerston North, New Plymouth &amp;
+          Taranaki.
+        </Text>
+        <HeroActions coursesLabel="View Our Mini Golf Courses" />
+      </PhotoHero>
 
       {/* Services Section */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <Container size="xl">
           <div className="text-center">
-            <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
+            <Text variant="h2" className="font-bold tracking-tight">
               Mini Putt &amp; Portable Mini Golf Hire
             </Text>
             <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-foreground-secondary">
@@ -220,82 +206,54 @@ export default function HomePage() {
             </Text>
           </div>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-2">
-            <Card className="group">
-              <CardHeader
-                title="Hole in One Challenge"
-                subtitle="Our single-hole challenge — perfect for parties, promotions, school galas and corporate events. Includes delivery and setup."
-              />
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary" />
-                    <Text variant="base">Quick to set up, big on fun</Text>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary" />
-                    <Text variant="base">Great for prizes and promotions</Text>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary" />
-                    <Text variant="base">Full equipment and support</Text>
-                  </div>
+          <div className="mt-12 grid gap-12 md:grid-cols-2">
+            {offers.map((offer) => (
+              <div key={offer.title}>
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+                  <Image
+                    src={offer.image}
+                    alt={offer.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                  />
                 </div>
-                <Link
-                  href="/book"
-                  className="btn-primary mt-8 inline-flex items-center justify-center gap-2"
-                >
-                  <Text variant="base">Get a Hire Quote</Text>
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </CardContent>
-            </Card>
-
-            <Card className="group">
-              <CardHeader
-                title="3, 6 & 9 Hole Courses"
-                subtitle="Multi-hole portable mini golf courses for bigger events and functions. Multiple layouts and obstacles available."
-              />
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary" />
-                    <Text variant="base">Multiple course configurations</Text>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary" />
-                    <Text variant="base">Indoor and outdoor setups</Text>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary" />
-                    <Text variant="base">Delivery, setup and pack-down</Text>
-                  </div>
-                </div>
-                <Link
-                  href="/book"
-                  className="btn-primary mt-8 inline-flex items-center justify-center gap-2"
-                >
-                  <Text variant="base">Get a Hire Quote</Text>
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </CardContent>
-            </Card>
+                <h3 className="mt-6 text-2xl font-semibold leading-tight tracking-tight">
+                  {offer.title}
+                </h3>
+                <p className="mt-3 text-foreground-secondary">{offer.description}</p>
+                <ul className="mt-6 space-y-3">
+                  {offer.points.map((point) => (
+                    <li key={point} className="flex items-center gap-3">
+                      <CheckCircle className="h-5 w-5 flex-shrink-0 text-primary" aria-hidden="true" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-          <Text variant="lg" className="mx-auto mt-10 max-w-2xl text-center text-foreground-secondary">
-            Hire starts from $190. See our{" "}
-            <Link href={`/${PRICES_PATH}`} className="text-primary underline hover:no-underline">
-              mini golf hire prices
-            </Link>{" "}
-            for the full price ranges and what affects them.
-          </Text>
+          <div className="mt-12 text-center">
+            <Link href="/book" className="btn-primary inline-flex items-center justify-center gap-2 px-8 py-3">
+              <Text variant="lg">Get a Hire Quote</Text>
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            </Link>
+            <Text variant="lg" className="mx-auto mt-8 max-w-2xl text-foreground-secondary">
+              Hire starts from $190. See our{" "}
+              <Link href={`/${PRICES_PATH}`} className="text-primary underline hover:no-underline">
+                mini golf hire prices
+              </Link>{" "}
+              for the full price ranges and what affects them.
+            </Text>
+          </div>
         </Container>
       </section>
 
       {/* Features Section */}
-      <section className="bg-background-secondary py-24">
+      <section className="bg-background-secondary py-16 md:py-24">
         <Container size="xl">
           <div className="text-center">
-            <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
+            <Text variant="h2" className="font-bold tracking-tight">
               Why Choose Golf 2 Go
             </Text>
             <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-foreground-secondary">
@@ -303,25 +261,22 @@ export default function HomePage() {
             </Text>
           </div>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <dl className="mx-auto mt-12 grid max-w-5xl gap-8 lg:grid-cols-3">
             {features.map((feature) => (
-              <Card key={feature.name} className="group">
-                <CardHeader
-                  title={feature.name}
-                  subtitle={feature.description}
-                  icon={<feature.icon className="h-8 w-8" />}
-                />
-              </Card>
+              <div key={feature.name}>
+                <dt className="text-xl font-semibold">{feature.name}</dt>
+                <dd className="mt-2 text-foreground-secondary">{feature.description}</dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </Container>
       </section>
 
       {/* Service Areas Section - Moved higher for better SEO */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <Container size="xl">
           <div className="text-center">
-            <Text variant="h2" align="center" className="font-bold tracking-tight text-foreground">
+            <Text variant="h2" className="font-bold tracking-tight">
               Mini Golf Hire Across New Zealand
             </Text>
             <Text variant="lg" className="mx-auto mt-4 max-w-2xl text-foreground-secondary">
@@ -329,30 +284,21 @@ export default function HomePage() {
             </Text>
           </div>
 
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-12 grid max-w-5xl gap-x-12 gap-y-10 md:grid-cols-2">
             {serviceAreas.map((area) => (
-              <Link key={area.title} href={area.href} className="group block h-full">
-                <Card className="h-full">
-                  <CardHeader title={area.title} subtitle={area.subtitle} />
-                  <CardContent>
-                    <div className="space-y-2">
-                      {area.places.map((place) => (
-                        <Text
-                          key={place}
-                          variant="sm"
-                          className="text-foreground-secondary"
-                        >
-                          • {place}
-                        </Text>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+              <div key={area.title}>
+                <h3 className="text-xl font-semibold">
+                  <Link href={area.href} className="text-primary underline hover:no-underline">
+                    {area.title}
+                  </Link>
+                </h3>
+                <p className="mt-2 text-foreground-secondary">{area.subtitle}</p>
+                <p className="mt-2 text-sm font-medium">{area.places.join(", ")}</p>
+              </div>
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-16 text-center">
             <Text variant="lg" className="mx-auto max-w-3xl text-foreground-secondary">
               We also travel to{" "}
               {extraAreas.map((l, i) => (
@@ -438,41 +384,9 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative bg-primary py-24 text-primary-foreground">
-          <Container size="xl" className="py-24">
-            <div className="relative z-10">
-              <Text
-                variant="h2"
-                align="center"
-                className="pb-4 font-bold tracking-tight text-primary-foreground"
-              >
-                Ready to Book Your Mini Golf Hire?
-              </Text>
-              <Text
-                variant="lg"
-                className="mx-auto mt-6 max-w-2xl text-center text-primary-foreground"
-              >
-                Tell us about your event and we&apos;ll send you a free, no-obligation quote.
-              </Text>
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link
-                  href="/book"
-                  className="btn-primary inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 px-8 py-3"
-                >
-                  <Text variant="lg">Get a Hire Quote</Text>
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="btn-outline inline-flex w-full sm:min-w-[200px] sm:w-auto items-center justify-center gap-2 border-primary-foreground/20 px-8 py-3 text-primary-foreground hover:bg-primary-foreground/10"
-                >
-                  <Text variant="lg">Contact Us</Text>
-                </Link>
-              </div>
-            </div>
-          </Container>
-      </section>
+      <CtaBand title="Ready to Book Your Mini Golf Hire?" withContact>
+        Tell us about your event and we&apos;ll send you a free, no-obligation quote.
+      </CtaBand>
     </div>
   );
 }

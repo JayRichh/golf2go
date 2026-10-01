@@ -1,5 +1,5 @@
-import Image from "next/image";
 
+import { PhotoHero } from "~/components/PhotoHero";
 import { Container } from "~/components/ui/Container";
 import { ImagePreview } from "~/components/ui/ImagePreview";
 import { Text } from "~/components/ui/Text";
@@ -279,40 +279,14 @@ export default function GalleryPage() {
       />
       
         <div className="overflow-x-hidden">
-        {/* Header */}
-        <section className="relative bg-primary text-primary-foreground">
-          <div className="relative isolate overflow-hidden py-32 md:py-40">
-            <div className="absolute inset-0 -z-10 w-full">
-              <Image
-                src="/3-fun-portable-mini-golf.jpg"
-                alt=""
-                fill
-                className="h-full w-full object-cover opacity-30"
-                sizes="100vw"
-                priority
-              />
-            </div>
-            <Container size="xl">
-              <div className="mx-auto max-w-2xl text-center min-h-[140px] flex flex-col justify-center py-8">
-                <Text
-                  variant="h1"
-                  align="center"
-                  className="font-bold tracking-tight text-primary-foreground"
-                  itemProp="name"
-                >
-                  Mini Golf &amp; Mini Putt Hire Gallery
-                </Text>
-                <Text
-                  variant="xl"
-                  className="mt-6 text-primary-foreground text-center"
-                  itemProp="description"
-                >
-                  See our portable mini golf courses in action at parties, events and functions across New Zealand
-                </Text>
-              </div>
-            </Container>
-          </div>
-        </section>
+        <PhotoHero image="/3-fun-portable-mini-golf.jpg">
+          <Text variant="h1" className="font-bold tracking-tight" itemProp="name">
+            Mini Golf &amp; Mini Putt Hire Gallery
+          </Text>
+          <Text variant="xl" className="mx-auto mt-6 max-w-2xl" itemProp="description">
+            See our portable mini golf courses in action at parties, events and functions across New Zealand
+          </Text>
+        </PhotoHero>
 
         {/* Gallery Grid */}
         <section className="py-16 md:py-24" itemScope itemType="https://schema.org/ImageGallery">
