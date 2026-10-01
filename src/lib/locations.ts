@@ -124,7 +124,7 @@ export const locations: Location[] = [
       {
         heading: "Hire from our home base",
         paragraphs: [
-          "Golf 2 Go is based in Palmerston North, so city events sit right on our doorstep. Delivery is priced by distance from Palmerston North, which means local hires carry the smallest travel component of anywhere we go. That makes a mini golf course a simple extra for city schools, clubs, churches and workplaces.",
+          "Golf 2 Go is based in Palmerston North, so city events sit right on our doorstep. Delivery is priced by distance from Palmerston North, which means local hires carry the smallest travel component. That makes a mini golf course a simple extra for city schools, clubs, churches and workplaces.",
           "We deliver, set up and pack down every course ourselves, whether the venue is a school hall, a function room in the city centre, a sports club lounge or a family backyard.",
           "For a work function in the city, a 6 or 9-hole round turns a quiet Friday afternoon into a team competition. For a school or kindergarten fundraiser, the Hole in One Challenge makes a simple stall: charge a small fee per shot and offer a prize for an ace. For a birthday, a few holes on the back lawn keep kids and adults busy between food and presents.",
         ],
@@ -202,13 +202,13 @@ export const locations: Location[] = [
         paragraphs: [
           "Tell us the size of your space and we will pick holes to suit. Twin Hedges measures 3.3m × 7.5m, while Slalom and Multi-tunnels each measure 2.8m × 9m and suit long, narrow rooms. A single Hole in One Challenge is ideal for a trade stand or a promotion in a busy lobby, while a 6 or 9-hole round gives a bigger crowd a full course to work through.",
           "If your function has a theme, the course can sit alongside it: put prizes at the final hole, keep a scoreboard by the bar, or run a team competition across the evening.",
-          "If your venue has set bump-in and bump-out times, tell us and we will plan the setup and pack-down around them. The same applies to waterfront and park venues where vehicle access may be limited, so mention any restrictions when you enquire.",
+          "If your venue has set bump-in and bump-out times, tell us your venue's access times when you book. The same applies to waterfront and park venues where vehicle access may be limited, so mention any restrictions when you enquire.",
         ],
       },
       {
         heading: "Getting a New Plymouth quote",
         paragraphs: [
-          "Hire starts from $190 for the Hole in One Challenge, which ranges up to $500, and full courses run from $575 to $2500. Delivery is priced by distance from Palmerston North and your free quote includes it. We need at least 48 hours notice for every booking, and we deliver, set up and pack down the course for you.",
+          "Hire starts from $190 for the Hole in One Challenge, which ranges up to $500, and full courses run from $575 to $2500. Delivery is priced by distance from Palmerston North and your free quote includes it. We need at least 48 hours notice for every booking, and we deliver, set up and pack down the course for you. Every booking starts with a free quote, so tell us your date, your venue and how many holes you would like.",
         ],
       },
     ],
@@ -271,7 +271,7 @@ export const locations: Location[] = [
         paragraphs: [
           "A lone Hole in One Challenge makes an easy stall to staff: charge a gold coin per go and hand out a reward to anyone who aces it. A 3, 6 or 9-hole course works as a feature activity where families play a full round together.",
           "Both work indoors in a community hall or outdoors on a domain or school field. Let us know the size of the space and whether it is inside or out, and we will plan a layout that suits the site.",
-          "If your event runs over a whole weekend, such as a regional show or a sports tournament, let us know the hours each day and we will quote for the full period. For a one-off evening, a shorter hire keeps the cost down. Coastal spots like Oakura and Opunake suit a lawn setup in summer, while a community hall in Stratford or Inglewood works in the cooler months.",
+          "The price depends on how long you need the course, so tell us your event hours and ask for a quote. For a one-off evening, a shorter hire keeps the cost down. Coastal spots like Oakura and Opunake suit a lawn setup in summer, while a community hall in Stratford or Inglewood works in the cooler months.",
         ],
       },
       {
