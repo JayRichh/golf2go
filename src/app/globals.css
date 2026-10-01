@@ -15,11 +15,11 @@
 
   body {
     @apply min-h-screen bg-background text-foreground antialiased;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   html {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   button {

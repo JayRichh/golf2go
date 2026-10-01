@@ -20,7 +20,7 @@ export function PhotoHero({
     <section className="relative isolate overflow-hidden bg-gray-900 text-white">
       <Image src={image} alt={alt} fill priority sizes="100vw" className="-z-10 object-cover" />
       <div
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/60 to-black/40"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 via-black/65 to-black/50"
         aria-hidden="true"
       />
       <Container size="xl" className="py-20 md:py-28">
