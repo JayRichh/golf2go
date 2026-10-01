@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { LocationLanding } from "~/components/LocationLanding";
 import { getLocation } from "~/lib/locations";
+import { imageSize } from "~/lib/site";
 import { generateMetadata as buildMetadata } from "../seo.config";
 
 const location = getLocation("wellington")!;
@@ -11,7 +12,7 @@ export const metadata: Metadata = buildMetadata({
   description: location.metaDescription,
   path: location.path,
   images: [
-    { url: location.heroImage, width: 1200, height: 630, alt: location.h1 },
+    { url: location.heroImage, ...imageSize(location.heroImage), alt: location.h1 },
   ],
 });
 

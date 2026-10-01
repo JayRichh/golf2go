@@ -264,7 +264,7 @@ export const eventTypes: EventType[] = [
     h1: 'Wedding Mini Golf Hire',
     intro:
       'Weddings have plenty of in-between moments: photos, the gap before the reception, the hour after dinner. A portable mini golf or mini putt course gives guests something relaxed to do while they wait. Golf 2 Go brings the course to your venue, lays it out on the lawn or indoors, and clears it away once the celebrations wind down, so there is one less thing on your list.',
-    heroImage: '/16-Holy-Bridge-3-3m-x-75m.jpg',
+    heroImage: '/2-parties-and-events-golf2go-portable-miniature-golf.jpg',
     highlights: [
       'A lawn game guests can enjoy between moments',
       'Suits garden venues and function rooms alike',

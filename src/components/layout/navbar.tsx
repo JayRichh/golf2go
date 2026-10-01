@@ -20,21 +20,21 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-white shadow-sm">
       <Container size="xl" className="px-3 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between gap-4">
-          <div className="flex items-center gap-8">
+        <div className="flex h-16 items-center justify-between gap-2 sm:gap-4">
+          <div className="flex items-center gap-4 sm:gap-8">
             <Link 
               href="/" 
               className="flex items-center transition-transform hover:scale-[0.98]"
               aria-label="Golf 2 Go Home"
             >
-              <div className="relative h-10 w-[120px]">
+              <div className="relative h-8 w-[80px] sm:h-10 sm:w-[120px]">
                 <Image
                   src="/5-cropped-golf2go-logo-1.jpg"
                   alt="Golf 2 Go"
                   fill
                   className="object-contain"
                   priority
-                  sizes="120px"
+                  sizes="(min-width: 640px) 120px, 80px"
                 />
               </div>
             </Link>
@@ -63,7 +63,7 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3 md:gap-6">
+          <div className="flex items-center gap-1 sm:gap-3 md:gap-6">
             {/* Always visible call link: icon-only 44px target on phones, number from sm up */}
             <a
               href="tel:021849931"

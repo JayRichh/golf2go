@@ -9,19 +9,19 @@ import { RelatedLinks } from "~/components/RelatedLinks";
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
 import { PRICES_PATH } from "~/lib/event-types";
-import { ORG_ID, SITE_URL, absUrl } from "~/lib/site";
+import { ORG_ID, SITE_URL, absUrl, imageSize } from "~/lib/site";
 import { generateMetadata as buildMetadata } from "../seo.config";
 
 const PATH = PRICES_PATH;
 const H1 = "Mini Golf Hire Prices NZ";
 const DESCRIPTION =
-  "Mini golf hire prices in NZ: Hole in One Challenge $190–$500, 3, 6 or 9-hole courses $575–$2500. Delivery, setup and pack-down included. Get a free quote.";
+  "Mini golf hire: 1 hole $190–$500, courses $575–$2500. We deliver, set up & pack down; delivery is priced by distance from Palmerston North, quoted separately.";
 
 export const metadata: Metadata = buildMetadata({
   title: "Mini Golf Hire Prices NZ | From $190",
   description: DESCRIPTION,
   path: PATH,
-  images: [{ url: "/3-fun-portable-mini-golf.jpg", width: 1200, height: 630, alt: H1 }],
+  images: [{ url: "/3-fun-portable-mini-golf.jpg", ...imageSize("/3-fun-portable-mini-golf.jpg"), alt: H1 }],
 });
 
 const priceBands = [
@@ -76,7 +76,7 @@ const faqs = [
   {
     question: "Is delivery included in the price?",
     answer:
-      "Delivery, setup and pack-down are part of every hire. The delivery component is priced by distance from our base in Palmerston North and is included in your quote.",
+      "We deliver, set up and pack down every hire. The delivery cost is priced by distance from our base in Palmerston North and quoted separately, alongside the hire price.",
   },
   {
     question: "How much notice do you need?",

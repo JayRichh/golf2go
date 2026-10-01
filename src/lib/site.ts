@@ -15,3 +15,20 @@ export const absUrl = (path = ''): string => {
   const clean = path.replace(/^\/+/, '').replace(/\/+$/, '')
   return clean ? `${SITE_URL}/${clean}` : SITE_URL
 }
+
+/** Real pixel sizes of the photos used as page heroes / OG images. */
+const IMAGE_SIZES: Record<string, { width: number; height: number }> = {
+  '/2-parties-and-events-golf2go-portable-miniature-golf.jpg': { width: 1060, height: 596 },
+  '/3-fun-portable-mini-golf.jpg': { width: 1060, height: 596 },
+  '/4-portable-miniature-golf.jpg': { width: 992, height: 558 },
+  '/7-portable-miniature-golf.jpg': { width: 992, height: 558 },
+  '/8-work-function-fun-portable-mini-golf.jpg': { width: 1060, height: 455 },
+  '/9-portable-mini-putt.jpg': { width: 787, height: 576 },
+  '/17-golf2go-portable-miniature-golf-close-up.jpg': { width: 928, height: 1060 },
+}
+
+export const imageSize = (url: string): { width: number; height: number } => {
+  const size = IMAGE_SIZES[url]
+  if (!size) throw new Error(`imageSize: unknown image ${url}`)
+  return size
+}
