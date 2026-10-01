@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
+import { locations } from "~/lib/locations";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { generateMetadata } = await import('./page/metadata');
@@ -81,6 +82,11 @@ const serviceAreas = [
     places: ["Auckland", "Christchurch", "Hamilton", "All Other Regions"],
   },
 ];
+
+// Location pages not already represented by a region card above.
+const extraAreas = locations.filter(
+  (l) => !serviceAreas.some((a) => a.href === `/${l.path}`) && l.slug !== "taranaki",
+);
 
 export default function HomePage() {
   return (
@@ -272,6 +278,13 @@ export default function HomePage() {
               </CardContent>
             </Card>
           </div>
+          <Text variant="lg" className="mx-auto mt-10 max-w-2xl text-center text-foreground-secondary">
+            Hire starts from $190. See our{" "}
+            <Link href="/mini-golf-hire-prices" className="text-primary underline hover:no-underline">
+              mini golf hire prices
+            </Link>{" "}
+            for the full price ranges and what affects them.
+          </Text>
         </Container>
       </section>
 
@@ -338,9 +351,33 @@ export default function HomePage() {
 
           <div className="mt-12 text-center">
             <Text variant="lg" className="mx-auto max-w-3xl text-foreground-secondary">
-              Our portable mini golf hire delivers mini putt setups for parties, birthdays,
-              fundraisers, corporate events and team building. We also specialise in indoor mini
-              golf — perfect for venues and conferences. Browse our{" "}
+              We also travel to{" "}
+              {extraAreas.map((l, i) => (
+                <span key={l.path}>
+                  <Link href={`/${l.path}`} className="text-primary underline hover:no-underline">
+                    {l.name}
+                  </Link>
+                  {i < extraAreas.length - 2 ? ", " : i === extraAreas.length - 2 ? " and " : ""}
+                </span>
+              ))}
+              . Our portable mini golf hire delivers mini putt setups for parties,{" "}
+              <Link href="/mini-golf-birthday-parties" className="text-primary underline hover:no-underline">
+                birthdays
+              </Link>
+              ,{" "}
+              <Link href="/mini-golf-school-galas-fundraisers" className="text-primary underline hover:no-underline">
+                school galas and fundraisers
+              </Link>
+              ,{" "}
+              <Link href="/mini-golf-weddings" className="text-primary underline hover:no-underline">
+                weddings
+              </Link>
+              ,{" "}
+              <Link href="/mini-golf-corporate-events" className="text-primary underline hover:no-underline">
+                corporate events and team building
+              </Link>
+              . We also specialise in indoor mini golf — perfect for venues and conferences. Browse
+              our{" "}
               <Link href="/gallery" className="text-primary underline hover:no-underline">
                 event gallery
               </Link>{" "}

@@ -2,6 +2,7 @@ import { ArrowRight, CheckCircle, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { RelatedLinks } from "~/components/RelatedLinks";
 import { Container } from "~/components/ui/Container";
 import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
@@ -148,6 +149,30 @@ export function LocationLanding({ location }: { location: Location }) {
           </Container>
         </section>
 
+        {/* Long-form copy (optional per location) */}
+        {location.body && location.body.length > 0 && (
+          <section className="pb-20">
+            <Container size="xl">
+              <div className="mx-auto max-w-3xl space-y-12">
+                {location.body.map((section) => (
+                  <div key={section.heading}>
+                    <Text variant="h2" className="font-bold tracking-tight text-foreground">
+                      {section.heading}
+                    </Text>
+                    <div className="mt-6 space-y-4">
+                      {section.paragraphs.map((p) => (
+                        <Text key={p} variant="lg" className="text-foreground-secondary">
+                          {p}
+                        </Text>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Container>
+          </section>
+        )}
+
         {/* What's included */}
         <section className="bg-background-secondary py-20">
           <Container size="xl">
@@ -208,6 +233,8 @@ export function LocationLanding({ location }: { location: Location }) {
             </div>
           </Container>
         </section>
+
+        <RelatedLinks currentPath={location.path} />
 
         {/* CTA */}
         <section className="relative bg-primary py-24">

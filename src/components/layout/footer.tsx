@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { Container } from "~/components/ui/Container";
 import { Text } from "~/components/ui/Text";
+import { eventTypes } from "~/lib/event-types";
+import { locations } from "~/lib/locations";
 
 const navigation = {
   company: [
@@ -14,11 +16,11 @@ const navigation = {
     { name: "Book Now", href: "/book" },
     { name: "Contact", href: "/contact" },
   ],
-  locations: [
-    { name: "Mini Golf Wellington", href: "/mini-golf-wellington" },
-    { name: "Mini Golf Palmerston North", href: "/mini-golf-palmerston-north" },
-    { name: "Mini Golf New Plymouth", href: "/mini-golf-new-plymouth" },
-    { name: "Mini Golf Taranaki", href: "/mini-golf-taranaki" },
+  // Derived from the data sources so new pages are linked automatically.
+  locations: locations.map((l) => ({ name: `Mini Golf ${l.name}`, href: `/${l.path}` })),
+  events: [
+    ...eventTypes.map((e) => ({ name: e.name, href: `/${e.path}` })),
+    { name: "Hire Prices", href: "/mini-golf-hire-prices" },
   ],
   contact: [
     { name: "Email", value: "admin@golf2go.co.nz", href: "mailto:admin@golf2go.co.nz", icon: "📧" },
@@ -31,7 +33,7 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-border/50 bg-background">
       <Container size="xl" className="px-3 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <div className="grid grid-cols-2 gap-12 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-12 sm:grid-cols-3 lg:grid-cols-5">
           <div>
             <Text variant="sm" className="font-semibold uppercase tracking-wider text-foreground">
               Company
@@ -72,6 +74,23 @@ export function Footer() {
             </Text>
             <ul className="mt-4 space-y-3">
               {navigation.locations.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="transition-colors hover:text-foreground">
+                    <Text variant="base" className="text-foreground-secondary">
+                      {item.name}
+                    </Text>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <Text variant="sm" className="font-semibold uppercase tracking-wider text-foreground">
+              Events
+            </Text>
+            <ul className="mt-4 space-y-3">
+              {navigation.events.map((item) => (
                 <li key={item.name}>
                   <Link href={item.href} className="transition-colors hover:text-foreground">
                     <Text variant="base" className="text-foreground-secondary">

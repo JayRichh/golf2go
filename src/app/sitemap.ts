@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 
+import { eventTypes } from '~/lib/event-types'
 import { locations } from '~/lib/locations'
 import { absUrl } from '~/lib/site'
 
@@ -50,6 +51,19 @@ const routes: Route[] = [
     pri: 0.85,
     imgs: [absUrl(l.heroImage)]
   })),
+  // Event-type landing pages — derived from the eventTypes source.
+  ...eventTypes.map(e => ({
+    path: `/${e.path}`,
+    freq: 'monthly',
+    pri: 0.8,
+    imgs: [absUrl(e.heroImage)]
+  })),
+  {
+    path: '/mini-golf-hire-prices',
+    freq: 'monthly',
+    pri: 0.8,
+    imgs: [absUrl('/3-fun-portable-mini-golf.jpg')]
+  },
   {
     path: '/gallery',
     freq: 'weekly',
