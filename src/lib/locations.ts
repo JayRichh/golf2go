@@ -51,6 +51,29 @@ export const locations: Location[] = [
       'Kapiti Coast',
       'Wainuiomata',
     ],
+    body: [
+      {
+        heading: "Mini golf for Wellington offices and conferences",
+        paragraphs: [
+          "The central city is packed with offices, conference rooms and function venues, and a portable course fits neatly into any of them. Every hole works indoors, so a wet, windy afternoon does not have to cancel the fun. Twin Hedges takes up 3.3m × 7.5m, while Slalom and Multi-tunnels each need 2.8m × 9m, so share your floor measurements and we will choose holes that suit the room.",
+          "At a conference, a short course in the foyer gives delegates something to do between sessions and an easy way to start a conversation. At a staff party or team building afternoon, a 6 or 9-hole round lets teams compete for bragging rights, with a play-off on the trickiest hole to settle a tie.",
+          "For a long event, consider two clusters of holes, one near the entrance and one near the food, so guests drift between them. Large conference venues and small boardrooms can both work with the right combination of holes.",
+        ],
+      },
+      {
+        heading: "From the Hutt Valley to the Kapiti Coast",
+        paragraphs: [
+          "We also travel beyond the CBD to Lower Hutt, Upper Hutt, Porirua, Wainuiomata and the Kapiti Coast. School galas, church fundraisers, sports club prizegivings and backyard birthdays can all book the single-hole Hole in One Challenge or a full 3, 6 or 9-hole course.",
+          "Whatever the suburb, we deliver the course, set it up and pack it down, so there is nothing for you to carry, assemble or store afterwards.",
+        ],
+      },
+      {
+        heading: "Pricing for Wellington hires",
+        paragraphs: [
+          "The Hole in One Challenge ranges from $190 to $500, and full 3, 6 and 9-hole courses range from $575 to $2500. Where your event lands depends on the number of holes, how long you keep the course and where in the region you are. Bookings need a minimum of 48 hours notice, and every quote is free, so send us the date and venue and we will price it for you.",
+        ],
+      },
+    ],
     faqs: [
       {
         question: 'Do you deliver mini golf hire across Wellington?',
@@ -96,6 +119,29 @@ export const locations: Location[] = [
       'Whanganui',
       'Ashhurst',
       'Manawatu',
+    ],
+    body: [
+      {
+        heading: "Hire from our home base",
+        paragraphs: [
+          "Golf 2 Go is based in Palmerston North, so city events sit right on our doorstep. Delivery is priced by distance from Palmerston North, which means local hires carry the smallest travel component of anywhere we go. That makes a mini golf course a simple extra for city schools, clubs, churches and workplaces.",
+          "We deliver, set up and pack down every course ourselves, whether the venue is a school hall, a function room in the city centre, a sports club lounge or a family backyard.",
+          "For a work function in the city, a 6 or 9-hole round turns a quiet Friday afternoon into a team competition. For a school or kindergarten fundraiser, the Hole in One Challenge makes a simple stall: charge a small fee per shot and offer a prize for an ace. For a birthday, a few holes on the back lawn keep kids and adults busy between food and presents.",
+        ],
+      },
+      {
+        heading: "Around the Manawatu",
+        paragraphs: [
+          "Beyond the city we travel to Feilding, Ashhurst, Levin and Whanganui. A school gala in Feilding, a club fundraiser in Levin or a family birthday in Ashhurst can each book the single-hole Hole in One Challenge or a 3, 6 or 9-hole course.",
+          "Indoor and outdoor setups both work, so a community hall can host the course as easily as a lawn. Send us the measurements of the space and we will choose from layouts such as Holy Bridge (3.3m × 7.5m), Triple Kidney (3.4m × 9m) and Bridge over the River (3.3m × 9m).",
+        ],
+      },
+      {
+        heading: "Prices and booking in Palmerston North",
+        paragraphs: [
+          "The Hole in One Challenge is priced from $190 to $500, and full 3, 6 or 9-hole courses from $575 to $2500, depending on holes, duration and location. We need at least 48 hours notice for every booking. Tell us your date, your venue and roughly how many guests you expect, and we will send back a free quote.",
+        ],
+      },
     ],
     faqs: [
       {
@@ -143,6 +189,29 @@ export const locations: Location[] = [
       'Waitara',
       'Oakura',
     ],
+    body: [
+      {
+        heading: "Mini golf at New Plymouth venues",
+        paragraphs: [
+          "New Plymouth has a mix of conference venues, function centres, school halls and waterfront parks, and a portable mini putt course can work in any of them. Our holes are built for indoor and outdoor use, so a function room and a lawn are equally good homes for the course.",
+          "For a corporate function or conference in the city, a short course in a foyer or breakout area gives guests something to do between sessions. For a wedding reception or a birthday, a lawn course keeps guests entertained while the hosts get on with the day.",
+        ],
+      },
+      {
+        heading: "Choosing a layout for a city venue",
+        paragraphs: [
+          "Tell us the size of your space and we will pick holes to suit. Twin Hedges measures 3.3m × 7.5m, while Slalom and Multi-tunnels each measure 2.8m × 9m and suit long, narrow rooms. A single Hole in One Challenge is ideal for a trade stand or a promotion in a busy lobby, while a 6 or 9-hole round gives a bigger crowd a full course to work through.",
+          "If your function has a theme, the course can sit alongside it: put prizes at the final hole, keep a scoreboard by the bar, or run a team competition across the evening.",
+          "If your venue has set bump-in and bump-out times, tell us and we will plan the setup and pack-down around them. The same applies to waterfront and park venues where vehicle access may be limited, so mention any restrictions when you enquire.",
+        ],
+      },
+      {
+        heading: "Getting a New Plymouth quote",
+        paragraphs: [
+          "Hire starts from $190 for the Hole in One Challenge, which ranges up to $500, and full courses run from $575 to $2500. Delivery is priced by distance from Palmerston North and your free quote includes it. We need at least 48 hours notice for every booking, and we deliver, set up and pack down the course for you.",
+        ],
+      },
+    ],
     faqs: [
       {
         question: 'Do you provide mini golf hire in New Plymouth?',
@@ -188,6 +257,29 @@ export const locations: Location[] = [
       'Inglewood',
       'Waitara',
       'Opunake',
+    ],
+    body: [
+      {
+        heading: "Across the whole Taranaki region",
+        paragraphs: [
+          "Taranaki events are spread right around the maunga, from Waitara on the north coast to Hawera in the south and Opunake on the western side. We travel to Stratford, Inglewood, Oakura and the towns in between, and we deliver, set up and pack down the course wherever your venue is.",
+          "Country school galas, community days, rugby and netball club prizegivings and town hall fundraisers can all make use of a mini golf course. It gives families a reason to stay longer and gives organisers a crowd-pleasing extra without any setup on their part.",
+        ],
+      },
+      {
+        heading: "Which option suits a small-town event?",
+        paragraphs: [
+          "A lone Hole in One Challenge makes an easy stall to staff: charge a gold coin per go and hand out a reward to anyone who aces it. A 3, 6 or 9-hole course works as a feature activity where families play a full round together.",
+          "Both work indoors in a community hall or outdoors on a domain or school field. Let us know the size of the space and whether it is inside or out, and we will plan a layout that suits the site.",
+          "If your event runs over a whole weekend, such as a regional show or a sports tournament, let us know the hours each day and we will quote for the full period. For a one-off evening, a shorter hire keeps the cost down. Coastal spots like Oakura and Opunake suit a lawn setup in summer, while a community hall in Stratford or Inglewood works in the cooler months.",
+        ],
+      },
+      {
+        heading: "Taranaki pricing",
+        paragraphs: [
+          "Expect $190 to $500 for the one-hole challenge and $575 to $2500 for a full course; the number of holes, the hours and the location decide where you land. For towns further from our base, travel makes up a larger share, because delivery is priced by distance from Palmerston North and your free quote includes it. Every booking needs at least 48 hours notice.",
+        ],
+      },
     ],
     faqs: [
       {
@@ -309,6 +401,7 @@ export const locations: Location[] = [
         paragraphs: [
           'A course gives people something to do between the speeches, the food and the catch-ups. Around the Waikato that might be a club prizegiving, a workplace function, a birthday on a back lawn or a stall at a community fundraiser.',
           'For a smaller crowd, the single-hole Hole in One Challenge is priced from $190 up to $500. Larger groups do better with more holes, since several players can be out on the course at once and the queue stays short. A 9-hole round with mixed layouts gives keen players a proper test.',
+          'Rural venues around Morrinsville and Ngaruawahia work just as well as city halls. A woolshed, a marae dining hall or a club rooms floor can each take a few holes, and a big farm lawn could take a full 9-hole circuit with space left over for the barbecue. In Cambridge or Te Awamutu, a few holes could slot into a market day or a sports club open day.',
         ],
       },
       {
@@ -382,7 +475,7 @@ export const locations: Location[] = [
       {
         heading: 'One hole or a full circuit?',
         paragraphs: [
-          'Choose the single hole when the course is a sideshow: a brand activation, a stall, a giveaway. Choose a circuit when it is a main attraction, as at a birthday, a school gala, a fundraiser, a wedding or a work do.',
+          'Choose the single hole when the course is a sideshow: a brand activation, a stall, a giveaway. Choose a circuit when it is a main attraction, as at a birthday, a school gala, a fundraiser, a wedding or a work do. A beachside barbecue in Papamoa could feature a short course on the grass, while a harbourside function suits a relaxed round as the light fades.',
           'Not sure? Describe the event and the crowd and we will recommend something that suits both the space and the budget. Bookings need 48 hours notice at minimum.',
         ],
       },
@@ -459,6 +552,7 @@ export const locations: Location[] = [
         heading: 'Placing the course on the day',
         paragraphs: [
           'Lawns, terraces and halls all work, but think about flow. A course near the entrance becomes an icebreaker as people arrive; one beside the dance floor or the bar keeps a crowd busy later in the evening. Tell us which you prefer and we will set the holes out to suit.',
+          'Vineyard and garden venues around Havelock North can take the course on the lawn, while Napier and Hastings function rooms suit an indoor layout.',
           'For a long afternoon function, consider splitting the course into two smaller clusters so that groups at different ends of the venue each have their own holes to play. For a short promotion, one well-placed Hole in One Challenge near the main walkway is easier for passers-by to spot than several holes tucked away in a corner.',
         ],
       },
