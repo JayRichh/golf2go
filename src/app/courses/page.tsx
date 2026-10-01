@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
-import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import { generateCoursesSchema, generateCourseTypesSchema, generateServiceSchema } from './schema';
 import { SITE_URL } from '~/lib/site';
@@ -124,8 +123,7 @@ export default function CoursesPage() {
       
     <div className="overflow-x-hidden">
       {/* Header */}
-      <section className="relative bg-primary">
-        <GradientBackground variant="glow">
+      <section className="relative bg-primary text-primary-foreground">
           <div className="relative isolate overflow-hidden py-32 md:py-40">
             <div className="absolute inset-0 -z-10 w-full">
               <Image
@@ -155,7 +153,6 @@ export default function CoursesPage() {
               </div>
             </Container>
           </div>
-        </GradientBackground>
       </section>
 
       {/* Main Course Options */}
@@ -176,8 +173,6 @@ export default function CoursesPage() {
             {courses.map((course) => (
               <Card
                 key={course.title}
-                variant="elevated"
-                interactive
                 className="group w-full overflow-hidden"
               >
                 <div className="relative aspect-[16/9] w-full overflow-hidden">
@@ -236,8 +231,6 @@ export default function CoursesPage() {
             {courseTypes.map((type, index) => (
               <Card
                 key={type.name}
-                variant="elevated"
-                interactive
                 className="group w-full overflow-hidden"
                 itemScope
                 itemType="https://schema.org/ListItem"
@@ -274,8 +267,7 @@ export default function CoursesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-primary py-24">
-        <GradientBackground variant="subtle">
+      <section className="relative bg-primary py-24 text-primary-foreground">
           <Container size="xl" className="py-24">
             <div className="relative z-10">
               <Text
@@ -307,9 +299,7 @@ export default function CoursesPage() {
                 </Link>
               </div>
             </div>
-            <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/20 to-transparent" />
           </Container>
-        </GradientBackground>
       </section>
 
       {/* SEO Content Section */}

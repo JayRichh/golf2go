@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { RelatedLinks } from "~/components/RelatedLinks";
 import { Container } from "~/components/ui/Container";
-import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import type { EventType } from "~/lib/event-types";
 import { ORG_ID, SITE_URL, absUrl } from "~/lib/site";
@@ -76,8 +75,7 @@ export function EventLanding({ event }: { event: EventType }) {
 
       <div className="overflow-x-hidden">
         {/* Hero */}
-        <section className="relative bg-primary">
-          <GradientBackground variant="glow">
+        <section className="relative bg-primary text-primary-foreground">
             <div className="relative isolate overflow-hidden py-32 md:py-40">
               <div className="absolute inset-0 -z-10 w-full">
                 <Image
@@ -119,7 +117,6 @@ export function EventLanding({ event }: { event: EventType }) {
                 </div>
               </Container>
             </div>
-          </GradientBackground>
         </section>
 
         {/* Highlights */}
@@ -201,8 +198,7 @@ export function EventLanding({ event }: { event: EventType }) {
         <RelatedLinks currentPath={event.path} />
 
         {/* CTA */}
-        <section className="relative bg-primary py-24">
-          <GradientBackground variant="subtle">
+        <section className="relative bg-primary py-24 text-primary-foreground">
             <Container size="xl" className="py-12">
               <div className="relative z-10 text-center">
                 <Text
@@ -228,9 +224,7 @@ export function EventLanding({ event }: { event: EventType }) {
                   </Link>
                 </div>
               </div>
-              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/20 to-transparent" />
             </Container>
-          </GradientBackground>
         </section>
       </div>
     </>

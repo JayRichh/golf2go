@@ -1,5 +1,3 @@
-"use client";
-
 import { HTMLAttributes, forwardRef } from "react";
 
 import { cn } from "~/utils/cn";
@@ -19,15 +17,14 @@ type TextVariant =
   | "lg"
   | "xl"
   | "base";
-type TextGradient = "none" | "blue" | "purple" | "orange" | "primary";
 
 interface TextProps extends HTMLAttributes<HTMLDivElement> {
   variant?: TextVariant;
+  /** Omit to inherit the parent colour (for example inside a button or a green band). */
   color?: "default" | "primary" | "secondary" | "success" | "error";
   weight?: "normal" | "medium" | "semibold" | "bold";
+  /** Omit to inherit the parent alignment. */
   align?: "left" | "center" | "right";
-  gradient?: TextGradient;
-  glass?: boolean;
   balance?: boolean;
   mono?: boolean;
 }
@@ -70,23 +67,29 @@ const alignClasses = {
   right: "text-right",
 };
 
-const gradientClasses: Record<TextGradient, string> = {
-  none: "",
-  blue: "bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent",
-  purple: "bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent",
-  orange: "bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent",
-  primary: "bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent",
+const elementFor = (variant: TextVariant) => {
+  switch (variant) {
+    case "h1":
+    case "h2":
+    case "h3":
+    case "h4":
+      return variant;
+    case "caption":
+    case "xs":
+    case "sm":
+      return "span";
+    default:
+      return "p";
+  }
 };
 
 export const Text = forwardRef<HTMLElement, TextProps>(
   (
     {
       variant = "body",
-      color = "default",
+      color,
       weight,
-      align = "left",
-      gradient = "none",
-      glass = false,
+      align,
       balance = false,
       mono = false,
       className,
@@ -95,53 +98,24 @@ export const Text = forwardRef<HTMLElement, TextProps>(
     },
     ref
   ) => {
-    const defaultWeight = variant.startsWith("h") ? "bold" : "normal";
-    const finalWeight = weight || defaultWeight;
-
-    // Use semantic HTML elements based on variant
-    const getElementType = () => {
-      switch (variant) {
-        case "h1": return "h1";
-        case "h2": return "h2";
-        case "h3": return "h3";
-        case "h4": return "h4";
-        case "body-lg":
-        case "body":
-        case "body-sm":
-        case "base":
-        case "lg":
-        case "xl":
-        case "md": return "p";
-        case "caption":
-        case "xs":
-        case "sm": return "span";
-        default: return "div";
-      }
-    };
-
-    const Element = getElementType() as any;
+    const finalWeight = weight || (variant.startsWith("h") ? "bold" : "normal");
+    const Element = elementFor(variant) as any;
 
     return (
       <Element
         ref={ref}
         className={cn(
           variantClasses[variant],
-          colorClasses[color],
+          color && colorClasses[color],
           weightClasses[finalWeight],
-          alignClasses[align],
-          gradientClasses[gradient],
-          glass && "glass",
+          align && alignClasses[align],
           balance && "text-balance",
           mono ? "font-mono" : "font-sans",
-          "relative",
           className
         )}
         {...props}
       >
-        {glass && (
-          <span className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-25 blur-sm" />
-        )}
-        <span className="relative">{children}</span>
+        {children}
       </Element>
     );
   }

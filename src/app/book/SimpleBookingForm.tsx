@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Container } from "~/components/ui/Container";
 import { FormCheckbox } from "~/components/ui/FormCheckbox";
 import { FormField } from "~/components/ui/FormField";
 import { Text } from "~/components/ui/Text";
@@ -134,29 +133,29 @@ export default function SimpleBookingForm() {
       />
       
       {success && (
-        <Container glass className="border-success/20 bg-success/10" role="status" aria-live="polite">
+        <div className="border-success/20 bg-success/10" role="status" aria-live="polite">
           <div className="flex items-center gap-3">
             <div>
               <Text variant="base" className="font-medium text-success">Booking request sent successfully!</Text>
               <Text variant="sm" className="text-success">We'll get back to you soon with confirmation details.</Text>
             </div>
           </div>
-        </Container>
+        </div>
       )}
 
       {error && (
-        <Container glass className="border-error/20 bg-error/10" role="alert" aria-live="assertive">
+        <div className="border-error/20 bg-error/10" role="alert" aria-live="assertive">
           <div className="flex items-center gap-3">
             <div>
               <Text variant="base" className="font-medium text-error">Something went wrong</Text>
               <Text variant="sm" className="text-error">{error}</Text>
             </div>
           </div>
-        </Container>
+        </div>
       )}
 
       {/* Contact Information Section */}
-      <Container glass className="p-6">
+      <div className="p-6">
         <div className="mb-6">
           <Text variant="h3" className="text-foreground mb-2">Contact Information</Text>
           <Text variant="sm" className="text-foreground-secondary">Your details for booking confirmation</Text>
@@ -198,10 +197,10 @@ export default function SimpleBookingForm() {
             itemProp="name"
           />
         </div>
-      </Container>
+      </div>
 
       {/* Event Details Section */}
-      <Container glass className="p-6">
+      <div className="p-6">
         <div className="mb-6">
           <Text variant="h3" className="text-foreground mb-2">Event Details</Text>
           <Text variant="sm" className="text-foreground-secondary">Tell us about your event requirements</Text>
@@ -273,11 +272,11 @@ export default function SimpleBookingForm() {
             rows={4}
           />
         </div>
-      </Container>
+      </div>
 
       {/* Price Estimate */}
       {formData.numberOfHoles && formData.numberOfDays && (
-        <Container glass className="p-6" itemScope itemType="https://schema.org/Offer">
+        <div className="p-6" itemScope itemType="https://schema.org/Offer">
           <meta itemProp="priceCurrency" content="NZD" />
           <meta itemProp="availability" content="https://schema.org/InStock" />
 
@@ -297,11 +296,11 @@ export default function SimpleBookingForm() {
             <Text variant="sm" className="text-foreground-secondary">• Delivery and setup costs quoted separately</Text>
             <Text variant="sm" className="text-foreground-secondary">• Final pricing confirmed upon booking</Text>
           </div>
-        </Container>
+        </div>
       )}
 
       {/* Terms & Submit */}
-      <Container glass className="p-6">
+      <div className="p-6">
         <div className="space-y-6">
           <FormCheckbox
             checked={formData.acceptTerms}
@@ -346,7 +345,7 @@ export default function SimpleBookingForm() {
             </Text>
           </div>
         </div>
-      </Container>
+      </div>
     </form>
   );
 }

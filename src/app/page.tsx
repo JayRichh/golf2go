@@ -6,7 +6,6 @@ import Link from "next/link";
 
 import { Card, CardContent, CardHeader } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
-import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import { PRICES_PATH } from "~/lib/event-types";
 import { locations } from "~/lib/locations";
@@ -166,8 +165,7 @@ export default function HomePage() {
         }}
       />
       {/* Hero Section */}
-      <section className="relative bg-primary">
-        <GradientBackground variant="glow">
+      <section className="relative bg-primary text-primary-foreground">
           <div className="relative isolate overflow-hidden py-32 md:py-40">
             <div className="absolute inset-0 -z-10 w-full">
               <Image
@@ -208,7 +206,6 @@ export default function HomePage() {
               </div>
             </Container>
           </div>
-        </GradientBackground>
       </section>
 
       {/* Services Section */}
@@ -224,7 +221,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-16 grid gap-8 md:grid-cols-2">
-            <Card variant="elevated" interactive className="group">
+            <Card className="group">
               <CardHeader
                 title="Hole in One Challenge"
                 subtitle="Our single-hole challenge — perfect for parties, promotions, school galas and corporate events. Includes delivery and setup."
@@ -254,7 +251,7 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card variant="elevated" interactive className="group">
+            <Card className="group">
               <CardHeader
                 title="3, 6 & 9 Hole Courses"
                 subtitle="Multi-hole portable mini golf courses for bigger events and functions. Multiple layouts and obstacles available."
@@ -308,7 +305,7 @@ export default function HomePage() {
 
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
-              <Card key={feature.name} variant="elevated" interactive className="group">
+              <Card key={feature.name} className="group">
                 <CardHeader
                   title={feature.name}
                   subtitle={feature.description}
@@ -335,7 +332,7 @@ export default function HomePage() {
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {serviceAreas.map((area) => (
               <Link key={area.title} href={area.href} className="group block h-full">
-                <Card variant="elevated" interactive className="h-full">
+                <Card className="h-full">
                   <CardHeader title={area.title} subtitle={area.subtitle} />
                   <CardContent>
                     <div className="space-y-2">
@@ -442,8 +439,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-primary py-24">
-        <GradientBackground variant="subtle">
+      <section className="relative bg-primary py-24 text-primary-foreground">
           <Container size="xl" className="py-24">
             <div className="relative z-10">
               <Text
@@ -475,9 +471,7 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/20 to-transparent" />
           </Container>
-        </GradientBackground>
       </section>
     </div>
   );

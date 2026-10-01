@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { Card, CardHeader, CardContent } from "~/components/ui/Card";
 import { Container } from "~/components/ui/Container";
-import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 import { generateContactSchema, generateContactFormSchema } from './schema';
 import { SITE_URL } from '~/lib/site';
@@ -85,8 +84,7 @@ export default function ContactPage() {
       
       <div className="overflow-x-hidden">
         {/* Header */}
-        <section className="relative bg-primary">
-          <GradientBackground variant="glow">
+        <section className="relative bg-primary text-primary-foreground">
             <div className="relative isolate overflow-hidden py-32 md:py-40">
               <div className="absolute inset-0 -z-10 w-full">
                 <Image
@@ -116,7 +114,6 @@ export default function ContactPage() {
                 </div>
               </Container>
             </div>
-          </GradientBackground>
         </section>
 
         {/* Contact Information */}
@@ -138,8 +135,6 @@ export default function ContactPage() {
               {contactInfo.map((item) => (
                 <Card
                   key={item.title}
-                  variant="elevated"
-                  interactive
                   className="group text-center p-6 hover:shadow-lg transition-shadow"
                   itemScope
                   itemType="https://schema.org/ContactPoint"
@@ -190,7 +185,7 @@ export default function ContactPage() {
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {serviceAreas.map((area) => (
-                <Card key={area.region} variant="elevated" className="p-6">
+                <Card key={area.region} className="p-6">
                   <div className="pb-4">
                     <Text variant="h4" className="text-foreground font-semibold">
                       {area.region}
@@ -232,7 +227,7 @@ export default function ContactPage() {
             <div className="mx-auto max-w-4xl">
               <div className="grid gap-8 lg:grid-cols-2">
                 {/* Quick Contact */}
-                <Card variant="elevated" className="p-8">
+                <Card className="p-8">
                   <CardHeader
                     title="Quick Contact"
                     subtitle="Get instant assistance for your corporate event needs"
@@ -274,10 +269,10 @@ export default function ContactPage() {
                 </Card>
 
                 {/* Booking CTA */}
-                <Card variant="elevated" className="p-8 bg-primary text-primary-foreground">
+                <Card className="p-8 bg-primary text-primary-foreground">
                   <CardHeader
                     title={<Text variant="sm" className="text-2xl md:text-3xl xl:text-4xl font-semibold leading-snug text-primary-foreground">Ready to Book?</Text>}
-                    subtitle={<Text variant="sm" className="text-primary-foreground/90">Complete our detailed booking form for a comprehensive quote</Text>}
+                    subtitle={<Text variant="sm" className="text-primary-foreground">Complete our detailed booking form for a comprehensive quote</Text>}
                     className="pb-6"
                   />
                   <CardContent className="space-y-6">

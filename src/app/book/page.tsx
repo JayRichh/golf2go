@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { Container } from "~/components/ui/Container";
-import { GradientBackground } from "~/components/ui/GradientBackground";
 import { Text } from "~/components/ui/Text";
 
 import SimpleBookingForm from "./SimpleBookingForm";
@@ -27,8 +26,7 @@ export default function BookPage() {
         }}
       />
       {/* Hero Section */}
-      <section className="relative bg-primary">
-        <GradientBackground variant="glow">
+      <section className="relative bg-primary text-primary-foreground">
           <div className="relative isolate overflow-hidden py-32 md:py-40">
             <div className="absolute inset-0 -z-10 w-full">
               <Image
@@ -55,7 +53,6 @@ export default function BookPage() {
               </div>
             </Container>
           </div>
-        </GradientBackground>
       </section>
 
       {/* Main Content */}

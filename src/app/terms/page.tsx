@@ -2,7 +2,6 @@ import { Download } from 'lucide-react';
 import Image from "next/image";
 
 import { Container } from '~/components/ui/Container';
-import { GradientBackground } from '~/components/ui/GradientBackground';
 import { Text } from '~/components/ui/Text';
 import { generateTermsSchema, generatePdfSchema } from './schema';
 import { SITE_URL } from '~/lib/site';
@@ -24,8 +23,7 @@ export default function Terms() {
         }}
       />
       {/* Hero Section */}
-      <section className="relative bg-primary">
-        <GradientBackground variant="glow">
+      <section className="relative bg-primary text-primary-foreground">
           <div className="relative isolate overflow-hidden py-32 md:py-40">
             <div className="absolute inset-0 -z-10 w-full">
               <Image
@@ -57,7 +55,6 @@ export default function Terms() {
               </div>
             </Container>
           </div>
-        </GradientBackground>
       </section>
 
       {/* PDF Viewer Section */}

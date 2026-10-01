@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 
 import { Footer } from "~/components/layout/footer";
 import { Navbar } from "~/components/layout/navbar";
-import { PageTransition } from "~/components/ui/PageTransition";
 import { Analytics } from "@vercel/analytics/react"
 import { ORG_ID, SITE_URL } from "~/lib/site";
 import "./globals.css";
@@ -272,7 +271,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Main content */}
         <Navbar />
         <main id="main-content" tabIndex={-1} className="flex-1">
-          <PageTransition>{children}</PageTransition>
+          {children}
         </main>
         <Footer />
 

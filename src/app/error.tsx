@@ -19,7 +19,7 @@ export default function Error({
         size="lg"
         className="flex min-h-[50vh] flex-col items-center justify-center text-center"
       >
-        <Card variant="elevated" className="max-w-md backdrop-blur">
+        <Card className="max-w-md">
           <CardContent className="flex flex-col items-center p-8">
             <div className="rounded-full bg-error/10 p-4">
               <AlertTriangle className="h-8 w-8 text-error" />
